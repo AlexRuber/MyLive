@@ -9,6 +9,10 @@
 import UIKit
 import FBSDKLoginKit
 import FirebaseAuth
+import Firebase
+import FirebaseStorage
+import FirebaseDatabase
+
 
 class SignInViewController: UIViewController, FBSDKLoginButtonDelegate {
 

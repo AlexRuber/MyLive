@@ -371,7 +371,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="131"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wes-Uh-bQu" id="jrb-in-51h">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="131"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Name " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XEl-wp-0Uv">
