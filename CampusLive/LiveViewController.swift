@@ -12,12 +12,16 @@ import CoreLocation
 
 class LiveViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
 
+    
     @IBOutlet weak var mapView: MKMapView!
     
+    
+     var location: CLLocation!
      let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -44,11 +48,14 @@ class LiveViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         self.mapView.setRegion(region, animated: true)
         self.locationManager.stopUpdatingLocation()
         
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Errors: " + error.localizedDescription)
     }
+    
+    
 
     
 }
