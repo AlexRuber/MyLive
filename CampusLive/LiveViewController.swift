@@ -50,4 +50,5 @@ class LiveViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         print("Errors: " + error.localizedDescription)
     }
 
+    
 }
