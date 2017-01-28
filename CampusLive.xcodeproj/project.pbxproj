@@ -17,21 +17,27 @@
 		983CE06B1E3478CC0098D03B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 983CE0691E3478CC0098D03B /* Main.storyboard */; };
 		983CE06D1E3478CC0098D03B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 983CE06C1E3478CC0098D03B /* Assets.xcassets */; };
 		983CE0701E3478CC0098D03B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 983CE06E1E3478CC0098D03B /* LaunchScreen.storyboard */; };
+		98F1C2661E3C2BA100BC5699 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 98F1C2651E3C2BA100BC5699 /* GoogleService-Info.plist */; };
+		E3F806F61A6E2BD5A752F002 /* Pods_CampusLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9072ACA91EB44818AC9E4446 /* Pods_CampusLive.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1BEB0BE0D549D64BB2443FD3 /* Pods-CampusLive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampusLive.release.xcconfig"; path = "Pods/Target Support Files/Pods-CampusLive/Pods-CampusLive.release.xcconfig"; sourceTree = "<group>"; };
 		61EE5E4D1E367E5400D0A7E5 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		61EE5E511E367EBB00D0A7E5 /* LiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
 		61EE5E531E367ED700D0A7E5 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		61EE5E551E367F1200D0A7E5 /* FeaturedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedViewController.swift; sourceTree = "<group>"; };
 		61EE5E571E367F2B00D0A7E5 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		61EE5E591E367F4900D0A7E5 /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
+		9072ACA91EB44818AC9E4446 /* Pods_CampusLive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CampusLive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		983CE0621E3478CC0098D03B /* CampusLive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampusLive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		983CE0651E3478CC0098D03B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		983CE06A1E3478CC0098D03B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		983CE06C1E3478CC0098D03B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		983CE06F1E3478CC0098D03B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		983CE0711E3478CC0098D03B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		98F1C2651E3C2BA100BC5699 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B51F3F03A5B13767F8E57889 /* Pods-CampusLive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampusLive.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CampusLive/Pods-CampusLive.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,17 +45,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3F806F61A6E2BD5A752F002 /* Pods_CampusLive.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5DD3E946B5A7DB3BDE918FED /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B51F3F03A5B13767F8E57889 /* Pods-CampusLive.debug.xcconfig */,
+				1BEB0BE0D549D64BB2443FD3 /* Pods-CampusLive.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		5E3484DA3D4363DAB0487D48 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9072ACA91EB44818AC9E4446 /* Pods_CampusLive.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		983CE0591E3478CC0098D03B = {
 			isa = PBXGroup;
 			children = (
 				983CE0641E3478CC0098D03B /* CampusLive */,
 				983CE0631E3478CC0098D03B /* Products */,
+				5DD3E946B5A7DB3BDE918FED /* Pods */,
+				5E3484DA3D4363DAB0487D48 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -73,6 +99,7 @@
 				61EE5E591E367F4900D0A7E5 /* MyProfileViewController.swift */,
 				983CE0691E3478CC0098D03B /* Main.storyboard */,
 				983CE06C1E3478CC0098D03B /* Assets.xcassets */,
+				98F1C2651E3C2BA100BC5699 /* GoogleService-Info.plist */,
 				983CE06E1E3478CC0098D03B /* LaunchScreen.storyboard */,
 				983CE0711E3478CC0098D03B /* Info.plist */,
 			);
@@ -86,9 +113,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 983CE0741E3478CC0098D03B /* Build configuration list for PBXNativeTarget "CampusLive" */;
 			buildPhases = (
+				300C4AD01D61397B591ACAB0 /* [CP] Check Pods Manifest.lock */,
 				983CE05E1E3478CC0098D03B /* Sources */,
 				983CE05F1E3478CC0098D03B /* Frameworks */,
 				983CE0601E3478CC0098D03B /* Resources */,
+				A78A70104A17EBBB2C077478 /* [CP] Embed Pods Frameworks */,
+				1AC0046AEED65E44B1CFF5F4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -141,11 +171,60 @@
 			files = (
 				983CE0701E3478CC0098D03B /* LaunchScreen.storyboard in Resources */,
 				983CE06D1E3478CC0098D03B /* Assets.xcassets in Resources */,
+				98F1C2661E3C2BA100BC5699 /* GoogleService-Info.plist in Resources */,
 				983CE06B1E3478CC0098D03B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1AC0046AEED65E44B1CFF5F4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CampusLive/Pods-CampusLive-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		300C4AD01D61397B591ACAB0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A78A70104A17EBBB2C077478 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CampusLive/Pods-CampusLive-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		983CE05E1E3478CC0098D03B /* Sources */ = {
@@ -279,12 +358,13 @@
 		};
 		983CE0751E3478CC0098D03B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B51F3F03A5B13767F8E57889 /* Pods-CampusLive.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = DSX523G48J;
 				INFOPLIST_FILE = CampusLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.firstApp.CampusLive;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firstversion.campuslive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -292,12 +372,13 @@
 		};
 		983CE0761E3478CC0098D03B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1BEB0BE0D549D64BB2443FD3 /* Pods-CampusLive.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = DSX523G48J;
 				INFOPLIST_FILE = CampusLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.firstApp.CampusLive;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firstversion.campuslive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
