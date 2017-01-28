@@ -13,6 +13,13 @@
 		61EE5E561E367F1200D0A7E5 /* FeaturedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EE5E551E367F1200D0A7E5 /* FeaturedViewController.swift */; };
 		61EE5E581E367F2B00D0A7E5 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EE5E571E367F2B00D0A7E5 /* EventDetailViewController.swift */; };
 		61EE5E5A1E367F4900D0A7E5 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EE5E591E367F4900D0A7E5 /* MyProfileViewController.swift */; };
+		61FC0EBD1E3C36D3004D92F1 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61FC0EBC1E3C36D3004D92F1 /* Bolts.framework */; };
+		61FC0EBF1E3C36E6004D92F1 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61FC0EBE1E3C36E6004D92F1 /* FBSDKLoginKit.framework */; };
+		61FC0EC21E3C36FD004D92F1 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61FC0EC01E3C36FD004D92F1 /* FBSDKCoreKit.framework */; };
+		61FC0EC31E3C36FD004D92F1 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61FC0EC11E3C36FD004D92F1 /* FBSDKShareKit.framework */; };
+		61FC0EC61E3C3C27004D92F1 /* MeasurementHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC0EC41E3C3C27004D92F1 /* MeasurementHelper.swift */; };
+		61FC0EC71E3C3C27004D92F1 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC0EC51E3C3C27004D92F1 /* AppState.swift */; };
+		61FC0EC91E3C3C57004D92F1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FC0EC81E3C3C57004D92F1 /* Constants.swift */; };
 		983CE0661E3478CC0098D03B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983CE0651E3478CC0098D03B /* AppDelegate.swift */; };
 		983CE06B1E3478CC0098D03B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 983CE0691E3478CC0098D03B /* Main.storyboard */; };
 		983CE06D1E3478CC0098D03B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 983CE06C1E3478CC0098D03B /* Assets.xcassets */; };
@@ -29,6 +36,13 @@
 		61EE5E551E367F1200D0A7E5 /* FeaturedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedViewController.swift; sourceTree = "<group>"; };
 		61EE5E571E367F2B00D0A7E5 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		61EE5E591E367F4900D0A7E5 /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
+		61FC0EBC1E3C36D3004D92F1 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		61FC0EBE1E3C36E6004D92F1 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		61FC0EC01E3C36FD004D92F1 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		61FC0EC11E3C36FD004D92F1 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		61FC0EC41E3C3C27004D92F1 /* MeasurementHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementHelper.swift; sourceTree = "<group>"; };
+		61FC0EC51E3C3C27004D92F1 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		61FC0EC81E3C3C57004D92F1 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		9072ACA91EB44818AC9E4446 /* Pods_CampusLive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CampusLive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		983CE0621E3478CC0098D03B /* CampusLive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampusLive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		983CE0651E3478CC0098D03B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -46,6 +60,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3F806F61A6E2BD5A752F002 /* Pods_CampusLive.framework in Frameworks */,
+				61FC0EC21E3C36FD004D92F1 /* FBSDKCoreKit.framework in Frameworks */,
+				61FC0EC31E3C36FD004D92F1 /* FBSDKShareKit.framework in Frameworks */,
+				61FC0EBD1E3C36D3004D92F1 /* Bolts.framework in Frameworks */,
+				61FC0EBF1E3C36E6004D92F1 /* FBSDKLoginKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +82,10 @@
 		5E3484DA3D4363DAB0487D48 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				61FC0EC01E3C36FD004D92F1 /* FBSDKCoreKit.framework */,
+				61FC0EC11E3C36FD004D92F1 /* FBSDKShareKit.framework */,
+				61FC0EBE1E3C36E6004D92F1 /* FBSDKLoginKit.framework */,
+				61FC0EBC1E3C36D3004D92F1 /* Bolts.framework */,
 				9072ACA91EB44818AC9E4446 /* Pods_CampusLive.framework */,
 			);
 			name = Frameworks;
@@ -93,7 +115,10 @@
 				983CE0651E3478CC0098D03B /* AppDelegate.swift */,
 				61EE5E4D1E367E5400D0A7E5 /* LoginViewController.swift */,
 				61EE5E531E367ED700D0A7E5 /* SignUpViewController.swift */,
+				61FC0EC81E3C3C57004D92F1 /* Constants.swift */,
 				61EE5E511E367EBB00D0A7E5 /* LiveViewController.swift */,
+				61FC0EC41E3C3C27004D92F1 /* MeasurementHelper.swift */,
+				61FC0EC51E3C3C27004D92F1 /* AppState.swift */,
 				61EE5E551E367F1200D0A7E5 /* FeaturedViewController.swift */,
 				61EE5E571E367F2B00D0A7E5 /* EventDetailViewController.swift */,
 				61EE5E591E367F4900D0A7E5 /* MyProfileViewController.swift */,
@@ -141,7 +166,7 @@
 				TargetAttributes = {
 					983CE0611E3478CC0098D03B = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = DSX523G48J;
+						DevelopmentTeam = EJD57Q9L26;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -231,11 +256,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61FC0EC61E3C3C27004D92F1 /* MeasurementHelper.swift in Sources */,
 				61EE5E581E367F2B00D0A7E5 /* EventDetailViewController.swift in Sources */,
 				983CE0661E3478CC0098D03B /* AppDelegate.swift in Sources */,
+				61FC0EC71E3C3C27004D92F1 /* AppState.swift in Sources */,
 				61EE5E5A1E367F4900D0A7E5 /* MyProfileViewController.swift in Sources */,
 				61EE5E521E367EBB00D0A7E5 /* LiveViewController.swift in Sources */,
 				61EE5E541E367ED700D0A7E5 /* SignUpViewController.swift in Sources */,
+				61FC0EC91E3C3C57004D92F1 /* Constants.swift in Sources */,
 				61EE5E4E1E367E5400D0A7E5 /* LoginViewController.swift in Sources */,
 				61EE5E561E367F1200D0A7E5 /* FeaturedViewController.swift in Sources */,
 			);
@@ -361,7 +389,11 @@
 			baseConfigurationReference = B51F3F03A5B13767F8E57889 /* Pods-CampusLive.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = DSX523G48J;
+				DEVELOPMENT_TEAM = EJD57Q9L26;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = CampusLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firstversion.campuslive;
@@ -375,7 +407,11 @@
 			baseConfigurationReference = 1BEB0BE0D549D64BB2443FD3 /* Pods-CampusLive.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = DSX523G48J;
+				DEVELOPMENT_TEAM = EJD57Q9L26;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = CampusLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.firstversion.campuslive;
