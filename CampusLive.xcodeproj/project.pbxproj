@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		616BAA041E402A1F008BF838 /* MeasurementHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616BAA011E402A1F008BF838 /* MeasurementHelper.swift */; };
+		616BAA051E402A1F008BF838 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616BAA021E402A1F008BF838 /* AppState.swift */; };
+		616BAA061E402A1F008BF838 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616BAA031E402A1F008BF838 /* Constants.swift */; };
+		616BAA081E407B5E008BF838 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 616BAA071E407B5E008BF838 /* GoogleService-Info.plist */; };
 		61EE5E4E1E367E5400D0A7E5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EE5E4D1E367E5400D0A7E5 /* LoginViewController.swift */; };
 		61EE5E521E367EBB00D0A7E5 /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EE5E511E367EBB00D0A7E5 /* LiveViewController.swift */; };
 		61EE5E541E367ED700D0A7E5 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EE5E531E367ED700D0A7E5 /* SignUpViewController.swift */; };
@@ -17,12 +21,15 @@
 		983CE06B1E3478CC0098D03B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 983CE0691E3478CC0098D03B /* Main.storyboard */; };
 		983CE06D1E3478CC0098D03B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 983CE06C1E3478CC0098D03B /* Assets.xcassets */; };
 		983CE0701E3478CC0098D03B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 983CE06E1E3478CC0098D03B /* LaunchScreen.storyboard */; };
-		98F1C2661E3C2BA100BC5699 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 98F1C2651E3C2BA100BC5699 /* GoogleService-Info.plist */; };
 		E3F806F61A6E2BD5A752F002 /* Pods_CampusLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9072ACA91EB44818AC9E4446 /* Pods_CampusLive.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1BEB0BE0D549D64BB2443FD3 /* Pods-CampusLive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampusLive.release.xcconfig"; path = "Pods/Target Support Files/Pods-CampusLive/Pods-CampusLive.release.xcconfig"; sourceTree = "<group>"; };
+		616BAA011E402A1F008BF838 /* MeasurementHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementHelper.swift; sourceTree = "<group>"; };
+		616BAA021E402A1F008BF838 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		616BAA031E402A1F008BF838 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		616BAA071E407B5E008BF838 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		61EE5E4D1E367E5400D0A7E5 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		61EE5E511E367EBB00D0A7E5 /* LiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
 		61EE5E531E367ED700D0A7E5 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -36,7 +43,6 @@
 		983CE06C1E3478CC0098D03B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		983CE06F1E3478CC0098D03B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		983CE0711E3478CC0098D03B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		98F1C2651E3C2BA100BC5699 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B51F3F03A5B13767F8E57889 /* Pods-CampusLive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampusLive.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CampusLive/Pods-CampusLive.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,14 +99,17 @@
 				983CE0651E3478CC0098D03B /* AppDelegate.swift */,
 				61EE5E4D1E367E5400D0A7E5 /* LoginViewController.swift */,
 				61EE5E531E367ED700D0A7E5 /* SignUpViewController.swift */,
+				616BAA011E402A1F008BF838 /* MeasurementHelper.swift */,
+				616BAA021E402A1F008BF838 /* AppState.swift */,
+				616BAA031E402A1F008BF838 /* Constants.swift */,
 				61EE5E511E367EBB00D0A7E5 /* LiveViewController.swift */,
 				61EE5E551E367F1200D0A7E5 /* FeaturedViewController.swift */,
 				61EE5E571E367F2B00D0A7E5 /* EventDetailViewController.swift */,
 				61EE5E591E367F4900D0A7E5 /* MyProfileViewController.swift */,
 				983CE0691E3478CC0098D03B /* Main.storyboard */,
 				983CE06C1E3478CC0098D03B /* Assets.xcassets */,
-				98F1C2651E3C2BA100BC5699 /* GoogleService-Info.plist */,
 				983CE06E1E3478CC0098D03B /* LaunchScreen.storyboard */,
+				616BAA071E407B5E008BF838 /* GoogleService-Info.plist */,
 				983CE0711E3478CC0098D03B /* Info.plist */,
 			);
 			path = CampusLive;
@@ -170,8 +179,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				983CE0701E3478CC0098D03B /* LaunchScreen.storyboard in Resources */,
+				616BAA081E407B5E008BF838 /* GoogleService-Info.plist in Resources */,
 				983CE06D1E3478CC0098D03B /* Assets.xcassets in Resources */,
-				98F1C2661E3C2BA100BC5699 /* GoogleService-Info.plist in Resources */,
 				983CE06B1E3478CC0098D03B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -206,7 +215,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		A78A70104A17EBBB2C077478 /* [CP] Embed Pods Frameworks */ = {
@@ -231,9 +240,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				616BAA041E402A1F008BF838 /* MeasurementHelper.swift in Sources */,
 				61EE5E581E367F2B00D0A7E5 /* EventDetailViewController.swift in Sources */,
 				983CE0661E3478CC0098D03B /* AppDelegate.swift in Sources */,
+				616BAA051E402A1F008BF838 /* AppState.swift in Sources */,
 				61EE5E5A1E367F4900D0A7E5 /* MyProfileViewController.swift in Sources */,
+				616BAA061E402A1F008BF838 /* Constants.swift in Sources */,
 				61EE5E521E367EBB00D0A7E5 /* LiveViewController.swift in Sources */,
 				61EE5E541E367ED700D0A7E5 /* SignUpViewController.swift in Sources */,
 				61EE5E4E1E367E5400D0A7E5 /* LoginViewController.swift in Sources */,
