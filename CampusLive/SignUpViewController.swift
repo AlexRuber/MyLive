@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 class SignUpViewController: UIViewController {
 
