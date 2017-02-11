@@ -101,13 +101,13 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addEventButton" destination="YBh-yN-wPh" id="S7e-9W-bU7"/>
-                        <outlet property="eventDescriptive" destination="gWL-zK-wao" id="H5H-cc-OQu"/>
+                        <outlet property="eventDescriptive" destination="gWL-zK-wao" id="cmv-sq-DFx"/>
                         <outlet property="eventPin" destination="1OZ-Ve-hAD" id="uhE-7J-N8r"/>
                         <outlet property="mapView" destination="qAi-iX-GBz" id="nGn-dI-466"/>
-                        <outlet property="orgSegment" destination="yuF-kP-G1T" id="QVS-KI-If9"/>
+                        <outlet property="orgSegment" destination="yuF-kP-G1T" id="hV0-Y1-t1J"/>
                         <outlet property="showAllSwitch" destination="CYJ-3Z-BrY" id="3eK-1l-mIR"/>
                         <outlet property="subtractEventButton" destination="evu-aa-WeU" id="1CF-W5-6oK"/>
-                        <outlet property="userSegment" destination="hxK-mW-spj" id="6jK-Bx-2GX"/>
+                        <outlet property="userSegment" destination="yuF-kP-G1T" id="LfF-Oo-xrO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H6d-1g-KNw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -616,9 +616,7 @@
         <image name="AddEventButton" width="100" height="100"/>
         <image name="FacebookButton" width="240" height="37"/>
         <image name="NavigationButton" width="101" height="100"/>
-        <image name="Pike" width="487" height="509"/>
         <image name="Pin" width="148" height="258"/>
-        <image name="Post" width="424" height="100"/>
         <image name="SubtractEventButton" width="100" height="100"/>
         <image name="UCSDLogo" width="163" height="160"/>
         <image name="addEvent" width="455" height="80"/>

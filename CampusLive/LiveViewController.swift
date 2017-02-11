@@ -28,7 +28,7 @@ class LiveViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     @IBOutlet weak var mapView: MKMapView!
     
     var location: CLLocation!
-    var addEventLocation: CLLocation! = CLLocation(latitude: 27.8812, longitude: -123.2374)
+    var addEventLocation: CLLocation!// = CLLocation(latitude: 27.8812, longitude: -123.2374)
     let locationManager = CLLocationManager()
     //Change value to false
     var isOrgLogin: Bool = false
@@ -39,7 +39,10 @@ class LiveViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     @IBOutlet weak var showAllSwitch: UISwitch!
     @IBOutlet weak var currentLocationButton: UIButton!
     @IBOutlet weak var eventPin: UIImageView!
+    @IBOutlet weak var eventDescriptive: UIButton!
+    @IBOutlet weak var userSegment: UISegmentedControl!
     
+    @IBOutlet weak var orgSegment: UISegmentedControl!
     let eventRef = FIRDatabase.database().reference().child("event")
     
     
@@ -159,7 +162,7 @@ class LiveViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         if(segue.identifier == "AddEventDescription"){
             let nav = segue.destination as! UINavigationController
             let destinationViewController = nav.viewControllers[0] as! AddEventViewController
-            destinationViewController.location = addEventLocation
+            destinationViewController.location = location
             //destinationViewController.isOrgLogin = true
         }
     }
