@@ -9,14 +9,26 @@
 import UIKit
 import MapKit
 import CoreLocation
+import Firebase
+
+@objc class CampusLiveAnnotation: NSObject, MKAnnotation {
+    var coordinate: CLLocationCoordinate2D
+    var title: String?
+    var subtitle: String?
+    
+    init(lat: CLLocationDegrees, long: CLLocationDegrees, title: String? = nil, subtitle: String? = nil) {
+        self.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        self.title = title
+        self.subtitle = subtitle
+    }
+}
 
 class LiveViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
     
     @IBOutlet weak var mapView: MKMapView!
     
-    
     var location: CLLocation!
-    var addEventLocation: CLLocation!
+    var addEventLocation: CLLocation! = CLLocation(latitude: 27.8812, longitude: -123.2374)
     let locationManager = CLLocationManager()
     //Change value to false
     var isOrgLogin: Bool = false
@@ -28,9 +40,7 @@ class LiveViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     @IBOutlet weak var currentLocationButton: UIButton!
     @IBOutlet weak var eventPin: UIImageView!
     
-    @IBOutlet weak var orgSegment: UISegmentedControl!
-    @IBOutlet weak var userSegment: UISegmentedControl!
-    @IBOutlet weak var eventDescriptive: UIButton!
+    let eventRef = FIRDatabase.database().reference().child("event")
     
     
 
@@ -78,7 +88,31 @@ class LiveViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         
         //var gesture = UIPanGestureRecognizer(target: self, action: Selector("userDragged:"))
         //addEventButton.addGestureRecognizer(gesture)
-        
+        displayLiveEvents()
+    }
+    
+    func displayLiveEvents(){
+        //var episode:Episode? = nil
+        eventRef.observe(.value, with: {(snap) in
+            if let userDict = snap.value as? [String:AnyObject]{
+                
+                print(userDict)
+                for each in userDict as [String: AnyObject] {
+                    let autoID = each.key
+                    var name = each.value["name"] as! String
+                    var endDate = each.value["endDate"] as! String
+                    var venue = each.value["venue"] as! String
+                    var latitude = each.value["latitude"] as! NSNumber
+                    var longitude = each.value["longitude"] as! NSNumber
+                    var description = each.value["description"] as! String
+                    let annotation = MKPointAnnotation()
+                    annotation.title = name
+                    annotation.subtitle = venue
+                    annotation.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
+                    self.mapView.addAnnotation(annotation)
+                }
+            }
+        })
     }
     
     //Event Button Click Variations
@@ -105,8 +139,6 @@ class LiveViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         // Dispose of any resources that can be recreated.
     }
     
-// MARK: - Location Delegate Methods 
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         self.location = locations.last! as CLLocation
@@ -117,7 +149,6 @@ class LiveViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1))
         self.mapView.setRegion(region, animated: true)
         self.locationManager.stopUpdatingLocation()
-        
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -132,27 +163,46 @@ class LiveViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             //destinationViewController.isOrgLogin = true
         }
     }
-    
-    
-
-    
-     //Fade out for Event Specific Button
-    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+    /*
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        /*
+        guard !annotation.isKind(of: MKUserLocation()) else {
+            return nil
+        }*/
+        /*if annotation.isKindOfClass(MKUserLocation){
+         //emty return, guard wasn't cooperating
+         }else{
+         return nil
+         }*/
         
-        self.location = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
+        guard !annotation.isKind(of: MKUserLocation.self) else {
+            return nil
+        }
         
-        UIView.animate(withDuration: 0.4, animations: {
+        let annotationIdentifier = "AnnotationIdentifier"
+        var annotationView: MKAnnotationView?
+        
+        if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
+            annotationView = dequeuedAnnotationView
+            annotationView?.annotation = annotation
+        }
+        else {
+            let av = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+            av.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            annotationView = av
+            annotationView?.isEnabled = true
+        }
+        
+        if let annotationView = annotationView {
+            // Configure your annotation view here
+            annotationView.canShowCallout = true
+            annotationView.image = UIImage(named: "mapPins")
+            let btn = UIButton()
+            btn.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
+            btn.setImage(UIImage(named: "info"), for: UIControlState())
+            annotationView.rightCalloutAccessoryView = btn
             
-            self.eventDescriptive.layer.opacity = 1
-            
-        })
-    }
-    
-    
-    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
-        UIView.animate(withDuration: 0.4, animations: {
-            self.eventDescriptive.layer.opacity = 0
-        })
-    }
-    
+        }
+        return annotationView
+    }*/
 }
