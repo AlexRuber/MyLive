@@ -17,8 +17,7 @@ class SignInViewController: UIViewController {
     var viewController: UIViewController!
     //var signupViewController: UIViewController!
     
-    @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var passwordLabel: UILabel!
+
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginInButton: UIButton!
@@ -33,9 +32,7 @@ class SignInViewController: UIViewController {
         customFBButton.addTarget(self, action: #selector(handleCustomFBLogin), for: .touchUpInside)
         
         segmentView.selectedSegmentIndex = 0
-        usernameLabel.isHidden = true
         usernameField.isHidden = true
-        passwordLabel.isHidden = true
         passwordField.isHidden = true
         loginInButton.isHidden = true
         forgetPasswordButton.isHidden = true
@@ -58,18 +55,14 @@ class SignInViewController: UIViewController {
     @IBAction func segmentStateChanged(_ sender: Any) {
         switch segmentView.selectedSegmentIndex{
         case 0:
-            usernameLabel.isHidden = true
             usernameField.isHidden = true
-            passwordLabel.isHidden = true
             passwordField.isHidden = true
             loginInButton.isHidden = true
             forgetPasswordButton.isHidden = true
             signupButton.isHidden = true
             customFBButton.isHidden = false
         case 1:
-            usernameLabel.isHidden = false
             usernameField.isHidden = false
-            passwordLabel.isHidden = false
             passwordField.isHidden = false
             loginInButton.isHidden = false
             forgetPasswordButton.isHidden = false

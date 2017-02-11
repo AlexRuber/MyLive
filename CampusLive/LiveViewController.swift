@@ -39,6 +39,8 @@ class LiveViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         
         self.mapView.setRegion(region, animated: true)
+        mapView!.setRegion(region, animated: true)
+        mapView!.setCenter(mapView!.userLocation.coordinate, animated: true)
     }
     
     
