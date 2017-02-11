@@ -24,6 +24,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var adminTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var instaTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,8 +77,9 @@ class SignUpViewController: UIViewController {
         let web = websiteTextField.text
         let fb = fbTextField.text
         let phone = phoneTextField.text
+        let insta = instaTextField.text
         
-        let posts: [String : AnyObject] = ["email":email as AnyObject, "org":org as AnyObject, "admin":admin as AnyObject, "website":web as AnyObject, "fb":fb as AnyObject, "phone":phone as AnyObject, "creationDate":currentDate as AnyObject]
+        let posts: [String : AnyObject] = ["email":email as AnyObject, "org":org as AnyObject, "admin":admin as AnyObject, "website":web as AnyObject, "fb":fb as AnyObject, "instagram":insta as AnyObject, "phone":phone as AnyObject, "creationDate":currentDate as AnyObject]
         userRef.child(uid!).setValue(posts)
         print("Posting value ")
     }
@@ -116,10 +118,12 @@ class SignUpViewController: UIViewController {
         //let viewController = segue.destination as!
         //viewController.isOrgLogin = true
         if(segue.identifier == "SignUpToFP"){
-            let barViewControllers = segue.destination as! UITabBarController
-            let nav = barViewControllers.viewControllers![0] as! UINavigationController
-            let destinationViewController = nav.viewControllers[0] as! LiveViewController
+            //let barViewControllers = segue.destination as! UITabBarController
+            //let nav = barViewControllers.viewControllers![0] as! UINavigationController
+            //let destinationViewController = nav.viewControllers[0] as! LiveViewController
+            let destinationViewController = segue.destination as! LiveViewController
             destinationViewController.isOrgLogin = true
+           // destinationViewController.isOrgLogin = true
         }
     }
 
