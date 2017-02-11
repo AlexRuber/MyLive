@@ -16,12 +16,20 @@ class LiveViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     
     
     var location: CLLocation!
+    var addEventLocation: CLLocation!
     let locationManager = CLLocationManager()
+    //Change value to false
     var isOrgLogin: Bool = false
     
     @IBOutlet weak var addEventButton: UIButton!
     @IBOutlet weak var showAllSwitch: UISwitch!
     @IBOutlet weak var currentLocationButton: UIButton!
+    @IBOutlet weak var eventPin: UIImageView!
+    @IBOutlet weak var eventDescription: UIButton!
+    
+    @IBAction func addEventDescription(_ sender: Any) {
+        performSegue(withIdentifier: "AddEventDescription", sender: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,11 +37,14 @@ class LiveViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         //print(isOrgLogin ?? "")
         showAllSwitch.isHidden = false
         
+        eventDescription.isHidden = true
+        eventPin.isHidden = true
+        
         if(isOrgLogin){
-            currentLocationButton.isHidden = true
+            //currentLocationButton.isHidden = true
             addEventButton.isHidden = false
         }else{
-            currentLocationButton.isHidden = false
+            //currentLocationButton.isHidden = false
             addEventButton.isHidden = true
         }
         
@@ -42,9 +53,18 @@ class LiveViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
         self.mapView.showsUserLocation = true
-        // Do any additional setup after loading the view.
+        
+        //var gesture = UIPanGestureRecognizer(target: self, action: Selector("userDragged:"))
+        //addEventButton.addGestureRecognizer(gesture)
+        
     }
-
+    
+    @IBAction func addEventButtonClicked(_ sender: Any) {
+        print("add event button clicked.")
+        eventDescription.isHidden = false
+        eventPin.isHidden = false
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -67,4 +87,11 @@ class LiveViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         print("Errors: " + error.localizedDescription)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "AddEventDescription"){
+            let destinationViewController = segue.destination as! AddEventViewController
+            destinationViewController.location = addEventLocation
+            // destinationViewController.isOrgLogin = true
+        }
+    }
 }

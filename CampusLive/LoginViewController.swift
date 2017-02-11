@@ -231,9 +231,11 @@ class SignInViewController: UIViewController {
         //let viewController = segue.destination as!
         //viewController.isOrgLogin = true
         if(segue.identifier == "SignUpToFP"){
-            let barViewControllers = segue.destination as! UITabBarController
-            let nav = barViewControllers.viewControllers![0] as! UINavigationController
-            let destinationViewController = nav.viewControllers[0] as! LiveViewController
+            //let barViewControllers = segue.destination as! UITabBarController
+            //let nav = barViewControllers.viewControllers![0] as! UINavigationController
+            
+            //let destinationViewController = nav.viewControllers[0]
+            let destinationViewController = segue.destination as! LiveViewController
             destinationViewController.isOrgLogin = true
         }
     }
