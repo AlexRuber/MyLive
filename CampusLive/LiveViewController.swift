@@ -11,24 +11,37 @@ import MapKit
 import CoreLocation
 
 class LiveViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
-
     
     @IBOutlet weak var mapView: MKMapView!
     
     
-     var location: CLLocation!
-     let locationManager = CLLocationManager()
+    var location: CLLocation!
+    let locationManager = CLLocationManager()
+    var isOrgLogin: Bool = false
+    
+    @IBOutlet weak var addEventButton: UIButton!
+    @IBOutlet weak var showAllSwitch: UISwitch!
+    @IBOutlet weak var currentLocationButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //print(isOrgLogin ?? "")
+        showAllSwitch.isHidden = false
+        
+        if(isOrgLogin){
+            currentLocationButton.isHidden = true
+            addEventButton.isHidden = false
+        }else{
+            currentLocationButton.isHidden = false
+            addEventButton.isHidden = true
+        }
         
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
         self.mapView.showsUserLocation = true
-
         // Do any additional setup after loading the view.
     }
 
@@ -48,14 +61,10 @@ class LiveViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         self.mapView.setRegion(region, animated: true)
         self.locationManager.stopUpdatingLocation()
         
-        
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Errors: " + error.localizedDescription)
     }
-    
-    
-
     
 }

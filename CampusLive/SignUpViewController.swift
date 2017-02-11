@@ -103,17 +103,24 @@ class SignUpViewController: UIViewController {
         AppState.sharedInstance.signedIn = true
         let notificationName = Notification.Name(rawValue: Constants.NotificationKeys.SignedIn)
         NotificationCenter.default.post(name: notificationName, object: nil, userInfo: nil)
-        //performSegue(withIdentifier: Constants.Segues.SignInToFp, sender: nil)
+        performSegue(withIdentifier: Constants.Segues.SignUpToFp, sender: nil)
     }
     
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        //let viewController = segue.destination as!
+        //viewController.isOrgLogin = true
+        if(segue.identifier == "SignUpToFP"){
+            let barViewControllers = segue.destination as! UITabBarController
+            let nav = barViewControllers.viewControllers![0] as! UINavigationController
+            let destinationViewController = nav.viewControllers[0] as! LiveViewController
+            destinationViewController.isOrgLogin = true
+        }
     }
-    */
 
 }

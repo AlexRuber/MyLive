@@ -42,17 +42,26 @@
                                     <action selector="navigationButton:" destination="HeC-Kp-YOV" eventType="touchUpInside" id="cco-V4-jAG"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBh-yN-wPh">
+                                <rect key="frame" x="320" y="568" width="42" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="plus"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="UCSD" id="CUC-Nd-Da0"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="addEventButton" destination="YBh-yN-wPh" id="S7e-9W-bU7"/>
+                        <outlet property="currentLocationButton" destination="suZ-My-rQ9" id="b2o-gb-ggf"/>
                         <outlet property="mapView" destination="qAi-iX-GBz" id="nGn-dI-466"/>
+                        <outlet property="showAllSwitch" destination="CYJ-3Z-BrY" id="3eK-1l-mIR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H6d-1g-KNw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2448.8000000000002" y="262.21889055472263"/>
+            <point key="canvasLocation" x="1612" y="1216.6416791604199"/>
         </scene>
         <!--Sign In View Controller-->
         <scene sceneID="yib-MY-dUM">
@@ -112,7 +121,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WLI-fq-dYk">
                                 <frame key="frameInset" minX="277" minY="412" width="46" height="30"/>
@@ -123,6 +132,7 @@
                                 </variation>
                                 <connections>
                                     <action selector="loginButtonClicked:" destination="WSx-hg-qa9" eventType="touchUpInside" id="lkO-F9-dA0"/>
+                                    <segue destination="AAJ-Vc-9j9" kind="show" identifier="SignUpToFP" id="9g1-Rz-ENh"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FEO-fJ-vi2">
@@ -160,7 +170,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DPa-dt-1gR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-903.20000000000005" y="1011.544227886057"/>
+            <point key="canvasLocation" x="-1191" y="438"/>
         </scene>
         <!--Sign Up-->
         <scene sceneID="HM2-iU-IAo">
@@ -228,7 +238,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ki0-tH-JQl">
                                 <frame key="frameInset" minX="128" minY="300" width="231" height="30"/>
@@ -271,6 +281,7 @@
                                 <state key="normal" title="Sign Up"/>
                                 <connections>
                                     <action selector="signupButtonClicked:" destination="gp6-gh-2Zr" eventType="touchUpInside" id="7fo-H8-IwT"/>
+                                    <segue destination="AAJ-Vc-9j9" kind="show" identifier="SignUpToFP" id="i80-q9-aLP"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="I agree to the terms and conditions. " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yz5-jL-d70">
@@ -317,7 +328,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WY1-tt-aGk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-810.39999999999998" y="1893.1034482758623"/>
+            <point key="canvasLocation" x="-1983.2" y="1216.6416791604199"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="692-WN-H5s">
@@ -336,7 +347,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rzP-wy-YPt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="303" y="978"/>
+            <point key="canvasLocation" x="-82" y="438"/>
         </scene>
         <!--Live-->
         <scene sceneID="95V-mp-Jha">
@@ -355,7 +366,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1jT-YQ-U8W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1391" y="264"/>
+            <point key="canvasLocation" x="1575" y="313"/>
         </scene>
         <!--Trending-->
         <scene sceneID="cpG-r8-yAn">
@@ -374,7 +385,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="knh-Yw-NwQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2449" y="976"/>
+            <point key="canvasLocation" x="780" y="1919"/>
         </scene>
         <!--Event Name -->
         <scene sceneID="1MJ-M2-nns">
@@ -453,7 +464,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W87-6t-v22" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="473" y="1737"/>
+            <point key="canvasLocation" x="-1895" y="1973"/>
         </scene>
         <!--Deals of the Day-->
         <scene sceneID="4zB-R5-7BZ">
@@ -472,7 +483,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YQu-v6-fKQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2449" y="1737"/>
+            <point key="canvasLocation" x="-82" y="2137"/>
         </scene>
         <!--Deals of the Day-->
         <scene sceneID="BiM-CD-1gR">
@@ -491,7 +502,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rCb-vM-Bgl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1390" y="1737"/>
+            <point key="canvasLocation" x="-82" y="1191"/>
         </scene>
         <!--Trending-->
         <scene sceneID="olD-tN-BNr">
@@ -510,7 +521,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u0x-ZH-kJa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1390" y="976"/>
+            <point key="canvasLocation" x="759" y="766"/>
         </scene>
     </scenes>
     <resources>
@@ -519,5 +530,9 @@
         <image name="LiveTabBarButton" width="25" height="12"/>
         <image name="NavigationButton" width="200" height="200"/>
         <image name="TrendingTabBarButton" width="25" height="23"/>
+        <image name="plus" width="50" height="50"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="i80-q9-aLP"/>
+    </inferredMetricsTieBreakers>
 </document>
