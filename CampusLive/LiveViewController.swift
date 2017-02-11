@@ -34,10 +34,11 @@ class LiveViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     var isOrgLogin: Bool = false
     
     @IBOutlet weak var addEventButton: UIButton!
+    @IBOutlet weak var subtractEventButton: UIButton!
+    
     @IBOutlet weak var showAllSwitch: UISwitch!
     @IBOutlet weak var currentLocationButton: UIButton!
     @IBOutlet weak var eventPin: UIImageView!
-    @IBOutlet weak var eventDescription: UIButton!
     
     let eventRef = FIRDatabase.database().reference().child("event")
     
@@ -45,21 +46,31 @@ class LiveViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         performSegue(withIdentifier: "AddEventDescription", sender: nil)
     }
     
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Minus Button is hidden to start
+        subtractEventButton.isHidden = true
         
         //print(isOrgLogin ?? "")
         showAllSwitch.isHidden = false
         
-        eventDescription.isHidden = true
+        eventDescriptive.isHidden = true
         eventPin.isHidden = true
         
         if(isOrgLogin){
             //currentLocationButton.isHidden = true
             addEventButton.isHidden = false
+            orgSegment.isHidden = false
+            userSegment.isHidden = true
         }else{
             //currentLocationButton.isHidden = false
             addEventButton.isHidden = true
+            userSegment.isHidden = false
+            orgSegment.isHidden = true
         }
         
         self.locationManager.delegate = self
@@ -97,11 +108,24 @@ class LiveViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         })
     }
     
+    //Event Button Click Variations
+    
     @IBAction func addEventButtonClicked(_ sender: Any) {
         print("add event button clicked.")
-        eventDescription.isHidden = false
+        eventDescriptive.isHidden = false
         eventPin.isHidden = false
+        addEventButton.isHidden = true
+        subtractEventButton.isHidden = false
     }
+    
+    @IBAction func subtractEventButtonClicked(_ sender: Any) {
+        eventPin.isHidden = true
+        eventDescriptive.isHidden = true
+        addEventButton.isHidden = false
+        subtractEventButton.isHidden = true
+    }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -110,7 +134,9 @@ class LiveViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        let location = locations.last
+        self.location = locations.last! as CLLocation
+
+
         let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
         
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1))
@@ -124,9 +150,10 @@ class LiveViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "AddEventDescription"){
-            let destinationViewController = segue.destination as! AddEventViewController
+            let nav = segue.destination as! UINavigationController
+            let destinationViewController = nav.viewControllers[0] as! AddEventViewController
             destinationViewController.location = addEventLocation
-            // destinationViewController.isOrgLogin = true
+            //destinationViewController.isOrgLogin = true
         }
     }
     /*
