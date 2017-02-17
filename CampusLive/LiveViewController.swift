@@ -20,31 +20,36 @@ import Firebase
         self.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
         self.title = title
         self.subtitle = subtitle
+        super.init()
     }
 }
 
-class LiveViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
+class LiveViewController: UIViewController, CLLocationManagerDelegate{
     
     @IBOutlet weak var mapView: MKMapView!
     
     var location: CLLocation!
-    var addEventLocation: CLLocation! = CLLocation(latitude: 27.8812, longitude: -123.2374)
-    let locationManager = CLLocationManager()
+    var addEventLocation: CLLocationCoordinate2D!
+    var locationManager = CLLocationManager()
+    var previousAddress: String!
+    var geoCoder: CLGeocoder!
+    
     //Change value to false
     var isOrgLogin: Bool = false
     
     @IBOutlet weak var addEventButton: UIButton!
     @IBOutlet weak var subtractEventButton: UIButton!
     
+    @IBOutlet weak var eventDescriptive: UIButton!
+    @IBOutlet weak var orgSegment: UISegmentedControl!
     @IBOutlet weak var showAllSwitch: UISwitch!
-    @IBOutlet weak var currentLocationButton: UIButton!
     @IBOutlet weak var eventPin: UIImageView!
     
-    let eventRef = FIRDatabase.database().reference().child("event")
-    
-    
+    var eventRef = FIRDatabase.database().reference().child("event")
+    //let ventRef = FIRDatabase.database().reference().child("stu_events")
 
     @IBAction func refreshLocationButton(_ sender: Any) {
+        locationManager.requestLocation()
         let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         
@@ -53,70 +58,84 @@ class LiveViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         mapView!.setCenter(mapView!.userLocation.coordinate, animated: true)
     }
     
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Minus Button is hidden to start
         subtractEventButton.isHidden = true
         
-        //print(isOrgLogin ?? "")
         showAllSwitch.isHidden = false
         
         eventDescriptive.isHidden = true
         eventPin.isHidden = true
         
+        //eventRef = eventRef.child("stu_events")
+        
         if(isOrgLogin){
             //currentLocationButton.isHidden = true
-            addEventButton.isHidden = false
-            orgSegment.isHidden = false
-            userSegment.isHidden = true
+            //addEventButton.isHidden = false
+            //orgSegment.isHidden = false
+            //userSegment.isHidden = true
         }else{
             //currentLocationButton.isHidden = false
-            addEventButton.isHidden = true
-            userSegment.isHidden = false
-            orgSegment.isHidden = true
+            //addEventButton.isHidden = true
+            //userSegment.isHidden = false
+            //orgSegment.isHidden = true
         }
         
-        self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager.requestWhenInUseAuthorization()
+        let span = MKCoordinateSpanMake(0.018, 0.018)
+        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 32.880777, longitude: -117.236395), span: span)
+        
+        mapView.setRegion(region, animated: true)
+        
+        isAuthorizedtoGetUserLocation()
+        
+        if CLLocationManager.locationServicesEnabled(){
+            self.locationManager.delegate = self
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestLocation()
+        }
+
         self.locationManager.startUpdatingLocation()
         self.mapView.showsUserLocation = true
+        self.mapView.delegate = self
         
-        //var gesture = UIPanGestureRecognizer(target: self, action: Selector("userDragged:"))
-        //addEventButton.addGestureRecognizer(gesture)
         displayLiveEvents()
     }
     
+    //if we have no permission to access user location, then ask user for permission.
+    func isAuthorizedtoGetUserLocation() {
+        
+        if CLLocationManager.authorizationStatus() != .authorizedWhenInUse     {
+            locationManager.requestWhenInUseAuthorization()
+        }
+    }
+    
     func displayLiveEvents(){
-        //var episode:Episode? = nil
+        
         eventRef.observe(.value, with: {(snap) in
             if let userDict = snap.value as? [String:AnyObject]{
                 
                 print(userDict)
                 for each in userDict as [String: AnyObject] {
                     let autoID = each.key
-                    var name = each.value["name"] as! String
+                    let name = each.value["name"] as! String
                     var endDate = each.value["endDate"] as! String
-                    var venue = each.value["venue"] as! String
-                    var latitude = each.value["latitude"] as! NSNumber
-                    var longitude = each.value["longitude"] as! NSNumber
+                    let venue = each.value["venue"] as! String
+                    let latitude = each.value["latitude"] as! NSNumber
+                    let longitude = each.value["longitude"] as! NSNumber
                     var description = each.value["description"] as! String
-                    let annotation = MKPointAnnotation()
-                    annotation.title = name
-                    annotation.subtitle = venue
-                    annotation.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
-                    self.mapView.addAnnotation(annotation)
+                    let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: venue)
+                    //annotation.title = name
+                    //annotation.subtitle = venue
+                    //annotation.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
+                    self.mapView.addAnnotation(clAnnotation)
                 }
             }
         })
     }
     
     //Event Button Click Variations
-    
     @IBAction func addEventButtonClicked(_ sender: Any) {
         print("add event button clicked.")
         eventDescriptive.isHidden = false
@@ -132,77 +151,107 @@ class LiveViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         subtractEventButton.isHidden = true
     }
     
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    //this method will be called each time when a user change his location access preference.
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            print("User allowed us to access location")
+            //do whatever init activities here.
+        }
     }
     
+    //this method is called by the framework on locationManager.requestLocation();
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
+        //let location:CLLocation = locations.first!
         self.location = locations.last! as CLLocation
-
-
-        let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
+        self.mapView.centerCoordinate = location.coordinate
+        let reg = MKCoordinateRegionMakeWithDistance(location.coordinate, 1500, 1500)
         
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1))
-        self.mapView.setRegion(region, animated: true)
+        self.mapView.setRegion(reg, animated: true)
         self.locationManager.stopUpdatingLocation()
+        //self.addEventLocation = location
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Errors: " + error.localizedDescription)
     }
-    
+ 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "AddEventDescription"){
             let nav = segue.destination as! UINavigationController
             let destinationViewController = nav.viewControllers[0] as! AddEventViewController
             destinationViewController.location = addEventLocation
-            //destinationViewController.isOrgLogin = true
+            destinationViewController.isOrgLogin = self.isOrgLogin
         }
     }
-    /*
+}
+
+extension LiveViewController: MKMapViewDelegate{
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        /*
-        guard !annotation.isKind(of: MKUserLocation()) else {
-            return nil
-        }*/
-        /*if annotation.isKindOfClass(MKUserLocation){
-         //emty return, guard wasn't cooperating
-         }else{
-         return nil
-         }*/
         
         guard !annotation.isKind(of: MKUserLocation.self) else {
             return nil
         }
         
-        let annotationIdentifier = "AnnotationIdentifier"
-        var annotationView: MKAnnotationView?
-        
-        if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) {
-            annotationView = dequeuedAnnotationView
-            annotationView?.annotation = annotation
-        }
-        else {
-            let av = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
-            av.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-            annotationView = av
-            annotationView?.isEnabled = true
-        }
-        
-        if let annotationView = annotationView {
-            // Configure your annotation view here
-            annotationView.canShowCallout = true
-            annotationView.image = UIImage(named: "mapPins")
-            let btn = UIButton()
-            btn.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
-            btn.setImage(UIImage(named: "info"), for: UIControlState())
-            annotationView.rightCalloutAccessoryView = btn
+        if let annotation = annotation as? CampusLiveAnnotation {
+            let identifier = "AnnotationIdentifier"
             
+            var view: MKAnnotationView
+            if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier){ // 2
+                dequeuedView.annotation = annotation
+                view = dequeuedView
+            } else {
+                // 3
+                view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                
+                let pikeImage = UIImage(named: "mapPins")
+                
+                view.image = pikeImage
+                view.isEnabled = true
+                view.canShowCallout = true
+                view.leftCalloutAccessoryView = UIImageView(image: pikeImage)
+                
+                
+                let btn2 = UIButton()
+                btn2.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+                btn2.setImage(UIImage(named: "info"), for: UIControlState())
+                view.rightCalloutAccessoryView = btn2
+                
+            }
+            return view
         }
-        return annotationView
-    }*/
+        return nil
+    }
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        self.location = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
+        // geoCode(location)
+        UIView.animate(withDuration: 0.4, animations: {
+            self.eventDescriptive.layer.opacity = 1
+        })
+    }
+    
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        UIView.animate(withDuration: 0.4, animations: {
+            self.eventDescriptive.layer.opacity = 0
+        })
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        if control == view.leftCalloutAccessoryView{
+            print("Left callout Accessory Called")
+            mapView.deselectAnnotation(view.annotation, animated: false)
+            performSegue(withIdentifier: "toProfileSegue", sender: view)
+        }
+        
+        if control == view.rightCalloutAccessoryView {
+            print("Right callout Accessory  View Called")
+            eventPin.isHidden = true
+            subtractEventButton.isHidden = true
+            addEventButton.isHidden = false
+            eventDescriptive.isHidden = true
+        }
+    }
 }
