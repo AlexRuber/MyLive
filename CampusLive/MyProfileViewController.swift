@@ -8,11 +8,31 @@
 
 import UIKit
 import Firebase
+import Foundation
+import FirebaseStorage
+import FirebaseDatabase
+import FBSDKLoginKit
 
 class MyProfileViewController: UIViewController {
 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var profileName: UILabel!
+    @IBAction func backBtnPressed(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    @IBAction func logoutBtnPressed(_ sender: Any) {
+   //MARK: Actions
+        
+        //signs the user out of firebase app
+        try! FIRAuth.auth()!.signOut()
+        
+        //sign the user out of facebook app
+        FBSDKAccessToken.setCurrent(nil)
+        
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController: UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "LoginView")
+        self.present(viewController, animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

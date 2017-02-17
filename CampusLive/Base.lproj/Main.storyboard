@@ -48,10 +48,6 @@
                                     <segue destination="u1Z-j7-M9b" kind="show" identifier="AddEventDescription" id="LpQ-QX-2dk"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="UCSDLogo2" translatesAutoresizingMaskIntoConstraints="NO" id="QvK-eE-oVh">
-                                <rect key="frame" x="113" y="28" width="148" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evu-aa-WeU">
                                 <rect key="frame" x="326" y="612" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -86,10 +82,14 @@
                                 </connections>
                             </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ewm-fi-yqh">
-                                <rect key="frame" x="16" y="28" width="51" height="31"/>
+                                <rect key="frame" x="163" y="578" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="onTintColor" red="0.1058823529" green="0.58823529409999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </switch>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="UCSDLogo" translatesAutoresizingMaskIntoConstraints="NO" id="QvK-eE-oVh">
+                                <rect key="frame" x="156" y="20" width="62" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -277,12 +277,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vBa-0L-pTl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2311" y="657"/>
+            <point key="canvasLocation" x="-236" y="-146"/>
         </scene>
         <!--Sign In View Controller-->
         <scene sceneID="yib-MY-dUM">
             <objects>
-                <viewController id="WSx-hg-qa9" customClass="SignInViewController" customModule="CampusLive" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginView" id="WSx-hg-qa9" customClass="SignInViewController" customModule="CampusLive" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7Bf-1A-9Xr"/>
                         <viewControllerLayoutGuide type="bottom" id="JP5-dX-bxr"/>
@@ -415,7 +415,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DPa-dt-1gR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1161" y="422"/>
+            <point key="canvasLocation" x="-1178" y="-48"/>
         </scene>
         <!--Sign Up-->
         <scene sceneID="HM2-iU-IAo">
@@ -757,9 +757,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lrh-jf-bN6">
-                                <rect key="frame" x="317" y="28" width="50" height="30"/>
+                                <rect key="frame" x="309" y="28" width="50" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="logoutBtnPressed:" destination="L0E-g9-m5t" eventType="touchUpInside" id="LCJ-wg-tga"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="27e-CJ-0Gr">
+                                <rect key="frame" x="16" y="28" width="34" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="backBtnPressed:" destination="L0E-g9-m5t" eventType="touchUpInside" id="guM-3k-BQg"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -800,7 +811,7 @@
         <image name="Pin" width="148" height="258"/>
         <image name="Settings" width="212" height="212"/>
         <image name="SubtractEventButton" width="100" height="100"/>
-        <image name="UCSDLogo2" width="398" height="82"/>
+        <image name="UCSDLogo" width="163" height="160"/>
         <image name="addEvent" width="455" height="80"/>
         <image name="clLogo" width="178" height="150"/>
     </resources>
