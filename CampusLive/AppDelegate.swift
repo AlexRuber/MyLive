@@ -10,6 +10,7 @@
 import UIKit
 import Firebase
 import FBSDKCoreKit
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

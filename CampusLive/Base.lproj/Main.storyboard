@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WSx-hg-qa9">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WSx-hg-qa9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -24,76 +24,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="qAi-iX-GBz">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="qAi-iX-GBz">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show All" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aQD-jZ-ndR">
-                                <rect key="frame" x="16" y="588" width="39" height="21"/>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" offImage="NavigationButton" translatesAutoresizingMaskIntoConstraints="NO" id="CYJ-3Z-BrY">
-                                <rect key="frame" x="11" y="614" width="51" height="31"/>
-                                <color key="onTintColor" red="0.039215686274509803" green="0.37647058823529411" blue="0.99215686274509807" alpha="1" colorSpace="calibratedRGB"/>
-                            </switch>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Pin" translatesAutoresizingMaskIntoConstraints="NO" id="1OZ-Ve-hAD">
-                                <rect key="frame" x="172" y="287" width="30" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="SUh-Gh-ovV"/>
-                                    <constraint firstAttribute="width" constant="30" id="nWn-an-7UX"/>
-                                </constraints>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Pin" translatesAutoresizingMaskIntoConstraints="NO" id="1OZ-Ve-hAD">
+                                <rect key="frame" x="172.5" y="287" width="30" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBh-yN-wPh">
-                                <rect key="frame" x="157" y="556" width="60" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="PDM-9i-Otu"/>
-                                </constraints>
-                                <state key="normal" image="AddEventButton"/>
-                                <connections>
-                                    <action selector="addEventButtonClicked:" destination="HeC-Kp-YOV" eventType="touchUpInside" id="GpE-mJ-b3n"/>
-                                </connections>
-                            </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yuF-kP-G1T">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yuF-kP-G1T">
                                 <rect key="frame" x="119" y="617" width="137" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="LIVE"/>
                                     <segment title="Trending"/>
                                 </segments>
                             </segmentedControl>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bYM-Bc-v9L">
-                                <rect key="frame" x="324" y="610" width="35" height="35"/>
-                                <state key="normal" image="NavigationButton"/>
-                                <connections>
-                                    <action selector="refreshLocationButton:" destination="HeC-Kp-YOV" eventType="touchUpInside" id="BBl-Zo-kh5"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gWL-zK-wao">
-                                <rect key="frame" x="108" y="251" width="158" height="28"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="28" id="TN0-BI-lWs"/>
-                                </constraints>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gWL-zK-wao">
+                                <rect key="frame" x="108" y="251" width="159" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="addEvent"/>
                                 <connections>
                                     <segue destination="u1Z-j7-M9b" kind="show" identifier="AddEventDescription" id="LpQ-QX-2dk"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UCSDLogo" translatesAutoresizingMaskIntoConstraints="NO" id="QvK-eE-oVh">
-                                <rect key="frame" x="157" y="20" width="60" height="60"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="BNk-Gd-R3A"/>
-                                    <constraint firstAttribute="height" constant="60" id="Nyt-Pd-vJy"/>
-                                </constraints>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="UCSDLogo2" translatesAutoresizingMaskIntoConstraints="NO" id="QvK-eE-oVh">
+                                <rect key="frame" x="113" y="28" width="148" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evu-aa-WeU">
-                                <rect key="frame" x="157" y="556" width="60" height="60"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evu-aa-WeU">
+                                <rect key="frame" x="326" y="612" width="35" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="SubtractEventButton"/>
                                 <connections>
                                     <action selector="subtractEventButtonClicked:" destination="HeC-Kp-YOV" eventType="touchUpInside" id="Y5e-dn-UWq"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j0R-2a-DDO">
-                                <rect key="frame" x="322" y="28" width="39" height="37"/>
+                                <rect key="frame" x="324" y="25" width="39" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Settings"/>
                                 <connections>
@@ -101,54 +69,44 @@
                                     <segue destination="L0E-g9-m5t" kind="show" identifier="toProfileSegue" id="yGP-IK-zj8"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bYM-Bc-v9L">
+                                <rect key="frame" x="16" y="612" width="35" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="NavigationButton"/>
+                                <connections>
+                                    <action selector="refreshLocationButton:" destination="HeC-Kp-YOV" eventType="touchUpInside" id="BBl-Zo-kh5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBh-yN-wPh">
+                                <rect key="frame" x="326" y="612" width="35" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="AddEventButton"/>
+                                <connections>
+                                    <action selector="addEventButtonClicked:" destination="HeC-Kp-YOV" eventType="touchUpInside" id="GpE-mJ-b3n"/>
+                                </connections>
+                            </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ewm-fi-yqh">
+                                <rect key="frame" x="16" y="28" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="onTintColor" red="0.1058823529" green="0.58823529409999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="gWL-zK-wao" firstAttribute="centerX" secondItem="1OZ-Ve-hAD" secondAttribute="centerX" id="1Le-r3-HH3"/>
-                            <constraint firstItem="qAi-iX-GBz" firstAttribute="top" secondItem="jT9-Ti-EMP" secondAttribute="top" id="35G-Om-1Ti"/>
-                            <constraint firstItem="qAi-iX-GBz" firstAttribute="bottom" secondItem="CJ9-nO-DKi" secondAttribute="top" id="6W8-F9-Vzj"/>
-                            <constraint firstItem="aQD-jZ-ndR" firstAttribute="leading" secondItem="jT9-Ti-EMP" secondAttribute="leadingMargin" id="6fc-nd-k1p"/>
-                            <constraint firstItem="YBh-yN-wPh" firstAttribute="centerX" secondItem="yuF-kP-G1T" secondAttribute="centerX" id="7jl-Ei-fNx"/>
-                            <constraint firstItem="1OZ-Ve-hAD" firstAttribute="top" secondItem="gWL-zK-wao" secondAttribute="bottom" constant="8" symbolic="YES" id="8BI-du-YaC"/>
-                            <constraint firstItem="QvK-eE-oVh" firstAttribute="leading" secondItem="YBh-yN-wPh" secondAttribute="leading" id="8KE-LO-iGi"/>
-                            <constraint firstItem="gWL-zK-wao" firstAttribute="top" secondItem="jT9-Ti-EMP" secondAttribute="top" constant="251" id="C65-Zl-6WW"/>
-                            <constraint firstItem="QvK-eE-oVh" firstAttribute="trailing" secondItem="YBh-yN-wPh" secondAttribute="trailing" id="DoN-FG-W6b"/>
-                            <constraint firstItem="qAi-iX-GBz" firstAttribute="centerX" secondItem="YBh-yN-wPh" secondAttribute="centerX" id="I6o-4n-tAo"/>
-                            <constraint firstItem="yuF-kP-G1T" firstAttribute="top" secondItem="evu-aa-WeU" secondAttribute="bottom" constant="8" symbolic="YES" id="Odb-1W-oHb"/>
-                            <constraint firstItem="aQD-jZ-ndR" firstAttribute="top" secondItem="qSU-X0-dDz" secondAttribute="bottom" constant="568" id="RgT-5Q-sHh"/>
-                            <constraint firstItem="CYJ-3Z-BrY" firstAttribute="top" secondItem="aQD-jZ-ndR" secondAttribute="bottom" constant="5" id="Sqo-kt-N4y"/>
-                            <constraint firstItem="bYM-Bc-v9L" firstAttribute="leading" secondItem="yuF-kP-G1T" secondAttribute="trailing" constant="68" id="V3b-HH-CK9"/>
-                            <constraint firstItem="QvK-eE-oVh" firstAttribute="top" secondItem="qSU-X0-dDz" secondAttribute="bottom" id="Z4M-NE-DYN"/>
-                            <constraint firstItem="evu-aa-WeU" firstAttribute="trailing" secondItem="YBh-yN-wPh" secondAttribute="trailing" id="cGV-tv-MY8"/>
-                            <constraint firstItem="YBh-yN-wPh" firstAttribute="top" secondItem="evu-aa-WeU" secondAttribute="top" id="d8G-P8-Zwz"/>
-                            <constraint firstItem="evu-aa-WeU" firstAttribute="leading" secondItem="YBh-yN-wPh" secondAttribute="leading" id="dno-iZ-hxQ"/>
-                            <constraint firstAttribute="trailing" secondItem="qAi-iX-GBz" secondAttribute="trailing" id="fT1-3R-LeP"/>
-                            <constraint firstItem="aQD-jZ-ndR" firstAttribute="centerX" secondItem="CYJ-3Z-BrY" secondAttribute="centerX" id="jV9-WH-tnv"/>
-                            <constraint firstItem="CJ9-nO-DKi" firstAttribute="top" secondItem="CYJ-3Z-BrY" secondAttribute="bottom" constant="22" id="rgU-bl-AjB"/>
-                            <constraint firstItem="bYM-Bc-v9L" firstAttribute="top" secondItem="qSU-X0-dDz" secondAttribute="bottom" constant="590" id="sZk-AS-tk3"/>
-                            <constraint firstItem="bYM-Bc-v9L" firstAttribute="trailing" secondItem="jT9-Ti-EMP" secondAttribute="trailingMargin" id="tGw-4i-SKA"/>
-                            <constraint firstItem="gWL-zK-wao" firstAttribute="leading" secondItem="jT9-Ti-EMP" secondAttribute="leadingMargin" constant="92" id="u2z-re-5s0"/>
-                            <constraint firstItem="qAi-iX-GBz" firstAttribute="leading" secondItem="jT9-Ti-EMP" secondAttribute="leading" id="vgs-RN-YGZ"/>
-                            <constraint firstItem="yuF-kP-G1T" firstAttribute="bottom" secondItem="bYM-Bc-v9L" secondAttribute="bottom" id="wEr-c4-gvS"/>
-                            <constraint firstItem="CYJ-3Z-BrY" firstAttribute="bottom" secondItem="yuF-kP-G1T" secondAttribute="bottom" id="xBi-eu-lOU"/>
-                            <constraint firstItem="QvK-eE-oVh" firstAttribute="centerX" secondItem="gWL-zK-wao" secondAttribute="centerX" id="xfk-Vn-Cj0"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="UCSD" id="CUC-Nd-Da0"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addEventButton" destination="YBh-yN-wPh" id="S7e-9W-bU7"/>
-                        <outlet property="eventDescriptive" destination="gWL-zK-wao" id="cqY-R4-W5U"/>
+                        <outlet property="eventDescriptive" destination="gWL-zK-wao" id="cmv-sq-DFx"/>
                         <outlet property="eventPin" destination="1OZ-Ve-hAD" id="uhE-7J-N8r"/>
                         <outlet property="mapView" destination="qAi-iX-GBz" id="nGn-dI-466"/>
-                        <outlet property="orgSegment" destination="yuF-kP-G1T" id="7FR-wU-v09"/>
-                        <outlet property="showAllSwitch" destination="CYJ-3Z-BrY" id="3eK-1l-mIR"/>
+                        <outlet property="orgSegment" destination="yuF-kP-G1T" id="hV0-Y1-t1J"/>
                         <outlet property="subtractEventButton" destination="evu-aa-WeU" id="1CF-W5-6oK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H6d-1g-KNw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-236" y="519"/>
+            <point key="canvasLocation" x="-236" y="517.6911544227886"/>
         </scene>
         <!--Add Event-->
         <scene sceneID="fhF-Lw-H3L">
@@ -576,7 +534,7 @@
                                     <action selector="termsSwitchValueChanged:" destination="gp6-gh-2Zr" eventType="valueChanged" id="rXc-kV-BUk"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Website: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="puZ-1z-ydc">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Website: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="puZ-1z-ydc">
                                 <rect key="frame" x="22" y="323" width="74" height="21"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -699,7 +657,6 @@
         <!--Event Name -->
         <scene sceneID="1MJ-M2-nns">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="W87-6t-v22" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController title="Event Name " id="Okl-11-L3v" customClass="EventDetailViewController" customModule="CampusLive" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2oS-AD-dDB"/>
@@ -772,6 +729,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W87-6t-v22" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="521" y="1496"/>
         </scene>
@@ -842,7 +800,7 @@
         <image name="Pin" width="148" height="258"/>
         <image name="Settings" width="212" height="212"/>
         <image name="SubtractEventButton" width="100" height="100"/>
-        <image name="UCSDLogo" width="163" height="160"/>
+        <image name="UCSDLogo2" width="398" height="82"/>
         <image name="addEvent" width="455" height="80"/>
         <image name="clLogo" width="178" height="150"/>
     </resources>
