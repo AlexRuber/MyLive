@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import Firebase
 
-class AddEventViewController: UIViewController {
+class AddEventViewController: UIViewController, UITextFieldDelegate {
 
     var location: CLLocationCoordinate2D!
     
@@ -80,6 +80,11 @@ class AddEventViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        //Hiding keyboard delegates
+        self.venueTextField.delegate = self
+        self.nameTextField.delegate = self
+        
         print(location)
         
         if(isOrgLogin){
@@ -94,5 +99,19 @@ class AddEventViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    
+    //Hide keyboard when user touches outside keyboard
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    //Hide after pressing enter key
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return (true)
+        
     }
 }

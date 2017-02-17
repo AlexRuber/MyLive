@@ -11,7 +11,7 @@ import Firebase
 import FBSDKLoginKit
 import FBSDKShareKit
 
-class SignInViewController: UIViewController {
+class SignInViewController: UIViewController, UITextFieldDelegate {
 
     var homeViewController: UIViewController!
     var viewController: UIViewController!
@@ -31,6 +31,11 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //Creating Delegates for Hiding Keyboard
+        self.usernameField.delegate = self
+        self.passwordField.delegate = self
+        
+        
         customFBButton.addTarget(self, action: #selector(handleCustomFBLogin), for: .touchUpInside)
         
         segmentView.selectedSegmentIndex = 0
@@ -41,9 +46,7 @@ class SignInViewController: UIViewController {
         signupButton.isHidden = true
         customFBButton.isHidden = false
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SignInViewController.hideKeyBoard))
-        view.addGestureRecognizer(tap)
-    
+  
     }
 
     @IBAction func segmentStateChanged(_ sender: Any) {
@@ -72,9 +75,18 @@ class SignInViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func hideKeyBoard(){
-        view.endEditing(true)
+    //Hide keyboard when user touches outside keyboard
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
+    
+    //Hide after pressing enter key
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return (true)
+        
+    }
+  
     
     override func viewDidAppear(_ animated: Bool) {
         /*

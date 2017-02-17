@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FBSDKLoginKit
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController, UITextFieldDelegate{
 
     let userRef = FIRDatabase.database().reference().child("org")
     var uid: String?
@@ -29,12 +29,36 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         termsSwitch.isOn = false
+        
+        //Creating Delegates for Hiding Keyboard
+        self.phoneTextField.delegate = self
+        self.fbTextField.delegate = self
+        self.websiteTextField.delegate = self
+        self.orgNameTextField.delegate = self
+        self.adminTextField.delegate = self
+        self.emailTextField.delegate = self
+        self.passwordTextField.delegate = self
+        self.instaTextField.delegate = self
+    
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    //Hide keyboard when user touches outside keyboard
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    //Hide after pressing enter key
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return (true)
+        
+    }
+    
     
     @IBAction func termsSwitchValueChanged(_ sender: Any) {
         if(termsSwitch.isOn){
