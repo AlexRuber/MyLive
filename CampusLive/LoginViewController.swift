@@ -18,8 +18,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     //var signupViewController: UIViewController!
     
     var isOrgLogin: Bool = false
-    
 
+    
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginInButton: UIButton!
@@ -27,10 +27,13 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var segmentView: UISegmentedControl!
     @IBOutlet weak var customFBButton: UIButton!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+     
+        //Activity Spinner Hidden to Begin
+        
         //Creating Delegates for Hiding Keyboard
         self.usernameField.delegate = self
         self.passwordField.delegate = self
@@ -106,7 +109,11 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     
     func handleCustomFBLogin(){
         //print(1234)
+        
         isOrgLogin = false
+        
+        self.customFBButton.isHidden = true
+        
         FBSDKLoginManager().logIn(withReadPermissions: ["email", "public_profile", "user_friends"], from: self){ (result, err) in
             if(err != nil){
                 print("Fb Login Failed", err ?? "")
@@ -179,16 +186,20 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func loginButtonClicked(_ sender: Any) {
+     
         // Sign In with credentials.
-        
         isOrgLogin = true
+        
         
         if ((usernameField.text?.isEmpty)! || (passwordField.text?.isEmpty)!){
             let alert = UIAlertController(title: "Invalid Fields", message: "Enter all details", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            
+            
             self.present(alert, animated: true, completion: nil)
         }
         else{
+
             if let email = usernameField.text, let password = passwordField.text {
             FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
                 if error == nil {
@@ -198,11 +209,15 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                     let alert = UIAlertController(title: "Invalid User", message: "User does not exist.", preferredStyle: UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
+                    
+                    
                     return
                     }
                 }
             }
         }
+        
+        
     }
     
     func logIn(_ user: FIRUser?) {

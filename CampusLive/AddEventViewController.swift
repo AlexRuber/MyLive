@@ -25,6 +25,23 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var endDatePicker: UIDatePicker!
     @IBOutlet weak var descriptionTextView: UITextView!
     
+    @IBAction func fbLinkTapped(_ sender: Any) {
+        UIApplication.shared.openURL(NSURL(string: "https://www.facebook.com/UcsdPike/")! as URL)
+
+    }
+    
+    @IBAction func instaLinkTapped(_ sender: Any) {
+        UIApplication.shared.openURL(NSURL(string: "https://www.instagram.com/ucsdpike/?hl=en")! as URL)
+
+    }
+   
+    @IBAction func webLinkTapped(_ sender: Any) {
+        UIApplication.shared.openURL(NSURL(string: "http://www.ucsdpike.org")! as URL)
+
+    }
+    
+    
+    
     @IBAction func backButtonClicked(_ sender: Any) {
             hideKeyBoard()
             self.dismiss(animated: true, completion: nil)
@@ -36,7 +53,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             self.uid = FIRAuth.auth()?.currentUser?.uid
             self.post()
             
-            let addEventPopup = UIAlertController(title: "✔️️", message: "Your event was succesfully posted", preferredStyle: .alert)
+            let addEventPopup = UIAlertController(title: "Posted", message: "Your event is now on the map", preferredStyle: .alert)
             //let defaultAction = UIAlertAction(title: "Close", style: .default, handler: nil)
             addEventPopup.addAction(UIAlertAction(title: "OK", style: .default, handler: {
                 action in

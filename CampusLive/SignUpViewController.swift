@@ -26,6 +26,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate{
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var instaTextField: UITextField!
     
+    @IBAction func backBtnPressed(_ sender: Any) {
+    self.dismiss(animated: true, completion: nil)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         termsSwitch.isOn = false
