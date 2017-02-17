@@ -32,7 +32,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     var addEventLocation: CLLocationCoordinate2D!
     var locationManager = CLLocationManager()
     var previousAddress: String!
-    var geoCoder: CLGeocoder!
+    //var geoCoder: CLGeocoder!
     
     //Change value to false
     var isOrgLogin: Bool = false
@@ -96,6 +96,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
             locationManager.requestLocation()
         }
 
+        self.locationManager.delegate = self
         self.locationManager.startUpdatingLocation()
         self.mapView.showsUserLocation = true
         self.mapView.delegate = self
@@ -133,6 +134,10 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
                 }
             }
         })
+    }
+    
+    @IBAction func settingsClicked(_ sender: Any) {
+        
     }
     
     //Event Button Click Variations
