@@ -38,15 +38,7 @@ class SignInViewController: UIViewController {
         forgetPasswordButton.isHidden = true
         signupButton.isHidden = true
         customFBButton.isHidden = false
-        /* ****** TO be uncommented in final code**********
-        if FIRAuth.auth()?.currentUser != nil{
-            // User is signed in.
-            // Move the user to the Home Screen.
-            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            homeViewController = mainStoryboard.instantiateViewController(withIdentifier: "TabView") as! UITabBarController
-            self.perform(#selector(self.presentHomeViewController), with: nil, afterDelay: 0.0)
-        }
-        */
+        
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SignInViewController.hideKeyBoard))
         view.addGestureRecognizer(tap)
     
@@ -179,57 +171,48 @@ class SignInViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         }
         else{
-            guard let email = usernameField.text, let password = passwordField.text else { return }
+            if let email = usernameField.text, let password = passwordField.text {
             FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
-                if let error = error {
-                    //                    let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                    //                    self.viewController = mainStoryboard.instantiateViewController(withIdentifier: "LoginView") as UIViewController
-                    //                    //self.present(homeViewController, animated: true, completion: nil)
-                    //                    //self.navigationController?.show(homeViewController, sender: nil)
-                    //                    self.perform(#selector(self.presentViewController1), with: nil, afterDelay: 0.0)
-                    print(error.localizedDescription)
+                if error == nil {
+                    self.logIn(user)
+                }else{
+                    print(error?.localizedDescription ?? "Something went wrong.")
+                    let alert = UIAlertController(title: "Invalid User", message: "User does not exist.", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
                     return
+                    }
                 }
-                self.logIn(user!)
             }
         }
     }
     
     func logIn(_ user: FIRUser?) {
-        MeasurementHelper.sendLoginEvent()
-        
-        AppState.sharedInstance.displayName = user?.displayName ?? user?.email
-        AppState.sharedInstance.photoURL = user?.photoURL
-        AppState.sharedInstance.signedIn = true
-        let notificationName = Notification.Name(rawValue: Constants.NotificationKeys.SignedIn)
-        NotificationCenter.default.post(name: notificationName, object: nil, userInfo: nil)
-        performSegue(withIdentifier: Constants.Segues.SignUpToFp, sender: nil)
+        if(FIRAuth.auth()?.currentUser != nil){
+            MeasurementHelper.sendLoginEvent()
+            AppState.sharedInstance.displayName = user?.displayName ?? user?.email
+            AppState.sharedInstance.photoURL = user?.photoURL
+            AppState.sharedInstance.signedIn = true
+            let notificationName = Notification.Name(rawValue: Constants.NotificationKeys.SignedIn)
+            NotificationCenter.default.post(name: notificationName, object: nil, userInfo: nil)
+            performSegue(withIdentifier: Constants.Segues.SignUpToFp, sender: nil)
+        }
     }
-    
-   // @IBOutlet weak var signupButtonClicked: UIButton!
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         //let viewController = segue.destination as!
         //viewController.isOrgLogin = true
-        if(segue.identifier == "SignUpToFP"){
+        if(FIRAuth.auth()?.currentUser != nil){
+            if(segue.identifier == "SignUpToFP"){
             //let barViewControllers = segue.destination as! UITabBarController
             //let nav = barViewControllers.viewControllers![0] as! UINavigationController
             
             //let destinationViewController = nav.viewControllers[0]
-            let destinationViewController = segue.destination as! LiveViewController
-            destinationViewController.isOrgLogin = true
+                let destinationViewController = segue.destination as! LiveViewController
+                destinationViewController.isOrgLogin = true
+            }
         }
     }
 
