@@ -26,6 +26,7 @@ class AddEventViewController: UIViewController {
     @IBOutlet weak var descriptionTextView: UITextView!
     
     @IBAction func backButtonClicked(_ sender: Any) {
+            hideKeyBoard()
             self.dismiss(animated: true, completion: nil)
     }
     
@@ -33,13 +34,17 @@ class AddEventViewController: UIViewController {
         if FIRAuth.auth()?.currentUser != nil{
             // User is signed in.
             self.uid = FIRAuth.auth()?.currentUser?.uid
-            
             self.post()
             
             let addEventPopup = UIAlertController(title: "✔️️", message: "Your event was succesfully posted", preferredStyle: .alert)
-            let defaultAction = UIAlertAction(title: "Close", style: .default, handler: nil)
-            addEventPopup.addAction(defaultAction)
+            //let defaultAction = UIAlertAction(title: "Close", style: .default, handler: nil)
+            addEventPopup.addAction(UIAlertAction(title: "OK", style: .default, handler: {
+                action in
+                self.dismiss(animated: true, completion: nil)
+            }))
             present(addEventPopup, animated: true, completion: nil)
+            //self.dismiss(animated: true, completion: nil)
+            //dismissView()
         }else{
             let addEventPopup = UIAlertController(title: "Error!", message: "Something went wrong.", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "Close", style: .default, handler: nil)
@@ -47,6 +52,11 @@ class AddEventViewController: UIViewController {
             present(addEventPopup, animated: true, completion: nil)
             self.dismiss(animated: true, completion: nil)
         }
+    }
+    
+    func dismissView(){
+            hideKeyBoard()
+            self.dismiss(animated: true, completion: nil)
     }
     
     func post(){
@@ -63,6 +73,10 @@ class AddEventViewController: UIViewController {
         print("Posting event success.")
     }
     
+    func hideKeyBoard(){
+        view.endEditing(true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -73,6 +87,8 @@ class AddEventViewController: UIViewController {
         }else{
             userRef = userRef.child("stu_events")
         }
+        
+        hideKeyBoard()
     }
     
     override func didReceiveMemoryWarning() {
