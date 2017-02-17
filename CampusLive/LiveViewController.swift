@@ -29,7 +29,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     @IBOutlet weak var mapView: MKMapView!
     
     var location: CLLocation!
-    var addEventLocation: CLLocation!// = CLLocation(latitude: 27.8812, longitude: -123.2374)
+    var addEventLocation: CLLocationCoordinate2D!// = CLLocation(latitude: 27.8812, longitude: -123.2374)
     let locationManager = CLLocationManager()
     //Change value to false
     var isOrgLogin: Bool = false
@@ -41,10 +41,10 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     @IBOutlet weak var orgSegment: UISegmentedControl!
     @IBOutlet weak var showAllSwitch: UISwitch!
     @IBOutlet weak var eventPin: UIImageView!
-    @IBOutlet weak var eventDescriptive: UIButton!
-    @IBOutlet weak var userSegment: UISegmentedControl!
+    //@IBOutlet weak var eventDescriptive: UIButton!
+    //@IBOutlet weak var userSegment: UISegmentedControl!
     
-    @IBOutlet weak var orgSegment: UISegmentedControl!
+    //@IBOutlet weak var orgSegment: UISegmentedControl!
     let eventRef = FIRDatabase.database().reference().child("event")
     
     
@@ -65,7 +65,6 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         //Minus Button is hidden to start
         subtractEventButton.isHidden = true
         
-        showAllSwitch.isHidden = false
         
         eventDescriptive.isHidden = true
         eventPin.isHidden = true
@@ -100,6 +99,8 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         self.locationManager.startUpdatingLocation()
         self.mapView.showsUserLocation = true
         self.mapView.delegate = self
+        
+        self.locationManager.delegate = self
         
         displayLiveEvents()
     }
@@ -164,9 +165,12 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         //let location:CLLocation = locations.first!
-        self.location = locations.last! as CLLocation
-        self.mapView.centerCoordinate = location.coordinate
-        let reg = MKCoordinateRegionMakeWithDistance(location.coordinate, 1500, 1500)
+        let location = locations.last
+        
+        let centerCoordinate = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
+        
+        self.mapView.centerCoordinate = (location?.coordinate)!
+        let reg = MKCoordinateRegionMakeWithDistance((location?.coordinate)!, 1500, 1500)
         
         self.mapView.setRegion(reg, animated: true)
         self.locationManager.stopUpdatingLocation()
@@ -181,7 +185,8 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         if(segue.identifier == "AddEventDescription"){
             let nav = segue.destination as! UINavigationController
             let destinationViewController = nav.viewControllers[0] as! AddEventViewController
-            destinationViewController.location = location
+            destinationViewController.location = addEventLocation
+            destinationViewController.isOrgLogin = self.isOrgLogin
             //destinationViewController.isOrgLogin = true
         }
     }
@@ -230,6 +235,8 @@ extension LiveViewController: MKMapViewDelegate{
         // geoCode(location)
         UIView.animate(withDuration: 0.4, animations: {
             self.eventDescriptive.layer.opacity = 1
+            
+            self.addEventLocation = self.location.coordinate
         })
     }
     

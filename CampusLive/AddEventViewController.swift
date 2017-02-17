@@ -33,6 +33,7 @@ class AddEventViewController: UIViewController {
         if FIRAuth.auth()?.currentUser != nil{
             // User is signed in.
             self.uid = FIRAuth.auth()?.currentUser?.uid
+            
             self.post()
             
             let addEventPopup = UIAlertController(title: "✔️️", message: "Your event was succesfully posted", preferredStyle: .alert)
@@ -64,6 +65,9 @@ class AddEventViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print(location)
+        
         if(isOrgLogin){
             userRef = userRef.child("org_events")
         }else{
