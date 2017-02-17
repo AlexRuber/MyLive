@@ -48,8 +48,8 @@
                                     <segue destination="u1Z-j7-M9b" kind="show" identifier="AddEventDescription" id="LpQ-QX-2dk"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="UCSDLogo" translatesAutoresizingMaskIntoConstraints="NO" id="QvK-eE-oVh">
-                                <rect key="frame" x="157.5" y="20" width="60" height="60"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="UCSDLogo2" translatesAutoresizingMaskIntoConstraints="NO" id="QvK-eE-oVh">
+                                <rect key="frame" x="113" y="28" width="148" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evu-aa-WeU">
@@ -61,7 +61,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j0R-2a-DDO">
-                                <rect key="frame" x="322" y="28" width="39" height="37"/>
+                                <rect key="frame" x="324" y="25" width="39" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Settings"/>
                                 <connections>
@@ -85,6 +85,11 @@
                                     <action selector="addEventButtonClicked:" destination="HeC-Kp-YOV" eventType="touchUpInside" id="GpE-mJ-b3n"/>
                                 </connections>
                             </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ewm-fi-yqh">
+                                <rect key="frame" x="16" y="28" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="onTintColor" red="0.1058823529" green="0.58823529409999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -101,7 +106,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H6d-1g-KNw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-236" y="519"/>
+            <point key="canvasLocation" x="-236" y="517.6911544227886"/>
         </scene>
         <!--Add Event-->
         <scene sceneID="fhF-Lw-H3L">
@@ -795,7 +800,7 @@
         <image name="Pin" width="148" height="258"/>
         <image name="Settings" width="212" height="212"/>
         <image name="SubtractEventButton" width="100" height="100"/>
-        <image name="UCSDLogo" width="163" height="160"/>
+        <image name="UCSDLogo2" width="398" height="82"/>
         <image name="addEvent" width="455" height="80"/>
         <image name="clLogo" width="178" height="150"/>
     </resources>
