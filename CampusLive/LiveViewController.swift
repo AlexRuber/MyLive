@@ -45,10 +45,8 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     //@IBOutlet weak var userSegment: UISegmentedControl!
     
     //@IBOutlet weak var orgSegment: UISegmentedControl!
-    let eventRef = FIRDatabase.database().reference().child("event")
+    var eventRef = FIRDatabase.database().reference()//.child("event")
     
-    
-
     @IBAction func refreshLocationButton(_ sender: Any) {
         locationManager.requestLocation()
         let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
@@ -102,6 +100,12 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         self.mapView.delegate = self
         
         self.locationManager.delegate = self
+        
+        if(isOrgLogin){
+            self.eventRef = eventRef.child("org_events")
+        }else{
+            self.eventRef = eventRef.child("stu_events")
+        }
         
         displayLiveEvents()
     }
