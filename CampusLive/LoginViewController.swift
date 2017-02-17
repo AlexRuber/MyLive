@@ -17,6 +17,8 @@ class SignInViewController: UIViewController {
     var viewController: UIViewController!
     //var signupViewController: UIViewController!
     
+    var isOrgLogin: Bool = false
+    
 
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -92,6 +94,7 @@ class SignInViewController: UIViewController {
     
     func handleCustomFBLogin(){
         //print(1234)
+        isOrgLogin = false
         FBSDKLoginManager().logIn(withReadPermissions: ["email", "public_profile", "user_friends"], from: self){ (result, err) in
             if(err != nil){
                 print("Fb Login Failed", err ?? "")
@@ -165,6 +168,9 @@ class SignInViewController: UIViewController {
     
     @IBAction func loginButtonClicked(_ sender: Any) {
         // Sign In with credentials.
+        
+        isOrgLogin = true
+        
         if ((usernameField.text?.isEmpty)! || (passwordField.text?.isEmpty)!){
             let alert = UIAlertController(title: "Invalid Fields", message: "Enter all details", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))

@@ -7,13 +7,40 @@
 //
 
 import UIKit
+import Firebase
 
 class MyProfileViewController: UIViewController {
 
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var profileName: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        print("Profile View Controller Loaded.")
+        
+        //self.uiImageView.layer.cornerRadius = self.uiImageView.frame.size.width/2
+        self.profileImage.clipsToBounds = true
+        
+        if FIRAuth.auth()?.currentUser != nil {
+            // User is signed in.
+            let user = FIRAuth.auth()?.currentUser
+            let email = user?.email
+            //let uid = user?.uid
+            let photoURL = user?.photoURL
+            let name = user?.displayName
+            
+            self.profileName.text = name
+            //self.uiEmailLabelView.text = email
+            if let photo = photoURL {
+                let data = NSData(contentsOf: photo)
+                self.profileImage.image = UIImage(data: data! as Data)
+            }
+            
+        } else {
+            print("User not Signed In.")
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {

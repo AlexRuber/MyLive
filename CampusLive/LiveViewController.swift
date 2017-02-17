@@ -96,6 +96,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
             locationManager.requestLocation()
         }
 
+        self.locationManager.delegate = self
         self.locationManager.startUpdatingLocation()
         self.mapView.showsUserLocation = true
         self.mapView.delegate = self
@@ -135,6 +136,10 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
                 }
             }
         })
+    }
+    
+    @IBAction func settingsClicked(_ sender: Any) {
+        
     }
     
     //Event Button Click Variations
