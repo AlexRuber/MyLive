@@ -193,8 +193,7 @@
 				TargetAttributes = {
 					DD46A8FA1E5A28D500CFA7D9 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = JATHMZ8R82;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					DD46A90E1E5A28D500CFA7D9 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -415,7 +414,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = JATHMZ8R82;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = CampusLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = maxvoskr.CampusLive;
@@ -428,7 +427,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = JATHMZ8R82;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = CampusLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = maxvoskr.CampusLive;
