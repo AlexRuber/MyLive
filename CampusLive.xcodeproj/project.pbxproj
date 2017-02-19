@@ -193,7 +193,8 @@
 				TargetAttributes = {
 					DD46A9341E5A2CA000CFA7D9 = {
 						CreatedOnToolsVersion = 8.2.1;
-						ProvisioningStyle = Manual;
+						DevelopmentTeam = DSX523G48J;
+						ProvisioningStyle = Automatic;
 					};
 					DD46A9481E5A2CA000CFA7D9 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -414,7 +415,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = DSX523G48J;
 				INFOPLIST_FILE = CampusLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = maxvoskr.CampusLive;
@@ -427,7 +429,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = DSX523G48J;
 				INFOPLIST_FILE = CampusLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = maxvoskr.CampusLive;
