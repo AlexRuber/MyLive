@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CampusLive/LiveViewController.swift"
-            timestampString = "508991721.256822"
+            timestampString = "509183474.163284"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "243"
-            endingLineNumber = "243"
-            landmarkName = "mapView(_:regionDidChangeAnimated:)"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
+            landmarkName = "mapView(_:viewFor:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CampusLive/LiveViewController.swift"
-            timestampString = "508991721.256822"
+            timestampString = "509183474.163284"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "244"
-            endingLineNumber = "244"
-            landmarkName = "mapView(_:regionDidChangeAnimated:)"
+            startingLineNumber = "255"
+            endingLineNumber = "255"
+            landmarkName = "mapView(_:viewFor:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -74,13 +74,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CampusLive/LiveViewController.swift"
-            timestampString = "508991721.256822"
+            timestampString = "509183474.163284"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "251"
-            endingLineNumber = "251"
-            landmarkName = "LiveViewController"
-            landmarkType = "4">
+            startingLineNumber = "262"
+            endingLineNumber = "262"
+            landmarkName = "mapView(_:regionDidChangeAnimated:)"
+            landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -122,12 +122,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CampusLive/LiveViewController.swift"
-            timestampString = "508991726.289908"
+            timestampString = "509183474.163284"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "245"
-            endingLineNumber = "245"
-            landmarkName = "mapView(_:regionDidChangeAnimated:)"
+            startingLineNumber = "256"
+            endingLineNumber = "256"
+            landmarkName = "mapView(_:viewFor:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -60,6 +60,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         //Minus Button is hidden to start
         subtractEventButton.isHidden = true
         
@@ -118,6 +119,8 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         }
     }
     
+
+    
     func displayLiveEvents(){
         
         eventRef.observe(.value, with: {(snap) in
@@ -137,10 +140,15 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
                     //annotation.subtitle = venue
                     //annotation.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
                     self.mapView.addAnnotation(clAnnotation)
+                    
+                    //add animation when pin gets posted 
+                    
+                    
                 }
             }
         })
     }
+
     
     @IBAction func settingsClicked(_ sender: Any) {
         
@@ -192,11 +200,20 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
  
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "AddEventDescription"){
+            
+            eventPin.isHidden = true
+            eventDescriptive.isHidden = true
+            addEventButton.isHidden = true
+            
             let nav = segue.destination as! UINavigationController
             let destinationViewController = nav.viewControllers[0] as! AddEventViewController
             destinationViewController.location = addEventLocation
             destinationViewController.isOrgLogin = self.isOrgLogin
             //destinationViewController.isOrgLogin = true
+            eventPin.isHidden = true
+            eventDescriptive.isHidden = true
+            subtractEventButton.isHidden = true
+            addEventButton.isHidden = false
         }
     }
 }

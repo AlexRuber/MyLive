@@ -25,31 +25,84 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var endDatePicker: UIDatePicker!
     @IBOutlet weak var descriptionTextView: UITextView!
     
-    @IBAction func fbLinkTapped(_ sender: Any) {
-        UIApplication.shared.openURL(NSURL(string: "https://www.facebook.com/UcsdPike/")! as URL)
+    //Social Link Code
+    
+    //Outline Outlets
+    @IBOutlet weak var fbOutline: UIImageView!
+    @IBOutlet weak var fbEventOutline: UIImageView!
+    @IBOutlet weak var snapOutline: UIImageView!
+    @IBOutlet weak var instaOutline: UIImageView!
+    @IBOutlet weak var webOutline: UIImageView!
+    
+    //Checkmark Outlets
+    @IBOutlet weak var fbCheckMark: UIImageView!
+    @IBOutlet weak var fbEventCheckMark: UIImageView!
+    @IBOutlet weak var instaCheckMark: UIImageView!
+    @IBOutlet weak var webCheckMark: UIImageView!
+    @IBOutlet weak var snapCheckMark: UIImageView!
+    
+    
+    
+    //Social Button Action Outlets
+    @IBAction func fbBtnClicked(_ sender: Any) {
+        fbOutline.isHidden = false
+        fbCheckMark.isHidden = false
 
     }
-    
-    @IBAction func instaLinkTapped(_ sender: Any) {
-        UIApplication.shared.openURL(NSURL(string: "https://www.instagram.com/ucsdpike/?hl=en")! as URL)
-
+    @IBAction func fbEventBtnClicked(_ sender: Any) {
+        fbEventOutline.isHidden = false
+        fbEventCheckMark.isHidden = false
     }
-   
-    @IBAction func webLinkTapped(_ sender: Any) {
-        UIApplication.shared.openURL(NSURL(string: "http://www.ucsdpike.org")! as URL)
-
+    @IBAction func snapBtnClicked(_ sender: Any) {
+        snapOutline.isHidden = false
+        snapCheckMark.isHidden = false
+    }
+    @IBAction func instaBtnClicked(_ sender: Any) {
+        instaOutline.isHidden = false
+        instaCheckMark.isHidden = false
+        
+    }
+    @IBAction func webBtnClicked(_ sender: Any) {
+        webOutline.isHidden = false
+        webCheckMark.isHidden = false
     }
     
     
+    
+    
+    //Link code
+  /**
+    @IBAction func snapLink(_ sender: Any) {
+         UIApplication.shared.openURL(NSURL(string: "https://www.brandonmagpayo.com")! as URL)
+    }
+    
+    @IBAction func instaLink(_ sender: Any) {
+         UIApplication.shared.openURL(NSURL(string: "https://www.instagram.com/brandonmonteiro_")! as URL)
+    }
+    @IBAction func fbLink(_ sender: Any) {
+         UIApplication.shared.openURL(NSURL(string: "https://www.facebook.com/brandonmagpayo")! as URL)
+    }
     
     @IBAction func backButtonClicked(_ sender: Any) {
             hideKeyBoard()
             self.dismiss(animated: true, completion: nil)
     }
-    
+    */
+   
     @IBAction func postButtonClicked(_ sender: Any) {
-        if FIRAuth.auth()?.currentUser != nil{
+        
+        if ((venueTextField.text?.isEmpty)! || (nameTextField.text?.isEmpty)!){
+            let alert = UIAlertController(title: "Invalid Fields", message: "Enter all details", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        else if FIRAuth.auth()?.currentUser != nil{
             // User is signed in.
+            
+            
             self.uid = FIRAuth.auth()?.currentUser?.uid
             self.post()
             
@@ -62,6 +115,9 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             present(addEventPopup, animated: true, completion: nil)
             //self.dismiss(animated: true, completion: nil)
             //dismissView()
+            
+          
+            
         }else{
             let addEventPopup = UIAlertController(title: "Error!", message: "Something went wrong.", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "Close", style: .default, handler: nil)
@@ -96,8 +152,21 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         
+        //Initiliaze hidden outline + checkmarks
+        fbOutline.isHidden = true
+        fbEventOutline.isHidden = true
+        snapOutline.isHidden = true
+        instaOutline.isHidden = true
+        webOutline.isHidden = true
+        fbCheckMark.isHidden = true
+        fbEventCheckMark.isHidden = true
+        instaCheckMark.isHidden = true
+        snapCheckMark.isHidden = true
+        webCheckMark.isHidden = true
         
+    
         //Hiding keyboard delegates
         self.venueTextField.delegate = self
         self.nameTextField.delegate = self
@@ -116,6 +185,22 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    //Check character count
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool
+    {
+        let maxLengthName = 17
+        let maxLengthVenue = 27
+        let currentStringName: String = nameTextField.text!
+        let currentStringVenue: String = venueTextField.text!
+        
+        let newLengthName = currentStringName.characters.count + string.characters.count - range.length
+        let newLengthVenue = currentStringVenue.characters.count + string.characters.count - range.length
+        
+        
+        return (newLengthName < maxLengthName && newLengthVenue < maxLengthVenue)
     }
     
     
