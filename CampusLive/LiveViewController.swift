@@ -60,10 +60,8 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         //Minus Button is hidden to start
         subtractEventButton.isHidden = true
-        
         
         eventDescriptive.isHidden = true
         eventPin.isHidden = true
@@ -124,7 +122,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     func displayLiveEvents(){
         
         eventRef.observe(.value, with: {(snap) in
-            if let userDict = snap.value as? [String:AnyObject]{
+            if let userDict = snap.value as? [String:AnyObject] {
                 
                 print(userDict)
                 for each in userDict as [String: AnyObject] {
@@ -143,15 +141,17 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
                     
                     //add animation when pin gets posted 
                     
-                    
                 }
             }
         })
     }
 
-    
     @IBAction func settingsClicked(_ sender: Any) {
         
+    }
+    
+    func infoButtonTapped() {
+        performSegue(withIdentifier: "detailEventVC", sender: self)
     }
     
     //Event Button Click Variations
@@ -218,7 +218,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     }
 }
 
-extension LiveViewController: MKMapViewDelegate{
+extension LiveViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
@@ -237,18 +237,41 @@ extension LiveViewController: MKMapViewDelegate{
                 // 3
                 view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 
-                let pikeImage = UIImage(named: "mapPins")
+                //let pikeImage = UIImage(named: "mapPins")
                 
-                view.image = pikeImage
+                // view.image = pikeImage
+                
+                let data = try? Data(contentsOf: AppState.sharedInstance.photoURL!) // make sure your image in this url does exist,otherwise unwrap in a if let check try-catch
+                
+                let profileImage : UIImage = UIImage(data: data!)!
+                
+                //view.image = pikeImage
+                let eventUserImage : UIImageView = UIImageView(image: profileImage)
+                //view.image = eventUserImage.image
+                
+                eventUserImage.layer.borderWidth = 1
+                let white = UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 1.0)
+                eventUserImage.layer.borderColor = white.cgColor
+                let f = CGRect(x: -2, y: -2, width: 40, height: 40) // CGRect(2,2,46,43)
+                eventUserImage.frame = f
+                
+                eventUserImage.layer.cornerRadius = 22.0
+                eventUserImage.layer.masksToBounds = true
+                
+                // let tempImage = eventUserImage
+                
+                view.addSubview(eventUserImage)
+                view.image = UIImage(named: "circularPin")
                 view.isEnabled = true
                 view.canShowCallout = true
-                view.leftCalloutAccessoryView = UIImageView(image: pikeImage)
-                
+                //view.leftCalloutAccessoryView = UIImageView(image: pikeImage)
+                view.leftCalloutAccessoryView = UIImageView(image: eventUserImage.image)
                 
                 let btn2 = UIButton()
                 btn2.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
                 btn2.setImage(UIImage(named: "info"), for: UIControlState())
                 view.rightCalloutAccessoryView = btn2
+                // btn2.addTarget(self, action: "infoButtonTapped", for: .touchUpInside)
                 
             }
             return view

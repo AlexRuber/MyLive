@@ -15,6 +15,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     var location: CLLocationCoordinate2D!
     
     var userRef = FIRDatabase.database().reference()
+    var users = FIRDatabase.database().reference()
     var uid: String?
     
     var isOrgLogin: Bool = false
@@ -95,7 +96,6 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             let alert = UIAlertController(title: "Invalid Fields", message: "Enter all details", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             
-            
             self.present(alert, animated: true, completion: nil)
         }
         
@@ -142,7 +142,13 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         let longitude = location.longitude
         
         let posts: [String : AnyObject] = ["uid":uid as AnyObject, "name":name as AnyObject, "venue":venue as AnyObject, "description":description as AnyObject, "startDate":startDate as AnyObject, "endDate":endDate as AnyObject, "latitude":latitude as AnyObject, "longitude":longitude as AnyObject]
-        userRef.childByAutoId().setValue(posts)
+        
+        userRef = userRef.childByAutoId()
+        userRef.setValue(posts)
+        
+        let userPost: Dictionary<String, AnyObject> = [ userRef.key : true as AnyObject ]
+        
+        users.child(uid!).updateChildValues(userPost)
         print("Posting event success.")
     }
     
@@ -179,6 +185,8 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             userRef = userRef.child("stu_events")
         }
         
+        users = users.child("users")
+        
         hideKeyBoard()
     }
     
@@ -202,7 +210,6 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         
         return (newLengthName < maxLengthName && newLengthVenue < maxLengthVenue)
     }
-    
     
     
     //Hide keyboard when user touches outside keyboard

@@ -16,6 +16,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     var homeViewController: UIViewController!
     var viewController: UIViewController!
     //var signupViewController: UIViewController!
+
+    var users: FIRDatabaseReference!
     
     var isOrgLogin: Bool = false
 
@@ -32,6 +34,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
      
+        users = FIRDatabase.database().reference().child("users")
+        
         //Activity Spinner Hidden to Begin
         
         //Creating Delegates for Hiding Keyboard
@@ -136,7 +140,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                 return
             }
             print("Successfully logged in with our user: ", user ?? "")
-            self.signedIn(user)
+            let userData = ["provider": user?.providerID]
+            self.signedIn(user, userID: (user?.uid)!, userData: userData as! Dictionary<String, String>)
         })
         
         FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email"]).start{
@@ -168,12 +173,20 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         present(prompt, animated: true, completion: nil);
     }
     
-    func signedIn(_ user: FIRUser?) {
+    func signedIn(_ user: FIRUser?, userID: String, userData: Dictionary<String, String>) {
         MeasurementHelper.sendLoginEvent()
         
         AppState.sharedInstance.displayName = user?.displayName ?? user?.email
         AppState.sharedInstance.photoURL = user?.photoURL
         AppState.sharedInstance.signedIn = true
+        
+        let imageUrl: Dictionary<String, String> = [
+            "profileImage": (user?.photoURL?.absoluteString)!
+            ]
+        
+        users.child(userID).updateChildValues(userData)
+        users.child(userID).updateChildValues(imageUrl)
+        
         let notificationName = Notification.Name(rawValue: Constants.NotificationKeys.SignedIn)
         NotificationCenter.default.post(name: notificationName, object: nil, userInfo: nil)
         performSegue(withIdentifier: Constants.Segues.SignInToFp, sender: nil)

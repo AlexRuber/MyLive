@@ -31,7 +31,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate{
     self.dismiss(animated: true, completion: nil)
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         termsSwitch.isOn = false
@@ -50,7 +49,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate{
         addImageBackButton.layer.cornerRadius = addImageBackButton.frame.size.height / 2
         addImageBackButton.clipsToBounds = true
 
-    
     }
 
     override func didReceiveMemoryWarning() {
