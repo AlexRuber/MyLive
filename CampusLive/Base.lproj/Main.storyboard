@@ -71,11 +71,6 @@
                                     <action selector="addEventButtonClicked:" destination="HeC-Kp-YOV" eventType="touchUpInside" id="GpE-mJ-b3n"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kiz-Wr-dgj">
-                                <rect key="frame" x="324" y="121" width="38" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Org" image="org"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bYM-Bc-v9L">
                                 <rect key="frame" x="16" y="607" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -94,6 +89,12 @@
                                     <segment title="" image="TrendingFilled"/>
                                 </segments>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Lo-8P-0qz">
+                                <rect key="frame" x="329" y="114" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="OrgUnfilled"/>
+                                <state key="highlighted" image="OrgFilled"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -829,7 +830,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yKl-lw-sjc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2428" y="297.30134932533736"/>
+            <point key="canvasLocation" x="1041" y="564"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cdQ-mA-xSc">
@@ -847,7 +848,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B8n-lj-MRu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1415" y="1004"/>
+            <point key="canvasLocation" x="820" y="1361"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ygy-gr-Iby">
@@ -878,6 +879,8 @@
         <image name="InstaLink" width="527" height="527"/>
         <image name="NavButtonFilled" width="581" height="581"/>
         <image name="NavigationButton" width="200" height="200"/>
+        <image name="OrgFilled" width="35" height="35"/>
+        <image name="OrgUnfilled" width="35" height="35"/>
         <image name="Pin" width="148" height="258"/>
         <image name="Post" width="424" height="100"/>
         <image name="Settings Filled" width="548" height="548"/>
@@ -890,7 +893,6 @@
         <image name="addEvent" width="455" height="80"/>
         <image name="checkMark" width="98" height="87"/>
         <image name="clLogo" width="178" height="150"/>
-        <image name="org" width="554" height="300"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="PCR-4T-TBK"/>

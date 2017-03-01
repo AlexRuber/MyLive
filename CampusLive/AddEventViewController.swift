@@ -82,12 +82,13 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     @IBAction func fbLink(_ sender: Any) {
          UIApplication.shared.openURL(NSURL(string: "https://www.facebook.com/brandonmagpayo")! as URL)
     }
+    */
     
     @IBAction func backButtonClicked(_ sender: Any) {
             hideKeyBoard()
             self.dismiss(animated: true, completion: nil)
     }
-    */
+    
    
     @IBAction func postButtonClicked(_ sender: Any) {
         
@@ -110,6 +111,8 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             //let defaultAction = UIAlertAction(title: "Close", style: .default, handler: nil)
             addEventPopup.addAction(UIAlertAction(title: "OK", style: .default, handler: {
                 action in
+                
+                //present view controller, not dismissed, but reloaded from prototype
                 self.dismiss(animated: true, completion: nil)
             }))
             present(addEventPopup, animated: true, completion: nil)

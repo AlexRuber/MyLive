@@ -201,19 +201,13 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "AddEventDescription"){
             
-            eventPin.isHidden = true
-            eventDescriptive.isHidden = true
-            addEventButton.isHidden = true
             
             let nav = segue.destination as! UINavigationController
             let destinationViewController = nav.viewControllers[0] as! AddEventViewController
             destinationViewController.location = addEventLocation
             destinationViewController.isOrgLogin = self.isOrgLogin
             //destinationViewController.isOrgLogin = true
-            eventPin.isHidden = true
-            eventDescriptive.isHidden = true
-            subtractEventButton.isHidden = true
-            addEventButton.isHidden = false
+      
         }
     }
 }
@@ -228,6 +222,20 @@ extension LiveViewController: MKMapViewDelegate{
         
         if let annotation = annotation as? CampusLiveAnnotation {
             let identifier = "AnnotationIdentifier"
+            //Custom view for pin annotation connected to FB Profile Pic
+            /**
+            var pinView: MKAnnotationView? = (mapView.dequeueReusableAnnotationView(withIdentifier: "CustomPinAnnotationView") as? MKAnnotationView)
+            pinView = MKAnnotationView(annotation, reuseIdentifier: "CustomPinAnnotationView")
+            pinView?.canShowCallout = true
+            pinView?.image = UIImage(named: "icon-map-placemark-68x80")
+            pinView?.calloutOffset = CGPoint(x: CGFloat(0), y: CGFloat(-5))
+            var profileImageView = UIImageView()
+            profileImageView.frame = CGRect(x: CGFloat(6), y: CGFloat(7), width: CGFloat(55), height: CGFloat(55))
+            profileImageView.layer.masksToBounds = true
+            profileImageView.layer.cornerRadius = 27
+            profileImageView.setImageWith(URL(string: "http://domain.com/avatar.jpg"))
+            pinView?.addSubview(profileImageView)
+            */
             
             var view: MKAnnotationView
             if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier){ // 2
@@ -237,12 +245,16 @@ extension LiveViewController: MKMapViewDelegate{
                 // 3
                 view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 
-                let pikeImage = UIImage(named: "mapPins")
+                print("AlexAlexAlexAlexAlexAlexAlex")
+                print(annotation.title!)
                 
-                view.image = pikeImage
+                
+                let annotationImage = UIImage(named: "mapPins")
+                
+                view.image = annotationImage
                 view.isEnabled = true
                 view.canShowCallout = true
-                view.leftCalloutAccessoryView = UIImageView(image: pikeImage)
+                view.leftCalloutAccessoryView = UIImageView(image: annotationImage)
                 
                 
                 let btn2 = UIButton()
@@ -281,11 +293,13 @@ extension LiveViewController: MKMapViewDelegate{
         }
         
         if control == view.rightCalloutAccessoryView {
-            print("Right callout Accessory  View Called")
+            
             eventPin.isHidden = true
             subtractEventButton.isHidden = true
             addEventButton.isHidden = false
             eventDescriptive.isHidden = true
+            print("Right callout Accessory  View Called")
+         
         }
     }
 }
