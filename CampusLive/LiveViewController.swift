@@ -15,11 +15,13 @@ import Firebase
     var coordinate: CLLocationCoordinate2D
     var title: String?
     var subtitle: String?
+    var imageUrl: String!
     
-    init(lat: CLLocationDegrees, long: CLLocationDegrees, title: String? = nil, subtitle: String? = nil) {
+    init(lat: CLLocationDegrees, long: CLLocationDegrees, title: String? = nil, subtitle: String? = nil, imageUrl: String!) {
         self.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
         self.title = title
         self.subtitle = subtitle
+        self.imageUrl = imageUrl
         super.init()
     }
 }
@@ -124,7 +126,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         eventRef.observe(.value, with: {(snap) in
             if let userDict = snap.value as? [String:AnyObject] {
                 
-                print(userDict)
+                // print(userDict)
                 for each in userDict as [String: AnyObject] {
                     let autoID = each.key
                     let name = each.value["name"] as! String
@@ -133,13 +135,15 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
                     let latitude = each.value["latitude"] as! NSNumber
                     let longitude = each.value["longitude"] as! NSNumber
                     var description = each.value["description"] as! String
-                    let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: venue)
+                    let imageUrl = each.value["profileImage"] as! String
+                    let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: venue, imageUrl: imageUrl)
                     //annotation.title = name
                     //annotation.subtitle = venue
                     //annotation.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
+                    //print("MAXMAXMAXXXXXXXXXX: \(clAnnotation.imageUrl!)")
                     self.mapView.addAnnotation(clAnnotation)
                     
-                    //add animation when pin gets posted 
+                    //add animation when pin gets posted
                     
                 }
             }
@@ -241,7 +245,12 @@ extension LiveViewController: MKMapViewDelegate {
                 
                 // view.image = pikeImage
                 
-                let data = try? Data(contentsOf: AppState.sharedInstance.photoURL!) // make sure your image in this url does exist,otherwise unwrap in a if let check try-catch
+                let imageUrl: URL = NSURL(string: annotation.imageUrl) as! URL
+                
+                
+                //let data = try? Data(contentsOf: AppState.sharedInstance.photoURL!) // make sure your image in this url does exist,otherwise unwrap in a if let check try-catch
+                
+                let data = try? Data(contentsOf: imageUrl)
                 
                 let profileImage : UIImage = UIImage(data: data!)!
                 
@@ -257,8 +266,6 @@ extension LiveViewController: MKMapViewDelegate {
                 
                 eventUserImage.layer.cornerRadius = 22.0
                 eventUserImage.layer.masksToBounds = true
-                
-                // let tempImage = eventUserImage
                 
                 view.addSubview(eventUserImage)
                 view.image = UIImage(named: "circularPin")
