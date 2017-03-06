@@ -156,7 +156,7 @@
 				TargetAttributes = {
 					983CE0611E3478CC0098D03B = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = DSX523G48J;
+						DevelopmentTeam = JATHMZ8R82;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -384,10 +384,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = DSX523G48J;
+				DEVELOPMENT_TEAM = JATHMZ8R82;
 				INFOPLIST_FILE = CampusLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.firstversion.campuslive;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maxvoskr.campuslive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -399,10 +399,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = DSX523G48J;
+				DEVELOPMENT_TEAM = JATHMZ8R82;
 				INFOPLIST_FILE = CampusLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.firstversion.campuslive;
+				PRODUCT_BUNDLE_IDENTIFIER = com.maxvoskr.campuslive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

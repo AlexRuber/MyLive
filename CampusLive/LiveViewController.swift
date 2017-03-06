@@ -15,11 +15,13 @@ import Firebase
     var coordinate: CLLocationCoordinate2D
     var title: String?
     var subtitle: String?
+    var imageUrl: String!
     
-    init(lat: CLLocationDegrees, long: CLLocationDegrees, title: String? = nil, subtitle: String? = nil) {
+    init(lat: CLLocationDegrees, long: CLLocationDegrees, title: String? = nil, subtitle: String? = nil, imageUrl: String!) {
         self.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
         self.title = title
         self.subtitle = subtitle
+        self.imageUrl = imageUrl
         super.init()
     }
 }
@@ -61,10 +63,8 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         //Minus Button is hidden to start
         subtractEventButton.isHidden = true
-        
         
         eventDescriptive.isHidden = true
         eventPin.isHidden = true
@@ -125,9 +125,9 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     func displayLiveEvents(){
         
         eventRef.observe(.value, with: {(snap) in
-            if let userDict = snap.value as? [String:AnyObject]{
+            if let userDict = snap.value as? [String:AnyObject] {
                 
-                print(userDict)
+                // print(userDict)
                 for each in userDict as [String: AnyObject] {
                     let autoID = each.key
                     let name = each.value["name"] as! String
@@ -136,23 +136,27 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
                     let latitude = each.value["latitude"] as! NSNumber
                     let longitude = each.value["longitude"] as! NSNumber
                     var description = each.value["description"] as! String
-                    let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: venue)
+                    let imageUrl = each.value["profileImage"] as! String
+                    let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: venue, imageUrl: imageUrl)
                     //annotation.title = name
                     //annotation.subtitle = venue
                     //annotation.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
+                    //print("MAXMAXMAXXXXXXXXXX: \(clAnnotation.imageUrl!)")
                     self.mapView.addAnnotation(clAnnotation)
                     
-                    //add animation when pin gets posted 
-                    
+                    //add animation when pin gets posted
                     
                 }
             }
         })
     }
 
-    
     @IBAction func settingsClicked(_ sender: Any) {
         
+    }
+    
+    func infoButtonTapped() {
+        performSegue(withIdentifier: "detailEventVC", sender: self)
     }
     
     //Event Button Click Variations
@@ -262,6 +266,7 @@ extension LiveViewController: MKMapViewDelegate{
                 btn2.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
                 btn2.setImage(UIImage(named: "info"), for: UIControlState())
                 view.rightCalloutAccessoryView = btn2
+                // btn2.addTarget(self, action: "infoButtonTapped", for: .touchUpInside)
                 
             }
             return view

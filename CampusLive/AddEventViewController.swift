@@ -15,6 +15,8 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     var location: CLLocationCoordinate2D!
     
     var userRef = FIRDatabase.database().reference()
+    var users = FIRDatabase.database().reference()
+    var storage = FIRStorage.storage().reference()
     var uid: String?
     
     var isOrgLogin: Bool = false
@@ -102,9 +104,6 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
       
     }
     
-    
-    
-    
     //Link code
   /**
     @IBAction func snapLink(_ sender: Any) {
@@ -119,6 +118,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     }
     */
     
+ 
     @IBAction func backButtonClicked(_ sender: Any) {
             hideKeyBoard()
             self.dismiss(animated: true, completion: nil)
@@ -139,7 +139,31 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             
             
             self.uid = FIRAuth.auth()?.currentUser?.uid
-            self.post()
+            
+            let data = try? Data(contentsOf: AppState.sharedInstance.photoURL!) // make sure your image in this url does exist,otherwise unwrap in a if let check try-catch
+            
+            let img: UIImage = UIImage(data: data!)!
+            
+            var downloadURL: String?
+            
+            if let imgData = UIImageJPEGRepresentation(img, 0.2) {
+                
+                let imgID = UUID().uuidString
+                let metadata = FIRStorageMetadata()
+                metadata.contentType = "image/jpeg"
+                
+                storage.child(imgID).put(imgData, metadata: metadata) { (metadata, error) in
+                    if error != nil {
+                        print("Max: Unable to store images in Firebase storage")
+                    } else {
+                        print("Max: Succesfully stored images in Firebase storage")
+                        downloadURL = (metadata?.downloadURL()!.absoluteString)!
+                        self.post(imageUrl: downloadURL!)
+                        //print("MAXMAXMAXMAXMAX: \(downloadURL!)")
+                        //self.postToFirebase(downloadURL!)
+                    }
+                }
+            }
             
             let addEventPopup = UIAlertController(title: "Posted", message: "Your event is now on the map", preferredStyle: .alert)
             //let defaultAction = UIAlertAction(title: "Close", style: .default, handler: nil)
@@ -154,9 +178,8 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             present(addEventPopup, animated: true, completion: nil)
             //self.dismiss(animated: true, completion: nil)
             
-          
             
-        }else{
+        } else {
             let addEventPopup = UIAlertController(title: "Error!", message: "Something went wrong.", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "Close", style: .default, handler: nil)
             addEventPopup.addAction(defaultAction)
@@ -165,12 +188,12 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func dismissView(){
+    func dismissView() {
             hideKeyBoard()
             self.dismiss(animated: true, completion: nil)
     }
     
-    func post(){
+    func post(imageUrl: String) {
         let name = nameTextField.text
         let venue = venueTextField.text
         let description = descriptionTextView.text
@@ -179,8 +202,14 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         let latitude = location.latitude
         let longitude = location.longitude
         
-        let posts: [String : AnyObject] = ["uid":uid as AnyObject, "name":name as AnyObject, "venue":venue as AnyObject, "description":description as AnyObject, "startDate":startDate as AnyObject, "endDate":endDate as AnyObject, "latitude":latitude as AnyObject, "longitude":longitude as AnyObject]
-        userRef.childByAutoId().setValue(posts)
+        let posts: [String : AnyObject] = ["uid":uid as AnyObject, "name":name as AnyObject, "venue":venue as AnyObject, "description":description as AnyObject, "startDate":startDate as AnyObject, "endDate":endDate as AnyObject, "latitude":latitude as AnyObject, "longitude":longitude as AnyObject, "profileImage":imageUrl as AnyObject]
+        
+        userRef = userRef.childByAutoId()
+        userRef.setValue(posts)
+        
+        let userPost: Dictionary<String, AnyObject> = [ userRef.key : true as AnyObject ]
+        
+        users.child(uid!).updateChildValues(userPost)
         print("Posting event success.")
     }
     
@@ -217,6 +246,8 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             userRef = userRef.child("stu_events")
         }
         
+        users = users.child("users")
+        
         hideKeyBoard()
     }
     
@@ -240,7 +271,6 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         
         return (newLengthName < maxLengthName && newLengthVenue < maxLengthVenue)
     }
-    
     
     
     //Hide keyboard when user touches outside keyboard

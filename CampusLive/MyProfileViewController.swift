@@ -37,8 +37,6 @@ class MyProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
-        
         print("Profile View Controller Loaded.")
         
         //self.uiImageView.layer.cornerRadius = self.uiImageView.frame.size.width/2

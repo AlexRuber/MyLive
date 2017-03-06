@@ -17,6 +17,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate{
     var isSwitchOn: Bool = false
     
     @IBOutlet weak var termsSwitch: UISwitch!
+    @IBOutlet weak var addImageBackButton: UIButton!
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var fbTextField: UITextField!
     @IBOutlet weak var websiteTextField: UITextField!
@@ -29,7 +30,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate{
     @IBAction func backBtnPressed(_ sender: Any) {
     self.dismiss(animated: true, completion: nil)
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +44,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate{
         self.emailTextField.delegate = self
         self.passwordTextField.delegate = self
         self.instaTextField.delegate = self
-    
+        
+        addImageBackButton.layer.cornerRadius = addImageBackButton.frame.size.width / 2
+        addImageBackButton.layer.cornerRadius = addImageBackButton.frame.size.height / 2
+        addImageBackButton.clipsToBounds = true
+
     }
 
     override func didReceiveMemoryWarning() {
