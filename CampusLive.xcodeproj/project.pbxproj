@@ -22,6 +22,7 @@
 		983CE06B1E3478CC0098D03B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 983CE0691E3478CC0098D03B /* Main.storyboard */; };
 		983CE06D1E3478CC0098D03B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 983CE06C1E3478CC0098D03B /* Assets.xcassets */; };
 		983CE0701E3478CC0098D03B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 983CE06E1E3478CC0098D03B /* LaunchScreen.storyboard */; };
+		98934AFA1E6A84D5009D8720 /* EventInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98934AF91E6A84D5009D8720 /* EventInfoViewController.swift */; };
 		E3F806F61A6E2BD5A752F002 /* Pods_CampusLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9072ACA91EB44818AC9E4446 /* Pods_CampusLive.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		983CE06C1E3478CC0098D03B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		983CE06F1E3478CC0098D03B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		983CE0711E3478CC0098D03B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		98934AF91E6A84D5009D8720 /* EventInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInfoViewController.swift; sourceTree = "<group>"; };
 		B51F3F03A5B13767F8E57889 /* Pods-CampusLive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampusLive.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CampusLive/Pods-CampusLive.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,6 +111,7 @@
 				61EE5E551E367F1200D0A7E5 /* FeaturedViewController.swift */,
 				610E35601E4EB9520041F418 /* AddEventViewController.swift */,
 				61EE5E591E367F4900D0A7E5 /* MyProfileViewController.swift */,
+				98934AF91E6A84D5009D8720 /* EventInfoViewController.swift */,
 				983CE0691E3478CC0098D03B /* Main.storyboard */,
 				983CE06C1E3478CC0098D03B /* Assets.xcassets */,
 				983CE06E1E3478CC0098D03B /* LaunchScreen.storyboard */,
@@ -252,6 +255,7 @@
 				616BAA061E402A1F008BF838 /* Constants.swift in Sources */,
 				61EE5E521E367EBB00D0A7E5 /* LiveViewController.swift in Sources */,
 				61EE5E541E367ED700D0A7E5 /* SignUpViewController.swift in Sources */,
+				98934AFA1E6A84D5009D8720 /* EventInfoViewController.swift in Sources */,
 				61EE5E4E1E367E5400D0A7E5 /* LoginViewController.swift in Sources */,
 				61EE5E561E367F1200D0A7E5 /* FeaturedViewController.swift in Sources */,
 			);

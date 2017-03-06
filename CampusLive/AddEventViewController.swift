@@ -50,9 +50,26 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
 
     }
     @IBAction func fbEventBtnClicked(_ sender: Any) {
-        fbEventOutline.isHidden = false
-        fbEventCheckMark.isHidden = false
+        
+        let prompt = UIAlertController.init(title: nil, message: "Copy Facebook Event URL", preferredStyle: .alert)
+        let okAction = UIAlertAction.init(title: "OK", style: .default) { (action) in
+            let userInput = prompt.textFields![0].text
+            if (userInput!.isEmpty) {
+                return
+            }
+            else{
+                self.fbEventOutline.isHidden = false
+                self.fbEventCheckMark.isHidden = false
+            }
+        
+        }
+     
+        prompt.addTextField(configurationHandler: nil)
+        prompt.addAction(okAction)
+        present(prompt, animated: true, completion: nil);
+        
     }
+    
     @IBAction func snapBtnClicked(_ sender: Any) {
         snapOutline.isHidden = false
         snapCheckMark.isHidden = false
@@ -63,8 +80,26 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         
     }
     @IBAction func webBtnClicked(_ sender: Any) {
-        webOutline.isHidden = false
-        webCheckMark.isHidden = false
+        
+        
+        let prompt = UIAlertController.init(title: nil, message: "Copy Website URL", preferredStyle: .alert)
+        let okAction = UIAlertAction.init(title: "OK", style: .default) { (action) in
+            let userInput = prompt.textFields![0].text
+            if (userInput!.isEmpty) {
+                return
+            }
+            else{
+                self.webOutline.isHidden = false
+                self.webCheckMark.isHidden = false
+            }
+            
+        }
+        
+        prompt.addTextField(configurationHandler: nil)
+        prompt.addAction(okAction)
+        present(prompt, animated: true, completion: nil);
+        
+      
     }
     
     
@@ -97,7 +132,6 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             
             
-            self.present(alert, animated: true, completion: nil)
         }
         
         else if FIRAuth.auth()?.currentUser != nil{
@@ -113,11 +147,12 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
                 action in
                 
                 //present view controller, not dismissed, but reloaded from prototype
-                self.dismiss(animated: true, completion: nil)
-            }))
+              self.dismiss(animated: true, completion: nil)
+                }
+            )
+            )
             present(addEventPopup, animated: true, completion: nil)
             //self.dismiss(animated: true, completion: nil)
-            //dismissView()
             
           
             

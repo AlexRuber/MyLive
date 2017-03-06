@@ -57,6 +57,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         mapView!.setCenter(mapView!.userLocation.coordinate, animated: true)
     }
     
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -201,16 +202,17 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "AddEventDescription"){
             
-            
             let nav = segue.destination as! UINavigationController
             let destinationViewController = nav.viewControllers[0] as! AddEventViewController
             destinationViewController.location = addEventLocation
             destinationViewController.isOrgLogin = self.isOrgLogin
             //destinationViewController.isOrgLogin = true
-      
+    
         }
     }
 }
+
+
 
 extension LiveViewController: MKMapViewDelegate{
     
@@ -245,7 +247,6 @@ extension LiveViewController: MKMapViewDelegate{
                 // 3
                 view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 
-                print("AlexAlexAlexAlexAlexAlexAlex")
                 print(annotation.title!)
                 
                 
@@ -293,6 +294,8 @@ extension LiveViewController: MKMapViewDelegate{
         }
         
         if control == view.rightCalloutAccessoryView {
+            
+            performSegue(withIdentifier: "EventInfo", sender: nil)
             
             eventPin.isHidden = true
             subtractEventButton.isHidden = true
