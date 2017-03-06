@@ -251,16 +251,29 @@ extension LiveViewController: MKMapViewDelegate{
                 // 3
                 view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 
-                print(annotation.title!)
+                let imageUrl: URL = NSURL(string: annotation.imageUrl) as! URL
                 
+                let data = try? Data(contentsOf: imageUrl)
                 
-                let annotationImage = UIImage(named: "mapPins")
+                let profileImage : UIImage = UIImage(data: data!)!
                 
-                view.image = annotationImage
+                let eventUserImage : UIImageView = UIImageView(image: profileImage)
+                //view.image = eventUserImage.image
+                
+                eventUserImage.layer.borderWidth = 1
+                let white = UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 1.0)
+                eventUserImage.layer.borderColor = white.cgColor
+                let f = CGRect(x: -2, y: -2, width: 40, height: 40) // CGRect(2,2,46,43)
+                eventUserImage.frame = f
+                eventUserImage.layer.cornerRadius = 22.0
+                eventUserImage.layer.masksToBounds = true
+                    
+                view.addSubview(eventUserImage)
+                view.image = UIImage(named: "circularPin")
                 view.isEnabled = true
                 view.canShowCallout = true
-                view.leftCalloutAccessoryView = UIImageView(image: annotationImage)
-                
+                // view.leftCalloutAccessoryView = UIImageView(image: pikeImage)
+                view.leftCalloutAccessoryView = UIImageView(image: eventUserImage.image)
                 
                 let btn2 = UIButton()
                 btn2.frame = CGRect(x: 0, y: 0, width: 30, height: 30)

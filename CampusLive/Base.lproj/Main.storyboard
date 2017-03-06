@@ -1013,6 +1013,7 @@
         <image name="addEvent" width="455" height="80"/>
         <image name="checkMark" width="98" height="87"/>
         <image name="clLogo" width="178" height="150"/>
+        <image name="facebook_anonymous" width="1024" height="1024"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="RHa-hJ-dSP"/>
