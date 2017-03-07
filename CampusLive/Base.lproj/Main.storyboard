@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WSx-hg-qa9">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WSx-hg-qa9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -929,6 +929,12 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="eventDescription" destination="G3F-1z-xbE" id="oJs-Ee-dQ9"/>
+                        <outlet property="eventProfileImage" destination="bGe-2s-ctY" id="gXu-zc-uJW"/>
+                        <outlet property="eventSubtitle" destination="B8Z-rC-GcS" id="0Sy-Yg-Wzd"/>
+                        <outlet property="eventTitle" destination="paN-ls-LjM" id="l7z-tS-W5b"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QZQ-X8-cHW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
