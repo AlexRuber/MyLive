@@ -294,6 +294,13 @@ extension LiveViewController: MKMapViewDelegate{
         return nil
     }
     
+    //Hides pins after posting event
+    override func viewDidAppear(_ animated: Bool) {
+        eventPin.isHidden = true
+        eventDescriptive.isHidden = true
+        addEventButton.isHidden = false
+    }
+    
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         self.location = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
         // geoCode(location)

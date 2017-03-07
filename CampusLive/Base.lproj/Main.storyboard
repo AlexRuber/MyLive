@@ -203,7 +203,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Post"/>
                                 <connections>
-                                    <action selector="postButtonClicked:" destination="fK9-Um-STD" eventType="touchUpInside" id="KfU-Em-vu7"/>
+                                    <action selector="didTapPost:" destination="fK9-Um-STD" eventType="touchUpInside" id="myW-QK-stq"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vce-vl-bcd">

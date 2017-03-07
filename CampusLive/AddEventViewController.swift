@@ -124,8 +124,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             self.dismiss(animated: true, completion: nil)
     }
     
-   
-    @IBAction func postButtonClicked(_ sender: Any) {
+    @IBAction func didTapPost(_ sender: Any) {
         
         if ((venueTextField.text?.isEmpty)! || (nameTextField.text?.isEmpty)!){
             let alert = UIAlertController(title: "Invalid Fields", message: "Enter all details", preferredStyle: UIAlertControllerStyle.alert)
@@ -133,6 +132,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             
             
         }
+   
         
         else if FIRAuth.auth()?.currentUser != nil{
             // User is signed in.
@@ -171,8 +171,9 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
                 action in
                 
                 //present view controller, not dismissed, but reloaded from prototype
-              self.dismiss(animated: true, completion: nil)
-                }
+                self.dismiss(animated: true, completion: nil)
+                
+            }
             )
             )
             present(addEventPopup, animated: true, completion: nil)
@@ -216,6 +217,8 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     func hideKeyBoard(){
         view.endEditing(true)
     }
+    
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -277,6 +280,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
+    
     
     //Hide after pressing enter key
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
