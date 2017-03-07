@@ -40,6 +40,7 @@
 		61EE5E551E367F1200D0A7E5 /* FeaturedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedViewController.swift; sourceTree = "<group>"; };
 		61EE5E591E367F4900D0A7E5 /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		9072ACA91EB44818AC9E4446 /* Pods_CampusLive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CampusLive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		982452661E6E35870022D63C /* CampusLive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CampusLive.entitlements; sourceTree = "<group>"; };
 		983CE0621E3478CC0098D03B /* CampusLive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampusLive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		983CE0651E3478CC0098D03B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		983CE06A1E3478CC0098D03B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -100,6 +101,7 @@
 		983CE0641E3478CC0098D03B /* CampusLive */ = {
 			isa = PBXGroup;
 			children = (
+				982452661E6E35870022D63C /* CampusLive.entitlements */,
 				983CE0651E3478CC0098D03B /* AppDelegate.swift */,
 				61EE5E511E367EBB00D0A7E5 /* LiveViewController.swift */,
 				61EE5E4D1E367E5400D0A7E5 /* LoginViewController.swift */,
@@ -156,8 +158,13 @@
 				TargetAttributes = {
 					983CE0611E3478CC0098D03B = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = JATHMZ8R82;
+						DevelopmentTeam = DSX523G48J;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -384,7 +391,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = JATHMZ8R82;
+				DEVELOPMENT_TEAM = DSX523G48J;
 				INFOPLIST_FILE = CampusLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.maxvoskr.campuslive;
@@ -399,7 +406,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = JATHMZ8R82;
+				DEVELOPMENT_TEAM = DSX523G48J;
 				INFOPLIST_FILE = CampusLive/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.maxvoskr.campuslive;

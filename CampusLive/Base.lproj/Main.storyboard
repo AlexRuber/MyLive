@@ -112,7 +112,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H6d-1g-KNw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-377" y="66"/>
+            <point key="canvasLocation" x="-295" y="-149"/>
         </scene>
         <!--Add Event-->
         <scene sceneID="fhF-Lw-H3L">
@@ -436,7 +436,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DPa-dt-1gR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1178.4000000000001" y="-48.125937031484263"/>
+            <point key="canvasLocation" x="-1212" y="-54"/>
         </scene>
         <!--Sign Up-->
         <scene sceneID="HM2-iU-IAo">
@@ -874,7 +874,7 @@
                                     <action selector="instaBtnClicked:" destination="fK9-Um-STD" eventType="touchUpInside" id="zmD-Ly-ebR"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BrandonProfilePic" translatesAutoresizingMaskIntoConstraints="NO" id="bGe-2s-ctY">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bGe-2s-ctY">
                                 <rect key="frame" x="12" y="82" width="98" height="96"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>

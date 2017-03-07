@@ -94,8 +94,13 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         
     }
   
-    
+    //Check access token for already logged facebook
     override func viewDidAppear(_ animated: Bool) {
+   
+        if (FBSDKAccessToken.current() != nil)
+        {
+            performSegue(withIdentifier: "SignInToFP", sender: self)
+        }
         /*
         if let user = FIRAuth.auth()?.currentUser {
             self.signedIn(user)
@@ -245,6 +250,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.

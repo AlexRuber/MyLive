@@ -214,8 +214,8 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     
         }
     }
+    
 }
-
 
 
 extension LiveViewController: MKMapViewDelegate{
@@ -272,8 +272,15 @@ extension LiveViewController: MKMapViewDelegate{
                 view.image = UIImage(named: "circularPin")
                 view.isEnabled = true
                 view.canShowCallout = true
-                // view.leftCalloutAccessoryView = UIImageView(image: pikeImage)
+                //view.leftCalloutAccessoryView = UIImageView(image: pikeImage)
                 view.leftCalloutAccessoryView = UIImageView(image: eventUserImage.image)
+               
+                //Custom Left Callout Image Settings
+                view.leftCalloutAccessoryView?.contentMode = .scaleAspectFit
+                view.leftCalloutAccessoryView?.frame = CGRect(x: CGFloat(5), y: CGFloat(5), width: CGFloat(eventPin.frame.size.height - 15), height: eventPin.frame.size.height - 15)
+                view.leftCalloutAccessoryView?.layer.cornerRadius = (view.leftCalloutAccessoryView?.frame.width)!/2
+                view.leftCalloutAccessoryView?.clipsToBounds = true
+                
                 
                 let btn2 = UIButton()
                 btn2.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
