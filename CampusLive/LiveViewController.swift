@@ -16,12 +16,14 @@ import Firebase
     var title: String?
     var subtitle: String?
     var imageUrl: String!
+    var eventDescription: String?
     
-    init(lat: CLLocationDegrees, long: CLLocationDegrees, title: String? = nil, subtitle: String? = nil, imageUrl: String!) {
+    init(lat: CLLocationDegrees, long: CLLocationDegrees, title: String? = nil, subtitle: String? = nil, imageUrl: String!, eventDescription: String? = nil) {
         self.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
         self.title = title
         self.subtitle = subtitle
         self.imageUrl = imageUrl
+        self.eventDescription = eventDescription
         super.init()
     }
 }
@@ -135,9 +137,9 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
                     let venue = each.value["venue"] as! String
                     let latitude = each.value["latitude"] as! NSNumber
                     let longitude = each.value["longitude"] as! NSNumber
-                    var description = each.value["description"] as! String
+                    let description = each.value["description"] as! String
                     let imageUrl = each.value["profileImage"] as! String
-                    let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: venue, imageUrl: imageUrl)
+                    let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: venue, imageUrl: imageUrl, eventDescription: description)
                     //annotation.title = name
                     //annotation.subtitle = venue
                     //annotation.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
@@ -204,7 +206,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     }
  
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "AddEventDescription"){
+        if(segue.identifier == "AddEventDescription") {
             
             let nav = segue.destination as! UINavigationController
             let destinationViewController = nav.viewControllers[0] as! AddEventViewController
@@ -212,6 +214,18 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
             destinationViewController.isOrgLogin = self.isOrgLogin
             //destinationViewController.isOrgLogin = true
     
+        }
+        
+        if (segue.identifier == "EventInfo") {
+            let nav = segue.destination as! UINavigationController
+            let destinationViewController = nav.viewControllers[0] as! EventInfoViewController
+            
+            let annotation: CampusLiveAnnotation = sender as! CampusLiveAnnotation
+            
+            destinationViewController.titleEvent = annotation.title
+            destinationViewController.subtitleEvent = annotation.subtitle
+            destinationViewController.imageEventUrl = annotation.imageUrl
+            destinationViewController.descriptionEvent = annotation.eventDescription
         }
     }
 }
@@ -313,7 +327,9 @@ extension LiveViewController: MKMapViewDelegate{
         
         if control == view.rightCalloutAccessoryView {
             
-            performSegue(withIdentifier: "EventInfo", sender: nil)
+            if let annotation = view.annotation as? CampusLiveAnnotation {
+                performSegue(withIdentifier: "EventInfo", sender: annotation)
+            }
             
             eventPin.isHidden = true
             subtractEventButton.isHidden = true
