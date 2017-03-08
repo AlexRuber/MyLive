@@ -20,8 +20,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     var users: FIRDatabaseReference!
     
     var isOrgLogin: Bool = false
-
     
+
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginInButton: UIButton!
@@ -29,7 +29,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var segmentView: UISegmentedControl!
     @IBOutlet weak var customFBButton: UIButton!
-
+    @IBOutlet weak var activityInd: UIActivityIndicatorView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +38,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         users = FIRDatabase.database().reference().child("users")
         
         //Activity Spinner Hidden to Begin
+        activityInd.isHidden = true
         
         //Creating Delegates for Hiding Keyboard
         self.usernameField.delegate = self
@@ -179,8 +181,10 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     }
     
     func signedIn(_ user: FIRUser?, userID: String, userData: Dictionary<String, String>) {
-        MeasurementHelper.sendLoginEvent()
         
+        
+        
+        MeasurementHelper.sendLoginEvent()
         AppState.sharedInstance.displayName = user?.displayName ?? user?.email
         AppState.sharedInstance.photoURL = user?.photoURL
         AppState.sharedInstance.signedIn = true
@@ -240,6 +244,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     
     func logIn(_ user: FIRUser?) {
         if(FIRAuth.auth()?.currentUser != nil){
+            
             MeasurementHelper.sendLoginEvent()
             AppState.sharedInstance.displayName = user?.displayName ?? user?.email
             AppState.sharedInstance.photoURL = user?.photoURL

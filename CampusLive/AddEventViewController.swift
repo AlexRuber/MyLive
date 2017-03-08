@@ -9,6 +9,8 @@
 import UIKit
 import MapKit
 import Firebase
+import FirebaseDatabase
+import FirebaseAuth
 
 class AddEventViewController: UIViewController, UITextFieldDelegate {
 
@@ -20,6 +22,11 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     var uid: String?
     
     var isOrgLogin: Bool = false
+    
+    //Outlet for Profile Image (connected with Firebase)
+    @IBOutlet weak var ProfileImage: UIImageView!
+    
+    
     
     @IBOutlet weak var venueTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
@@ -103,20 +110,6 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         
       
     }
-    
-    //Link code
-  /**
-    @IBAction func snapLink(_ sender: Any) {
-         UIApplication.shared.openURL(NSURL(string: "https://www.brandonmagpayo.com")! as URL)
-    }
-    
-    @IBAction func instaLink(_ sender: Any) {
-         UIApplication.shared.openURL(NSURL(string: "https://www.instagram.com/brandonmonteiro_")! as URL)
-    }
-    @IBAction func fbLink(_ sender: Any) {
-         UIApplication.shared.openURL(NSURL(string: "https://www.facebook.com/brandonmagpayo")! as URL)
-    }
-    */
     
  
     @IBAction func backButtonClicked(_ sender: Any) {
@@ -223,6 +216,31 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        //Settings for Profile imageview
+        ProfileImage.layer.cornerRadius = ProfileImage.frame.size.width / 2
+        ProfileImage.layer.cornerRadius = ProfileImage.frame.size.height / 2
+        self.ProfileImage.clipsToBounds = true
+        
+        
+        if FIRAuth.auth()?.currentUser != nil {
+            // User is signed in.
+            let user = FIRAuth.auth()?.currentUser
+            let email = user?.email
+            //let uid = user?.uid
+            let photoURL = user?.photoURL
+            let name = user?.displayName
+            
+            //self.uiEmailLabelView.text = email
+            if let photo = photoURL {
+                let data = NSData(contentsOf: photo)
+                self.ProfileImage.image = UIImage(data: data! as Data)
+            }
+            
+        } else {
+            print("User not Signed In.")
+        }
+        
+        
         
         //Initiliaze hidden outline + checkmarks
         fbOutline.isHidden = true

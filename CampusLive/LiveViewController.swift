@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 import Firebase
+import SVProgressHUD
 
 @objc class CampusLiveAnnotation: NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
@@ -29,6 +30,8 @@ import Firebase
 }
 
 class LiveViewController: UIViewController, CLLocationManagerDelegate{
+
+    
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -45,6 +48,8 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     @IBOutlet weak var orgSegment: UISegmentedControl!
     @IBOutlet weak var showAllSwitch: UISwitch!
     @IBOutlet weak var eventPin: UIImageView!
+    
+    
     //@IBOutlet weak var eventDescriptive: UIButton!
     //@IBOutlet weak var userSegment: UISegmentedControl!
     
@@ -60,10 +65,19 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         mapView!.setRegion(region, animated: true)
         mapView!.setCenter(mapView!.userLocation.coordinate, animated: true)
     }
-    
    
+    //Hides pins after posting event
+    override func viewDidAppear(_ animated: Bool) {
+        
+        eventPin.isHidden = true
+        eventDescriptive.isHidden = true
+        addEventButton.isHidden = false
+    }
+
     override func viewDidLoad() {
-        super.viewDidLoad()
+       super.viewDidLoad()
+        SVProgressHUD.show(withStatus: "Loading Map :)")
+
         
         //Minus Button is hidden to start
         subtractEventButton.isHidden = true
@@ -74,11 +88,13 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         //eventRef = eventRef.child("stu_events")
         
         if(isOrgLogin){
+
             //currentLocationButton.isHidden = true
             //addEventButton.isHidden = false
             //orgSegment.isHidden = false
             //userSegment.isHidden = true
         }else{
+
             //currentLocationButton.isHidden = false
             //addEventButton.isHidden = true
             //userSegment.isHidden = false
@@ -126,6 +142,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     
     func displayLiveEvents(){
         
+        
         eventRef.observe(.value, with: {(snap) in
             if let userDict = snap.value as? [String:AnyObject] {
                 
@@ -147,6 +164,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
                     self.mapView.addAnnotation(clAnnotation)
                     
                     //add animation when pin gets posted
+                   
                     
                 }
             }
@@ -268,9 +286,7 @@ extension LiveViewController: MKMapViewDelegate{
                 let imageUrl: URL = NSURL(string: annotation.imageUrl) as! URL
                 
                 let data = try? Data(contentsOf: imageUrl)
-                
                 let profileImage : UIImage = UIImage(data: data!)!
-                
                 let eventUserImage : UIImageView = UIImageView(image: profileImage)
                 //view.image = eventUserImage.image
                 
@@ -308,12 +324,6 @@ extension LiveViewController: MKMapViewDelegate{
         return nil
     }
     
-    //Hides pins after posting event
-    override func viewDidAppear(_ animated: Bool) {
-        eventPin.isHidden = true
-        eventDescriptive.isHidden = true
-        addEventButton.isHidden = false
-    }
     
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         self.location = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
@@ -353,4 +363,18 @@ extension LiveViewController: MKMapViewDelegate{
          
         }
     }
+    
+    func mapViewWillStartLoadingMap(_ mapView: MKMapView) {
+        SVProgressHUD.show(withStatus: "Loading Map :)")
+
+    }
+  
+    
+    func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
+        SVProgressHUD.dismiss(withDelay: 2)
+
+    }
+    
+   
+
 }

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WSx-hg-qa9">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WSx-hg-qa9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -27,6 +27,9 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="qAi-iX-GBz">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="HeC-Kp-YOV" id="Dlp-7s-7Q8"/>
+                                </connections>
                             </mapView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Pin" translatesAutoresizingMaskIntoConstraints="NO" id="1OZ-Ve-hAD">
                                 <rect key="frame" x="172.5" y="287" width="30" height="50"/>
@@ -112,7 +115,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H6d-1g-KNw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-295" y="-149"/>
+            <point key="canvasLocation" x="-295" y="-115"/>
         </scene>
         <!--Add Event-->
         <scene sceneID="fhF-Lw-H3L">
@@ -178,7 +181,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BrandonProfilePic" translatesAutoresizingMaskIntoConstraints="NO" id="zM5-1l-p9h">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zM5-1l-p9h">
                                 <rect key="frame" x="9" y="83" width="98" height="96"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -308,6 +311,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="ProfileImage" destination="zM5-1l-p9h" id="5y2-4b-Ayo"/>
                         <outlet property="descriptionTextView" destination="8bC-pE-7N8" id="rSi-wX-itZ"/>
                         <outlet property="endDatePicker" destination="PGD-Qc-qnL" id="WG1-5f-IoG"/>
                         <outlet property="fbCheckMark" destination="flb-Kx-lBf" id="YFe-rX-QjK"/>
@@ -419,10 +423,15 @@
                                     <action selector="segmentStateChanged:" destination="WSx-hg-qa9" eventType="valueChanged" id="kjC-b5-Mq3"/>
                                 </connections>
                             </segmentedControl>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Ta5-Lp-KAN">
+                                <rect key="frame" x="164" y="385" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.10588235294117647" green="0.58823529411764708" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
+                        <outlet property="activityInd" destination="Ta5-Lp-KAN" id="4c1-YE-hIR"/>
                         <outlet property="customFBButton" destination="3U8-14-arI" id="u2Z-6u-zvr"/>
                         <outlet property="forgetPasswordButton" destination="FEO-fJ-vi2" id="XnV-9r-eeM"/>
                         <outlet property="loginInButton" destination="WLI-fq-dYk" id="of3-vE-CzU"/>
@@ -533,7 +542,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instagram:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MAH-oZ-fhf">
-                                <rect key="frame" x="22" y="423" width="140" height="21"/>
+                                <rect key="frame" x="22" y="423" width="140" height="22"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -938,7 +947,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QZQ-X8-cHW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="428" y="1328.1859070464768"/>
+            <point key="canvasLocation" x="490" y="1327"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cdQ-mA-xSc">
@@ -997,7 +1006,6 @@
     </scenes>
     <resources>
         <image name="AddEventButton" width="492" height="491"/>
-        <image name="BrandonProfilePic" width="337" height="324"/>
         <image name="FBEventLink" width="461" height="462"/>
         <image name="FBLink" width="521" height="521"/>
         <image name="FacebookButton" width="240" height="37"/>
@@ -1022,6 +1030,6 @@
         <image name="facebook_anonymous" width="1024" height="1024"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RHa-hJ-dSP"/>
+        <segue reference="PCR-4T-TBK"/>
     </inferredMetricsTieBreakers>
 </document>
