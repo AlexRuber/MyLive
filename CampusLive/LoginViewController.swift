@@ -99,10 +99,10 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     //Check access token for already logged facebook
     override func viewDidAppear(_ animated: Bool) {
    
-        if (FBSDKAccessToken.current() != nil)
+        /*if (FBSDKAccessToken.current() != nil)
         {
             performSegue(withIdentifier: "SignInToFP", sender: self)
-        }
+        }*/
         /*
         if let user = FIRAuth.auth()?.currentUser {
             self.signedIn(user)
@@ -181,8 +181,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     }
     
     func signedIn(_ user: FIRUser?, userID: String, userData: Dictionary<String, String>) {
-        
-        
         
         MeasurementHelper.sendLoginEvent()
         AppState.sharedInstance.displayName = user?.displayName ?? user?.email

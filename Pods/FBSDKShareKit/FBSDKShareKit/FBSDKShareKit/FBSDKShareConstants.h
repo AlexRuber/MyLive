@@ -20,37 +20,35 @@
 
 #import <FBSDKCoreKit/FBSDKMacros.h>
 
-/**
-  The error domain for all errors from FBSDKShareKit.
-
- Error codes from the SDK in the range 200-299 are reserved for this domain.
+/*!
+ @abstract The error domain for all errors from FBSDKShareKit.
+ @discussion Error codes from the SDK in the range 200-299 are reserved for this domain.
  */
 FBSDK_EXTERN NSString *const FBSDKShareErrorDomain;
 
-/**
- NS_ENUM(NSInteger, FBSDKShareErrorCode)
-  Error codes for FBSDKShareErrorDomain.
+/*!
+ @typedef NS_ENUM(NSInteger, FBSDKShareErrorCode)
+ @abstract Error codes for FBSDKShareErrorDomain.
  */
 typedef NS_ENUM(NSInteger, FBSDKShareErrorCode)
 {
-  /**
-    Reserved.
+  /*!
+   @abstract Reserved.
    */
   FBSDKShareReservedErrorCode = 200,
 
-  /**
-    The error code for errors from uploading open graph objects.
+  /*!
+   @abstract The error code for errors from uploading open graph objects.
    */
   FBSDKShareOpenGraphErrorCode,
 
-  /**
-    The error code for when a sharing dialog is not available.
-
- Use the canShare methods to check for this case before calling show.
+  /*!
+   @abstract The error code for when a sharing dialog is not available.
+   @discussion Use the canShare methods to check for this case before calling show.
    */
   FBSDKShareDialogNotAvailableErrorCode,
 
-  /**
+  /*!
    @The error code for unknown errors.
    */
   FBSDKShareUnknownErrorCode,

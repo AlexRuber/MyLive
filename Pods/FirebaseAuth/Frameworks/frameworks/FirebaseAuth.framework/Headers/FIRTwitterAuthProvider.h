@@ -23,17 +23,16 @@ extern NSString *const FIRTwitterAuthProviderID;
 
 /** @fn credentialWithToken:secret:
     @brief Creates an @c FIRAuthCredential for a Twitter sign in.
-
     @param token The Twitter OAuth token.
     @param secret The Twitter OAuth secret.
-    @return A FIRAuthCredential containing the Twitter credential.
+    @return A @c FIRAuthCredential containing the Twitter credential.
  */
 + (FIRAuthCredential *)credentialWithToken:(NSString *)token secret:(NSString *)secret;
 
 /** @fn init
     @brief This class is not meant to be initialized.
  */
-- (instancetype)init NS_UNAVAILABLE;
+- (nullable instancetype)init NS_UNAVAILABLE;
 
 @end
 

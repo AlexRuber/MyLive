@@ -18,72 +18,56 @@
 
 #import <UIKit/UIKit.h>
 
-/**
+/*!
+ @class FBSDKApplicationDelegate
 
-  The FBSDKApplicationDelegate is designed to post process the results from Facebook Login
+ @abstract
+ The FBSDKApplicationDelegate is designed to post process the results from Facebook Login
  or Facebook Dialogs (or any action that requires switching over to the native Facebook
  app or Safari).
 
-
-
+ @discussion
  The methods in this class are designed to mirror those in UIApplicationDelegate, and you
  should call them in the respective methods in your AppDelegate implementation.
  */
 @interface FBSDKApplicationDelegate : NSObject
 
-/**
-  Gets the singleton instance.
+/*!
+ @abstract Gets the singleton instance.
  */
 + (instancetype)sharedInstance;
 
-/**
-  Call this method from the [UIApplicationDelegate application:openURL:sourceApplication:annotation:] method
+/*!
+ @abstract
+ Call this method from the [UIApplicationDelegate application:openURL:sourceApplication:annotation:] method
  of the AppDelegate for your app. It should be invoked for the proper processing of responses during interaction
  with the native Facebook app or Safari as part of SSO authorization flow or Facebook dialogs.
 
- - Parameter application: The application as passed to [UIApplicationDelegate application:openURL:sourceApplication:annotation:].
+ @param application The application as passed to [UIApplicationDelegate application:openURL:sourceApplication:annotation:].
 
- - Parameter url: The URL as passed to [UIApplicationDelegate application:openURL:sourceApplication:annotation:].
+ @param url The URL as passed to [UIApplicationDelegate application:openURL:sourceApplication:annotation:].
 
- - Parameter sourceApplication: The sourceApplication as passed to [UIApplicationDelegate application:openURL:sourceApplication:annotation:].
+ @param sourceApplication The sourceApplication as passed to [UIApplicationDelegate application:openURL:sourceApplication:annotation:].
 
- - Parameter annotation: The annotation as passed to [UIApplicationDelegate application:openURL:sourceApplication:annotation:].
+ @param annotation The annotation as passed to [UIApplicationDelegate application:openURL:sourceApplication:annotation:].
 
- - Returns: YES if the url was intended for the Facebook SDK, NO if not.
-  */
+ @return YES if the url was intended for the Facebook SDK, NO if not.
+ */
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation;
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_9_3
-/**
-  Call this method from the [UIApplicationDelegate application:openURL:options:] method
- of the AppDelegate for your app. It should be invoked for the proper processing of responses during interaction
- with the native Facebook app or Safari as part of SSO authorization flow or Facebook dialogs.
-
- - Parameter application: The application as passed to [UIApplicationDelegate application:openURL:options:].
-
- - Parameter url: The URL as passed to [UIApplicationDelegate application:openURL:options:].
-
- - Parameter options: The options dictionary as passed to [UIApplicationDelegate application:openURL:options:].
-
- - Returns: YES if the url was intended for the Facebook SDK, NO if not.
- */
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options;
-#endif
-
-/**
-  Call this method from the [UIApplicationDelegate application:didFinishLaunchingWithOptions:] method
+/*!
+ @abstract
+ Call this method from the [UIApplicationDelegate application:didFinishLaunchingWithOptions:] method
  of the AppDelegate for your app. It should be invoked for the proper use of the Facebook SDK.
 
- - Parameter application: The application as passed to [UIApplicationDelegate application:didFinishLaunchingWithOptions:].
+ @param application The application as passed to [UIApplicationDelegate application:didFinishLaunchingWithOptions:].
 
- - Parameter launchOptions: The launchOptions as passed to [UIApplicationDelegate application:didFinishLaunchingWithOptions:].
+ @param launchOptions The launchOptions as passed to [UIApplicationDelegate application:didFinishLaunchingWithOptions:].
 
- - Returns: YES if the url was intended for the Facebook SDK, NO if not.
+ @return YES if the url was intended for the Facebook SDK, NO if not.
  */
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
 

@@ -23,16 +23,15 @@ extern NSString *const FIRFacebookAuthProviderID;
 
 /** @fn credentialWithAccessToken:
     @brief Creates an @c FIRAuthCredential for a Facebook sign in.
-
     @param accessToken The Access Token from Facebook.
-    @return A FIRAuthCredential containing the Facebook credentials.
+    @return A @c FIRAuthCredential containing the Facebook credentials.
  */
 + (FIRAuthCredential *)credentialWithAccessToken:(NSString *)accessToken;
 
 /** @fn init
     @brief This class should not be initialized.
  */
-- (instancetype)init NS_UNAVAILABLE;
+- (nullable instancetype)init NS_UNAVAILABLE;
 
 @end
 

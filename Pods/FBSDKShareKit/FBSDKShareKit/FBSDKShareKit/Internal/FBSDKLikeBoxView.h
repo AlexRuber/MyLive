@@ -18,20 +18,20 @@
 
 #import <UIKit/UIKit.h>
 
-/**
- NS_ENUM(NSUInteger, FBSDKLikeBoxCaretPosition)
+/*!
+ @typedef NS_ENUM(NSUInteger, FBSDKLikeBoxCaretPosition)
 
-  Specifies the position of the caret relative to the box.
+ @abstract Specifies the position of the caret relative to the box.
  */
 typedef NS_ENUM(NSUInteger, FBSDKLikeBoxCaretPosition)
 {
-  /** The caret is on the top of the box. */
+  /*! The caret is on the top of the box. */
   FBSDKLikeBoxCaretPositionTop,
-  /** The caret is on the left of the box. */
+  /*! The caret is on the left of the box. */
   FBSDKLikeBoxCaretPositionLeft,
-  /** The caret is on the bottom of the box. */
+  /*! The caret is on the bottom of the box. */
   FBSDKLikeBoxCaretPositionBottom,
-  /** The caret is on the right of the box. */
+  /*! The caret is on the right of the box. */
   FBSDKLikeBoxCaretPositionRight,
 };
 

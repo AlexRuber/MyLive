@@ -6,14 +6,14 @@ target 'CampusLive' do
   use_frameworks!
 
   # Pods for CampusLive
+  pod ’FBSDKCoreKit’
+  pod ’FBSDKShareKit’
+  pod ’FBSDKLoginKit’
 
-pod 'FBSDKCoreKit'
-pod 'FBSDKShareKit'
-pod 'FBSDKLoginKit'
+  pod ‘Firebase/Core’
+  pod ‘Firebase/Auth’
+  pod ‘Firebase/Storage’
+  pod ‘Firebase/Database’
+  pod ’SVProgressHUD’
 
-pod ‘Firebase/Core’
-pod ‘Firebase/Auth’
-pod ‘Firebase/Storage’
-pod ‘Firebase/Database’
-pod 'SVProgressHUD'
 end

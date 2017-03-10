@@ -50,7 +50,6 @@ static NSString *g_legacyUserDefaultTokenInformationKeyName = @"FBAccessTokenInf
 static NSString *const FBSDKSettingsLimitEventAndDataUsage = @"com.facebook.sdk:FBSDKSettingsLimitEventAndDataUsage";
 static BOOL g_disableErrorRecovery;
 static NSString *g_userAgentSuffix;
-static NSString *g_defaultGraphAPIVersion;
 
 @implementation FBSDKSettings
 
@@ -197,19 +196,6 @@ FBSDKSETTINGS_PLIST_CONFIGURATION_SETTING_IMPL(NSNumber, FacebookJpegCompression
   if (![g_userAgentSuffix isEqualToString:suffix]) {
     g_userAgentSuffix = suffix;
   }
-}
-
-+ (void)setGraphAPIVersion:(NSString *)version
-{
-  if (![g_defaultGraphAPIVersion isEqualToString:version])
-  {
-    g_defaultGraphAPIVersion = version;
-  }
-}
-
-+ (NSString *)graphAPIVersion
-{
-  return g_defaultGraphAPIVersion ?: FBSDK_TARGET_PLATFORM_VERSION;
 }
 
 #pragma mark - Internal - Graph API Debug

@@ -23,17 +23,16 @@ extern NSString *const FIREmailPasswordAuthProviderID;
 
 /** @fn credentialWithEmail:password:
     @brief Creates an @c FIRAuthCredential for an email & password sign in.
-
     @param email The user's email address.
     @param password The user's password.
-    @return A FIRAuthCredential containing the email & password credential.
+    @return A @c FIRAuthCredential containing the email & password credential.
  */
 + (FIRAuthCredential *)credentialWithEmail:(NSString *)email password:(NSString *)password;
 
 /** @fn init
     @brief This class is not meant to be initialized.
  */
-- (instancetype)init NS_UNAVAILABLE;
+- (nullable instancetype)init NS_UNAVAILABLE;
 
 @end
 

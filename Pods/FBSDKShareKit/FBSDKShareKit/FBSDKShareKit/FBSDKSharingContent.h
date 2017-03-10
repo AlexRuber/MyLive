@@ -22,43 +22,42 @@
 
 @class FBSDKHashtag;
 
-/**
-  A base interface for content to be shared.
+/*!
+ @abstract A base interface for content to be shared.
  */
 @protocol FBSDKSharingContent <FBSDKCopying, NSSecureCoding>
 
-/**
-  URL for the content being shared.
-
- This URL will be checked for all link meta tags for linking in platform specific ways.  See documentation
+/*!
+ @abstract URL for the content being shared.
+ @discussion This URL will be checked for all link meta tags for linking in platform specific ways.  See documentation
  for App Links (https://developers.facebook.com/docs/applinks/)
- - Returns: URL representation of the content link
+ @return URL representation of the content link
  */
 @property (nonatomic, copy) NSURL *contentURL;
 
-/**
-  Hashtag for the content being shared.
- - Returns: The hashtag for the content being shared.
+/*!
+ @abstract Hashtag for the content being shared.
+ @return The hashtag for the content being shared.
  */
 @property (nonatomic, copy) FBSDKHashtag *hashtag;
 
-/**
-  List of IDs for taggable people to tag with this content.
-  See documentation for Taggable Friends
+/*!
+ @abstract List of IDs for taggable people to tag with this content.
+ @description See documentation for Taggable Friends
  (https://developers.facebook.com/docs/graph-api/reference/user/taggable_friends)
- - Returns: Array of IDs for people to tag (NSString)
+ @return Array of IDs for people to tag (NSString)
  */
 @property (nonatomic, copy) NSArray *peopleIDs;
 
-/**
-  The ID for a place to tag with this content.
- - Returns: The ID for the place to tag
+/*!
+ @abstract The ID for a place to tag with this content.
+ @return The ID for the place to tag
  */
 @property (nonatomic, copy) NSString *placeID;
 
-/**
-  A value to be added to the referrer URL when a person follows a link from this shared content on feed.
- - Returns: The ref for the content.
+/*!
+ @abstract A value to be added to the referrer URL when a person follows a link from this shared content on feed.
+ @return The ref for the content.
  */
 @property (nonatomic, copy) NSString *ref;
 

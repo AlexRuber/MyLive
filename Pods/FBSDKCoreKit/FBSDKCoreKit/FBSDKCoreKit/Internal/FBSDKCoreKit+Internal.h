@@ -41,7 +41,6 @@
 #else
 #import "Device/FBSDKDeviceButton+Internal.h"
 #import "Device/FBSDKDeviceDialogView.h"
-#import "Device/FBSDKSmartDeviceDialogView.h"
 #import "Device/FBSDKDeviceViewControllerBase+Internal.h"
 #import "Device/FBSDKModalFormPresentationController.h"
 #endif
@@ -55,9 +54,7 @@
 #import "ErrorRecovery/FBSDKErrorRecoveryAttempter.h"
 #import "FBSDKDynamicFrameworkLoader.h"
 #import "FBSDKApplicationDelegate+Internal.h"
-#import "FBSDKDeviceRequestsHelper.h"
 #import "FBSDKError.h"
-#import "FBSDKImageDownloader.h"
 #import "FBSDKInternalUtility.h"
 #import "FBSDKLogger.h"
 #import "FBSDKMath.h"

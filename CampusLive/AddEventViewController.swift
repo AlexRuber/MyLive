@@ -24,9 +24,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     var isOrgLogin: Bool = false
     
     //Outlet for Profile Image (connected with Firebase)
-    @IBOutlet weak var ProfileImage: UIImageView!
-    
-    
+    @IBOutlet weak var profileImage: UIImageView!
     
     @IBOutlet weak var venueTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
@@ -49,7 +47,6 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var instaCheckMark: UIImageView!
     @IBOutlet weak var webCheckMark: UIImageView!
     @IBOutlet weak var snapCheckMark: UIImageView!
-    
     
     
     //Social Button Action Outlets
@@ -90,7 +87,6 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     }
     @IBAction func webBtnClicked(_ sender: Any) {
         
-        
         let prompt = UIAlertController.init(title: nil, message: "Copy Website URL", preferredStyle: .alert)
         let okAction = UIAlertAction.init(title: "OK", style: .default) { (action) in
             let userInput = prompt.textFields![0].text
@@ -108,7 +104,6 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         prompt.addAction(okAction)
         present(prompt, animated: true, completion: nil);
         
-      
     }
     
  
@@ -125,11 +120,8 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             
             
         }
-   
-        
         else if FIRAuth.auth()?.currentUser != nil{
             // User is signed in.
-            
             
             self.uid = FIRAuth.auth()?.currentUser?.uid
             
@@ -211,16 +203,13 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         view.endEditing(true)
     }
     
- 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     
         //Settings for Profile imageview
-        ProfileImage.layer.cornerRadius = ProfileImage.frame.size.width / 2
-        ProfileImage.layer.cornerRadius = ProfileImage.frame.size.height / 2
-        self.ProfileImage.clipsToBounds = true
-        
+        profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
+        profileImage.layer.cornerRadius = profileImage.frame.size.height / 2
+        self.profileImage.clipsToBounds = true
         
         if FIRAuth.auth()?.currentUser != nil {
             // User is signed in.
@@ -233,14 +222,12 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             //self.uiEmailLabelView.text = email
             if let photo = photoURL {
                 let data = NSData(contentsOf: photo)
-                self.ProfileImage.image = UIImage(data: data! as Data)
+                self.profileImage.image = UIImage(data: data! as Data)
             }
             
         } else {
             print("User not Signed In.")
         }
-        
-        
         
         //Initiliaze hidden outline + checkmarks
         fbOutline.isHidden = true

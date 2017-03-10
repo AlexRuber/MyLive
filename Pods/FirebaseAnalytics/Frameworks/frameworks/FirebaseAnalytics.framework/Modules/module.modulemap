@@ -14,7 +14,10 @@ framework module FirebaseAnalytics {
   header "FIRParameterNames.h"
   header "FIRUserPropertyNames.h"
 
+  link framework "AddressBook"
+  link framework "AdSupport"
   link framework "StoreKit"
+  link framework "SystemConfiguration"
 
   link "c++"
   link "sqlite3"

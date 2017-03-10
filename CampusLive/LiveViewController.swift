@@ -18,20 +18,22 @@ import SVProgressHUD
     var subtitle: String?
     var imageUrl: String!
     var eventDescription: String?
+    var eventID: String?
+    var endDate: String?
     
-    init(lat: CLLocationDegrees, long: CLLocationDegrees, title: String? = nil, subtitle: String? = nil, imageUrl: String!, eventDescription: String? = nil) {
+    init(lat: CLLocationDegrees, long: CLLocationDegrees, title: String? = nil, subtitle: String? = nil, imageUrl: String!, eventDescription: String? = nil, eventID: String? = nil, endDate: String? = nil) {
         self.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
         self.title = title
         self.subtitle = subtitle
         self.imageUrl = imageUrl
         self.eventDescription = eventDescription
+        self.eventID = eventID
+        self.endDate = endDate
         super.init()
     }
 }
 
 class LiveViewController: UIViewController, CLLocationManagerDelegate{
-
-    
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -40,6 +42,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     let locationManager = CLLocationManager()
     //Change value to false
     var isOrgLogin: Bool = false
+    var uid: String?
     
     @IBOutlet weak var addEventButton: UIButton!
     @IBOutlet weak var subtractEventButton: UIButton!
@@ -55,6 +58,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     
     //@IBOutlet weak var orgSegment: UISegmentedControl!
     var eventRef = FIRDatabase.database().reference()//.child("event")
+    var users = FIRDatabase.database().reference()
     
     @IBAction func refreshLocationButton(_ sender: Any) {
         locationManager.requestLocation()
@@ -68,7 +72,6 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
    
     //Hides pins after posting event
     override func viewDidAppear(_ animated: Bool) {
-        
         eventPin.isHidden = true
         eventDescriptive.isHidden = true
         addEventButton.isHidden = false
@@ -76,9 +79,8 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
 
     override func viewDidLoad() {
        super.viewDidLoad()
-        SVProgressHUD.show(withStatus: "Loading Map :)")
+       SVProgressHUD.show(withStatus: "Loading Map :)")
 
-        
         //Minus Button is hidden to start
         subtractEventButton.isHidden = true
         
@@ -127,6 +129,10 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
             self.eventRef = eventRef.child("stu_events")
         }
         
+        self.uid = FIRAuth.auth()?.currentUser?.uid
+        
+        users = users.child("users").child(uid!)
+        
         displayLiveEvents()
     }
     
@@ -141,8 +147,6 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
 
     
     func displayLiveEvents(){
-        
-        
         eventRef.observe(.value, with: {(snap) in
             if let userDict = snap.value as? [String:AnyObject] {
                 
@@ -150,22 +154,41 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
                 for each in userDict as [String: AnyObject] {
                     let autoID = each.key
                     let name = each.value["name"] as! String
+                    
                     var endDate = each.value["endDate"] as! String
+                    let index = endDate.index(endDate.startIndex, offsetBy: 20)
+                    let endDateSubstring = endDate.substring(to: index)
+                    
+                    // for subtitle
+                    let startDate = each.value["startDate"] as! String
+                    let indexStart = startDate.index(startDate.startIndex, offsetBy: 20)
+                    let startDateSubstring = startDate.substring(to: indexStart)
+                    
+                    let dateFormatter = DateFormatter()
+                    
+                    dateFormatter.locale = NSLocale.current
+                    
+                    let dateAsString = startDateSubstring
+                    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                    let newDate = dateFormatter.date(from: dateAsString)
+                    
+                    let formatter: DateFormatter = DateFormatter()
+                    formatter.dateFormat = "E HH:mm a"
+                    let stringDate: String = formatter.string(from: newDate!)
+                    
+                    
+                
                     let venue = each.value["venue"] as! String
+                    let subtitle = "\(venue)" + ", " + "\(stringDate)"
                     let latitude = each.value["latitude"] as! NSNumber
                     let longitude = each.value["longitude"] as! NSNumber
                     let description = each.value["description"] as! String
                     let imageUrl = each.value["profileImage"] as! String
-                    let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: venue, imageUrl: imageUrl, eventDescription: description)
-                    //annotation.title = name
-                    //annotation.subtitle = venue
-                    //annotation.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
-                    //print("MAXMAXMAXXXXXXXXXX: \(clAnnotation.imageUrl!)")
+                    let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: subtitle, imageUrl: imageUrl, eventDescription: description, eventID: autoID, endDate: endDateSubstring)
+            
                     self.mapView.addAnnotation(clAnnotation)
                     
                     //add animation when pin gets posted
-                   
-                    
                 }
             }
         })
@@ -293,13 +316,58 @@ extension LiveViewController: MKMapViewDelegate{
                 eventUserImage.layer.borderWidth = 1
                 let white = UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 1.0)
                 eventUserImage.layer.borderColor = white.cgColor
-                let f = CGRect(x: -2, y: -2, width: 40, height: 40) // CGRect(2,2,46,43)
+                let f = CGRect(x: 1, y: 1, width: 40, height: 40) // CGRect(2,2,46,43)
                 eventUserImage.frame = f
                 eventUserImage.layer.cornerRadius = 22.0
                 eventUserImage.layer.masksToBounds = true
                     
                 view.addSubview(eventUserImage)
-                view.image = UIImage(named: "circularPin")
+                
+                let dateFormatter = DateFormatter()
+                
+                dateFormatter.locale = NSLocale.current
+                
+                let dateAsString = annotation.endDate
+                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                let newDate = dateFormatter.date(from: dateAsString!)
+                
+                // using current date and time as an example
+                let someDate = Date()
+                
+                // convert Date to TimeInterval (typealias for Doub
+                let timeInterval = someDate.timeIntervalSince1970
+                var integerDate = newDate?.timeIntervalSince1970
+                
+                let formatter: DateFormatter = DateFormatter()
+                formatter.dateFormat = "E HH:mm a"
+                let stringDate: String = formatter.string(from: newDate!)
+                
+                print("CURRENT DATE: \(timeInterval)")
+                print("EVENT END DATE: \(integerDate)")
+                
+                if (integerDate! < timeInterval) {
+                    eventRef.child(annotation.eventID!).removeValue { (error, ref) in
+                        print("DELETEEEEEEEEEE")
+                        if error != nil {
+                            print("error \(error)")
+                        }
+                    }
+                }
+                
+                view.image = UIImage(named: "whiteCircularPin")
+                
+                users.observe(.value, with: {(snap) in
+                    if let userDict = snap.value as? [String: AnyObject] {
+                        
+                        for each in userDict as [String: AnyObject] {
+                            if each.key as! String == annotation.eventID {
+                                view.image = UIImage(named: "blueCircularPin")
+                                break
+                            }
+                        }
+                    }
+                })
+                
                 view.isEnabled = true
                 view.canShowCallout = true
                 //view.leftCalloutAccessoryView = UIImageView(image: pikeImage)
@@ -369,12 +437,9 @@ extension LiveViewController: MKMapViewDelegate{
 
     }
   
-    
     func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
         SVProgressHUD.dismiss(withDelay: 2)
 
     }
     
-   
-
 }
