@@ -15,6 +15,7 @@ class EventInfoViewController: UIViewController {
     @IBOutlet weak var eventDescription: UITextView!
     @IBOutlet weak var eventProfileImage: UIImageView!
     //@IBOutlet weak var startDate: UILabel!
+    //@IBOutlet weak var startDate: UILabel!
     @IBOutlet weak var startDate: UILabel!
     
     var titleEvent: String?
@@ -37,6 +38,7 @@ class EventInfoViewController: UIViewController {
         eventSubtitle?.text = subtitleEvent
         
         eventDescription.text = descriptionEvent
+        print(endDateStr)
         startDate.text = endDateStr
         //startDate.isHidden = true
         

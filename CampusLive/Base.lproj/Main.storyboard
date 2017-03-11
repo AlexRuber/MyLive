@@ -888,21 +888,21 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pickup ⚽ Game " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="paN-ls-LjM">
-                                <rect key="frame" x="152" y="82" width="173" height="24"/>
+                                <rect key="frame" x="125" y="82" width="227" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="RIMAC Field" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B8Z-rC-GcS">
-                                <rect key="frame" x="152" y="118" width="97" height="24"/>
+                                <rect key="frame" x="125" y="118" width="227" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Fri. 7pm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vsw-Mo-wYm">
-                                <rect key="frame" x="152" y="150" width="64" height="24"/>
+                                <rect key="frame" x="125" y="150" width="227" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -943,11 +943,12 @@
                         <outlet property="eventProfileImage" destination="bGe-2s-ctY" id="gXu-zc-uJW"/>
                         <outlet property="eventSubtitle" destination="B8Z-rC-GcS" id="0Sy-Yg-Wzd"/>
                         <outlet property="eventTitle" destination="paN-ls-LjM" id="l7z-tS-W5b"/>
+                        <outlet property="startDate" destination="vsw-Mo-wYm" id="lPd-zZ-X2i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QZQ-X8-cHW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="490" y="1327"/>
+            <point key="canvasLocation" x="488.80000000000001" y="1326.3868065967017"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cdQ-mA-xSc">

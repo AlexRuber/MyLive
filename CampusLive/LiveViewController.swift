@@ -271,7 +271,9 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
             destinationViewController.imageEventUrl = annotation.imageUrl
             destinationViewController.descriptionEvent = annotation.eventDescription
             destinationViewController.startDateStr = annotation.startDate
+            print(annotation.startDate)
             destinationViewController.endDateStr = annotation.endDate
+            print(annotation.endDate)
         }
     }
     
