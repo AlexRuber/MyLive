@@ -13,7 +13,7 @@ import FirebaseDatabase
 import FirebaseAuth
 
 class AddEventViewController: UIViewController, UITextFieldDelegate {
-
+    
     var location: CLLocationCoordinate2D!
     
     var userRef = FIRDatabase.database().reference()
@@ -30,6 +30,8 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var startDatePicker: UIDatePicker!
     @IBOutlet weak var endDatePicker: UIDatePicker!
+    //@IBOutlet weak var descriptionTextView: UITextView!
+    //@IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var descriptionTextView: UITextView!
     
     //Social Link Code
@@ -53,7 +55,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     @IBAction func fbBtnClicked(_ sender: Any) {
         fbOutline.isHidden = false
         fbCheckMark.isHidden = false
-
+        
     }
     @IBAction func fbEventBtnClicked(_ sender: Any) {
         
@@ -67,9 +69,9 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
                 self.fbEventOutline.isHidden = false
                 self.fbEventCheckMark.isHidden = false
             }
-        
+            
         }
-     
+        
         prompt.addTextField(configurationHandler: nil)
         prompt.addAction(okAction)
         present(prompt, animated: true, completion: nil);
@@ -106,10 +108,10 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         
     }
     
- 
+    
     @IBAction func backButtonClicked(_ sender: Any) {
-            hideKeyBoard()
-            self.dismiss(animated: true, completion: nil)
+        hideKeyBoard()
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func didTapPost(_ sender: Any) {
@@ -159,7 +161,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
                 self.dismiss(animated: true, completion: nil)
                 
             }
-            )
+                )
             )
             present(addEventPopup, animated: true, completion: nil)
             //self.dismiss(animated: true, completion: nil)
@@ -175,16 +177,28 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     }
     
     func dismissView() {
-            hideKeyBoard()
-            self.dismiss(animated: true, completion: nil)
+        hideKeyBoard()
+        self.dismiss(animated: true, completion: nil)
     }
     
     func post(imageUrl: String) {
         let name = nameTextField.text
         let venue = venueTextField.text
         let description = descriptionTextView.text
-        let startDate = String(describing: startDatePicker.date)
-        let endDate = String(describing: endDatePicker.date)
+        //print(description)
+        
+        //d.setTime( d.getTime() + d.getTimezoneOffset()*60*1000 );
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-dd hh:mm a"
+        
+        //let startDate = String(describing: startDatePicker.date)
+        let endDate = dateFormatter.string(from: endDatePicker.date)
+        print(endDate)
+        
+        let startDate = dateFormatter.string(from: startDatePicker.date)
+        print(startDate)
+        
         let latitude = location.latitude
         let longitude = location.longitude
         
@@ -205,7 +219,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         //Settings for Profile imageview
         profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
         profileImage.layer.cornerRadius = profileImage.frame.size.height / 2
@@ -241,7 +255,6 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         snapCheckMark.isHidden = true
         webCheckMark.isHidden = true
         
-    
         //Hiding keyboard delegates
         self.venueTextField.delegate = self
         self.nameTextField.delegate = self
@@ -268,14 +281,13 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange,
                    replacementString string: String) -> Bool
     {
-        let maxLengthName = 17
+        let maxLengthName = 27
         let maxLengthVenue = 27
         let currentStringName: String = nameTextField.text!
         let currentStringVenue: String = venueTextField.text!
         
         let newLengthName = currentStringName.characters.count + string.characters.count - range.length
         let newLengthVenue = currentStringVenue.characters.count + string.characters.count - range.length
-        
         
         return (newLengthName < maxLengthName && newLengthVenue < maxLengthVenue)
     }
