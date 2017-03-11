@@ -120,6 +120,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             let alert = UIAlertController(title: "Invalid Fields", message: "Enter all details", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             
+            present(alert, animated: true, completion: nil)
             
         }
         else if FIRAuth.auth()?.currentUser != nil{
