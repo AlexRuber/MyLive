@@ -699,7 +699,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WY1-tt-aGk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1178.4000000000001" y="658.92053973013503"/>
+            <point key="canvasLocation" x="-1478" y="674"/>
         </scene>
         <!--Event Name -->
         <scene sceneID="1MJ-M2-nns">
@@ -829,7 +829,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yKl-lw-sjc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1041" y="564"/>
+            <point key="canvasLocation" x="1298" y="463"/>
         </scene>
         <!--Brandon's Event-->
         <scene sceneID="U7N-i3-Q8A">
@@ -1032,6 +1032,6 @@
         <image name="facebook_anonymous" width="1024" height="1024"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RHa-hJ-dSP"/>
+        <segue reference="PCR-4T-TBK"/>
     </inferredMetricsTieBreakers>
 </document>
