@@ -33,81 +33,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     //@IBOutlet weak var descriptionTextView: UITextView!
     //@IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var descriptionTextView: UITextView!
-    
-    //Social Link Code
-    
-    //Outline Outlets
-    @IBOutlet weak var fbOutline: UIImageView!
-    @IBOutlet weak var fbEventOutline: UIImageView!
-    @IBOutlet weak var snapOutline: UIImageView!
-    @IBOutlet weak var instaOutline: UIImageView!
-    @IBOutlet weak var webOutline: UIImageView!
-    
-    //Checkmark Outlets
-    @IBOutlet weak var fbCheckMark: UIImageView!
-    @IBOutlet weak var fbEventCheckMark: UIImageView!
-    @IBOutlet weak var instaCheckMark: UIImageView!
-    @IBOutlet weak var webCheckMark: UIImageView!
-    @IBOutlet weak var snapCheckMark: UIImageView!
-    
-    
-    //Social Button Action Outlets
-    @IBAction func fbBtnClicked(_ sender: Any) {
-        fbOutline.isHidden = false
-        fbCheckMark.isHidden = false
-        
-    }
-    @IBAction func fbEventBtnClicked(_ sender: Any) {
-        
-        let prompt = UIAlertController.init(title: nil, message: "Copy Facebook Event URL", preferredStyle: .alert)
-        let okAction = UIAlertAction.init(title: "OK", style: .default) { (action) in
-            let userInput = prompt.textFields![0].text
-            if (userInput!.isEmpty) {
-                return
-            }
-            else{
-                self.fbEventOutline.isHidden = false
-                self.fbEventCheckMark.isHidden = false
-            }
-            
-        }
-        
-        prompt.addTextField(configurationHandler: nil)
-        prompt.addAction(okAction)
-        present(prompt, animated: true, completion: nil);
-        
-    }
-    
-    @IBAction func snapBtnClicked(_ sender: Any) {
-        snapOutline.isHidden = false
-        snapCheckMark.isHidden = false
-    }
-    @IBAction func instaBtnClicked(_ sender: Any) {
-        instaOutline.isHidden = false
-        instaCheckMark.isHidden = false
-        
-    }
-    @IBAction func webBtnClicked(_ sender: Any) {
-        
-        let prompt = UIAlertController.init(title: nil, message: "Copy Website URL", preferredStyle: .alert)
-        let okAction = UIAlertAction.init(title: "OK", style: .default) { (action) in
-            let userInput = prompt.textFields![0].text
-            if (userInput!.isEmpty) {
-                return
-            }
-            else{
-                self.webOutline.isHidden = false
-                self.webCheckMark.isHidden = false
-            }
-            
-        }
-        
-        prompt.addTextField(configurationHandler: nil)
-        prompt.addAction(okAction)
-        present(prompt, animated: true, completion: nil);
-        
-    }
-    
+ 
     
     @IBAction func backButtonClicked(_ sender: Any) {
         hideKeyBoard()
@@ -120,6 +46,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             let alert = UIAlertController(title: "Invalid Fields", message: "Enter all details", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             
+            present(alert, animated: true, completion: nil)
             
         }
         else if FIRAuth.auth()?.currentUser != nil{
@@ -243,17 +170,6 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             print("User not Signed In.")
         }
         
-        //Initiliaze hidden outline + checkmarks
-        fbOutline.isHidden = true
-        fbEventOutline.isHidden = true
-        snapOutline.isHidden = true
-        instaOutline.isHidden = true
-        webOutline.isHidden = true
-        fbCheckMark.isHidden = true
-        fbEventCheckMark.isHidden = true
-        instaCheckMark.isHidden = true
-        snapCheckMark.isHidden = true
-        webCheckMark.isHidden = true
         
         //Hiding keyboard delegates
         self.venueTextField.delegate = self

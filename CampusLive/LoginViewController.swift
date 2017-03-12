@@ -31,11 +31,17 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var customFBButton: UIButton!
     @IBOutlet weak var activityInd: UIActivityIndicatorView!
     
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
      
         users = FIRDatabase.database().reference().child("users")
+        
+        if(FIRAuth.auth()?.currentUser != nil){
+            
+            performSegue(withIdentifier: "SignInToFP", sender: self)
+        }
         
         //Activity Spinner Hidden to Begin
         activityInd.isHidden = true
@@ -97,19 +103,27 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     }
   
     //Check access token for already logged facebook
+    /*
     override func viewDidAppear(_ animated: Bool) {
-   
-        /*if (FBSDKAccessToken.current() != nil)
-        {
-            performSegue(withIdentifier: "SignInToFP", sender: self)
-        }*/
+        
         /*
+        if(FIRAuth.auth()?.currentUser != nil){
+           
+            performSegue(withIdentifier: "SignInToFP", sender: self)
+        }
+        */
+        /*
+        if (FBSDKAccessToken.current() != nil)
+        {
+            performSegue(withIdentifier:"SignInToFP", sender: self)
+        }
+        
         if let user = FIRAuth.auth()?.currentUser {
             self.signedIn(user)
         }
         */
     }
-    
+    */
     func presentHomeViewController(){
         self.present(homeViewController, animated: true, completion: nil)
     }
@@ -123,15 +137,18 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         
         isOrgLogin = false
         
-        self.customFBButton.isHidden = true
+        self.customFBButton.isHidden = false
         
         FBSDKLoginManager().logIn(withReadPermissions: ["email", "public_profile", "user_friends"], from: self){ (result, err) in
             if(err != nil){
                 print("Fb Login Failed", err ?? "")
-                return
+                self.dismiss(animated: true, completion: nil)
             }
-            print(result?.token.tokenString ?? "")
+            
+            //print(result?.token.tokenString ?? "")
             self.showEmailAddress()
+            //self.dismiss(animated: true, completion: nil)
+
         }
     }
     
