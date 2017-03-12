@@ -42,7 +42,8 @@ class MyProfileViewController: UIViewController {
 
         print("Profile View Controller Loaded.")
         
-        //self.uiImageView.layer.cornerRadius = self.uiImageView.frame.size.width/2
+        //Making Profile Image a Circle
+        self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2
         self.profileImage.clipsToBounds = true
         
         if FIRAuth.auth()?.currentUser != nil {

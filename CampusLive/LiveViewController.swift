@@ -82,7 +82,6 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         SVProgressHUD.show(withStatus: "Loading Map :)")
-        
         //Minus Button is hidden to start
         subtractEventButton.isHidden = true
         
@@ -443,12 +442,12 @@ extension LiveViewController: MKMapViewDelegate{
     }
     
     func mapViewWillStartLoadingMap(_ mapView: MKMapView) {
-        SVProgressHUD.show(withStatus: "Loading Map :)")
+       // SVProgressHUD.show(withStatus: "Loading Map :)")
         
     }
     
     func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
-        SVProgressHUD.dismiss(withDelay: 2)
+        SVProgressHUD.dismiss(withDelay: 0.8)
         
     }
     
