@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FBSDKLoginKit
 import FBSDKShareKit
+import SVProgressHUD
 
 class SignInViewController: UIViewController, UITextFieldDelegate {
 
@@ -22,6 +23,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     var isOrgLogin: Bool = false
     
 
+    @IBOutlet weak var logoImage: UIImageView!
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginInButton: UIButton!
@@ -35,7 +37,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-     
+        
         users = FIRDatabase.database().reference().child("users")
         
         if(FIRAuth.auth()?.currentUser != nil){
@@ -86,6 +88,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -125,6 +129,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         */
     }
     */
+    
     func presentHomeViewController(){
         self.present(homeViewController, animated: true, completion: nil)
     }
@@ -145,7 +150,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                 print("Fb Login Failed", err ?? "")
                 self.dismiss(animated: true, completion: nil)
             }
-            
             //print(result?.token.tokenString ?? "")
             self.showEmailAddress()
             //self.dismiss(animated: true, completion: nil)
