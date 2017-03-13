@@ -94,9 +94,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "152"
-            endingLineNumber = "152"
-            landmarkName = "showEmailAddress()"
-            landmarkType = "7">
+            endingLineNumber = "152">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -110,9 +108,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "114"
-            endingLineNumber = "114"
-            landmarkName = "presentHomeViewController()"
-            landmarkType = "7">
+            endingLineNumber = "114">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -158,9 +154,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "118"
-            endingLineNumber = "118"
-            landmarkName = "presentViewController1()"
-            landmarkType = "7">
+            endingLineNumber = "118">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -174,9 +168,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "124"
-            endingLineNumber = "124"
-            landmarkName = "handleCustomFBLogin()"
-            landmarkType = "7">
+            endingLineNumber = "124">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -190,9 +182,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "117"
-            endingLineNumber = "117"
-            landmarkName = "presentViewController1()"
-            landmarkType = "7">
+            endingLineNumber = "117">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
