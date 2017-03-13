@@ -155,7 +155,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate{
             //let nav = barViewControllers.viewControllers![0] as! UINavigationController
             //let destinationViewController = nav.viewControllers[0] as! LiveViewController
             let destinationViewController = segue.destination as! LiveViewController
-            destinationViewController.isOrgLogin = true
+            //destinationViewController.isOrgLogin = true
            // destinationViewController.isOrgLogin = true
         }
     }

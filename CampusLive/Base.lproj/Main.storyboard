@@ -100,6 +100,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="OrgUnfilled"/>
                                 <state key="highlighted" image="OrgFilled"/>
+                                <connections>
+                                    <action selector="isVerifiedClicked:" destination="HeC-Kp-YOV" eventType="touchUpInside" id="Olw-jQ-8sP"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -113,6 +116,7 @@
                         <outlet property="mapView" destination="qAi-iX-GBz" id="nGn-dI-466"/>
                         <outlet property="orgSegment" destination="yuF-kP-G1T" id="hV0-Y1-t1J"/>
                         <outlet property="subtractEventButton" destination="evu-aa-WeU" id="1CF-W5-6oK"/>
+                        <outlet property="verifiedButton" destination="6Lo-8P-0qz" id="XRW-xU-J7I"/>
                         <segue destination="Yb5-6D-gIK" kind="show" identifier="EventInfo" id="B7M-3u-HxH"/>
                     </connections>
                 </viewController>

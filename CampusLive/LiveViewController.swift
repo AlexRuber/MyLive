@@ -40,26 +40,21 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     @IBOutlet weak var mapView: MKMapView!
     
     var location: CLLocation!
-    var addEventLocation: CLLocationCoordinate2D!// = CLLocation(latitude: 27.8812, longitude: -123.2374)
+    var addEventLocation: CLLocationCoordinate2D!
     let locationManager = CLLocationManager()
-    //Change value to false
-    var isOrgLogin: Bool = false
+    
     var uid: String?
     
     @IBOutlet weak var addEventButton: UIButton!
     @IBOutlet weak var subtractEventButton: UIButton!
+    @IBOutlet weak var verifiedButton: UIButton!
     
     @IBOutlet weak var eventDescriptive: UIButton!
     @IBOutlet weak var orgSegment: UISegmentedControl!
     @IBOutlet weak var showAllSwitch: UISwitch!
     @IBOutlet weak var eventPin: UIImageView!
     
-    
-    //@IBOutlet weak var eventDescriptive: UIButton!
-    //@IBOutlet weak var userSegment: UISegmentedControl!
-    
-    //@IBOutlet weak var orgSegment: UISegmentedControl!
-    var eventRef = FIRDatabase.database().reference()//.child("event")
+    var eventRef = FIRDatabase.database().reference()
     var eventRefOrg = FIRDatabase.database().reference()
     var users = FIRDatabase.database().reference()
     
@@ -89,25 +84,8 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         eventDescriptive.isHidden = true
         eventPin.isHidden = true
         
-        //eventRef = eventRef.child("stu_events")
-        
-        if(isOrgLogin){
-            
-            //currentLocationButton.isHidden = true
-            //addEventButton.isHidden = false
-            //orgSegment.isHidden = false
-            //userSegment.isHidden = true
-        }else{
-            
-            //currentLocationButton.isHidden = false
-            //addEventButton.isHidden = true
-            //userSegment.isHidden = false
-            //orgSegment.isHidden = true
-        }
-        
         let span = MKCoordinateSpanMake(0.018, 0.018)
         let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 32.880777, longitude: -117.236395), span: span)
-        
         mapView.setRegion(region, animated: true)
         
         isAuthorizedtoGetUserLocation()
@@ -117,14 +95,13 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
             self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.requestLocation()
         }
-        
+
         self.locationManager.delegate = self
         self.locationManager.startUpdatingLocation()
         self.mapView.showsUserLocation = true
         self.mapView.delegate = self
-        
         self.locationManager.delegate = self
-        
+    
         self.eventRefOrg = eventRefOrg.child("org_events")
         self.eventRef = eventRef.child("stu_events")
         
@@ -132,8 +109,11 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         
         users = users.child("users").child(uid!)
         
-        //displayOrgEvents()
-        displayLiveEvents()
+        if(isVerifiedFlag){
+            displayLiveOrgEvents()
+        }else{
+            displayLiveEvents()
+        }
     }
     
     //if we have no permission to access user location, then ask user for permission.
@@ -145,61 +125,79 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     }
     
     @IBAction func indexChanged(_ sender: Any) {
-        switch orgSegment.selectedSegmentIndex {
-            case 0:
-                displayLiveEvents()
-            case 1:
-                displayTrendingEvents()
-            default:
-            break
-        }
-
+        displayRelevantEvents()
     }
     
     func displayLiveEvents() {
         
-        var allAnnotations = self.mapView.annotations
-        //self.mapView.removeAnnotations(allAnnotations)
+        let currentDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = NSLocale.current
+        dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
+        let formatter: DateFormatter = DateFormatter()
+        formatter.dateFormat = "E hh:mm a"
+        
+        //displaying ORG live events
+        displayLiveOrgEvents()
+        
+        //displaying student live events
+        eventRef.observe(.value, with: {(snap) in
+            if let userDict = snap.value as? [String:AnyObject] {
+                for each in userDict as [String: AnyObject] {
+                    let autoID = each.key
+                    let name = each.value["name"] as! String
+                    let endDateSubstring = each.value["endDate"] as! String
+                    let startDateSubstring = each.value["startDate"] as! String
+                    let dateAsString = startDateSubstring
+                    let newDate = dateFormatter.date(from: dateAsString)
+                    let stringDate: String! = formatter.string(from: newDate!)
+                    let startDateTimeInterval = newDate?.timeIntervalSince1970
+                    let currentDateTimeInterval = currentDate.timeIntervalSince1970
+                    let dayFromNow = currentDateTimeInterval + 86400.0
+                    
+                    if (Double(startDateTimeInterval!) < dayFromNow) {
+                        let venue = each.value["venue"] as! String
+                        let subtitle = "\(venue)" + ", " + "\(stringDate!)"
+                        let latitude = each.value["latitude"] as! NSNumber
+                        let longitude = each.value["longitude"] as! NSNumber
+                        let description = each.value["description"] as! String
+                        let imageUrl = each.value["profileImage"] as! String
+                        let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: subtitle, imageUrl: imageUrl, eventDescription: description, eventID: autoID, endDate: endDateSubstring, startDate: startDateSubstring)
+                        
+                        self.mapView.addAnnotation(clAnnotation)
+                    }
+                }
+            }
+        })
+    }
+    
+    func displayLiveOrgEvents(){
+        
+        let currentDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = NSLocale.current
+        dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
+        let formatter: DateFormatter = DateFormatter()
+        formatter.dateFormat = "E hh:mm a"
+        
+        let allAnnotations = self.mapView.annotations
         
         for annotation in allAnnotations {
             mapView.view(for: annotation)?.isHidden = true
         }
         
-        eventRef.observe(.value, with: {(snap) in
+        eventRefOrg.observe(.value, with: {(snap) in
             if let userDict = snap.value as? [String:AnyObject] {
-                
-                // print(userDict)
                 for each in userDict as [String: AnyObject] {
-                    
                     let autoID = each.key
                     let name = each.value["name"] as! String
-                    
-                    var endDateSubstring = each.value["endDate"] as! String
-                    //let index = endDate.index(endDate.startIndex, offsetBy: 20)
-                    //let endDateSubstring = endDate.substring(to: index)
-                    
-                    // for subtitle
+                    let endDateSubstring = each.value["endDate"] as! String
                     let startDateSubstring = each.value["startDate"] as! String
-                    //let indexStart = startDate.index(startDate.startIndex, offsetBy: 20)
-                    //let startDateSubstring = startDate.substring(to: indexStart)
-                    
-                    let currentDate = Date()
-
-                    let dateFormatter = DateFormatter()
-                    
-                    dateFormatter.locale = NSLocale.current
-                    
                     let dateAsString = startDateSubstring
-                    dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
                     let newDate = dateFormatter.date(from: dateAsString)
-                    
-                    let formatter: DateFormatter = DateFormatter()
-                    formatter.dateFormat = "E hh:mm a"
                     let stringDate: String! = formatter.string(from: newDate!)
-                    
                     let startDateTimeInterval = newDate?.timeIntervalSince1970
                     let currentDateTimeInterval = currentDate.timeIntervalSince1970
-                    
                     let dayFromNow = currentDateTimeInterval + 86400.0
                     
                     if (Double(startDateTimeInterval!) < dayFromNow) {
@@ -213,59 +211,45 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
                         let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: subtitle, imageUrl: imageUrl, eventDescription: description, eventID: autoID, endDate: endDateSubstring, startDate: startDateSubstring)
                         
                         self.mapView.addAnnotation(clAnnotation)
-                        
-                        //add animation when pin gets posted
                     }
                 }
             }
         })
     }
     
-    func displayTrendingEvents() {
+    func displayOrgTrendingEvents(){
         
-        var allAnnotations = self.mapView.annotations
-        //self.mapView.removeAnnotations(allAnnotations)
+        let allAnnotations = self.mapView.annotations
+        
+        let currentDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = NSLocale.current
+        dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
+        
+        let currentDateTimeInterval = currentDate.timeIntervalSince1970
+        let dayFromNow = currentDateTimeInterval + 86400.0
+        
+        let formatter: DateFormatter = DateFormatter()
+        formatter.dateFormat = "E hh:mm a"
         
         for annotation in allAnnotations {
             mapView.view(for: annotation)?.isHidden = true
         }
         
-        eventRef.observe(.value, with: {(snap) in
+        eventRefOrg.observe(.value, with: {(snap) in
             if let userDict = snap.value as? [String:AnyObject] {
                 
                 // print(userDict)
                 for each in userDict as [String: AnyObject] {
                     
-                    var endDateSubstring = each.value["endDate"] as! String
-                    //let index = endDate.index(endDate.startIndex, offsetBy: 20)
-                    //let endDateSubstring = endDate.substring(to: index)
-                    
-                    // for subtitle
+                    let endDateSubstring = each.value["endDate"] as! String
                     let startDateSubstring = each.value["startDate"] as! String
-                    //let indexStart = startDate.index(startDate.startIndex, offsetBy: 20)
-                    //let startDateSubstring = startDate.substring(to: indexStart)
-                    
-                    let currentDate = Date()
-                    let dateFormatter = DateFormatter()
-                    
-                    dateFormatter.locale = NSLocale.current
-                    
                     let dateAsString = startDateSubstring
-                    dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
                     let newDate = dateFormatter.date(from: dateAsString)
-                    
                     let startDateTimeInterval = newDate?.timeIntervalSince1970
-                    let currentDateTimeInterval = currentDate.timeIntervalSince1970
-                    
-                    let dayFromNow = currentDateTimeInterval + 86400.0
                     
                     if (Double(startDateTimeInterval!) > dayFromNow) {
-                        
-                        let formatter: DateFormatter = DateFormatter()
-                        formatter.dateFormat = "E hh:mm a"
                         let stringDate: String! = formatter.string(from: newDate!)
-                        //print("MAXXXXXX : \(stringDate)")
-                        
                         let autoID = each.key
                         let name = each.value["name"] as! String
                         let venue = each.value["venue"] as! String
@@ -277,72 +261,91 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
                         let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: subtitle, imageUrl: imageUrl, eventDescription: description, eventID: autoID, endDate: endDateSubstring, startDate: startDateSubstring)
                         
                         self.mapView.addAnnotation(clAnnotation)
-                        
-                        //add animation when pin gets posted
                     }
                 }
             }
         })
     }
     
-    /*
-    func displayOrgEvents(){
+    func displayTrendingEvents() {
+        let currentDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = NSLocale.current
+        dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
         
-        //self.eventRef = eventRef.child("stu_events")
-        print("Inside Display Org Events.")
+        let currentDateTimeInterval = currentDate.timeIntervalSince1970
+        let dayFromNow = currentDateTimeInterval + 86400.0
         
-        eventRefOrg.observe(.value, with: {(snap) in
+        let formatter: DateFormatter = DateFormatter()
+        formatter.dateFormat = "E hh:mm a"
+        
+        //displaying ORG events
+        displayOrgTrendingEvents()
+        
+        //displaying Student events
+        eventRef.observe(.value, with: {(snap) in
             if let userDict = snap.value as? [String:AnyObject] {
                 
-                // print(userDict)
                 for each in userDict as [String: AnyObject] {
                     
-                    let autoID = each.key
-                    let name = each.value["name"] as! String
-                    
-                    var endDateSubstring = each.value["endDate"] as! String
-                    //let index = endDate.index(endDate.startIndex, offsetBy: 20)
-                    //let endDateSubstring = endDate.substring(to: index)
-                    
-                    // for subtitle
+                    let endDateSubstring = each.value["endDate"] as! String
                     let startDateSubstring = each.value["startDate"] as! String
-                    //let indexStart = startDate.index(startDate.startIndex, offsetBy: 20)
-                    //let startDateSubstring = startDate.substring(to: indexStart)
-                    
-                    let dateFormatter = DateFormatter()
-                    
-                    dateFormatter.locale = NSLocale.current
-                    
                     let dateAsString = startDateSubstring
-                    dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
                     let newDate = dateFormatter.date(from: dateAsString)
-                    
-                    print(newDate)
-                    
-                    let formatter: DateFormatter = DateFormatter()
-                    formatter.dateFormat = "E hh:mm a"
-                    let stringDate: String! = formatter.string(from: newDate!)
-                    print("\(stringDate)")
-                    
-                    let venue = each.value["venue"] as! String
-                    let subtitle = "\(venue)" + ", " + "\(stringDate!)"
-                    let latitude = each.value["latitude"] as! NSNumber
-                    let longitude = each.value["longitude"] as! NSNumber
-                    let description = each.value["description"] as! String
-                    let imageUrl = each.value["profileImage"] as! String
-                    let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: subtitle, imageUrl: imageUrl, eventDescription: description, eventID: autoID, endDate: endDateSubstring, startDate: startDateSubstring)
-                    
-                    self.mapView.addAnnotation(clAnnotation)
-                    
-                    //add animation when pin gets posted
+                    let startDateTimeInterval = newDate?.timeIntervalSince1970
+                    if (Double(startDateTimeInterval!) > dayFromNow) {
+                        let stringDate: String! = formatter.string(from: newDate!)
+                        let autoID = each.key
+                        let name = each.value["name"] as! String
+                        let venue = each.value["venue"] as! String
+                        let subtitle = "\(venue)" + ", " + "\(stringDate!)"
+                        let latitude = each.value["latitude"] as! NSNumber
+                        let longitude = each.value["longitude"] as! NSNumber
+                        let description = each.value["description"] as! String
+                        let imageUrl = each.value["profileImage"] as! String
+                        let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: subtitle, imageUrl: imageUrl, eventDescription: description, eventID: autoID, endDate: endDateSubstring, startDate: startDateSubstring)
+                        
+                        self.mapView.addAnnotation(clAnnotation)
+                    }
                 }
             }
         })
     }
-    */
     
     @IBAction func settingsClicked(_ sender: Any) {
         
+    }
+    
+    var isVerifiedFlag = false
+    
+    func displayRelevantEvents(){
+        switch orgSegment.selectedSegmentIndex {
+        case 0:
+            if(isVerifiedFlag){
+                displayLiveOrgEvents()
+            }else{
+                displayLiveEvents()
+            }
+        case 1:
+            if(isVerifiedFlag){
+                displayOrgTrendingEvents()
+            }else{
+                displayTrendingEvents()
+            }
+        default:
+            break
+        }
+    }
+    
+    @IBAction func isVerifiedClicked(_ sender: Any) {
+        if(!isVerifiedFlag){
+            isVerifiedFlag = true
+            verifiedButton.setImage(UIImage(named: "OrgFilled"), for: UIControlState.normal)
+        }else{
+            isVerifiedFlag = false
+            verifiedButton.setImage(UIImage(named: "OrgUnfilled"), for: UIControlState.normal)
+        }
+        displayRelevantEvents()
     }
     
     func infoButtonTapped() {
@@ -375,18 +378,12 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     
     //this method is called by the framework on locationManager.requestLocation();
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        //let location:CLLocation = locations.first!
         let location = locations.last
-        
-        let centerCoordinate = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
-        
+        _ = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
         self.mapView.centerCoordinate = (location?.coordinate)!
         let reg = MKCoordinateRegionMakeWithDistance((location?.coordinate)!, 1500, 1500)
-        
         self.mapView.setRegion(reg, animated: true)
         self.locationManager.stopUpdatingLocation()
-        //self.addEventLocation = location
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -395,19 +392,14 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "AddEventDescription") {
-            
             let nav = segue.destination as! UINavigationController
             let destinationViewController = nav.viewControllers[0] as! AddEventViewController
             destinationViewController.location = addEventLocation
-            destinationViewController.isOrgLogin = self.isOrgLogin
-            //destinationViewController.isOrgLogin = true
-            
         }
         
         if (segue.identifier == "EventInfo") {
             let nav = segue.destination as! UINavigationController
             let destinationViewController = nav.viewControllers[0] as! EventInfoViewController
-            
             let annotation: CampusLiveAnnotation = sender as! CampusLiveAnnotation
             
             destinationViewController.titleEvent = annotation.title
@@ -415,9 +407,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
             destinationViewController.imageEventUrl = annotation.imageUrl
             destinationViewController.descriptionEvent = annotation.eventDescription
             destinationViewController.startDateStr = annotation.startDate
-            print(annotation.startDate)
             destinationViewController.endDateStr = annotation.endDate
-            print(annotation.endDate)
         }
     }
     
@@ -454,15 +444,12 @@ extension LiveViewController: MKMapViewDelegate{
                 dequeuedView.annotation = annotation
                 view = dequeuedView
             } else {
-                // 3
                 view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 
                 let imageUrl: URL = NSURL(string: annotation.imageUrl) as! URL
-                
                 let data = try? Data(contentsOf: imageUrl)
                 let profileImage : UIImage = UIImage(data: data!)!
                 let eventUserImage : UIImageView = UIImageView(image: profileImage)
-                //view.image = eventUserImage.image
                 
                 eventUserImage.layer.borderWidth = 1
                 let white = UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 1.0)
@@ -473,13 +460,10 @@ extension LiveViewController: MKMapViewDelegate{
                 eventUserImage.layer.masksToBounds = true
                 
                 view.addSubview(eventUserImage)
-                
                 let dateFormatter = DateFormatter()
-                
                 dateFormatter.locale = NSLocale.current
                 
                 let dateAsString = annotation.endDate
-                print(dateAsString!)
                 dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
                 let newDate = dateFormatter.date(from: dateAsString!)
                 
@@ -495,7 +479,8 @@ extension LiveViewController: MKMapViewDelegate{
                 //let stringDate: String = formatter.string(from: newDate!)
                 
                 if (integerDate! < timeInterval) {
-                    
+                    //Don't want an event deletion to be initiated from client side. 
+                    /*
                     eventRef.child(annotation.eventID!).removeValue { (error, ref) in
                         
                         print("DELETEEEEEEEEEE")
@@ -506,6 +491,7 @@ extension LiveViewController: MKMapViewDelegate{
                             print("error \(error)")
                         }
                     }
+                    */
                 }
                 
                 view.image = UIImage(named: "whiteCircularPin")
@@ -514,7 +500,7 @@ extension LiveViewController: MKMapViewDelegate{
                     if let userDict = snap.value as? [String: AnyObject] {
                         
                         for each in userDict as [String: AnyObject] {
-                            if each.key as! String == annotation.eventID {
+                            if each.key == annotation.eventID {
                                 view.image = UIImage(named: "blueCircularPin")
                                 break
                             }

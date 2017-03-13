@@ -284,7 +284,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
             
             //let destinationViewController = nav.viewControllers[0]
                 let destinationViewController = segue.destination as! LiveViewController
-                destinationViewController.isOrgLogin = true
+                //destinationViewController.isOrgLogin = true
             }
         }
     }
