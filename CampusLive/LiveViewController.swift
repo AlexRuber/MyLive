@@ -132,7 +132,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         
         users = users.child("users").child(uid!)
         
-        displayOrgEvents()
+        //displayOrgEvents()
         displayLiveEvents()
     }
     
@@ -195,6 +195,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         })
     }
     
+    /*
     func displayOrgEvents(){
         
         //self.eventRef = eventRef.child("stu_events")
@@ -248,6 +249,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
             }
         })
     }
+    */
     
     @IBAction func settingsClicked(_ sender: Any) {
         
