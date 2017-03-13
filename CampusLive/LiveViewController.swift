@@ -442,12 +442,12 @@ extension LiveViewController: MKMapViewDelegate{
     }
     
     func mapViewWillStartLoadingMap(_ mapView: MKMapView) {
-       // SVProgressHUD.show(withStatus: "Loading Map :)")
+       //SVProgressHUD.show(withStatus: "Loading Map :)")
         
     }
     
     func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
-        SVProgressHUD.dismiss(withDelay: 0.8)
+        SVProgressHUD.dismiss(withDelay: 0.5)
         
     }
     
