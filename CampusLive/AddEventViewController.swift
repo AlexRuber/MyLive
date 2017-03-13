@@ -42,6 +42,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func didTapPost(_ sender: Any) {
         
+        print("USER POST COUNT:  \(AppState.sharedInstance.userPostCount!)")
         if ((venueTextField.text?.isEmpty)! || (nameTextField.text?.isEmpty)!){
             let alert = UIAlertController(title: "Invalid Fields", message: "Enter all details", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
@@ -49,7 +50,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             present(alert, animated: true, completion: nil)
             
         }
-        else if FIRAuth.auth()?.currentUser != nil{
+        else if (FIRAuth.auth()?.currentUser != nil && AppState.sharedInstance.userPostCount! <= 2) {
             // User is signed in.
             
             self.uid = FIRAuth.auth()?.currentUser?.uid
@@ -73,6 +74,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
                         print("Max: Succesfully stored images in Firebase storage")
                         downloadURL = (metadata?.downloadURL()!.absoluteString)!
                         self.post(imageUrl: downloadURL!)
+                        
                         //print("MAXMAXMAXMAXMAX: \(downloadURL!)")
                         //self.postToFirebase(downloadURL!)
                     }
@@ -108,6 +110,10 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
+    func setUserPostCount(count: Int) {
+        AppState.sharedInstance.userPostCount = count
+    }
+    
     func post(imageUrl: String) {
         let name = nameTextField.text
         let venue = venueTextField.text
@@ -137,6 +143,10 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         let userPost: Dictionary<String, AnyObject> = [ userRef.key : true as AnyObject ]
         
         users.child(uid!).updateChildValues(userPost)
+        
+        AppState.sharedInstance.userPostCount = AppState.sharedInstance.userPostCount! + 1
+        users.child(uid!).updateChildValues(["postCount" : AppState.sharedInstance.userPostCount])
+        
         print("Posting event success.")
     }
     
@@ -184,6 +194,13 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         }
         
         users = users.child("users")
+        self.uid = FIRAuth.auth()?.currentUser?.uid
+        
+        users.child(uid!).observeSingleEvent(of: .value, with: {(snap) in
+            let userDict = snap.value as? NSDictionary
+            let postCount = userDict?["postCount"] as! Int
+            self.setUserPostCount(count: postCount)
+        })
         
         hideKeyBoard()
     }

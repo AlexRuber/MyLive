@@ -145,8 +145,27 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         }
     }
     
+    @IBAction func indexChanged(_ sender: Any) {
+        switch orgSegment.selectedSegmentIndex {
+            case 0:
+                displayLiveEvents()
+            case 1:
+                displayTrendingEvents()
+            default:
+            break
+        }
+
+    }
     
-    func displayLiveEvents(){
+    func displayLiveEvents() {
+        
+        var allAnnotations = self.mapView.annotations
+        //self.mapView.removeAnnotations(allAnnotations)
+        
+        for annotation in allAnnotations {
+            mapView.view(for: annotation)?.isHidden = true
+        }
+        
         eventRef.observe(.value, with: {(snap) in
             if let userDict = snap.value as? [String:AnyObject] {
                 
@@ -165,6 +184,8 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
                     //let indexStart = startDate.index(startDate.startIndex, offsetBy: 20)
                     //let startDateSubstring = startDate.substring(to: indexStart)
                     
+                    let currentDate = Date()
+
                     let dateFormatter = DateFormatter()
                     
                     dateFormatter.locale = NSLocale.current
@@ -173,24 +194,93 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
                     dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
                     let newDate = dateFormatter.date(from: dateAsString)
                     
-                    print(newDate)
-                    
                     let formatter: DateFormatter = DateFormatter()
                     formatter.dateFormat = "E hh:mm a"
                     let stringDate: String! = formatter.string(from: newDate!)
-                    print("MAXXXXXX : \(stringDate)")
                     
-                    let venue = each.value["venue"] as! String
-                    let subtitle = "\(venue)" + ", " + "\(stringDate!)"
-                    let latitude = each.value["latitude"] as! NSNumber
-                    let longitude = each.value["longitude"] as! NSNumber
-                    let description = each.value["description"] as! String
-                    let imageUrl = each.value["profileImage"] as! String
-                    let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: subtitle, imageUrl: imageUrl, eventDescription: description, eventID: autoID, endDate: endDateSubstring, startDate: startDateSubstring)
+                    let startDateTimeInterval = newDate?.timeIntervalSince1970
+                    let currentDateTimeInterval = currentDate.timeIntervalSince1970
                     
-                    self.mapView.addAnnotation(clAnnotation)
+                    let dayFromNow = currentDateTimeInterval + 86400.0
                     
-                    //add animation when pin gets posted
+                    if (Double(startDateTimeInterval!) < dayFromNow) {
+                        
+                        let venue = each.value["venue"] as! String
+                        let subtitle = "\(venue)" + ", " + "\(stringDate!)"
+                        let latitude = each.value["latitude"] as! NSNumber
+                        let longitude = each.value["longitude"] as! NSNumber
+                        let description = each.value["description"] as! String
+                        let imageUrl = each.value["profileImage"] as! String
+                        let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: subtitle, imageUrl: imageUrl, eventDescription: description, eventID: autoID, endDate: endDateSubstring, startDate: startDateSubstring)
+                        
+                        self.mapView.addAnnotation(clAnnotation)
+                        
+                        //add animation when pin gets posted
+                    }
+                }
+            }
+        })
+    }
+    
+    func displayTrendingEvents() {
+        
+        var allAnnotations = self.mapView.annotations
+        //self.mapView.removeAnnotations(allAnnotations)
+        
+        for annotation in allAnnotations {
+            mapView.view(for: annotation)?.isHidden = true
+        }
+        
+        eventRef.observe(.value, with: {(snap) in
+            if let userDict = snap.value as? [String:AnyObject] {
+                
+                // print(userDict)
+                for each in userDict as [String: AnyObject] {
+                    
+                    var endDateSubstring = each.value["endDate"] as! String
+                    //let index = endDate.index(endDate.startIndex, offsetBy: 20)
+                    //let endDateSubstring = endDate.substring(to: index)
+                    
+                    // for subtitle
+                    let startDateSubstring = each.value["startDate"] as! String
+                    //let indexStart = startDate.index(startDate.startIndex, offsetBy: 20)
+                    //let startDateSubstring = startDate.substring(to: indexStart)
+                    
+                    let currentDate = Date()
+                    let dateFormatter = DateFormatter()
+                    
+                    dateFormatter.locale = NSLocale.current
+                    
+                    let dateAsString = startDateSubstring
+                    dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
+                    let newDate = dateFormatter.date(from: dateAsString)
+                    
+                    let startDateTimeInterval = newDate?.timeIntervalSince1970
+                    let currentDateTimeInterval = currentDate.timeIntervalSince1970
+                    
+                    let dayFromNow = currentDateTimeInterval + 86400.0
+                    
+                    if (Double(startDateTimeInterval!) > dayFromNow) {
+                        
+                        let formatter: DateFormatter = DateFormatter()
+                        formatter.dateFormat = "E hh:mm a"
+                        let stringDate: String! = formatter.string(from: newDate!)
+                        //print("MAXXXXXX : \(stringDate)")
+                        
+                        let autoID = each.key
+                        let name = each.value["name"] as! String
+                        let venue = each.value["venue"] as! String
+                        let subtitle = "\(venue)" + ", " + "\(stringDate!)"
+                        let latitude = each.value["latitude"] as! NSNumber
+                        let longitude = each.value["longitude"] as! NSNumber
+                        let description = each.value["description"] as! String
+                        let imageUrl = each.value["profileImage"] as! String
+                        let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: subtitle, imageUrl: imageUrl, eventDescription: description, eventID: autoID, endDate: endDateSubstring, startDate: startDateSubstring)
+                        
+                        self.mapView.addAnnotation(clAnnotation)
+                        
+                        //add animation when pin gets posted
+                    }
                 }
             }
         })
@@ -338,8 +428,6 @@ extension LiveViewController: MKMapViewDelegate{
                 dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
                 let newDate = dateFormatter.date(from: dateAsString!)
                 
-                print(newDate)
-                
                 // using current date and time as an example
                 let someDate = Date()
                 
@@ -351,12 +439,13 @@ extension LiveViewController: MKMapViewDelegate{
                 formatter.dateFormat = "E HH:mm"
                 //let stringDate: String = formatter.string(from: newDate!)
                 
-                print("CURRENT DATE: \(timeInterval)")
-                print("EVENT END DATE: \(integerDate)")
-                print(dateAsString)
                 if (integerDate! < timeInterval) {
                     eventRef.child(annotation.eventID!).removeValue { (error, ref) in
+                        
                         print("DELETEEEEEEEEEE")
+                        //AppState.sharedInstance.userPostCount = AppState.sharedInstance.userPostCount! - 1
+                        //self.users.child(self.uid!).updateChildValues(["postCount" : AppState.sharedInstance.userPostCount])
+                        
                         if error != nil {
                             print("error \(error)")
                         }
