@@ -132,22 +132,30 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         let startDate = dateFormatter.string(from: startDatePicker.date)
         print(startDate)
         
-        let latitude = location.latitude
-        let longitude = location.longitude
+        let currentDate = Date()
+        let currentDateTimeInterval = currentDate.timeIntervalSince1970
+        let dayFromNow = currentDateTimeInterval + 86400.0
+        let newDate = dateFormatter.date(from: startDate)
+        let startDateTimeInterval = newDate?.timeIntervalSince1970
         
-        let posts: [String : AnyObject] = ["uid":uid as AnyObject, "name":name as AnyObject, "venue":venue as AnyObject, "description":description as AnyObject, "startDate":startDate as AnyObject, "endDate":endDate as AnyObject, "latitude":latitude as AnyObject, "longitude":longitude as AnyObject, "profileImage":imageUrl as AnyObject]
-        
-        userRef = userRef.childByAutoId()
-        userRef.setValue(posts)
-        
-        let userPost: Dictionary<String, AnyObject> = [ userRef.key : true as AnyObject ]
-        
-        users.child(uid!).updateChildValues(userPost)
-        
-        AppState.sharedInstance.userPostCount = AppState.sharedInstance.userPostCount! + 1
-        users.child(uid!).updateChildValues(["postCount" : AppState.sharedInstance.userPostCount])
-        
-        print("Posting event success.")
+        if(Double(startDateTimeInterval!) < dayFromNow){
+            let latitude = location.latitude
+            let longitude = location.longitude
+            
+            let posts: [String : AnyObject] = ["uid":uid as AnyObject, "name":name as AnyObject, "venue":venue as AnyObject, "description":description as AnyObject, "startDate":startDate as AnyObject, "endDate":endDate as AnyObject, "latitude":latitude as AnyObject, "longitude":longitude as AnyObject, "profileImage":imageUrl as AnyObject]
+            
+            userRef = userRef.childByAutoId()
+            userRef.setValue(posts)
+            
+            let userPost: Dictionary<String, AnyObject> = [ userRef.key : true as AnyObject ]
+            
+            users.child(uid!).updateChildValues(userPost)
+            
+            AppState.sharedInstance.userPostCount = AppState.sharedInstance.userPostCount! + 1
+            users.child(uid!).updateChildValues(["postCount" : AppState.sharedInstance.userPostCount as Any])
+            
+            print("Posting event success.")
+        }
     }
     
     func hideKeyBoard(){
