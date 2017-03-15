@@ -20,18 +20,18 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 
     var users: FIRDatabaseReference!
     
-    var isOrgLogin: Bool = false
+    //var isOrgLogin: Bool = false
     
 
     @IBOutlet weak var logoImage: UIImageView!
-    @IBOutlet weak var usernameField: UITextField!
-    @IBOutlet weak var passwordField: UITextField!
-    @IBOutlet weak var loginInButton: UIButton!
-    @IBOutlet weak var forgetPasswordButton: UIButton!
-    @IBOutlet weak var signupButton: UIButton!
-    @IBOutlet weak var segmentView: UISegmentedControl!
+    //@IBOutlet weak var usernameField: UITextField!
+    //@IBOutlet weak var passwordField: UITextField!
+    //@IBOutlet weak var loginInButton: UIButton!
+    //@IBOutlet weak var forgetPasswordButton: UIButton!
+    //@IBOutlet weak var signupButton: UIButton!
+    //@IBOutlet weak var segmentView: UISegmentedControl!
     @IBOutlet weak var customFBButton: UIButton!
-    @IBOutlet weak var activityInd: UIActivityIndicatorView!
+    //@IBOutlet weak var activityInd: UIActivityIndicatorView!
     
 
     
@@ -46,27 +46,28 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         }
         
         //Activity Spinner Hidden to Begin
-        activityInd.isHidden = true
+        //activityInd.isHidden = true
         
         //Creating Delegates for Hiding Keyboard
-        self.usernameField.delegate = self
-        self.passwordField.delegate = self
+        //self.usernameField.delegate = self
+        //self.passwordField.delegate = self
         
         let customFBImage = UIImage(named: "facebook-login-blue")
         customFBButton.setImage(customFBImage, for: .normal)
         customFBButton.addTarget(self, action: #selector(handleCustomFBLogin), for: .touchUpInside)
         
-        segmentView.selectedSegmentIndex = 0
-        usernameField.isHidden = true
-        passwordField.isHidden = true
-        loginInButton.isHidden = true
-        forgetPasswordButton.isHidden = true
-        signupButton.isHidden = true
-        customFBButton.isHidden = false
+        //segmentView.selectedSegmentIndex = 0
+        //usernameField.isHidden = true
+        //asswordField.isHidden = true
+        //loginInButton.isHidden = true
+        //forgetPasswordButton.isHidden = true
+        //signupButton.isHidden = true
+        //customFBButton.isHidden = false
         
   
     }
 
+    /*
     @IBAction func segmentStateChanged(_ sender: Any) {
         switch segmentView.selectedSegmentIndex{
         case 0:
@@ -87,7 +88,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
             break;
         }
     }
-    
+    */
     
     
     override func didReceiveMemoryWarning() {
@@ -141,7 +142,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     func handleCustomFBLogin(){
         //print(1234)
         
-        isOrgLogin = false
+        //isOrgLogin = false
         
         self.customFBButton.isHidden = false
         
@@ -183,6 +184,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    /*
     @IBAction func didRequestPasswordReset(_ sender: Any) {
         let prompt = UIAlertController.init(title: nil, message: "Email:", preferredStyle: .alert)
         let okAction = UIAlertAction.init(title: "OK", style: .default) { (action) in
@@ -201,6 +203,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         prompt.addAction(okAction)
         present(prompt, animated: true, completion: nil);
     }
+    */
     
     func signedIn(_ user: FIRUser?, userID: String, userData: Dictionary<String, String>) {
         
@@ -221,7 +224,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         performSegue(withIdentifier: Constants.Segues.SignInToFp, sender: nil)
     }
 
-    
+    /*
     @IBAction func signupButtonClicked(_ sender: Any) {
         performSegue(withIdentifier: "SignUpIdentifier", sender: nil)
     }
@@ -274,7 +277,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
             performSegue(withIdentifier: Constants.Segues.SignUpToFp, sender: nil)
         }
     }
-    
+    */
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.

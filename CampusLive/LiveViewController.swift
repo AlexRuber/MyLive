@@ -408,6 +408,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
             destinationViewController.descriptionEvent = annotation.eventDescription
             destinationViewController.startDateStr = annotation.startDate
             destinationViewController.endDateStr = annotation.endDate
+            destinationViewController.eventId = annotation.eventID
         }
     }
     
@@ -479,14 +480,19 @@ extension LiveViewController: MKMapViewDelegate{
                 //let stringDate: String = formatter.string(from: newDate!)
                 
                 if (integerDate! < timeInterval) {
+                    /*
+                    if(AppState.sharedInstance.userPostCount! > 1){
+                        AppState.sharedInstance.userPostCount = AppState.sharedInstance.userPostCount! - 1
+                        self.users.child(self.uid!).updateChildValues(["postCount" : AppState.sharedInstance.userPostCount as Any])
+                    }
+                    */
+                    
                     //Don't want an event deletion to be initiated from client side. 
                     /*
                     eventRef.child(annotation.eventID!).removeValue { (error, ref) in
-                        
                         print("DELETEEEEEEEEEE")
                         //AppState.sharedInstance.userPostCount = AppState.sharedInstance.userPostCount! - 1
                         //self.users.child(self.uid!).updateChildValues(["postCount" : AppState.sharedInstance.userPostCount])
-                        
                         if error != nil {
                             print("error \(error)")
                         }

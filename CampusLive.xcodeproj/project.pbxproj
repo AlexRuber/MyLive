@@ -15,7 +15,6 @@
 		616BAA081E407B5E008BF838 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 616BAA071E407B5E008BF838 /* GoogleService-Info.plist */; };
 		61EE5E4E1E367E5400D0A7E5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EE5E4D1E367E5400D0A7E5 /* LoginViewController.swift */; };
 		61EE5E521E367EBB00D0A7E5 /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EE5E511E367EBB00D0A7E5 /* LiveViewController.swift */; };
-		61EE5E541E367ED700D0A7E5 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EE5E531E367ED700D0A7E5 /* SignUpViewController.swift */; };
 		61EE5E561E367F1200D0A7E5 /* FeaturedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EE5E551E367F1200D0A7E5 /* FeaturedViewController.swift */; };
 		61EE5E5A1E367F4900D0A7E5 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EE5E591E367F4900D0A7E5 /* MyProfileViewController.swift */; };
 		983CE0661E3478CC0098D03B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983CE0651E3478CC0098D03B /* AppDelegate.swift */; };
@@ -36,7 +35,6 @@
 		616BAA071E407B5E008BF838 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		61EE5E4D1E367E5400D0A7E5 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		61EE5E511E367EBB00D0A7E5 /* LiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
-		61EE5E531E367ED700D0A7E5 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		61EE5E551E367F1200D0A7E5 /* FeaturedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedViewController.swift; sourceTree = "<group>"; };
 		61EE5E591E367F4900D0A7E5 /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		9072ACA91EB44818AC9E4446 /* Pods_CampusLive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CampusLive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,7 +103,6 @@
 				983CE0651E3478CC0098D03B /* AppDelegate.swift */,
 				61EE5E511E367EBB00D0A7E5 /* LiveViewController.swift */,
 				61EE5E4D1E367E5400D0A7E5 /* LoginViewController.swift */,
-				61EE5E531E367ED700D0A7E5 /* SignUpViewController.swift */,
 				616BAA011E402A1F008BF838 /* MeasurementHelper.swift */,
 				616BAA021E402A1F008BF838 /* AppState.swift */,
 				616BAA031E402A1F008BF838 /* Constants.swift */,
@@ -261,7 +258,6 @@
 				610E355F1E4E7A560041F418 /* ObjectView.swift in Sources */,
 				616BAA061E402A1F008BF838 /* Constants.swift in Sources */,
 				61EE5E521E367EBB00D0A7E5 /* LiveViewController.swift in Sources */,
-				61EE5E541E367ED700D0A7E5 /* SignUpViewController.swift in Sources */,
 				98934AFA1E6A84D5009D8720 /* EventInfoViewController.swift in Sources */,
 				61EE5E4E1E367E5400D0A7E5 /* LoginViewController.swift in Sources */,
 				61EE5E561E367F1200D0A7E5 /* FeaturedViewController.swift in Sources */,

@@ -80,28 +80,14 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
                     }
                 }
             }
-            
-            let addEventPopup = UIAlertController(title: "Posted", message: "Your event is now on the map", preferredStyle: .alert)
-            //let defaultAction = UIAlertAction(title: "Close", style: .default, handler: nil)
-            addEventPopup.addAction(UIAlertAction(title: "OK", style: .default, handler: {
-                action in
-                
-                //present view controller, not dismissed, but reloaded from prototype
-                self.dismiss(animated: true, completion: nil)
-                
-            }
-                )
-            )
-            present(addEventPopup, animated: true, completion: nil)
             //self.dismiss(animated: true, completion: nil)
             
-            
         } else {
-            let addEventPopup = UIAlertController(title: "Error!", message: "Something went wrong.", preferredStyle: .alert)
-            let defaultAction = UIAlertAction(title: "Close", style: .default, handler: nil)
-            addEventPopup.addAction(defaultAction)
-            present(addEventPopup, animated: true, completion: nil)
-            self.dismiss(animated: true, completion: nil)
+            if(AppState.sharedInstance.userPostCount! > 2 ){
+                showPopup(mTitle: "Uh Oh!", mMessage: "You have reached the max number of events for the day.", isViewControllerDismissed: true)
+            }else {
+            showPopup(mTitle: "Error", mMessage: "Something went wrong. Please try again later.", isViewControllerDismissed: true)
+            }
         }
     }
     
@@ -155,7 +141,21 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             users.child(uid!).updateChildValues(["postCount" : AppState.sharedInstance.userPostCount as Any])
             
             print("Posting event success.")
+            showPopup(mTitle: "Hurray!", mMessage: "Your event is now on map.", isViewControllerDismissed: true)
+            
         }
+        else{
+            showPopup(mTitle: "Oops!", mMessage: "You can post an event that starts in 24 hours.", isViewControllerDismissed: false)
+        }
+    }
+    
+    func showPopup(mTitle: String, mMessage: String, isViewControllerDismissed: Bool){
+        let addEventPopup = UIAlertController(title: mTitle, message: mMessage, preferredStyle: .alert)
+        addEventPopup.addAction(UIAlertAction(title: "OK", style: .default, handler: {
+            action in
+                self.dismiss(animated: isViewControllerDismissed, completion: nil)
+        }))
+        present(addEventPopup, animated: true, completion: nil)
     }
     
     func hideKeyBoard(){
@@ -173,10 +173,10 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         if FIRAuth.auth()?.currentUser != nil {
             // User is signed in.
             let user = FIRAuth.auth()?.currentUser
-            let email = user?.email
+            //let email = user?.email
             //let uid = user?.uid
             let photoURL = user?.photoURL
-            let name = user?.displayName
+            //let name = user?.displayName
             
             //self.uiEmailLabelView.text = email
             if let photo = photoURL {
