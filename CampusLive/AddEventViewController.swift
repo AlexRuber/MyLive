@@ -171,8 +171,8 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             if !snapshot.exists(){return}
             //let dict = snapshot.value as? NSDictionary
             //let postCount = dict.value["max_post_count"] as? Int
-            let defaultPostCount = (snapshot.value as? NSDictionary)?["max_post_count"] as! Int
-            print(defaultPostCount)
+            self.defaultPostCount = (snapshot.value as? NSDictionary)?["max_post_count"] as! Int
+            print(self.defaultPostCount)
         })
         
         
