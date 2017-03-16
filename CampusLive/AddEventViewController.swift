@@ -19,7 +19,9 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     var userRef = FIRDatabase.database().reference()
     var users = FIRDatabase.database().reference()
     var storage = FIRStorage.storage().reference()
+    var ref: FIRDatabaseReference! = FIRDatabase.database().reference().child("app_defaults")
     var uid: String?
+    var defaultPostCount: Int!
     
     var isOrgLogin: Bool = false
     
@@ -50,7 +52,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             present(alert, animated: true, completion: nil)
             
         }
-        else if (FIRAuth.auth()?.currentUser != nil && AppState.sharedInstance.userPostCount! <= 2) {
+        else if (FIRAuth.auth()?.currentUser != nil && AppState.sharedInstance.userPostCount! <= defaultPostCount) {
             // User is signed in.
             
             self.uid = FIRAuth.auth()?.currentUser?.uid
@@ -83,7 +85,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             //self.dismiss(animated: true, completion: nil)
             
         } else {
-            if(AppState.sharedInstance.userPostCount! > 2 ){
+            if(AppState.sharedInstance.userPostCount! > defaultPostCount ){
                 showPopup(mTitle: "Uh Oh!", mMessage: "You have reached the max number of events for the day.", isViewControllerDismissed: true)
             }else {
             showPopup(mTitle: "Error", mMessage: "Something went wrong. Please try again later.", isViewControllerDismissed: true)
@@ -164,6 +166,19 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ref.observeSingleEvent(of: .value, with: {snapshot in
+            if !snapshot.exists(){return}
+            //let dict = snapshot.value as? NSDictionary
+            //let postCount = dict.value["max_post_count"] as? Int
+            let defaultPostCount = (snapshot.value as? NSDictionary)?["max_post_count"] as! Int
+            print(defaultPostCount)
+        })
+        
+        
+        //let postCount: Dictionary<String, AnyObject> = [ defaults.key : true as AnyObject ]
+        //defaultPostCount = defaults.value(forKey: "max_post_count") as! Int!
+        //print(defaultPostCount)
         
         //Settings for Profile imageview
         profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
