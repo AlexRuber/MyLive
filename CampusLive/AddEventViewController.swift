@@ -157,6 +157,11 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         let newDate = dateFormatter.date(from: startDate)
         let startDateTimeInterval = newDate?.timeIntervalSince1970
         
+        let latitude = location.latitude
+        let longitude = location.longitude
+        
+        let posts: [String: AnyObject] = ["name": name as AnyObject, "venue": venue as AnyObject, "description": description as AnyObject, "startDate": startDate as AnyObject, "endDate": endDate as AnyObject, "latitude": latitude as AnyObject, "longitude": longitude as AnyObject, "profileImage": imageUrl as AnyObject]
+        
         userRef = userRef.childByAutoId()
         userRef.setValue(posts)
         
@@ -221,11 +226,11 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         
         print(location)
         
-        if(isOrgLogin){
-            userRef = userRef.child("org_events")
-        }else{
+        //if(isOrgLogin){
+         //   userRef = userRef.child("org_events")
+        //}else{
             userRef = userRef.child("stu_events")
-        }
+        //}
         
         users = users.child("users")
         self.uid = FIRAuth.auth()?.currentUser?.uid

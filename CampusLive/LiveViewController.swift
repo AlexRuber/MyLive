@@ -43,6 +43,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     var addEventLocation: CLLocationCoordinate2D!
     let locationManager = CLLocationManager()
     
+    
     var uid: String?
     
     @IBOutlet weak var addEventButton: UIButton!
@@ -53,6 +54,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     @IBOutlet weak var orgSegment: UISegmentedControl!
     @IBOutlet weak var showAllSwitch: UISwitch!
     @IBOutlet weak var eventPin: UIImageView!
+    
     
     var eventRef = FIRDatabase.database().reference()
     var eventRefOrg = FIRDatabase.database().reference()
@@ -70,6 +72,8 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         print("Did tap user location")
         
     }
+ 
+  
     
     //Hides pins after posting event
     override func viewDidAppear(_ animated: Bool) {
@@ -354,7 +358,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
             isVerifiedFlag = false
             verifiedButton.setImage(UIImage(named: "OrgUnfilled"), for: UIControlState.normal)
         }
-        displayRelevantEvents()
+       // displayRelevantEvents()
     }
     
     func infoButtonTapped() {
@@ -418,6 +422,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
             destinationViewController.startDateStr = annotation.startDate
             destinationViewController.endDateStr = annotation.endDate
             destinationViewController.eventId = annotation.eventID
+            destinationViewController.coordinate = annotation.coordinate
         }
     }
     
@@ -552,9 +557,11 @@ extension LiveViewController: MKMapViewDelegate{
         self.location = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
         // geoCode(location)
         
+        /**
         let span = MKCoordinateSpanMake(0.269, 0.269)
         let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 32.793181, longitude: -117.164898), span: span)
         mapView.setRegion(region, animated: true)
+        */
         
         UIView.animate(withDuration: 0.4, animations: {
             self.eventDescriptive.layer.opacity = 1
@@ -591,6 +598,7 @@ extension LiveViewController: MKMapViewDelegate{
             
         }
     }
+   
     
     func mapViewWillStartLoadingMap(_ mapView: MKMapView) {
        //SVProgressHUD.show(withStatus: "Loading Map :)")

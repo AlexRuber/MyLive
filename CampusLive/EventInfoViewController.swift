@@ -9,6 +9,8 @@
 import UIKit
 import FirebaseDatabase
 import FirebaseAuth
+import SVProgressHUD
+import MapKit
 
 class EventInfoViewController: UIViewController {
     
@@ -22,6 +24,7 @@ class EventInfoViewController: UIViewController {
     //@IBOutlet weak var startDate: UILabel!
     //@IBOutlet weak var startDate: UILabel!
     @IBOutlet weak var startDate: UILabel!
+    @IBOutlet weak var checkInBtn: UIButton!
     
     var titleEvent: String?
     var subtitleEvent: String?
@@ -30,11 +33,48 @@ class EventInfoViewController: UIViewController {
     var startDateStr: String?
     var endDateStr: String?
     var eventId: String?
+    var coordinate: CLLocationCoordinate2D?
+   
+    @IBAction func getDirections(_ sender: Any) {
+        //Defining destination
+        let latitude: CLLocationDegrees = (coordinate?.latitude)!
+        let longitude: CLLocationDegrees = (coordinate?.longitude)!
+        
+        let regionDistance:CLLocationDistance = 1000;
+        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+        let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center), MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)]
+        
+        let placemark = MKPlacemark(coordinate: coordinates)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = "Event Location"
+        mapItem.openInMaps(launchOptions: options)
+    
+    }
+    
+    
     
     @IBAction func backBtnTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
+ 
+    @IBAction func checkInBtnTapped(_ sender: Any) {
+        let addEventPopup = UIAlertController(title: "Checked In", message: "You are now checked in to the event!", preferredStyle: .alert)
+        //let defaultAction = UIAlertAction(title: "Close", style: .default, handler: nil)
+        addEventPopup.addAction(UIAlertAction(title: "OK", style: .default, handler: {
+            action in
+            //present view controller, not dismissed, but reloaded from prototype
+            self.dismiss(animated: true, completion: nil)
+        }
+            )
+        )
+        present(addEventPopup, animated: true, completion: nil)
+        //self.dismiss(animated: true, completion: nil)
+        
+    }
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -55,7 +55,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         //Custom FB Button Settings
         let customFBImage = UIImage(named: "facebook-login-blue")
         customFBButton.setImage(customFBImage, for: .normal)
-        customFBButton.frame = CGRect(x: 0, y: 0, width: 175, height: 44)
+        customFBButton.frame = CGRect(x: 0, y: 0, width: 250, height: 45)
         customFBButton.center = self.view.center
         customFBButton.addTarget(self, action: #selector(handleCustomFBLogin), for: .touchUpInside)
         

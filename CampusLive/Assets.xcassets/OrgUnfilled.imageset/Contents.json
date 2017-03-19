@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "College button (unfilled).png",
+      "filename" : "campus switch (unfilled).png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "College button (unfilled)-1.png",
+      "filename" : "campus switch (unfilled)-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "College button (unfilled)-2.png",
+      "filename" : "campus switch (unfilled)-2.png",
       "scale" : "3x"
     }
   ],
