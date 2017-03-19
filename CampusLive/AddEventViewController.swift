@@ -158,7 +158,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         let startDateTimeInterval = newDate?.timeIntervalSince1970
         
         userRef = userRef.childByAutoId()
-        userRef.setValue(posts)
+       // userRef.setValue(posts)
         
         let userPost: Dictionary<String, AnyObject> = [ userRef.key : true as AnyObject ]
         

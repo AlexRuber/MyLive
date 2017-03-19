@@ -17,18 +17,18 @@ import SVProgressHUD
     var title: String?
     var subtitle: String?
     var imageUrl: String!
-    var eventDescription: String?
-    var eventID: String?
+    //var eventDescription: String?
+    //var eventID: String?
     var endDate: String?
     var startDate: String?
     
-    init(lat: CLLocationDegrees, long: CLLocationDegrees, title: String? = nil, subtitle: String? = nil, imageUrl: String!, eventDescription: String? = nil, eventID: String? = nil, endDate: String? = nil, startDate: String? = nil) {
+    init(lat: CLLocationDegrees, long: CLLocationDegrees, title: String? = nil, subtitle: String? = nil, imageUrl: String!, endDate: String? = nil, startDate: String? = nil) {
         self.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
         self.title = title
         self.subtitle = subtitle
         self.imageUrl = imageUrl
-        self.eventDescription = eventDescription
-        self.eventID = eventID
+        //self.eventDescription = eventDescription
+        //self.eventID = eventID
         self.endDate = endDate
         self.startDate = startDate
         super.init()
@@ -45,18 +45,18 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     
     var uid: String?
     
-    @IBOutlet weak var addEventButton: UIButton!
-    @IBOutlet weak var subtractEventButton: UIButton!
+    //@IBOutlet weak var addEventButton: UIButton!
+    //@IBOutlet weak var subtractEventButton: UIButton!
     @IBOutlet weak var verifiedButton: UIButton!
     
-    @IBOutlet weak var eventDescriptive: UIButton!
+    //@IBOutlet weak var eventDescriptive: UIButton!
     @IBOutlet weak var orgSegment: UISegmentedControl!
-    @IBOutlet weak var showAllSwitch: UISwitch!
-    @IBOutlet weak var eventPin: UIImageView!
+    //@IBOutlet weak var showAllSwitch: UISwitch!
+    //@IBOutlet weak var eventPin: UIImageView!
     
-    var eventRef = FIRDatabase.database().reference()
-    var eventRefOrg = FIRDatabase.database().reference()
-    var users = FIRDatabase.database().reference()
+    var eventOrgRef = FIRDatabase.database().reference()
+    var eventBusRef = FIRDatabase.database().reference()
+    //var users = FIRDatabase.database().reference()
     
     @IBAction func refreshLocationButton(_ sender: Any) {
         locationManager.requestLocation()
@@ -73,9 +73,9 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     
     //Hides pins after posting event
     override func viewDidAppear(_ animated: Bool) {
-        eventPin.isHidden = true
-        eventDescriptive.isHidden = true
-        addEventButton.isHidden = false
+        //eventPin.isHidden = true
+        //eventDescriptive.isHidden = true
+        //addEventButton.isHidden = false
     }
     
     override func viewDidLoad() {
@@ -88,10 +88,10 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         SVProgressHUD.setForegroundColor(foregroundColor)
         SVProgressHUD.setBackgroundColor(backgroundColor)
         //Minus Button is hidden to start
-        subtractEventButton.isHidden = true
+        //subtractEventButton.isHidden = true
         
-        eventDescriptive.isHidden = true
-        eventPin.isHidden = true
+        //eventDescriptive.isHidden = true
+        //eventPin.isHidden = true
         
         let span = MKCoordinateSpanMake(0.018, 0.018)
         let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 32.880777, longitude: -117.236395), span: span)
@@ -111,17 +111,17 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         self.mapView.delegate = self
         self.locationManager.delegate = self
     
-        self.eventRefOrg = eventRefOrg.child("org_events")
-        self.eventRef = eventRef.child("stu_events")
+        self.eventBusRef = eventBusRef.child("business_events")
+        self.eventOrgRef = eventOrgRef.child("org_events")
         
         self.uid = FIRAuth.auth()?.currentUser?.uid
         
-        users = users.child("users").child(uid!)
+        //users = users.child("users").child(uid!)
         
         if(isVerifiedFlag){
-            displayLiveOrgEvents()
+            //displayLiveOrgEvents()
         }else{
-            displayLiveEvents()
+            //displayLiveEvents()
         }
     }
     
@@ -136,7 +136,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     @IBAction func indexChanged(_ sender: Any) {
         displayRelevantEvents()
     }
-    
+    /*
     func displayLiveEvents() {
         
         let currentDate = Date()
@@ -320,7 +320,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
             }
         })
     }
-    
+    */
     @IBAction func settingsClicked(_ sender: Any) {
         
     }
@@ -331,15 +331,15 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         switch orgSegment.selectedSegmentIndex {
         case 0:
             if(isVerifiedFlag){
-                displayLiveOrgEvents()
+                //displayLiveOrgEvents()
             }else{
-                displayLiveEvents()
+                //displayLiveEvents()
             }
         case 1:
             if(isVerifiedFlag){
-                displayOrgTrendingEvents()
+                //displayOrgTrendingEvents()
             }else{
-                displayTrendingEvents()
+                //displayTrendingEvents()
             }
         default:
             break
@@ -354,20 +354,20 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
             isVerifiedFlag = false
             verifiedButton.setImage(UIImage(named: "OrgUnfilled"), for: UIControlState.normal)
         }
-        displayRelevantEvents()
+        //displayRelevantEvents()
     }
     
     func infoButtonTapped() {
         performSegue(withIdentifier: "detailEventVC", sender: self)
     }
-    
+    /*
     //Event Button Click Variations
     @IBAction func addEventButtonClicked(_ sender: Any) {
         print("add event button clicked.")
-        eventDescriptive.isHidden = false
-        eventPin.isHidden = false
-        addEventButton.isHidden = true
-        subtractEventButton.isHidden = false
+        //eventDescriptive.isHidden = false
+        //eventPin.isHidden = false
+        //addEventButton.isHidden = true
+        //subtractEventButton.isHidden = false
     }
     
     @IBAction func subtractEventButtonClicked(_ sender: Any) {
@@ -376,6 +376,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         addEventButton.isHidden = false
         subtractEventButton.isHidden = true
     }
+    */
     
     //this method will be called each time when a user change his location access preference.
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -400,12 +401,13 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        /*
         if(segue.identifier == "AddEventDescription") {
             let nav = segue.destination as! UINavigationController
             let destinationViewController = nav.viewControllers[0] as! AddEventViewController
             destinationViewController.location = addEventLocation
         }
-        
+        */
         if (segue.identifier == "EventInfo") {
             let nav = segue.destination as! UINavigationController
             let destinationViewController = nav.viewControllers[0] as! EventInfoViewController
@@ -414,10 +416,10 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
             destinationViewController.titleEvent = annotation.title
             destinationViewController.subtitleEvent = annotation.subtitle
             destinationViewController.imageEventUrl = annotation.imageUrl
-            destinationViewController.descriptionEvent = annotation.eventDescription
+            //destinationViewController.descriptionEvent = annotation.eventDescription
             destinationViewController.startDateStr = annotation.startDate
             destinationViewController.endDateStr = annotation.endDate
-            destinationViewController.eventId = annotation.eventID
+            //destinationViewController.eventId = annotation.eventID
         }
     }
     
@@ -510,7 +512,7 @@ extension LiveViewController: MKMapViewDelegate{
                 }
                 
                 view.image = UIImage(named: "whiteCircularPin")
-                
+                /*
                 users.observe(.value, with: {(snap) in
                     if let userDict = snap.value as? [String: AnyObject] {
                         
@@ -522,6 +524,7 @@ extension LiveViewController: MKMapViewDelegate{
                         }
                     }
                 })
+                */
                 
                 view.isEnabled = true
                 view.canShowCallout = true
@@ -530,7 +533,7 @@ extension LiveViewController: MKMapViewDelegate{
                 
                 //Custom Left Callout Image Settings
                 view.leftCalloutAccessoryView?.contentMode = .scaleAspectFit
-                view.leftCalloutAccessoryView?.frame = CGRect(x: CGFloat(5), y: CGFloat(5), width: CGFloat(eventPin.frame.size.height - 15), height: eventPin.frame.size.height - 15)
+               // view.leftCalloutAccessoryView?.frame = CGRect(x: CGFloat(5), y: CGFloat(5), width: CGFloat(eventPin.frame.size.height - 15), height: eventPin.frame.size.height - 15)
                 view.leftCalloutAccessoryView?.layer.cornerRadius = (view.leftCalloutAccessoryView?.frame.width)!/2
                 view.leftCalloutAccessoryView?.clipsToBounds = true
                 
@@ -552,12 +555,14 @@ extension LiveViewController: MKMapViewDelegate{
         self.location = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
         // geoCode(location)
         
+        /*
         let span = MKCoordinateSpanMake(0.269, 0.269)
         let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 32.793181, longitude: -117.164898), span: span)
         mapView.setRegion(region, animated: true)
+ **/
         
         UIView.animate(withDuration: 0.4, animations: {
-            self.eventDescriptive.layer.opacity = 1
+            //self.eventDescriptive.layer.opacity = 1
             
             self.addEventLocation = self.location.coordinate
         })
@@ -565,7 +570,7 @@ extension LiveViewController: MKMapViewDelegate{
     
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
         UIView.animate(withDuration: 0.4, animations: {
-            self.eventDescriptive.layer.opacity = 0
+           // self.eventDescriptive.layer.opacity = 0
         })
     }
     
@@ -582,13 +587,13 @@ extension LiveViewController: MKMapViewDelegate{
             if let annotation = view.annotation as? CampusLiveAnnotation {
                 performSegue(withIdentifier: "EventInfo", sender: annotation)
             }
-            
+            /*
             eventPin.isHidden = true
             subtractEventButton.isHidden = true
             addEventButton.isHidden = false
             eventDescriptive.isHidden = true
             print("Right callout Accessory  View Called")
-            
+            */
         }
     }
     
