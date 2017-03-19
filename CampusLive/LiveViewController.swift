@@ -62,10 +62,13 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         locationManager.requestLocation()
         let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-        
+        mapView.showsUserLocation = true
+        mapView.setUserTrackingMode(.follow, animated: true)
         self.mapView.setRegion(region, animated: true)
         mapView!.setRegion(region, animated: true)
         mapView!.setCenter(mapView!.userLocation.coordinate, animated: true)
+        print("Did tap user location")
+        
     }
     
     //Hides pins after posting event
@@ -77,7 +80,13 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        SVProgressHUD.show(withStatus: "Loading Map :)")
+        
+        //Settings for the loading spinner
+        let foregroundColor = UIColor(red: 27/255, green: 150/255, blue: 254/255, alpha: 1)
+        let backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+        SVProgressHUD.show()
+        SVProgressHUD.setForegroundColor(foregroundColor)
+        SVProgressHUD.setBackgroundColor(backgroundColor)
         //Minus Button is hidden to start
         subtractEventButton.isHidden = true
         
@@ -501,7 +510,7 @@ extension LiveViewController: MKMapViewDelegate{
                         
                         for each in userDict as [String: AnyObject] {
                             if each.key == annotation.eventID {
-                                view.image = UIImage(named: "blueCircularPin")
+                                view.image = UIImage(named: "purpleCircularPin")
                                 break
                             }
                         }
@@ -536,6 +545,11 @@ extension LiveViewController: MKMapViewDelegate{
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         self.location = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
         // geoCode(location)
+        
+        let span = MKCoordinateSpanMake(0.269, 0.269)
+        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 32.793181, longitude: -117.164898), span: span)
+        mapView.setRegion(region, animated: true)
+        
         UIView.animate(withDuration: 0.4, animations: {
             self.eventDescriptive.layer.opacity = 1
             
@@ -574,6 +588,7 @@ extension LiveViewController: MKMapViewDelegate{
     
     func mapViewWillStartLoadingMap(_ mapView: MKMapView) {
        //SVProgressHUD.show(withStatus: "Loading Map :)")
+       // SVProgressHUD.show()
         
     }
     

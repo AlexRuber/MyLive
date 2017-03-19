@@ -32,6 +32,8 @@ class EventInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        eventDescription.isEditable = false
+        
         self.title = titleEvent
         
         eventTitle?.text = titleEvent

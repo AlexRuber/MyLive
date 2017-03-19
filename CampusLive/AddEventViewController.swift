@@ -11,6 +11,7 @@ import MapKit
 import Firebase
 import FirebaseDatabase
 import FirebaseAuth
+import SVProgressHUD
 
 class AddEventViewController: UIViewController, UITextFieldDelegate {
     
@@ -40,6 +41,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
+    
     @IBAction func didTapPost(_ sender: Any) {
         
         print("USER POST COUNT:  \(AppState.sharedInstance.userPostCount!)")
@@ -50,7 +52,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             present(alert, animated: true, completion: nil)
             
         }
-        else if (FIRAuth.auth()?.currentUser != nil && AppState.sharedInstance.userPostCount! <= 2) {
+        else if (FIRAuth.auth()?.currentUser != nil && AppState.sharedInstance.userPostCount! <= 100) {
             // User is signed in.
             
             self.uid = FIRAuth.auth()?.currentUser?.uid
@@ -85,6 +87,12 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             //let defaultAction = UIAlertAction(title: "Close", style: .default, handler: nil)
             addEventPopup.addAction(UIAlertAction(title: "OK", style: .default, handler: {
                 action in
+                //Settings for the loading spinner
+                let foregroundColor = UIColor(red: 27/255, green: 150/255, blue: 254/255, alpha: 1)
+                let backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+                SVProgressHUD.setForegroundColor(foregroundColor)
+                SVProgressHUD.setBackgroundColor(backgroundColor)
+                SVProgressHUD.show(withStatus: "Posting event")
                 
                 //present view controller, not dismissed, but reloaded from prototype
                 self.dismiss(animated: true, completion: nil)
@@ -97,11 +105,21 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             
             
         } else {
+            
+            if (AppState.sharedInstance.userPostCount! >= 3){
+                let alert = UIAlertController(title: "Uh Oh!", message: "You have reached the max number of events for the day.", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                present(alert, animated: true, completion: nil)
+                
+            }
+            else {
             let addEventPopup = UIAlertController(title: "Error!", message: "Something went wrong.", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "Close", style: .default, handler: nil)
             addEventPopup.addAction(defaultAction)
             present(addEventPopup, animated: true, completion: nil)
             self.dismiss(animated: true, completion: nil)
+            }
+            
         }
     }
     
@@ -148,6 +166,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         users.child(uid!).updateChildValues(["postCount" : AppState.sharedInstance.userPostCount])
         
         print("Posting event success.")
+        SVProgressHUD.dismiss(withDelay: 2.0)
     }
     
     func hideKeyBoard(){
