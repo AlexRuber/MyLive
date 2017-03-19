@@ -7,8 +7,13 @@
 //
 
 import UIKit
+import FirebaseDatabase
+import FirebaseAuth
 
 class EventInfoViewController: UIViewController {
+    
+    var userRef = FIRDatabase.database().reference()
+    var uid: String!
     
     @IBOutlet weak var eventTitle: UILabel!
     @IBOutlet weak var eventSubtitle: UILabel!
@@ -24,6 +29,7 @@ class EventInfoViewController: UIViewController {
     var imageEventUrl: String?
     var startDateStr: String?
     var endDateStr: String?
+    var eventId: String?
     
     @IBAction func backBtnTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -63,5 +69,21 @@ class EventInfoViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func reportEventClicked(_ sender: Any) {
+        self.uid = FIRAuth.auth()?.currentUser?.uid
+        let posts: [String : AnyObject] = ["reported By": uid as AnyObject]
+        userRef = userRef.child("malicious_events").child(eventId!)
+        userRef.setValue(posts)
+        
+        let addEventPopup = UIAlertController(title: "Appreciate it!", message: "Thank you for reporting. Our team will shortly look into it.", preferredStyle: .alert)
+        addEventPopup.addAction(UIAlertAction(title: "OK", style: .default, handler: {
+            action in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        present(addEventPopup, animated: true, completion: nil)
+        
+    }
+    
     
 }

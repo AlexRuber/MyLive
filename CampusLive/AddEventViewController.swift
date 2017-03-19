@@ -20,7 +20,9 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     var userRef = FIRDatabase.database().reference()
     var users = FIRDatabase.database().reference()
     var storage = FIRStorage.storage().reference()
+    var ref: FIRDatabaseReference! = FIRDatabase.database().reference().child("app_defaults")
     var uid: String?
+    var defaultPostCount: Int!
     
     var isOrgLogin: Bool = false
     
@@ -103,7 +105,6 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             present(addEventPopup, animated: true, completion: nil)
             //self.dismiss(animated: true, completion: nil)
             
-            
         } else {
             
             if (AppState.sharedInstance.userPostCount! >= 3){
@@ -150,10 +151,11 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         let startDate = dateFormatter.string(from: startDatePicker.date)
         print(startDate)
         
-        let latitude = location.latitude
-        let longitude = location.longitude
-        
-        let posts: [String : AnyObject] = ["uid":uid as AnyObject, "name":name as AnyObject, "venue":venue as AnyObject, "description":description as AnyObject, "startDate":startDate as AnyObject, "endDate":endDate as AnyObject, "latitude":latitude as AnyObject, "longitude":longitude as AnyObject, "profileImage":imageUrl as AnyObject]
+        let currentDate = Date()
+        let currentDateTimeInterval = currentDate.timeIntervalSince1970
+        let dayFromNow = currentDateTimeInterval + 86400.0
+        let newDate = dateFormatter.date(from: startDate)
+        let startDateTimeInterval = newDate?.timeIntervalSince1970
         
         userRef = userRef.childByAutoId()
         userRef.setValue(posts)
@@ -176,6 +178,19 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ref.observeSingleEvent(of: .value, with: {snapshot in
+            if !snapshot.exists(){return}
+            //let dict = snapshot.value as? NSDictionary
+            //let postCount = dict.value["max_post_count"] as? Int
+            self.defaultPostCount = (snapshot.value as? NSDictionary)?["max_post_count"] as! Int
+            print(self.defaultPostCount)
+        })
+        
+        
+        //let postCount: Dictionary<String, AnyObject> = [ defaults.key : true as AnyObject ]
+        //defaultPostCount = defaults.value(forKey: "max_post_count") as! Int!
+        //print(defaultPostCount)
+        
         //Settings for Profile imageview
         profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
         profileImage.layer.cornerRadius = profileImage.frame.size.height / 2
@@ -184,10 +199,10 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         if FIRAuth.auth()?.currentUser != nil {
             // User is signed in.
             let user = FIRAuth.auth()?.currentUser
-            let email = user?.email
+            //let email = user?.email
             //let uid = user?.uid
             let photoURL = user?.photoURL
-            let name = user?.displayName
+            //let name = user?.displayName
             
             //self.uiEmailLabelView.text = email
             if let photo = photoURL {
