@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        let tintColor = UIColor(red: 27/255, green: 150/255, blue: 254/255, alpha: 1)
+        let tintColor = UIColor(red: 27/255, green: 150/255, blue: 254/255, alpha: 1.0)
         window!.tintColor = tintColor
         
         return true

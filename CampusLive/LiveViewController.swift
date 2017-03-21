@@ -354,9 +354,21 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         if(!isVerifiedFlag){
             isVerifiedFlag = true
             verifiedButton.setImage(UIImage(named: "OrgFilled"), for: UIControlState.normal)
+            
+            //Zoom in to UCSD School
+            let schoolSpan = MKCoordinateSpan(latitudeDelta: 0.025, longitudeDelta: 0.025)
+            let schoolCoordinate = CLLocationCoordinate2DMake(32.88077651406362, -117.2365665435791)
+            let schoolRegion = MKCoordinateRegionMake(schoolCoordinate, schoolSpan)
+            self.mapView.setRegion(schoolRegion, animated: true)
+            
         }else{
+            //Zoom out to all of San Diego
             isVerifiedFlag = false
             verifiedButton.setImage(UIImage(named: "OrgUnfilled"), for: UIControlState.normal)
+            
+            let SDspan = MKCoordinateSpanMake(0.269, 0.269)
+            let SDregion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 32.793181, longitude: -117.164898), span: SDspan)
+            mapView.setRegion(SDregion, animated: true)
         }
        // displayRelevantEvents()
     }
