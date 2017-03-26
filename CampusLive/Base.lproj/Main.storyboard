@@ -89,7 +89,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="OrgUnfilled"/>
                                 <state key="selected" image="OrgFilled"/>
-                                <state key="highlighted" image="B0CAC105-CF07-40CD-9F68-BF2FBA1AA6AA"/>
+                                <state key="highlighted" image="0146100C-C099-49D3-A7A2-62A350E02DCC"/>
                                 <connections>
                                     <action selector="isVerifiedClicked:" destination="HeC-Kp-YOV" eventType="touchUpInside" id="Olw-jQ-8sP"/>
                                 </connections>
@@ -113,6 +113,8 @@
                         <outlet property="eventPin" destination="1OZ-Ve-hAD" id="uhE-7J-N8r"/>
                         <outlet property="mapView" destination="qAi-iX-GBz" id="nGn-dI-466"/>
                         <outlet property="orgSegment" destination="yuF-kP-G1T" id="hV0-Y1-t1J"/>
+                        <outlet property="refreshLocaiton" destination="bYM-Bc-v9L" id="H6p-95-tMU"/>
+                        <outlet property="schoolButton" destination="6Lo-8P-0qz" id="cGl-2V-BxP"/>
                         <outlet property="subtractEventButton" destination="evu-aa-WeU" id="1CF-W5-6oK"/>
                         <outlet property="verifiedButton" destination="6Lo-8P-0qz" id="XRW-xU-J7I"/>
                         <segue destination="Yb5-6D-gIK" kind="show" identifier="EventInfo" id="B7M-3u-HxH"/>
@@ -532,8 +534,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="AddEventButton" width="492" height="491"/>
-        <image name="B0CAC105-CF07-40CD-9F68-BF2FBA1AA6AA" width="557" height="557">
+        <image name="0146100C-C099-49D3-A7A2-62A350E02DCC" width="557" height="557">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -21271,6 +21272,7 @@ ABL58gAS+f8AEvoEABL6BgAS+ggAEvoNABL6FQAS+hgAEvodABL6JQAS+igAEvo6ABL6PQAS+kIAAAAA
 AAAEAQAAAAAAAABBAAAAAAAAAAAAAAAAABL6RA
 </mutableData>
         </image>
+        <image name="AddEventButton" width="492" height="491"/>
         <image name="BrandonProfilePic" width="337" height="324"/>
         <image name="CheckInButton" width="676" height="164"/>
         <image name="Destination" width="253" height="253"/>

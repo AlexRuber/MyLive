@@ -50,11 +50,12 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     @IBOutlet weak var subtractEventButton: UIButton!
     @IBOutlet weak var verifiedButton: UIButton!
     
+    @IBOutlet weak var refreshLocaiton: UIButton!
     @IBOutlet weak var eventDescriptive: UIButton!
     @IBOutlet weak var orgSegment: UISegmentedControl!
     @IBOutlet weak var showAllSwitch: UISwitch!
     @IBOutlet weak var eventPin: UIImageView!
-    
+    @IBOutlet weak var schoolButton: UIButton!
     
     var eventRef = FIRDatabase.database().reference()
     var eventRefOrg = FIRDatabase.database().reference()
