@@ -89,7 +89,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="OrgUnfilled"/>
                                 <state key="selected" image="OrgFilled"/>
-                                <state key="highlighted" image="0146100C-C099-49D3-A7A2-62A350E02DCC"/>
+                                <state key="highlighted" image="AFC91EB1-93FB-49CA-A4BF-CD100AC9BB46"/>
                                 <connections>
                                     <action selector="isVerifiedClicked:" destination="HeC-Kp-YOV" eventType="touchUpInside" id="Olw-jQ-8sP"/>
                                 </connections>
@@ -534,7 +534,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="0146100C-C099-49D3-A7A2-62A350E02DCC" width="557" height="557">
+        <image name="AFC91EB1-93FB-49CA-A4BF-CD100AC9BB46" width="557" height="557">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
