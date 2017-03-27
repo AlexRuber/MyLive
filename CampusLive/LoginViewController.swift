@@ -35,15 +35,12 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     
 
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+                    
         
         users = FIRDatabase.database().reference().child("users")
-        
-        if(FIRAuth.auth()?.currentUser != nil){
-            
-            performSegue(withIdentifier: "SignInToFP", sender: self)
-        }
         
         //Activity Spinner Hidden to Begin
         //activityInd.isHidden = true
@@ -112,15 +109,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     }
   
     //Check access token for already logged facebook
-    /*
-    override func viewDidAppear(_ animated: Bool) {
-        
-        /*
-        if(FIRAuth.auth()?.currentUser != nil){
-           
-            performSegue(withIdentifier: "SignInToFP", sender: self)
-        }
-        */
+
+ 
         /*
         if (FBSDKAccessToken.current() != nil)
         {
@@ -131,8 +121,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
             self.signedIn(user)
         }
         */
-    }
-    */
+    
+    
     
     func presentHomeViewController(){
         self.present(homeViewController, animated: true, completion: nil)
