@@ -111,28 +111,14 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         
     }
   
-    //Check access token for already logged facebook
-    /*
     override func viewDidAppear(_ animated: Bool) {
-        
-        /*
-        if(FIRAuth.auth()?.currentUser != nil){
-           
-            performSegue(withIdentifier: "SignInToFP", sender: self)
-        }
-        */
-        /*
-        if (FBSDKAccessToken.current() != nil)
+        if (FBSDKAccessToken.current() != nil && FIRAuth.auth()?.currentUser != nil)
         {
             performSegue(withIdentifier:"SignInToFP", sender: self)
         }
         
-        if let user = FIRAuth.auth()?.currentUser {
-            self.signedIn(user)
-        }
-        */
     }
-    */
+    
     
     func presentHomeViewController(){
         self.present(homeViewController, animated: true, completion: nil)
