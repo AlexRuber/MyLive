@@ -111,6 +111,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         
     }
   
+    //Remember user sign in
     override func viewDidAppear(_ animated: Bool) {
         if (FBSDKAccessToken.current() != nil && FIRAuth.auth()?.currentUser != nil)
         {
