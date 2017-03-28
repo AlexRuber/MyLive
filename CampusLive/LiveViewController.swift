@@ -21,6 +21,8 @@ import SVProgressHUD
     var eventID: String?
     var endDate: String?
     var startDate: String?
+    var type: String?
+    var colorType: String?
     
     init(lat: CLLocationDegrees, long: CLLocationDegrees, title: String? = nil, subtitle: String? = nil, imageUrl: String!, eventId: String!, endDate: String? = nil, startDate: String? = nil) {
         self.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
@@ -31,6 +33,8 @@ import SVProgressHUD
         self.eventID = eventId
         self.endDate = endDate
         self.startDate = startDate
+        self.type = type
+        self.colorType = colorType
         super.init()
     }
 }
@@ -131,6 +135,11 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     }
     
     func displayLiveEvents() {
+        let allAnnotations = self.mapView.annotations
+        
+        for annotation in allAnnotations {
+            mapView.view(for: annotation)?.isHidden = true
+        }
         
         let currentDate = Date()
         let dateFormatter = DateFormatter()
@@ -271,9 +280,16 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
                 }
             }
         })
-    }
+    }*/
     
     func displayTrendingEvents() {
+        
+        let allAnnotations = self.mapView.annotations
+        
+        for annotation in allAnnotations {
+            mapView.view(for: annotation)?.isHidden = true
+        }
+        
         let currentDate = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.locale = NSLocale.current
@@ -286,10 +302,10 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         formatter.dateFormat = "E hh:mm a"
         
         //displaying ORG events
-        displayOrgTrendingEvents()
+        //displayOrgTrendingEvents()
         
         //displaying Student events
-        eventRef.observe(.value, with: {(snap) in
+        events.observe(.value, with: {(snap) in
             if let userDict = snap.value as? [String:AnyObject] {
                 
                 for each in userDict as [String: AnyObject] {
@@ -299,17 +315,21 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
                     let dateAsString = startDateSubstring
                     let newDate = dateFormatter.date(from: dateAsString)
                     let startDateTimeInterval = newDate?.timeIntervalSince1970
+                    
                     if (Double(startDateTimeInterval!) > dayFromNow) {
                         let stringDate: String! = formatter.string(from: newDate!)
                         let autoID = each.key
-                        let name = each.value["name"] as! String
+                        let name = each.value["title"] as! String
                         let venue = each.value["venue"] as! String
                         let subtitle = "\(venue)" + ", " + "\(stringDate!)"
                         let latitude = each.value["latitude"] as! NSNumber
                         let longitude = each.value["longitude"] as! NSNumber
-                        let description = each.value["description"] as! String
-                        let imageUrl = each.value["profileImage"] as! String
-                        let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: subtitle, imageUrl: imageUrl, eventDescription: description, eventID: autoID, endDate: endDateSubstring, startDate: startDateSubstring)
+                        
+                        let imageUrl = each.value["image"] as! String
+                        let type = each.value["type"] as! String
+                        let colorType = each.value["colorType"] as! String
+                        
+                        let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: subtitle, imageUrl: imageUrl, eventID: autoID, endDate: endDateSubstring, startDate: startDateSubstring, type: type, colorType: colorType)
                         
                         self.mapView.addAnnotation(clAnnotation)
                     }
@@ -317,23 +337,24 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
             }
         })
     }
-    */
+    
     @IBAction func settingsClicked(_ sender: Any) {
         
     }
     
-    var isVerifiedFlag = false
+    var isVerifiedFlag = true
     
     func displayRelevantEvents(){
         switch orgSegment.selectedSegmentIndex {
         case 0:
             if(isVerifiedFlag){
-                //displayLiveOrgEvents()
+                displayLiveEvents()
             }else{
                 //displayLiveEvents()
             }
         case 1:
             if(isVerifiedFlag){
+                displayTrendingEvents()
                 //displayOrgTrendingEvents()
             }else{
                 //displayTrendingEvents()
@@ -351,7 +372,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
             isVerifiedFlag = false
             verifiedButton.setImage(UIImage(named: "OrgUnfilled"), for: UIControlState.normal)
         }
-        //displayRelevantEvents()
+        displayRelevantEvents()
     }
     
     func infoButtonTapped() {
@@ -410,10 +431,13 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
             let destinationViewController = nav.viewControllers[0] as! EventInfoViewController
             let annotation: CampusLiveAnnotation = sender as! CampusLiveAnnotation
             
+            
+            print("eventID: \(annotation.eventID)")
+            print("Title: \(annotation.title)")
+
             destinationViewController.titleEvent = annotation.title
             destinationViewController.subtitleEvent = annotation.subtitle
             destinationViewController.imageEventUrl = annotation.imageUrl
-            //destinationViewController.descriptionEvent = annotation.eventDescription
             destinationViewController.startDateStr = annotation.startDate
             destinationViewController.endDateStr = annotation.endDate
             destinationViewController.eventId = annotation.eventID
@@ -421,7 +445,6 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     }
     
 }
-
 
 extension LiveViewController: MKMapViewDelegate{
     
@@ -437,21 +460,6 @@ extension LiveViewController: MKMapViewDelegate{
         
         if let annotation = annotation as? CampusLiveAnnotation {
             let identifier = "AnnotationIdentifier"
-            //Custom view for pin annotation connected to FB Profile Pic
-            /**
-             var pinView: MKAnnotationView? = (mapView.dequeueReusableAnnotationView(withIdentifier: "CustomPinAnnotationView") as? MKAnnotationView)
-             pinView = MKAnnotationView(annotation, reuseIdentifier: "CustomPinAnnotationView")
-             pinView?.canShowCallout = true
-             pinView?.image = UIImage(named: "icon-map-placemark-68x80")
-             pinView?.calloutOffset = CGPoint(x: CGFloat(0), y: CGFloat(-5))
-             var profileImageView = UIImageView()
-             profileImageView.frame = CGRect(x: CGFloat(6), y: CGFloat(7), width: CGFloat(55), height: CGFloat(55))
-             profileImageView.layer.masksToBounds = true
-             profileImageView.layer.cornerRadius = 27
-             profileImageView.setImageWith(URL(string: "http://domain.com/avatar.jpg"))
-             pinView?.addSubview(profileImageView)
-             */
-            
             var view: MKAnnotationView
             if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier){ // 2
                 dequeuedView.annotation = annotation
@@ -459,14 +467,46 @@ extension LiveViewController: MKMapViewDelegate{
             } else {
                 view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 
+                print("eventID: \(annotation.eventID)")
                 let imageUrl: URL = NSURL(string: annotation.imageUrl) as! URL
-                let data = try? Data(contentsOf: imageUrl)
-                let profileImage : UIImage = UIImage(data: data!)!
+                var data = try? Data(contentsOf: imageUrl)
+                var profileImage : UIImage = UIImage(data: data!)!
+                
+                data = UIImageJPEGRepresentation(profileImage, 0.0)
+                profileImage = UIImage(data: data!)!
+                
                 let eventUserImage : UIImageView = UIImageView(image: profileImage)
                 
                 eventUserImage.layer.borderWidth = 1
-                let white = UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 1.0)
-                eventUserImage.layer.borderColor = white.cgColor
+                //eventUserImage.layer.borderColor = otherEvents.cgColor
+                
+                //colors
+                let otherEvents = UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 1.0)
+                let live_events = UIColor(red: 255.0, green: 0.0, blue: 57.0, alpha: 1.0)
+                let trending = UIColor(red: 0.0, green: 255.0, blue: 216.0, alpha: 1.0)
+                let events = UIColor(red: 27.0, green: 150.0, blue: 254.0, alpha: 1.0)
+                let experiences = UIColor(red: 164.0, green: 50.0, blue: 255.0, alpha: 1.0)
+                let twentyOnePlus = UIColor(red: 0.0, green: 51.0, blue: 102.0, alpha: 1.0)
+                let check_ins = UIColor(red: 67.0, green: 199.0, blue: 61.0, alpha: 1.0)
+                
+                //eventUserImage.layer.borderColor = otherEvents.cgColor
+                switch annotation.colorType! {
+                    case "Live Events":
+                        eventUserImage.layer.borderColor = live_events.cgColor
+                    case "Trending":
+                        eventUserImage.layer.borderColor = trending.cgColor
+                    case "Events":
+                        eventUserImage.layer.borderColor = events.cgColor
+                    case "Experiences":
+                        eventUserImage.layer.borderColor = experiences.cgColor
+                    case "21+":
+                        eventUserImage.layer.borderColor = twentyOnePlus.cgColor
+                    case "check_ins":
+                        eventUserImage.layer.borderColor = check_ins.cgColor
+                    default:
+                        eventUserImage.layer.borderColor = otherEvents.cgColor
+                }
+                
                 let f = CGRect(x: 1, y: 1, width: 40, height: 40) // CGRect(2,2,46,43)
                 eventUserImage.frame = f
                 eventUserImage.layer.cornerRadius = 22.0

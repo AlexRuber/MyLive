@@ -33,7 +33,6 @@ class EventInfoViewController: UIViewController {
     
     var titleEvent: String?
     var subtitleEvent: String?
-    var descriptionEvent: String?
     var imageEventUrl: String?
     var startDateStr: String?
     var endDateStr: String?
@@ -45,6 +44,8 @@ class EventInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.event_social_info = event_social_info.child("event_social_info")
         
         eventDescription.isEditable = false
         
@@ -75,6 +76,8 @@ class EventInfoViewController: UIViewController {
         eventProfileImage.layer.cornerRadius = eventProfileImage.frame.size.width / 2
         eventProfileImage.layer.cornerRadius = eventProfileImage.frame.size.height / 2
         eventProfileImage.clipsToBounds = true
+        
+        
         
         // Do any additional setup after loading the view.
     }
