@@ -219,8 +219,10 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         users.child(userID).updateChildValues(userData)
         users.child(userID).updateChildValues(imageUrl)
         
-        checkCampus()
-        selectCampus()
+        DispatchQueue.main.async {
+            self.checkCampus()
+            self.selectCampus()
+        }
         
         //let notificationName = Notification.Name(rawValue: Constants.NotificationKeys.SignedIn)
         //NotificationCenter.default.post(name: notificationName, object: nil, userInfo: nil)
@@ -250,12 +252,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         campusRef = FIRDatabase.database().reference().child("campuses").child("san_diego")
         
         let passwordPrompt = UIAlertController(title: "Campus", message: "Select your Campus:", preferredStyle: UIAlertControllerStyle.alert)
-        //passwordPrompt.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
-        //passwordPrompt.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) -> Void in
-            // Now do whatever you want with inputTextField (remember to unwrap the optional)
-        //}))
         
-        campusRef.observe(.childMoved, with: {(snap) in
+        campusRef.observe(.value, with: {(snap) in
             if let userDict = snap.value as? [String:AnyObject] {
                 
                 AppState.sharedInstance.campusDict = userDict
@@ -295,8 +293,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        checkCampus()
-        selectCampus()
+        //checkCampus()
+        //selectCampus()
     }
 
     /*
