@@ -15,7 +15,9 @@ import MapKit
 class EventInfoViewController: UIViewController {
     
     var userRef = FIRDatabase.database().reference()
-    var event_social_info = FIRDatabase.database().reference()
+    var ref: FIRDatabaseReference!
+    //var eventRef: FIRDatabaseReference!
+    var eventInfoRef: FIRDatabaseReference!
     
     var uid: String!
     
@@ -23,6 +25,10 @@ class EventInfoViewController: UIViewController {
     @IBOutlet weak var eventSubtitle: UILabel!
     @IBOutlet weak var eventDescription: UITextView!
     @IBOutlet weak var eventProfileImage: UIImageView!
+    
+    @IBOutlet weak var goingbutton: UIButton!
+    
+    
     //@IBOutlet weak var startDate: UILabel!
     //@IBOutlet weak var startDate: UILabel!
     @IBOutlet weak var startDate: UILabel!
@@ -79,28 +85,25 @@ class EventInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.event_social_info = event_social_info.child("event_social_info")
+        //self.event_social_info = event_social_info.child("event_social_info")
         
         eventDescription.isEditable = false
         
         self.title = titleEvent
         
+        ref = FIRDatabase.database().reference()
+        //eventRef = FIRDatabase.database().reference().child("events")
+        eventInfoRef = FIRDatabase.database().reference().child("event_social_info")
+        
         eventTitle?.text = titleEvent
         eventSubtitle?.text = subtitleEvent
         
-        event_social_info.observe(.value, with: {(snap) in
-            if let userDict = snap.value as? [String:AnyObject] {
-                for each in userDict as [String: AnyObject] {
-                    if each.key == self.eventId {
-                        self.eventDescription.text = each.value["description"] as! String
-                    }
-                }
-            }
-        })
-        
-        print(endDateStr)
+        //eventDescription.text = descriptionEvent
+        //print(endDateStr)
         startDate.text = endDateStr
         //startDate.isHidden = true
+        
+        displayEventInfo()
         
         let imageUrl: URL = NSURL(string: imageEventUrl!) as! URL
         
@@ -119,11 +122,24 @@ class EventInfoViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    func displayEventInfo(){
+        eventInfoRef.child(eventId!).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            let description = value?["description"] as? String ?? ""
+            //let user = User.init(username: username)
+            self.eventDescription.text = description
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    /*
     @IBAction func reportEventClicked(_ sender: Any) {
         self.uid = FIRAuth.auth()?.currentUser?.uid
         let posts: [String : AnyObject] = ["reported By": uid as AnyObject]
@@ -138,6 +154,30 @@ class EventInfoViewController: UIViewController {
         present(addEventPopup, animated: true, completion: nil)
         
     }
+    */
     
+    @IBAction func onEventCheckedIn(_ sender: Any) {
+        
+        goingbutton.setTitle("Checked In", for: UIControlState.disabled)
+        
+        self.uid = FIRAuth.auth()?.currentUser?.uid
+        
+        let posts: [String : AnyObject] = [eventId!: true as AnyObject]
+        userRef = userRef.child("user_checkins").child(uid)
+        userRef.setValue(posts)
+        
+        ref = ref.child("event_users").child(eventId!)
+        let post1: [String : AnyObject] = [uid: true as AnyObject]
+        ref.setValue(post1)
+        
+        let addEventPopup = UIAlertController(title: "Done", message: "You have checked-in for the event.", preferredStyle: .alert)
+        DispatchQueue.main.async {
+            addEventPopup.addAction(UIAlertAction(title: "OK", style: .default, handler: {
+                action in
+                self.dismiss(animated: true, completion: nil)
+            }))
+            self.present(addEventPopup, animated: true, completion: nil)
+        }
+    }
     
 }

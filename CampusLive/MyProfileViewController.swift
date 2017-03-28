@@ -17,7 +17,10 @@ class MyProfileViewController: UIViewController {
 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var profileName: UILabel!
+    @IBOutlet weak var campusSegment: UISegmentedControl!
    
+    
+    //var showCampus: Bool?
     
     //Back Button
     @IBAction func backBtnPressed(_ sender: Any) {
@@ -60,13 +63,50 @@ class MyProfileViewController: UIViewController {
                 let data = NSData(contentsOf: photo)
                 self.profileImage.image = UIImage(data: data! as Data)
             }
+            campusSegment.isHidden = true
             
+            
+            if(AppState.sharedInstance.showCampus)!{
+                campusSegment.isHidden = false
+                addCampusToSegment()
+            }
         } else {
             print("User not Signed In.")
         }
         
     }
-
+    
+    func addCampusToSegment(){
+        
+        campusSegment.removeAllSegments()
+        let userDict = AppState.sharedInstance.campusDict
+        var i = 0
+        for each in userDict! {
+            //AppState.sharedInstance.dafaultCampus = each.key
+            campusSegment.insertSegment(withTitle: each.key, at: i, animated: true)
+            i += 1
+        }
+    }
+    
+    @IBAction func segmentValueChanged(_ sender: Any) {
+        let userDict = AppState.sharedInstance.campusDict
+        
+        for each in userDict as! [String: AnyObject]{
+            if(each.key == campusSegment.titleForSegment(at: campusSegment.selectedSegmentIndex)!){
+                AppState.sharedInstance.dafaultCampus = each.key
+                AppState.sharedInstance.defaultLatitude = each.value["latitude"] as? NSNumber
+                AppState.sharedInstance.defaultLongitude = each.value["longitude"] as? NSNumber
+                //self.dismiss(animated: true, completion: nil)
+                
+                
+            let secondViewController = self.storyboard!.instantiateViewController(withIdentifier: "HomeView")
+            self.present(secondViewController, animated: true, completion: nil)
+        }
+        }
+        //AppState.sharedInstance.dafaultCampus = userDict?[campusSegment.titleForSegment(at: campusSegment.selectedSegmentIndex)!] as! String
+         //print(AppState.sharedInstance.dafaultCampus)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

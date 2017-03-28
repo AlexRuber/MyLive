@@ -20,8 +20,15 @@ class AppState: NSObject {
 
   static let sharedInstance = AppState()
 
-  var signedIn = false
-  var displayName: String?
-  var photoURL: URL?
-  var userPostCount: Int?
+    var signedIn = false
+    var displayName: String?
+    var photoURL: URL?
+    var userPostCount: Int?
+    
+    var dafaultCampus: String?
+    var showCampus: Bool?
+    var defaultLatitude: NSNumber?
+    var defaultLongitude: NSNumber?
+    var campusDict: [String:AnyObject]?
+    
 }

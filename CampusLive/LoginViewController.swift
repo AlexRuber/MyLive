@@ -19,6 +19,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     //var signupViewController: UIViewController!
 
     var users: FIRDatabaseReference!
+    var app_default: FIRDatabaseReference!
+    var campusRef: FIRDatabaseReference!
     
     //var isOrgLogin: Bool = false
     
@@ -113,7 +115,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     override func viewDidAppear(_ animated: Bool) {
         if (FBSDKAccessToken.current() != nil && FIRAuth.auth()?.currentUser != nil)
         {
-            performSegue(withIdentifier:"SignInToFP", sender: self)
+            //performSegue(withIdentifier:"SignInToFP", sender: self)
+            showEmailAddress()
         }
         
     }
@@ -159,7 +162,14 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                 return
             }
             print("Successfully logged in with our user: ", user ?? "")
-            let userData = ["provider": user?.providerID]
+            
+            let currentDate = Date()
+            let dateFormatter = DateFormatter()
+            dateFormatter.locale = NSLocale.current
+            dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
+            let newDate = dateFormatter.string(from: currentDate)
+            
+            let userData: [String : AnyObject] = ["provider": user?.providerID as AnyObject, "createdOn": newDate as AnyObject]
             self.signedIn(user, userID: (user?.uid)!, userData: userData as! Dictionary<String, String>)
         })
         
@@ -208,9 +218,84 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         users.child(userID).updateChildValues(userData)
         users.child(userID).updateChildValues(imageUrl)
         
-        let notificationName = Notification.Name(rawValue: Constants.NotificationKeys.SignedIn)
-        NotificationCenter.default.post(name: notificationName, object: nil, userInfo: nil)
-        performSegue(withIdentifier: Constants.Segues.SignInToFp, sender: nil)
+        checkCampus()
+        selectCampus()
+        
+        //let notificationName = Notification.Name(rawValue: Constants.NotificationKeys.SignedIn)
+        //NotificationCenter.default.post(name: notificationName, object: nil, userInfo: nil)
+        //performSegue(withIdentifier: Constants.Segues.SignInToFp, sender: nil)
+    
+    }
+    
+    /*
+    func doNothing(){
+        var inputTextField: UITextField?
+        let passwordPrompt = UIAlertController(title: "Campus", message: "Select your Campus.", preferredStyle: UIAlertControllerStyle.alert)
+        passwordPrompt.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
+        passwordPrompt.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) -> Void in
+            // Now do whatever you want with inputTextField (remember to unwrap the optional)
+        }))
+        passwordPrompt.addTextField(configurationHandler: {(textField: UITextField!) in
+            textField.placeholder = "Password"
+            textField.isSecureTextEntry = true
+            inputTextField = textField
+        })
+        
+        present(passwordPrompt, animated: true, completion: nil)
+    }
+    */
+    
+    func selectCampus(){
+        campusRef = FIRDatabase.database().reference().child("campuses").child("san_diego")
+        
+        let passwordPrompt = UIAlertController(title: "Campus", message: "Select your Campus:", preferredStyle: UIAlertControllerStyle.alert)
+        //passwordPrompt.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
+        //passwordPrompt.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) -> Void in
+            // Now do whatever you want with inputTextField (remember to unwrap the optional)
+        //}))
+        
+        campusRef.observe(.childMoved, with: {(snap) in
+            if let userDict = snap.value as? [String:AnyObject] {
+                
+                AppState.sharedInstance.campusDict = userDict
+                
+                for each in userDict as [String: AnyObject] {
+                    
+                    passwordPrompt.addAction(UIAlertAction(title: each.key, style: UIAlertActionStyle.default, handler: { (action) -> Void in
+                        AppState.sharedInstance.dafaultCampus = each.key
+                        AppState.sharedInstance.defaultLatitude = each.value["latitude"] as? NSNumber
+                        AppState.sharedInstance.defaultLongitude = each.value["longitude"] as? NSNumber
+                        let notificationName = Notification.Name(rawValue: Constants.NotificationKeys.SignedIn)
+                        NotificationCenter.default.post(name: notificationName, object: nil, userInfo: nil)
+                        self.performSegue(withIdentifier: Constants.Segues.SignInToFp, sender: nil)
+                        
+                        //self.dismiss(animated: true, completion: nil)
+                    }))
+                    
+                }
+            }
+        }){ (error) in
+            print(error.localizedDescription)
+        }
+        //DispatchQueue.main.async {
+        present(passwordPrompt, animated: true, completion: nil)
+        //self.dismiss(animated: true, completion: nil)
+    }
+    
+    func checkCampus(){
+        app_default = FIRDatabase.database().reference().child("app_defaults")
+        app_default.observe(.value, with: {(snapshot) in
+            let value = snapshot.value as? NSDictionary
+            AppState.sharedInstance.showCampus = value?["show_campus"] as? Bool
+            //self.showCampus =
+        }){ (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        checkCampus()
+        selectCampus()
     }
 
     /*
