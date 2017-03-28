@@ -13,6 +13,8 @@ import FirebaseAuth
 class EventInfoViewController: UIViewController {
     
     var userRef = FIRDatabase.database().reference()
+    var event_social_info = FIRDatabase.database().reference()
+    
     var uid: String!
     
     @IBOutlet weak var eventTitle: UILabel!
@@ -25,7 +27,6 @@ class EventInfoViewController: UIViewController {
     
     var titleEvent: String?
     var subtitleEvent: String?
-    var descriptionEvent: String?
     var imageEventUrl: String?
     var startDateStr: String?
     var endDateStr: String?
@@ -38,6 +39,8 @@ class EventInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.event_social_info = event_social_info.child("event_social_info")
+        
         eventDescription.isEditable = false
         
         self.title = titleEvent
@@ -45,7 +48,16 @@ class EventInfoViewController: UIViewController {
         eventTitle?.text = titleEvent
         eventSubtitle?.text = subtitleEvent
         
-        eventDescription.text = descriptionEvent
+        event_social_info.observe(.value, with: {(snap) in
+            if let userDict = snap.value as? [String:AnyObject] {
+                for each in userDict as [String: AnyObject] {
+                    if each.key == self.eventId {
+                        self.eventDescription.text = each.value["description"] as! String
+                    }
+                }
+            }
+        })
+        
         print(endDateStr)
         startDate.text = endDateStr
         //startDate.isHidden = true
@@ -61,6 +73,8 @@ class EventInfoViewController: UIViewController {
         eventProfileImage.layer.cornerRadius = eventProfileImage.frame.size.width / 2
         eventProfileImage.layer.cornerRadius = eventProfileImage.frame.size.height / 2
         eventProfileImage.clipsToBounds = true
+        
+        
         
         // Do any additional setup after loading the view.
     }
