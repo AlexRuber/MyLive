@@ -45,7 +45,7 @@ class EventInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.event_social_info = event_social_info.child("event_social_info")
+        //self.event_social_info = event_social_info.child("event_social_info")
         
         eventDescription.isEditable = false
         

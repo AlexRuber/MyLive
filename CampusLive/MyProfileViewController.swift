@@ -68,12 +68,43 @@ class MyProfileViewController: UIViewController {
             
             if(AppState.sharedInstance.showCampus)!{
                 campusSegment.isHidden = false
-                let ref = FIRDatabase.database().reference().child("campuses").child("san_diego")
+                addCampusToSegment()
             }
         } else {
             print("User not Signed In.")
         }
         
+    }
+    
+    func addCampusToSegment(){
+        
+        campusSegment.removeAllSegments()
+        let userDict = AppState.sharedInstance.campusDict
+        var i = 0
+        for each in userDict! {
+            //AppState.sharedInstance.dafaultCampus = each.key
+            campusSegment.insertSegment(withTitle: each.key, at: i, animated: true)
+            i += 1
+        }
+    }
+    
+    @IBAction func segmentValueChanged(_ sender: Any) {
+        let userDict = AppState.sharedInstance.campusDict
+        
+        for each in userDict as! [String: AnyObject]{
+            if(each.key == campusSegment.titleForSegment(at: campusSegment.selectedSegmentIndex)!){
+                AppState.sharedInstance.dafaultCampus = each.key
+                AppState.sharedInstance.defaultLatitude = each.value["latitude"] as? NSNumber
+                AppState.sharedInstance.defaultLongitude = each.value["longitude"] as? NSNumber
+                //self.dismiss(animated: true, completion: nil)
+                
+                
+            let secondViewController = self.storyboard!.instantiateViewController(withIdentifier: "HomeView")
+            self.present(secondViewController, animated: true, completion: nil)
+        }
+        }
+        //AppState.sharedInstance.dafaultCampus = userDict?[campusSegment.titleForSegment(at: campusSegment.selectedSegmentIndex)!] as! String
+         //print(AppState.sharedInstance.dafaultCampus)
     }
     
     override func didReceiveMemoryWarning() {

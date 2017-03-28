@@ -117,7 +117,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     override func viewDidAppear(_ animated: Bool) {
         if (FBSDKAccessToken.current() != nil && FIRAuth.auth()?.currentUser != nil)
         {
-            performSegue(withIdentifier:"SignInToFP", sender: self)
+            //performSegue(withIdentifier:"SignInToFP", sender: self)
+            showEmailAddress()
         }
         
     }
@@ -254,15 +255,17 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
             // Now do whatever you want with inputTextField (remember to unwrap the optional)
         //}))
         
-        campusRef.observe(.value, with: {(snap) in
+        campusRef.observe(.childMoved, with: {(snap) in
             if let userDict = snap.value as? [String:AnyObject] {
+                
+                AppState.sharedInstance.campusDict = userDict
                 
                 for each in userDict as [String: AnyObject] {
                     
                     passwordPrompt.addAction(UIAlertAction(title: each.key, style: UIAlertActionStyle.default, handler: { (action) -> Void in
                         AppState.sharedInstance.dafaultCampus = each.key
-                        AppState.sharedInstance.defaultLatitude = each.value["latitude"] as! String
-                        AppState.sharedInstance.defaultLongitutde = each.value["longitude"] as! String
+                        AppState.sharedInstance.defaultLatitude = each.value["latitude"] as? NSNumber
+                        AppState.sharedInstance.defaultLongitude = each.value["longitude"] as? NSNumber
                         let notificationName = Notification.Name(rawValue: Constants.NotificationKeys.SignedIn)
                         NotificationCenter.default.post(name: notificationName, object: nil, userInfo: nil)
                         self.performSegue(withIdentifier: Constants.Segues.SignInToFp, sender: nil)

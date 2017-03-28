@@ -24,7 +24,7 @@ import SVProgressHUD
     var type: String?
     var colorType: String?
     
-    init(lat: CLLocationDegrees, long: CLLocationDegrees, title: String? = nil, subtitle: String? = nil, imageUrl: String!, eventId: String!, endDate: String? = nil, startDate: String? = nil) {
+    init(lat: CLLocationDegrees, long: CLLocationDegrees, title: String? = nil, subtitle: String? = nil, imageUrl: String!, eventId: String!, endDate: String? = nil, startDate: String? = nil, type: String!, colorType: String!) {
         self.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
         self.title = title
         self.subtitle = subtitle
@@ -79,7 +79,9 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //print(AppState.sharedInstance.dafaultCampus)
+        print(AppState.sharedInstance.dafaultCampus)
+        print(AppState.sharedInstance.defaultLatitude)
+        print(AppState.sharedInstance.defaultLongitude)
         
         //Settings for the loading spinner
         let foregroundColor = UIColor(red: 27/255, green: 150/255, blue: 254/255, alpha: 1)
@@ -94,7 +96,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         //eventPin.isHidden = true
         
         let span = MKCoordinateSpanMake(0.018, 0.018)
-        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 32.880777, longitude: -117.236395), span: span)
+        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: AppState.sharedInstance.defaultLatitude as! CLLocationDegrees, longitude: AppState.sharedInstance.defaultLongitude as! CLLocationDegrees), span: span)
         mapView.setRegion(region, animated: true)
         
         isAuthorizedtoGetUserLocation()
@@ -119,6 +121,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         self.uid = FIRAuth.auth()?.currentUser?.uid
         
         displayLiveEvents()
+        displayTrendingEvents()
         
     }
     
@@ -133,6 +136,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     @IBAction func indexChanged(_ sender: Any) {
         displayRelevantEvents()
     }
+    
     
     func displayLiveEvents() {
         let allAnnotations = self.mapView.annotations
@@ -175,9 +179,14 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
                             let longitude = each.value["longitude"] as! NSNumber
                             //let description = each.value["description"] as! String
                             let imageUrl = each.value["image"] as! String
-                            let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: subtitle, imageUrl: imageUrl, eventId: autoID, endDate: endDateSubstring, startDate: startDateSubstring)
+                            
+                            let type = each.value["type"] as! String
+                            let colorType = each.value["colorType"] as! String
+                            
+                            let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: subtitle, imageUrl: imageUrl, eventId: autoID, endDate: endDateSubstring, startDate: startDateSubstring, type: type, colorType: colorType)
                             
                             self.mapView.addAnnotation(clAnnotation)
+                            //self.mapView.addAnnotation(clAnnotation)
                         }
                     }
                 }
@@ -305,7 +314,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         //displayOrgTrendingEvents()
         
         //displaying Student events
-        events.observe(.value, with: {(snap) in
+        eventRef.observe(.value, with: {(snap) in
             if let userDict = snap.value as? [String:AnyObject] {
                 
                 for each in userDict as [String: AnyObject] {
@@ -329,7 +338,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
                         let type = each.value["type"] as! String
                         let colorType = each.value["colorType"] as! String
                         
-                        let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: subtitle, imageUrl: imageUrl, eventID: autoID, endDate: endDateSubstring, startDate: startDateSubstring, type: type, colorType: colorType)
+                        let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: subtitle, imageUrl: imageUrl, eventId: autoID, endDate: endDateSubstring, startDate: startDateSubstring, type: type, colorType: colorType)
                         
                         self.mapView.addAnnotation(clAnnotation)
                     }
@@ -348,7 +357,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         switch orgSegment.selectedSegmentIndex {
         case 0:
             if(isVerifiedFlag){
-                displayLiveEvents()
+                displayTrendingEvents()
             }else{
                 //displayLiveEvents()
             }
@@ -491,20 +500,30 @@ extension LiveViewController: MKMapViewDelegate{
                 
                 //eventUserImage.layer.borderColor = otherEvents.cgColor
                 switch annotation.colorType! {
-                    case "Live Events":
+                    case "live":
                         eventUserImage.layer.borderColor = live_events.cgColor
-                    case "Trending":
+                        break
+                    case "trending":
                         eventUserImage.layer.borderColor = trending.cgColor
-                    case "Events":
+                        break
+                    case "event":
                         eventUserImage.layer.borderColor = events.cgColor
-                    case "Experiences":
+                        break
+                    case "experience":
                         eventUserImage.layer.borderColor = experiences.cgColor
+                        break
                     case "21+":
                         eventUserImage.layer.borderColor = twentyOnePlus.cgColor
+                        break
                     case "check_ins":
                         eventUserImage.layer.borderColor = check_ins.cgColor
-                    default:
+                        break
+                    case "other":
                         eventUserImage.layer.borderColor = otherEvents.cgColor
+                        break
+                    default:
+                        break
+                    //eventUserImage.layer.borderColor = otherEvents.cgColor
                 }
                 
                 let f = CGRect(x: 1, y: 1, width: 40, height: 40) // CGRect(2,2,46,43)
