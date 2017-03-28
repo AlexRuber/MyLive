@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WSx-hg-qa9">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WSx-hg-qa9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -28,30 +28,10 @@
                                     <outlet property="delegate" destination="HeC-Kp-YOV" id="Dlp-7s-7Q8"/>
                                 </connections>
                             </mapView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Pin" translatesAutoresizingMaskIntoConstraints="NO" id="1OZ-Ve-hAD">
-                                <rect key="frame" x="172.5" y="287" width="30" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="WhiteStuff" translatesAutoresizingMaskIntoConstraints="NO" id="He1-3n-7qr">
                                 <rect key="frame" x="319" y="39" width="49" height="120"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gWL-zK-wao">
-                                <rect key="frame" x="108" y="251" width="159" height="28"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="addEvent"/>
-                                <connections>
-                                    <segue destination="u1Z-j7-M9b" kind="show" identifier="AddEventDescription" id="LpQ-QX-2dk"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evu-aa-WeU">
-                                <rect key="frame" x="324" y="607" width="40" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="SubtractEventButton"/>
-                                <connections>
-                                    <action selector="subtractEventButtonClicked:" destination="HeC-Kp-YOV" eventType="touchUpInside" id="Y5e-dn-UWq"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j0R-2a-DDO">
                                 <rect key="frame" x="328" y="54" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -108,9 +88,6 @@
                     <navigationItem key="navigationItem" title="UCSD" id="CUC-Nd-Da0"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="addEventButton" destination="YBh-yN-wPh" id="S7e-9W-bU7"/>
-                        <outlet property="eventDescriptive" destination="gWL-zK-wao" id="cmv-sq-DFx"/>
-                        <outlet property="eventPin" destination="1OZ-Ve-hAD" id="uhE-7J-N8r"/>
                         <outlet property="mapView" destination="qAi-iX-GBz" id="nGn-dI-466"/>
                         <outlet property="orgSegment" destination="yuF-kP-G1T" id="hV0-Y1-t1J"/>
                         <outlet property="refreshLocaiton" destination="bYM-Bc-v9L" id="H6p-95-tMU"/>
@@ -237,7 +214,6 @@
                         <outlet property="profileImage" destination="zM5-1l-p9h" id="LLz-Dk-nxn"/>
                         <outlet property="startDatePicker" destination="nM1-Vw-tkK" id="j1o-Uu-bms"/>
                         <outlet property="venueTextField" destination="dw9-u3-tWD" id="fco-Te-sVL"/>
-                        <segue destination="HeC-Kp-YOV" kind="show" identifier="PostedEvent" id="RHa-hJ-dSP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vBa-0L-pTl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -21272,7 +21248,6 @@ ABL58gAS+f8AEvoEABL6BgAS+ggAEvoNABL6FQAS+hgAEvodABL6JQAS+igAEvo6ABL6PQAS+kIAAAAA
 AAAEAQAAAAAAAABBAAAAAAAAAAAAAAAAABL6RA
 </mutableData>
         </image>
-        <image name="AddEventButton" width="492" height="491"/>
         <image name="BrandonProfilePic" width="337" height="324"/>
         <image name="CheckInButton" width="676" height="164"/>
         <image name="Destination" width="253" height="253"/>
@@ -21289,7 +21264,6 @@ AAAEAQAAAAAAAABBAAAAAAAAAAAAAAAAABL6RA
         <image name="SubtractEventButton" width="492" height="492"/>
         <image name="TrendingFilled" width="25" height="20"/>
         <image name="WhiteStuff" width="201" height="400"/>
-        <image name="addEvent" width="455" height="80"/>
         <image name="clLogo" width="178" height="150"/>
     </resources>
     <inferredMetricsTieBreakers>

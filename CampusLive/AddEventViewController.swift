@@ -163,7 +163,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         let posts: [String: AnyObject] = ["name": name as AnyObject, "venue": venue as AnyObject, "description": description as AnyObject, "startDate": startDate as AnyObject, "endDate": endDate as AnyObject, "latitude": latitude as AnyObject, "longitude": longitude as AnyObject, "profileImage": imageUrl as AnyObject]
         
         userRef = userRef.childByAutoId()
-        userRef.setValue(posts)
+       // userRef.setValue(posts)
         
         let userPost: Dictionary<String, AnyObject> = [ userRef.key : true as AnyObject ]
         
