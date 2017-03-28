@@ -24,4 +24,8 @@ class AppState: NSObject {
   var displayName: String?
   var photoURL: URL?
   var userPostCount: Int?
+  var dafaultCampus: String?
+    var showCampus: Bool?
+    var defaultLatitude: String?
+    var defaultLongitutde: String?
 }

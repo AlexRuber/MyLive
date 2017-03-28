@@ -17,7 +17,10 @@ class MyProfileViewController: UIViewController {
 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var profileName: UILabel!
+    @IBOutlet weak var campusSegment: UISegmentedControl!
    
+    
+    //var showCampus: Bool?
     
     //Back Button
     @IBAction func backBtnPressed(_ sender: Any) {
@@ -60,13 +63,19 @@ class MyProfileViewController: UIViewController {
                 let data = NSData(contentsOf: photo)
                 self.profileImage.image = UIImage(data: data! as Data)
             }
+            campusSegment.isHidden = true
             
+            
+            if(AppState.sharedInstance.showCampus)!{
+                campusSegment.isHidden = false
+                let ref = FIRDatabase.database().reference().child("campuses").child("san_diego")
+            }
         } else {
             print("User not Signed In.")
         }
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

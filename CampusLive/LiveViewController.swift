@@ -18,17 +18,17 @@ import SVProgressHUD
     var subtitle: String?
     var imageUrl: String!
     //var eventDescription: String?
-    //var eventID: String?
+    var eventID: String?
     var endDate: String?
     var startDate: String?
     
-    init(lat: CLLocationDegrees, long: CLLocationDegrees, title: String? = nil, subtitle: String? = nil, imageUrl: String!, endDate: String? = nil, startDate: String? = nil) {
+    init(lat: CLLocationDegrees, long: CLLocationDegrees, title: String? = nil, subtitle: String? = nil, imageUrl: String!, eventId: String!, endDate: String? = nil, startDate: String? = nil) {
         self.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
         self.title = title
         self.subtitle = subtitle
         self.imageUrl = imageUrl
         //self.eventDescription = eventDescription
-        //self.eventID = eventID
+        self.eventID = eventId
         self.endDate = endDate
         self.startDate = startDate
         super.init()
@@ -45,18 +45,14 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     
     var uid: String?
     
-    //@IBOutlet weak var addEventButton: UIButton!
-    //@IBOutlet weak var subtractEventButton: UIButton!
     @IBOutlet weak var verifiedButton: UIButton!
     
-    //@IBOutlet weak var eventDescriptive: UIButton!
     @IBOutlet weak var orgSegment: UISegmentedControl!
-    //@IBOutlet weak var showAllSwitch: UISwitch!
-    //@IBOutlet weak var eventPin: UIImageView!
     
-    var eventOrgRef = FIRDatabase.database().reference()
-    var eventBusRef = FIRDatabase.database().reference()
-    //var users = FIRDatabase.database().reference()
+    //var eventOrgRef = FIRDatabase.database().reference()
+    //var eventBusRef = FIRDatabase.database().reference()
+    
+    var eventRef: FIRDatabaseReference!
     
     @IBAction func refreshLocationButton(_ sender: Any) {
         locationManager.requestLocation()
@@ -73,13 +69,13 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     
     //Hides pins after posting event
     override func viewDidAppear(_ animated: Bool) {
-        //eventPin.isHidden = true
-        //eventDescriptive.isHidden = true
-        //addEventButton.isHidden = false
+    
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //print(AppState.sharedInstance.dafaultCampus)
         
         //Settings for the loading spinner
         let foregroundColor = UIColor(red: 27/255, green: 150/255, blue: 254/255, alpha: 1)
@@ -111,18 +107,15 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         self.mapView.delegate = self
         self.locationManager.delegate = self
     
-        self.eventBusRef = eventBusRef.child("business_events")
-        self.eventOrgRef = eventOrgRef.child("org_events")
+        //self.eventBusRef = eventBusRef.child("business_events")
+        //self.eventOrgRef = eventOrgRef.child("org_events")
+        
+        eventRef = FIRDatabase.database().reference().child("events")
         
         self.uid = FIRAuth.auth()?.currentUser?.uid
         
-        //users = users.child("users").child(uid!)
+        displayLiveEvents()
         
-        if(isVerifiedFlag){
-            //displayLiveOrgEvents()
-        }else{
-            //displayLiveEvents()
-        }
     }
     
     //if we have no permission to access user location, then ask user for permission.
@@ -136,7 +129,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     @IBAction func indexChanged(_ sender: Any) {
         displayRelevantEvents()
     }
-    /*
+    
     func displayLiveEvents() {
         
         let currentDate = Date()
@@ -147,39 +140,43 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         formatter.dateFormat = "E hh:mm a"
         
         //displaying ORG live events
-        displayLiveOrgEvents()
+        //displayLiveOrgEvents()
         
         //displaying student live events
-        eventRef.observe(.value, with: {(snap) in
-            if let userDict = snap.value as? [String:AnyObject] {
-                for each in userDict as [String: AnyObject] {
-                    let autoID = each.key
-                    let name = each.value["name"] as! String
-                    let endDateSubstring = each.value["endDate"] as! String
-                    let startDateSubstring = each.value["startDate"] as! String
-                    let dateAsString = startDateSubstring
-                    let newDate = dateFormatter.date(from: dateAsString)
-                    let stringDate: String! = formatter.string(from: newDate!)
-                    let startDateTimeInterval = newDate?.timeIntervalSince1970
-                    let currentDateTimeInterval = currentDate.timeIntervalSince1970
-                    let dayFromNow = currentDateTimeInterval + 86400.0
-                    
-                    if (Double(startDateTimeInterval!) < dayFromNow) {
-                        let venue = each.value["venue"] as! String
-                        let subtitle = "\(venue)" + ", " + "\(stringDate!)"
-                        let latitude = each.value["latitude"] as! NSNumber
-                        let longitude = each.value["longitude"] as! NSNumber
-                        let description = each.value["description"] as! String
-                        let imageUrl = each.value["profileImage"] as! String
-                        let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: subtitle, imageUrl: imageUrl, eventDescription: description, eventID: autoID, endDate: endDateSubstring, startDate: startDateSubstring)
+        DispatchQueue.main.async {
+            self.eventRef.observe(.value, with: {(snap) in
+                if let userDict = snap.value as? [String:AnyObject] {
+                    for each in userDict as [String: AnyObject] {
+                        let autoID = each.key
+                        //let type = each.value["type"] as! String
+                        let name = each.value["title"] as! String
+                        let endDateSubstring = each.value["endDate"] as! String
+                        let startDateSubstring = each.value["startDate"] as! String
+                        let dateAsString = startDateSubstring
+                        let newDate = dateFormatter.date(from: dateAsString)
+                        let stringDate: String! = formatter.string(from: newDate!)
+                        let startDateTimeInterval = newDate?.timeIntervalSince1970
+                        let currentDateTimeInterval = currentDate.timeIntervalSince1970
+                        let dayFromNow = currentDateTimeInterval + 86400.0
                         
-                        self.mapView.addAnnotation(clAnnotation)
+                        if (Double(startDateTimeInterval!) < dayFromNow) {
+                            let venue = each.value["venue"] as! String
+                            let subtitle = "\(venue)" + ", " + "\(stringDate!)"
+                            let latitude = each.value["latitude"] as! NSNumber
+                            let longitude = each.value["longitude"] as! NSNumber
+                            //let description = each.value["description"] as! String
+                            let imageUrl = each.value["image"] as! String
+                            let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: subtitle, imageUrl: imageUrl, eventId: autoID, endDate: endDateSubstring, startDate: startDateSubstring)
+                            
+                            self.mapView.addAnnotation(clAnnotation)
+                        }
                     }
                 }
-            }
-        })
+            })
+        }
     }
     
+    /*
     func displayLiveOrgEvents(){
         
         let currentDate = Date()
@@ -419,7 +416,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
             //destinationViewController.descriptionEvent = annotation.eventDescription
             destinationViewController.startDateStr = annotation.startDate
             destinationViewController.endDateStr = annotation.endDate
-            //destinationViewController.eventId = annotation.eventID
+            destinationViewController.eventId = annotation.eventID
         }
     }
     
@@ -427,6 +424,10 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
 
 
 extension LiveViewController: MKMapViewDelegate{
+    
+    func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
+        
+    }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
@@ -533,7 +534,9 @@ extension LiveViewController: MKMapViewDelegate{
                 
                 //Custom Left Callout Image Settings
                 view.leftCalloutAccessoryView?.contentMode = .scaleAspectFit
-               // view.leftCalloutAccessoryView?.frame = CGRect(x: CGFloat(5), y: CGFloat(5), width: CGFloat(eventPin.frame.size.height - 15), height: eventPin.frame.size.height - 15)
+                view.leftCalloutAccessoryView?.frame = CGRect(x: CGFloat(5), y: CGFloat(5), width: CGFloat(40), height: CGFloat(40))
+                    
+                    //CGFloat(eventPin.frame.size.height - 15), height: eventPin.frame.size.height - 15)
                 view.leftCalloutAccessoryView?.layer.cornerRadius = (view.leftCalloutAccessoryView?.frame.width)!/2
                 view.leftCalloutAccessoryView?.clipsToBounds = true
                 
