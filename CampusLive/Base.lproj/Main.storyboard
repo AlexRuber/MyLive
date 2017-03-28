@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WSx-hg-qa9">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WSx-hg-qa9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -69,7 +69,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="OrgUnfilled"/>
                                 <state key="selected" image="OrgFilled"/>
-                                <state key="highlighted" image="A1030F90-FABD-4224-9761-2D9007693350"/>
+                                <state key="highlighted" image="4209486C-CF4E-4E6C-AA29-705656508121"/>
                                 <connections>
                                     <action selector="isVerifiedClicked:" destination="HeC-Kp-YOV" eventType="touchUpInside" id="Olw-jQ-8sP"/>
                                 </connections>
@@ -92,7 +92,6 @@
                         <outlet property="orgSegment" destination="yuF-kP-G1T" id="hV0-Y1-t1J"/>
                         <outlet property="refreshLocaiton" destination="bYM-Bc-v9L" id="H6p-95-tMU"/>
                         <outlet property="schoolButton" destination="6Lo-8P-0qz" id="cGl-2V-BxP"/>
-                        <outlet property="subtractEventButton" destination="evu-aa-WeU" id="1CF-W5-6oK"/>
                         <outlet property="verifiedButton" destination="6Lo-8P-0qz" id="XRW-xU-J7I"/>
                         <segue destination="Yb5-6D-gIK" kind="show" identifier="EventInfo" id="B7M-3u-HxH"/>
                     </connections>
@@ -367,7 +366,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="campusSegment" destination="5BF-cO-wZR" id="c9K-xH-EDR"/>
                         <outlet property="profileImage" destination="qCi-XR-LVQ" id="vYN-Ml-Isd"/>
                         <outlet property="profileName" destination="cQo-Ab-2Iy" id="NsK-ID-xxI"/>
                     </connections>
@@ -466,7 +464,6 @@
                         <outlet property="eventProfileImage" destination="bGe-2s-ctY" id="gXu-zc-uJW"/>
                         <outlet property="eventSubtitle" destination="B8Z-rC-GcS" id="0Sy-Yg-Wzd"/>
                         <outlet property="eventTitle" destination="paN-ls-LjM" id="l7z-tS-W5b"/>
-                        <outlet property="goingbutton" destination="klk-mj-28K" id="TSg-wi-BUQ"/>
                         <outlet property="startDate" destination="vsw-Mo-wYm" id="lPd-zZ-X2i"/>
                     </connections>
                 </viewController>
@@ -512,7 +509,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="A1030F90-FABD-4224-9761-2D9007693350" width="557" height="557">
+        <image name="4209486C-CF4E-4E6C-AA29-705656508121" width="557" height="557">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -21250,6 +21247,7 @@ ABL58gAS+f8AEvoEABL6BgAS+ggAEvoNABL6FQAS+hgAEvodABL6JQAS+igAEvo6ABL6PQAS+kIAAAAA
 AAAEAQAAAAAAAABBAAAAAAAAAAAAAAAAABL6RA
 </mutableData>
         </image>
+        <image name="AddEventButton" width="492" height="491"/>
         <image name="BrandonProfilePic" width="337" height="324"/>
         <image name="CheckInButton" width="676" height="164"/>
         <image name="Destination" width="253" height="253"/>
@@ -21259,16 +21257,11 @@ AAAEAQAAAAAAAABBAAAAAAAAAAAAAAAAABL6RA
         <image name="NavigationButton" width="200" height="200"/>
         <image name="OrgFilled" width="401" height="333"/>
         <image name="OrgUnfilled" width="401" height="333"/>
-        <image name="Pin" width="148" height="258"/>
         <image name="Post" width="424" height="100"/>
         <image name="Settings Filled" width="548" height="548"/>
         <image name="Settings Unfilled" width="496" height="496"/>
-        <image name="SubtractEventButton" width="492" height="492"/>
         <image name="TrendingFilled" width="25" height="20"/>
         <image name="WhiteStuff" width="201" height="400"/>
         <image name="clLogo" width="178" height="150"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="Jw6-FQ-Kg9"/>
-    </inferredMetricsTieBreakers>
 </document>
