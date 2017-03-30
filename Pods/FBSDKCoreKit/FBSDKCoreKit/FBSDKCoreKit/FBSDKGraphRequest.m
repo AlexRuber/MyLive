@@ -77,7 +77,7 @@ static NSString *const kGetHTTPMethod = @"GET";
   if ((self = [self initWithGraphPath:graphPath
                            parameters:parameters
                           tokenString:tokenString
-                              version:[FBSDKSettings graphAPIVersion]
+                              version:FBSDK_TARGET_PLATFORM_VERSION
                            HTTPMethod:HTTPMethod])) {
     self.flags |= flags;
   }
@@ -91,7 +91,7 @@ static NSString *const kGetHTTPMethod = @"GET";
                        HTTPMethod:(NSString *)HTTPMethod {
   if ((self = [super init])) {
     _tokenString = [tokenString copy];
-    _version = version ? [version copy] : [FBSDKSettings graphAPIVersion];
+    _version = version ? [version copy] : FBSDK_TARGET_PLATFORM_VERSION;
     _graphPath = [graphPath copy];
     _HTTPMethod = HTTPMethod ? [HTTPMethod copy] : kGetHTTPMethod;
     _parameters = [[NSMutableDictionary alloc] initWithDictionary:parameters];

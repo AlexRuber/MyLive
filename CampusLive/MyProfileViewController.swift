@@ -91,7 +91,7 @@ class MyProfileViewController: UIViewController {
     @IBAction func segmentValueChanged(_ sender: Any) {
         let userDict = AppState.sharedInstance.campusDict
         
-        for each in userDict as! [String: AnyObject]{
+        for each in userDict as! [String: AnyObject]! {
             if(each.key == campusSegment.titleForSegment(at: campusSegment.selectedSegmentIndex)!){
                 AppState.sharedInstance.dafaultCampus = each.key
                 AppState.sharedInstance.defaultLatitude = each.value["latitude"] as? NSNumber

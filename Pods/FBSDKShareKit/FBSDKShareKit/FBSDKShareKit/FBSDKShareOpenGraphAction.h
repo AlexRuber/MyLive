@@ -23,47 +23,46 @@
 #import <FBSDKShareKit/FBSDKShareOpenGraphObject.h>
 #import <FBSDKShareKit/FBSDKShareOpenGraphValueContainer.h>
 
-/**
-  An Open Graph Action for sharing.
-
- The property keys MUST have namespaces specified on them, such as `og:image`.
+/*!
+ @abstract An Open Graph Action for sharing.
+ @discussion The property keys MUST have namespaces specified on them, such as `og:image`.
  */
 @interface FBSDKShareOpenGraphAction : FBSDKShareOpenGraphValueContainer <FBSDKCopying, NSSecureCoding>
 
-/**
-  Convenience method to build a new action and set the object for the specified key.
- - Parameter actionType: The action type of the receiver
- - Parameter object: The Open Graph object represented by this action
- - Parameter key: The key for the object
+/*!
+ @abstract Convenience method to build a new action and set the object for the specified key.
+ @param actionType The action type of the receiver
+ @param object The Open Graph object represented by this action
+ @param key The key for the object
  */
 + (instancetype)actionWithType:(NSString *)actionType object:(FBSDKShareOpenGraphObject *)object key:(NSString *)key;
 
-/**
-  Convenience method to build a new action and set the object for the specified key.
- - Parameter actionType: The action type of the receiver
- - Parameter objectID: The ID of an existing Open Graph object
- - Parameter key: The key for the object
+/*!
+ @abstract Convenience method to build a new action and set the object for the specified key.
+ @param actionType The action type of the receiver
+ @param objectID The ID of an existing Open Graph object
+ @param key The key for the object
  */
 + (instancetype)actionWithType:(NSString *)actionType objectID:(NSString *)objectID key:(NSString *)key;
 
-/**
-  Convenience method to build a new action and set the object for the specified key.
- - Parameter actionType: The action type of the receiver
- - Parameter objectURL: The URL to a page that defines the Open Graph object with meta tags
- - Parameter key: The key for the object
+/*!
+ @abstract Convenience method to build a new action and set the object for the specified key.
+ @param actionType The action type of the receiver
+ @param objectURL The URL to a page that defines the Open Graph object with meta tags
+ @param key The key for the object
  */
 + (instancetype)actionWithType:(NSString *)actionType objectURL:(NSURL *)objectURL key:(NSString *)key;
 
-/**
-  Gets the action type.
- - Returns: The action type
+/*!
+ @abstract Gets the action type.
+ @return The action type
  */
 @property (nonatomic, copy) NSString *actionType;
 
-/**
-  Compares the receiver to another Open Graph Action.
- - Parameter action: The other action
- - Returns: YES if the receiver's values are equal to the other action's values; otherwise NO
+/*!
+ @abstract Compares the receiver to another Open Graph Action.
+ @param action The other action
+ @return YES if the receiver's values are equal to the other action's values; otherwise NO
  */
 - (BOOL)isEqualToShareOpenGraphAction:(FBSDKShareOpenGraphAction *)action;
 

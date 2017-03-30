@@ -22,10 +22,9 @@
 
 #import <FBSDKShareKit/FBSDKSharingButton.h>
 
-/**
-  A button to send content through Messenger.
-
- Tapping the receiver will invoke the FBSDKShareDialog with the attached shareContent.  If the dialog cannot
+/*!
+ @abstract A button to send content through Messenger.
+ @discussion Tapping the receiver will invoke the FBSDKShareDialog with the attached shareContent.  If the dialog cannot
  be shown, the button will be disable.
  */
 @interface FBSDKSendButton : FBSDKButton <FBSDKSharingButton>

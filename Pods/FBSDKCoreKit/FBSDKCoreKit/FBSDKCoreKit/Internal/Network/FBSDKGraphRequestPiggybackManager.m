@@ -30,7 +30,7 @@ static int const FBSDKTokenRefreshRetrySeconds = 60 * 60;           // hour
   if ([FBSDKSettings appID].length > 0) {
     BOOL safeForPiggyback = YES;
     for (FBSDKGraphRequestMetadata *metadata in connection.requests) {
-      if (![metadata.request.version isEqualToString:[FBSDKSettings graphAPIVersion]] ||
+      if (![metadata.request.version isEqualToString:FBSDK_TARGET_PLATFORM_VERSION] ||
           [metadata.request hasAttachments]) {
         safeForPiggyback = NO;
         break;

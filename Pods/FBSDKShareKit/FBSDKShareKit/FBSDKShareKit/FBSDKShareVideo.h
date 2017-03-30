@@ -22,40 +22,40 @@
 
 @class FBSDKSharePhoto;
 
-/**
-  A video for sharing.
+/*!
+ @abstract A video for sharing.
  */
 @interface FBSDKShareVideo : NSObject <FBSDKCopying, NSSecureCoding>
 
-/**
-  Convenience method to build a new video object with a videoURL.
- - Parameter videoURL: The URL to the video
+/*!
+ @abstract Convenience method to build a new video object with a videoURL.
+ @param videoURL The URL to the video
  */
 + (instancetype)videoWithVideoURL:(NSURL *)videoURL;
 
-/**
-  Convenience method to build a new video object with a videoURL and a previewPhoto
- - Parameter videoURL: The URL to the video
- - Parameter previewPhoto: The photo that represents the video
+/*!
+ @abstract Convenience method to build a new video object with a videoURL and a previewPhoto
+ @param videoURL The URL to the video
+ @param previewPhoto The photo that represents the video
  */
 + (instancetype)videoWithVideoURL:(NSURL *)videoURL previewPhoto:(FBSDKSharePhoto *)previewPhoto;
 
-/**
-  The file URL to the video.
- - Returns: URL that points to the location of the video on disk
+/*!
+ @abstract The file URL to the video.
+ @return URL that points to the location of the video on disk
  */
 @property (nonatomic, copy) NSURL *videoURL;
 
-/**
-  The photo that represents the video.
- - Returns: The photo
+/*!
+ @abstract The photo that represents the video.
+ @return The photo
  */
 @property (nonatomic, copy) FBSDKSharePhoto *previewPhoto;
 
-/**
-  Compares the receiver to another video.
- - Parameter video: The other video
- - Returns: YES if the receiver's values are equal to the other video's values; otherwise NO
+/*!
+ @abstract Compares the receiver to another video.
+ @param video The other video
+ @return YES if the receiver's values are equal to the other video's values; otherwise NO
  */
 - (BOOL)isEqualToShareVideo:(FBSDKShareVideo *)video;
 
