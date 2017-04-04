@@ -366,12 +366,15 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         case 0:
             if(isVerifiedFlag){
                 displayTrendingEvents()
+                
             }else{
                 //displayLiveEvents()
             }
         case 1:
             if(isVerifiedFlag){
+                
                 displayTrendingEvents()
+                
                 //displayOrgTrendingEvents()
             }else{
                 //displayTrendingEvents()
@@ -510,15 +513,16 @@ extension LiveViewController: MKMapViewDelegate{
                 eventUserImage.layer.borderWidth = 1
                 //eventUserImage.layer.borderColor = otherEvents.cgColor
                 
-                //colors
-                let otherEvents = UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 1.0)
-                let live_events = UIColor(red: 255.0, green: 0.0, blue: 57.0, alpha: 1.0)
-                let trending = UIColor(red: 0.0, green: 255.0, blue: 216.0, alpha: 1.0)
-                let events = UIColor(red: 27.0, green: 150.0, blue: 254.0, alpha: 1.0)
-                let experiences = UIColor(red: 164.0, green: 50.0, blue: 255.0, alpha: 1.0)
-                let twentyOnePlus = UIColor(red: 0.0, green: 51.0, blue: 102.0, alpha: 1.0)
-                let check_ins = UIColor(red: 67.0, green: 199.0, blue: 61.0, alpha: 1.0)
+                // creating colors
+                let otherEvents = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha:1.0)
+                let live_events = UIColor(red: 1.0, green: 0.0, blue: 57/255.0, alpha: 1.0)
+                let trending = UIColor(red: 0.0, green: 1, blue: 216/255.0, alpha: 1.0)
+                let events = UIColor(red: 27/255.0, green: 150/255.0, blue: 254/255.0, alpha: 1.0)
+                let experiences = UIColor(red: 164/255.0, green: 50/255.0, blue: 1.0, alpha: 1.0)
+                let twentyOnePlus = UIColor(red: 0.0, green: 51/255.0, blue: 102/255.0, alpha: 1.0)
+                let check_ins = UIColor(red: 67/255.0, green: 199/255.0, blue: 61/255.0, alpha: 1.0)
                 
+                print("colorType: \(annotation.colorType)")
                 //eventUserImage.layer.borderColor = otherEvents.cgColor
                 switch annotation.colorType! {
                     case "live":
@@ -553,6 +557,7 @@ extension LiveViewController: MKMapViewDelegate{
                 eventUserImage.layer.masksToBounds = true
                 
                 view.addSubview(eventUserImage)
+                
                 let dateFormatter = DateFormatter()
                 dateFormatter.locale = NSLocale.current
                 

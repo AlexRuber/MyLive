@@ -20,21 +20,21 @@
 
 #import <FBSDKShareKit/FBSDKSharingContent.h>
 
-/**
-  A model for photo content to be shared.
+/*!
+ @abstract A model for photo content to be shared.
  */
 @interface FBSDKSharePhotoContent : NSObject <FBSDKSharingContent>
 
-/**
-  Photos to be shared.
- - Returns: Array of the photos (FBSDKSharePhoto)
+/*!
+ @abstract Photos to be shared.
+ @return Array of the photos (FBSDKSharePhoto)
  */
 @property (nonatomic, copy) NSArray *photos;
 
-/**
-  Compares the receiver to another photo content.
- - Parameter content: The other content
- - Returns: YES if the receiver's values are equal to the other content's values; otherwise NO
+/*!
+ @abstract Compares the receiver to another photo content.
+ @param content The other content
+ @return YES if the receiver's values are equal to the other content's values; otherwise NO
  */
 - (BOOL)isEqualToSharePhotoContent:(FBSDKSharePhotoContent *)content;
 

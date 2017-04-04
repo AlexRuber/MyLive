@@ -22,10 +22,9 @@
 
 #import <FBSDKShareKit/FBSDKSharingButton.h>
 
-/**
-  A button to share content.
-
- Tapping the receiver will invoke the FBSDKShareDialog with the attached shareContent.  If the dialog cannot
+/*!
+ @abstract A button to share content.
+ @discussion Tapping the receiver will invoke the FBSDKShareDialog with the attached shareContent.  If the dialog cannot
  be shown, the button will be disabled.
  */
 @interface FBSDKShareButton : FBSDKButton <FBSDKSharingButton>

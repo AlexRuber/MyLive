@@ -18,29 +18,25 @@
 
 #import <Foundation/Foundation.h>
 
-/**
-  The common interface for components that initiate liking.
-
-- See:FBSDKLikeButton
-
-- See:FBSDKLikeControl
+/*!
+ @abstract The common interface for components that initiate liking.
+ @see FBSDKLikeButton
+ @see FBSDKLikeControl
  */
 @protocol FBSDKLiking <NSObject>
 
-/**
-  The objectID for the object to like.
+/*!
+ @abstract The objectID for the object to like.
 
-
- This value may be an Open Graph object ID or a string representation of an URL that describes an
+ @discussion This value may be an Open Graph object ID or a string representation of an URL that describes an
  Open Graph object.  The objects may be public objects, like pages, or objects that are defined by your application.
  */
 @property (nonatomic, copy) NSString *objectID;
 
-/**
-  The type of object referenced by the objectID.
+/*!
+ @abstract The type of object referenced by the objectID.
 
-
- If the objectType is unknown, the control will determine the objectType by querying the server with the
+ @discussion If the objectType is unknown, the control will determine the objectType by querying the server with the
  objectID.  Specifying a value for the objectType is an optimization that should be used if the type is known by the
  consumer.  Consider setting the objectType if it is known when setting the objectID.
  */

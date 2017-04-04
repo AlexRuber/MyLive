@@ -22,95 +22,88 @@
 
 @protocol FBSDKSharingDelegate;
 
-/**
-  The common interface for components that initiate sharing.
-
-- See:FBSDKShareDialog
-
-- See:FBSDKMessageDialog
-
-- See:FBSDKShareAPI
+/*!
+ @abstract The common interface for components that initiate sharing.
+ @see FBSDKShareDialog
+ @see FBSDKMessageDialog
+ @see FBSDKShareAPI
  */
 @protocol FBSDKSharing <NSObject>
 
-/**
-  The receiver's delegate or nil if it doesn't have a delegate.
+/*!
+ @abstract The receiver's delegate or nil if it doesn't have a delegate.
  */
 @property (nonatomic, weak) id<FBSDKSharingDelegate> delegate;
 
-/**
-  The content to be shared.
+/*!
+ @abstract The content to be shared.
  */
 @property (nonatomic, copy) id<FBSDKSharingContent> shareContent;
 
-/**
-  A Boolean value that indicates whether the receiver should fail if it finds an error with the share content.
-
- If NO, the sharer will still be displayed without the data that was mis-configured.  For example, an
+/*!
+ @abstract A Boolean value that indicates whether the receiver should fail if it finds an error with the share content.
+ @discussion If NO, the sharer will still be displayed without the data that was mis-configured.  For example, an
  invalid placeID specified on the shareContent would produce a data error.
  */
 @property (nonatomic, assign) BOOL shouldFailOnDataError;
 
-/**
-  Validates the content on the receiver.
- - Parameter errorRef: If an error occurs, upon return contains an NSError object that describes the problem.
- - Returns: YES if the content is valid, otherwise NO.
+/*!
+ @abstract Validates the content on the receiver.
+ @param errorRef If an error occurs, upon return contains an NSError object that describes the problem.
+ @return YES if the content is valid, otherwise NO.
  */
 - (BOOL)validateWithError:(NSError **)errorRef;
 
 @end
 
-/**
-  The common interface for dialogs that initiate sharing.
+/*!
+ @abstract The common interface for dialogs that initiate sharing.
  */
 @protocol FBSDKSharingDialog <FBSDKSharing>
 
-/**
-  A Boolean value that indicates whether the receiver can initiate a share.
-
- May return NO if the appropriate Facebook app is not installed and is required or an access token is
+/*!
+ @abstract A Boolean value that indicates whether the receiver can initiate a share.
+ @discussion May return NO if the appropriate Facebook app is not installed and is required or an access token is
  required but not available.  This method does not validate the content on the receiver, so this can be checked before
  building up the content.
-
-- See:[FBSDKSharing validateWithError:]
- - Returns: YES if the receiver can share, otherwise NO.
+ @see [FBSDKSharing validateWithError:]
+ @result YES if the receiver can share, otherwise NO.
  */
 - (BOOL)canShow;
 
-/**
-  Shows the dialog.
- - Returns: YES if the receiver was able to begin sharing, otherwise NO.
+/*!
+ @abstract Shows the dialog.
+ @result YES if the receiver was able to begin sharing, otherwise NO.
  */
 - (BOOL)show;
 
 @end
 
-/**
-  A delegate for FBSDKSharing.
-
- The delegate is notified with the results of the sharer as long as the application has permissions to
+/*!
+ @abstract A delegate for FBSDKSharing.
+ @discussion The delegate is notified with the results of the sharer as long as the application has permissions to
  receive the information.  For example, if the person is not signed into the containing app, the sharer may not be able
  to distinguish between completion of a share and cancellation.
  */
 @protocol FBSDKSharingDelegate <NSObject>
 
-/**
-  Sent to the delegate when the share completes without error or cancellation.
- - Parameter sharer: The FBSDKSharing that completed.
- - Parameter results: The results from the sharer.  This may be nil or empty.
+/*!
+ @abstract Sent to the delegate when the share completes without error or cancellation.
+ @param sharer The FBSDKSharing that completed.
+ @param results The results from the sharer.  This may be nil or empty.
  */
 - (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results;
 
-/**
-  Sent to the delegate when the sharer encounters an error.
- - Parameter sharer: The FBSDKSharing that completed.
- - Parameter error: The error.
+/*!
+ @abstract Sent to the delegate when the sharer encounters an error.
+ @param sharer The FBSDKSharing that completed.
+ @param error The error.
  */
 - (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error;
 
-/**
-  Sent to the delegate when the sharer is cancelled.
- - Parameter sharer: The FBSDKSharing that completed.
+/*!
+ @abstract Sent to the delegate when the sharer is cancelled.
+ @param sharer The FBSDKSharing that completed.
  */
 - (void)sharerDidCancel:(id<FBSDKSharing>)sharer;
 
