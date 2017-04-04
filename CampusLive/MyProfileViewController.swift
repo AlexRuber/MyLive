@@ -17,8 +17,9 @@ class MyProfileViewController: UIViewController {
 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var profileName: UILabel!
-    @IBOutlet weak var campusSegment: UISegmentedControl!
+    //@IBOutlet weak var campusSegment: UISegmentedControl!
    
+    @IBOutlet weak var campusSegment: UISegmentedControl!
     
     //var showCampus: Bool?
     
@@ -89,9 +90,10 @@ class MyProfileViewController: UIViewController {
     }
     
     @IBAction func segmentValueChanged(_ sender: Any) {
+ 
         let userDict = AppState.sharedInstance.campusDict
         
-        for each in userDict! as! [String: AnyObject]{
+        for each in userDict! {
             if(each.key == campusSegment.titleForSegment(at: campusSegment.selectedSegmentIndex)!){
                 AppState.sharedInstance.dafaultCampus = each.key
                 AppState.sharedInstance.defaultLatitude = each.value["latitude"] as? NSNumber
@@ -99,13 +101,19 @@ class MyProfileViewController: UIViewController {
                 //self.dismiss(animated: true, completion: nil)
                 
                 
-            let secondViewController = self.storyboard!.instantiateViewController(withIdentifier: "HomeView")
-            self.present(secondViewController, animated: true, completion: nil)
+                let secondViewController = self.storyboard!.instantiateViewController(withIdentifier: "HomeView")
+                
+            }
         }
-        }
+
+    }
+    
+ 
+    
+    
         //AppState.sharedInstance.dafaultCampus = userDict?[campusSegment.titleForSegment(at: campusSegment.selectedSegmentIndex)!] as! String
          //print(AppState.sharedInstance.dafaultCampus)
-    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

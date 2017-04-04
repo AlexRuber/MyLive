@@ -54,8 +54,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         //Custom FB Button Settings
         let customFBImage = UIImage(named: "facebook-login-blue")
         customFBButton.setImage(customFBImage, for: .normal)
-        customFBButton.frame = CGRect(x: 0, y: 0, width: 250, height: 45)
-        customFBButton.center = self.view.center
+        customFBButton.frame = CGRect(x: 75, y: 540, width: 250, height: 45)
         customFBButton.addTarget(self, action: #selector(handleCustomFBLogin), for: .touchUpInside)
         
         //segmentView.selectedSegmentIndex = 0
@@ -254,7 +253,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
             // Now do whatever you want with inputTextField (remember to unwrap the optional)
         //}))
         
-        campusRef.observe(.childMoved, with: {(snap) in
+        campusRef.observe(.value
+            , with: {(snap) in
             if let userDict = snap.value as? [String:AnyObject] {
                 
                 AppState.sharedInstance.campusDict = userDict

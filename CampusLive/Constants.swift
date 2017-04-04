@@ -14,6 +14,10 @@
 //  limitations under the License.
 //
 
+import UIKit
+
+let SHADOW_GRAY: CGFloat = 120.0 / 255.0
+
 struct Constants {
 
   struct NotificationKeys {
@@ -32,4 +36,6 @@ struct Constants {
     static let photoURL = "photoURL"
     static let imageURL = "imageURL"
   }
+    
+  
 }
