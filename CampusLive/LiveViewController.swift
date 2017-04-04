@@ -81,7 +81,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     
     //Hides pins after posting event
     override func viewDidAppear(_ animated: Bool) {
-    
+        
     }
     
     override func viewDidLoad() {
