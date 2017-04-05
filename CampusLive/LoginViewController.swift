@@ -12,6 +12,7 @@ import FBSDKLoginKit
 import FBSDKShareKit
 import SVProgressHUD
 
+
 class SignInViewController: UIViewController, UITextFieldDelegate {
 
     var homeViewController: UIViewController!
@@ -112,13 +113,13 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     //Check access token for already logged facebook
 
     override func viewDidAppear(_ animated: Bool) {
-        if (FBSDKAccessToken.current() != nil && FIRAuth.auth()?.currentUser != nil)
-        {
-            //performSegue(withIdentifier:"SignInToFP", sender: self)
-            showEmailAddress()
+        if(FBSDKAccessToken.current() != nil && FIRAuth.auth()?.currentUser != nil){
+            //user is sign in
+            //Put here something what you want to do if user is sign in
+            print("user is already signed in")
+            //performSegue(withIdentifier: "SignInToFP", sender: nil)
         }
-        
-    }
+}
  
     
     func presentHomeViewController(){
@@ -148,6 +149,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 
         }
     }
+    
     
     func showEmailAddress(){
         let accessToken = FBSDKAccessToken.current()
