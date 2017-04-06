@@ -503,7 +503,8 @@ extension LiveViewController: MKMapViewDelegate{
                 view = dequeuedView
             } else {
                 view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                
+                view.image = UIImage(named: "bgpin")
+
                 print("eventID: \(annotation.eventID)")
                 let imageUrl: URL = NSURL(string: annotation.imageUrl) as! URL
                 var data = try? Data(contentsOf: imageUrl)
@@ -555,9 +556,9 @@ extension LiveViewController: MKMapViewDelegate{
                     //eventUserImage.layer.borderColor = otherEvents.cgColor
                 }
                 
-                let f = CGRect(x: 1, y: 1, width: 40, height: 40) // CGRect(2,2,46,43)
+                let f = CGRect(x: 1, y: 1, width: 35, height: 35) // CGRect(2,2,46,43)
                 eventUserImage.frame = f
-                eventUserImage.layer.cornerRadius = 22.0
+                eventUserImage.layer.cornerRadius = 18.0
                 eventUserImage.layer.masksToBounds = true
                 
                 view.addSubview(eventUserImage)
@@ -601,7 +602,6 @@ extension LiveViewController: MKMapViewDelegate{
                     */
                 }
                 
-                view.image = UIImage(named: "whiteCircularPin")
                 /*
                 users.observe(.value, with: {(snap) in
                     if let userDict = snap.value as? [String: AnyObject] {
