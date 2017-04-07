@@ -15,7 +15,6 @@
 		616BAA081E407B5E008BF838 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 616BAA071E407B5E008BF838 /* GoogleService-Info.plist */; };
 		61EE5E4E1E367E5400D0A7E5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EE5E4D1E367E5400D0A7E5 /* LoginViewController.swift */; };
 		61EE5E521E367EBB00D0A7E5 /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EE5E511E367EBB00D0A7E5 /* LiveViewController.swift */; };
-		61EE5E561E367F1200D0A7E5 /* FeaturedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EE5E551E367F1200D0A7E5 /* FeaturedViewController.swift */; };
 		61EE5E5A1E367F4900D0A7E5 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EE5E591E367F4900D0A7E5 /* MyProfileViewController.swift */; };
 		983CE0661E3478CC0098D03B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983CE0651E3478CC0098D03B /* AppDelegate.swift */; };
 		983CE06B1E3478CC0098D03B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 983CE0691E3478CC0098D03B /* Main.storyboard */; };
@@ -23,6 +22,7 @@
 		983CE0701E3478CC0098D03B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 983CE06E1E3478CC0098D03B /* LaunchScreen.storyboard */; };
 		98473CF01E93471F00141911 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98473CEF1E93471F00141911 /* HeaderView.swift */; };
 		98934AFA1E6A84D5009D8720 /* EventInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98934AF91E6A84D5009D8720 /* EventInfoViewController.swift */; };
+		DD2DB3A91E96F00000E07CF8 /* CheckInTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2DB3A81E96F00000E07CF8 /* CheckInTableViewCell.swift */; };
 		E3F806F61A6E2BD5A752F002 /* Pods_CampusLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9072ACA91EB44818AC9E4446 /* Pods_CampusLive.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,7 +36,6 @@
 		616BAA071E407B5E008BF838 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		61EE5E4D1E367E5400D0A7E5 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		61EE5E511E367EBB00D0A7E5 /* LiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
-		61EE5E551E367F1200D0A7E5 /* FeaturedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedViewController.swift; sourceTree = "<group>"; };
 		61EE5E591E367F4900D0A7E5 /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		9072ACA91EB44818AC9E4446 /* Pods_CampusLive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CampusLive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		982452661E6E35870022D63C /* CampusLive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CampusLive.entitlements; sourceTree = "<group>"; };
@@ -49,6 +48,7 @@
 		98473CEF1E93471F00141911 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		98934AF91E6A84D5009D8720 /* EventInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInfoViewController.swift; sourceTree = "<group>"; };
 		B51F3F03A5B13767F8E57889 /* Pods-CampusLive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampusLive.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CampusLive/Pods-CampusLive.debug.xcconfig"; sourceTree = "<group>"; };
+		DD2DB3A81E96F00000E07CF8 /* CheckInTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckInTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,17 +103,9 @@
 			children = (
 				982452661E6E35870022D63C /* CampusLive.entitlements */,
 				983CE0651E3478CC0098D03B /* AppDelegate.swift */,
-				61EE5E511E367EBB00D0A7E5 /* LiveViewController.swift */,
-				61EE5E4D1E367E5400D0A7E5 /* LoginViewController.swift */,
-				616BAA011E402A1F008BF838 /* MeasurementHelper.swift */,
-				616BAA021E402A1F008BF838 /* AppState.swift */,
-				616BAA031E402A1F008BF838 /* Constants.swift */,
-				610E355E1E4E7A560041F418 /* ObjectView.swift */,
-				61EE5E551E367F1200D0A7E5 /* FeaturedViewController.swift */,
-				610E35601E4EB9520041F418 /* AddEventViewController.swift */,
-				61EE5E591E367F4900D0A7E5 /* MyProfileViewController.swift */,
-				98473CEF1E93471F00141911 /* HeaderView.swift */,
-				98934AF91E6A84D5009D8720 /* EventInfoViewController.swift */,
+				DD2DB3AA1E96F67C00E07CF8 /* Controllers */,
+				DD2DB3AC1E96F6E400E07CF8 /* Data */,
+				DD2DB3AD1E96F71000E07CF8 /* Views */,
 				983CE0691E3478CC0098D03B /* Main.storyboard */,
 				983CE06C1E3478CC0098D03B /* Assets.xcassets */,
 				983CE06E1E3478CC0098D03B /* LaunchScreen.storyboard */,
@@ -121,6 +113,38 @@
 				983CE0711E3478CC0098D03B /* Info.plist */,
 			);
 			path = CampusLive;
+			sourceTree = "<group>";
+		};
+		DD2DB3AA1E96F67C00E07CF8 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				61EE5E4D1E367E5400D0A7E5 /* LoginViewController.swift */,
+				61EE5E511E367EBB00D0A7E5 /* LiveViewController.swift */,
+				98934AF91E6A84D5009D8720 /* EventInfoViewController.swift */,
+				61EE5E591E367F4900D0A7E5 /* MyProfileViewController.swift */,
+				610E35601E4EB9520041F418 /* AddEventViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		DD2DB3AC1E96F6E400E07CF8 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				616BAA021E402A1F008BF838 /* AppState.swift */,
+				616BAA011E402A1F008BF838 /* MeasurementHelper.swift */,
+				616BAA031E402A1F008BF838 /* Constants.swift */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		DD2DB3AD1E96F71000E07CF8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				610E355E1E4E7A560041F418 /* ObjectView.swift */,
+				98473CEF1E93471F00141911 /* HeaderView.swift */,
+				DD2DB3A81E96F00000E07CF8 /* CheckInTableViewCell.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,6 +277,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD2DB3A91E96F00000E07CF8 /* CheckInTableViewCell.swift in Sources */,
 				616BAA041E402A1F008BF838 /* MeasurementHelper.swift in Sources */,
 				610E35611E4EB9520041F418 /* AddEventViewController.swift in Sources */,
 				983CE0661E3478CC0098D03B /* AppDelegate.swift in Sources */,
@@ -264,7 +289,6 @@
 				61EE5E521E367EBB00D0A7E5 /* LiveViewController.swift in Sources */,
 				98934AFA1E6A84D5009D8720 /* EventInfoViewController.swift in Sources */,
 				61EE5E4E1E367E5400D0A7E5 /* LoginViewController.swift in Sources */,
-				61EE5E561E367F1200D0A7E5 /* FeaturedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

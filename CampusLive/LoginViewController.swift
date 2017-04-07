@@ -12,7 +12,7 @@ import FBSDKLoginKit
 import FBSDKShareKit
 import SVProgressHUD
 
-class SignInViewController: UIViewController, UITextFieldDelegate {
+class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
 
     var homeViewController: UIViewController!
     var viewController: UIViewController!
@@ -24,7 +24,9 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     
     //var isOrgLogin: Bool = false
     
-
+    @IBOutlet weak var featureScrollView: UIScrollView!
+    
+    @IBOutlet weak var featurePageControl: UIPageControl!
     @IBOutlet weak var logoImage: UIImageView!
     //@IBOutlet weak var usernameField: UITextField!
     //@IBOutlet weak var passwordField: UITextField!
@@ -35,8 +37,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var customFBButton: UIButton!
     //@IBOutlet weak var activityInd: UIActivityIndicatorView!
     
-
-    
+    var featureImagesArray = [UIImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +55,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         //Custom FB Button Settings
         let customFBImage = UIImage(named: "facebook-login-blue")
         customFBButton.setImage(customFBImage, for: .normal)
-        customFBButton.frame = CGRect(x: 75, y: 540, width: 250, height: 45)
+        //customFBButton.frame = CGRect(x: 75, y: 540, width: 250, height: 45)
         customFBButton.addTarget(self, action: #selector(handleCustomFBLogin), for: .touchUpInside)
         
         //segmentView.selectedSegmentIndex = 0
@@ -118,9 +119,47 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
             showEmailAddress()
         }
         
-    }
- 
+        var contentWidth: CGFloat = 0.0
+        
+        featureImagesArray = [#imageLiteral(resourceName: "InstaLink"), #imageLiteral(resourceName: "SnapLink"), #imageLiteral(resourceName: "Pin"), #imageLiteral(resourceName: "girl")]
+        featureScrollView.isPagingEnabled = true
+        
+        featureScrollView.showsHorizontalScrollIndicator = false
+        
+        loadFeatures()
     
+        featureScrollView.delegate = self
+    }
+    
+    func loadFeatures() {
+
+        var scrollWidth = featureScrollView.frame.size.width
+        var index = 0
+        for feature in featureImagesArray {
+    
+            let featureImageView = UIImageView(image: feature)
+            featureImageView.contentMode = .scaleAspectFit
+            featureScrollView.addSubview(featureImageView)
+    
+            print("ScrollView Origin X: \(featureScrollView.frame.origin.x)")
+            print("ScrollView Widths: \(featureScrollView.frame.size.width * CGFloat(index))")
+            featureImageView.frame = CGRect(x: (featureScrollView.frame.origin.x - 67) + (featureScrollView.frame.size.width * CGFloat(index)), y: featureScrollView.frame.origin.y - 141, width: scrollWidth, height: featureScrollView.frame.size.height)
+            print("Image View frame: \(featureImageView.frame.origin.x)")
+            print("Image View frame: \(featureImageView.frame.origin.y)")
+            
+            index = index + 1
+        }
+        
+        featureScrollView.contentSize = CGSize(width: featureScrollView.frame.origin.x + scrollWidth * CGFloat(featureImagesArray.count), height: 241)
+        
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let page = scrollView.contentOffset.x / scrollView.frame.size.width
+        featurePageControl.currentPage = Int(page)
+    }
+
+ 
     func presentHomeViewController(){
         self.present(homeViewController, animated: true, completion: nil)
     }

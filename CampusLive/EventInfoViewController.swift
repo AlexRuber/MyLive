@@ -163,6 +163,7 @@ class EventInfoViewController: UIViewController {
         self.uid = FIRAuth.auth()?.currentUser?.uid
         
         let posts: [String : AnyObject] = [eventId!: true as AnyObject]
+        print("My id: \(uid)")
         userRef = userRef.child("user_checkins").child(uid)
         userRef.setValue(posts)
         
