@@ -23,6 +23,7 @@
 		983CE0701E3478CC0098D03B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 983CE06E1E3478CC0098D03B /* LaunchScreen.storyboard */; };
 		98473CF01E93471F00141911 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98473CEF1E93471F00141911 /* HeaderView.swift */; };
 		98934AFA1E6A84D5009D8720 /* EventInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98934AF91E6A84D5009D8720 /* EventInfoViewController.swift */; };
+		DD2DB3AF1E98D72B00E07CF8 /* EventBasicProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2DB3AE1E98D72B00E07CF8 /* EventBasicProperties.swift */; };
 		E3F806F61A6E2BD5A752F002 /* Pods_CampusLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9072ACA91EB44818AC9E4446 /* Pods_CampusLive.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		98473CEF1E93471F00141911 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		98934AF91E6A84D5009D8720 /* EventInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInfoViewController.swift; sourceTree = "<group>"; };
 		B51F3F03A5B13767F8E57889 /* Pods-CampusLive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampusLive.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CampusLive/Pods-CampusLive.debug.xcconfig"; sourceTree = "<group>"; };
+		DD2DB3AE1E98D72B00E07CF8 /* EventBasicProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventBasicProperties.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				616BAA021E402A1F008BF838 /* AppState.swift */,
+				DD2DB3AE1E98D72B00E07CF8 /* EventBasicProperties.swift */,
 				616BAA031E402A1F008BF838 /* Constants.swift */,
 				616BAA011E402A1F008BF838 /* MeasurementHelper.swift */,
 			);
@@ -286,6 +289,7 @@
 				616BAA061E402A1F008BF838 /* Constants.swift in Sources */,
 				98473CF01E93471F00141911 /* HeaderView.swift in Sources */,
 				61EE5E521E367EBB00D0A7E5 /* LiveViewController.swift in Sources */,
+				DD2DB3AF1E98D72B00E07CF8 /* EventBasicProperties.swift in Sources */,
 				6153D05B1E9884D7007E0CE7 /* CheckInTableViewCell.swift in Sources */,
 				98934AFA1E6A84D5009D8720 /* EventInfoViewController.swift in Sources */,
 				61EE5E4E1E367E5400D0A7E5 /* LoginViewController.swift in Sources */,

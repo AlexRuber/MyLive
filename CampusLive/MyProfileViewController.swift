@@ -23,10 +23,17 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBOutlet weak var checkInsTableView: UITableView!
 
-    var user_checkins = FIRDatabase.database().reference().child("user_checkins")
     let uid = FIRAuth.auth()?.currentUser?.uid
+    var user_checkins = FIRDatabase.database().reference()
+    var events = FIRDatabase.database().reference()
+    
+    var messages: [FIRDataSnapshot]! = []
     
     var checkInsArray = [String]()
+    var eventsArray : [Event] = []
+    
+    var eventTitle: String!
+    var startDate: String!
     
     //var showCampus: Bool?
     
@@ -52,9 +59,14 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        user_checkins = user_checkins.child("user_checkins").child(self.uid!)
         print("Profile View Controller Loaded.")
         
         campusSegment.layer.isHidden = true
+        
+        checkInsTableView.delegate = self
+        checkInsTableView.dataSource = self
         
         //Making Profile Image a Circle
         self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2
@@ -84,22 +96,59 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
         } else {
             print("User not Signed In.")
         }
-        checkInsTableView.delegate = self
-        checkInsTableView.dataSource = self
         
         self.user_checkins.observe(.value, with: {(snap) in
             if let userDict = snap.value as? [String: AnyObject] {
+                for each in userDict as [String: AnyObject] {
+                    self.checkInsArray.append(each.key)
+                }
+            }
+        })
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        self.eventTitle = ""
+        self.startDate = ""
+        events = events.child("events")
+        
+        self.events.observe(.value, with: {(snap) in
+            if let userDict = snap.value as? [String: AnyObject] {
+                //print("userDict: \(userDict)")
                 
                 for each in userDict as [String: AnyObject] {
-                    if each.key == self.uid {
-                        print("Each Key(userID): \(each.key)")
-                        print("Each value(eventID): \(each.value)")
-                        //self.checkInsArray.append(each.value as! String)
+                    
+                    for i in 0..<self.checkInsArray.count {
+                        if (each.key == self.checkInsArray[i]) {
+                            let title = each.value["title"] as! String
+                            let startDate = each.value["startDate"] as! String
+                            
+                            print("title: \(title)")
+                            
+                            
+                            self.eventsArray.append(Event(title: title, startDate: startDate))
+                            
+                            print("array title: \(self.eventsArray[0].title)")
+                            
+                            self.eventTitle = ""
+                            self.startDate = ""
+                        }
                     }
                 }
             }
         })
+        
+
+        DispatchQueue.main.async() {
+            self.checkInsTableView.reloadData()
+        }
     }
+    
+    /*func storeEventValues(i: Int) {
+        print("iiiiiiiiii: \(i)")
+        
+    }*/
     
     func addCampusToSegment(){
         
@@ -139,8 +188,8 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CheckInTableViewCell
         
-        cell.eventTitleLabel.text = "Hello"
-        cell.eventDateLabel.text = "Come over"
+        cell.eventTitleLabel.text = eventsArray[indexPath.row].title
+        cell.eventDateLabel.text = eventsArray[indexPath.row].startDate
         
         return cell
     }

@@ -12,7 +12,6 @@ import FBSDKLoginKit
 import FBSDKShareKit
 import SVProgressHUD
 
-
 class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
 
     var homeViewController: UIViewController!
@@ -156,6 +155,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let page = scrollView.contentOffset.x / scrollView.frame.size.width
         featurePageControl.currentPage = Int(page)
+        
     }
   
     //Check access token for already logged facebook
