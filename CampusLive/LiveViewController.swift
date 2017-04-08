@@ -88,9 +88,9 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         
         orgSegment.tintColor = UIColor.white
         
-        print(AppState.sharedInstance.dafaultCampus)
-        print(AppState.sharedInstance.defaultLatitude)
-        print(AppState.sharedInstance.defaultLongitude)
+        //print(AppState.sharedInstance.dafaultCampus)
+        //print(AppState.sharedInstance.defaultLatitude)
+        //print(AppState.sharedInstance.defaultLongitude)
         
         //Settings for the loading spinner
         let foregroundColor = UIColor(red: 27/255, green: 150/255, blue: 254/255, alpha: 1)
@@ -126,8 +126,10 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         //self.eventOrgRef = eventOrgRef.child("org_events")
         
         eventRef = FIRDatabase.database().reference().child("events")
-        
         self.uid = FIRAuth.auth()?.currentUser?.uid
+        
+        isVerifiedFlag = true
+        verifiedButton.setImage(UIImage(named: "OrgFilled"), for: UIControlState.normal)
         
         displayLiveEvents()
         //displayTrendingEvents()
@@ -480,8 +482,8 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
             let annotation: CampusLiveAnnotation = sender as! CampusLiveAnnotation
             
             
-            print("eventID: \(annotation.eventID)")
-            print("Title: \(annotation.title)")
+            //print("eventID: \(annotation.eventID)")
+            //print("Title: \(annotation.title)")
 
             destinationViewController.titleEvent = annotation.title
             destinationViewController.subtitleEvent = annotation.subtitle
@@ -517,7 +519,7 @@ extension LiveViewController: MKMapViewDelegate{
                 view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 view.image = UIImage(named: "bgpin")
 
-                print("eventID: \(annotation.eventID)")
+               // print("eventID: \(annotation.eventID)")
                 let imageUrl: URL = NSURL(string: annotation.imageUrl) as! URL
                 var data = try? Data(contentsOf: imageUrl)
                 var profileImage : UIImage = UIImage(data: data!)!
@@ -539,7 +541,7 @@ extension LiveViewController: MKMapViewDelegate{
                 let twentyOnePlus = UIColor(red: 0.0, green: 51/255.0, blue: 102/255.0, alpha: 1.0)
                 let check_ins = UIColor(red: 67/255.0, green: 199/255.0, blue: 61/255.0, alpha: 1.0)
                 
-                print("colorType: \(annotation.colorType)")
+                //print("colorType: \(annotation.colorType)")
                 //eventUserImage.layer.borderColor = otherEvents.cgColor
                 switch annotation.colorType! {
                     case "live":

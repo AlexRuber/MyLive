@@ -32,13 +32,14 @@ class EventInfoViewController: UIViewController {
     //@IBOutlet weak var startDate: UILabel!
     //@IBOutlet weak var startDate: UILabel!
     @IBOutlet weak var startDate: UILabel!
+    @IBOutlet weak var endDate: UILabel!
     @IBOutlet weak var checkInBtn: UIButton!
     
     var titleEvent: String?
     var subtitleEvent: String?
     var imageEventUrl: String?
-    var startDateStr: String?
-    var endDateStr: String?
+    var startDateStr: String!
+    var endDateStr: String!
     var eventId: String?
     var coordinate: CLLocationCoordinate2D?
    
@@ -65,25 +66,15 @@ class EventInfoViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
- 
     @IBAction func checkInBtnTapped(_ sender: Any) {
-        
-        //goingbutton.setTitle("Checked In", for: UIControlState.disabled)
-        
         MeasurementHelper.checkInEvent();
-        
         self.uid = FIRAuth.auth()?.currentUser?.uid
-        
         let posts: [String : AnyObject] = [eventId!: true as AnyObject]
         userRef = userRef.child("user_checkins").child(uid)
         userRef.updateChildValues(posts)
-        //userRef.setValue(posts)
-        
         ref = ref.child("event_users").child(eventId!)
         let post1: [String : AnyObject] = [uid: true as AnyObject]
         ref.updateChildValues(post1)
-        //ref.setValue(post1)
-        
         let addEventPopup = UIAlertController(title: "Checked In", message: "You are now checked in to the event!", preferredStyle: .alert)
         DispatchQueue.main.async {
             addEventPopup.addAction(UIAlertAction(title: "OK", style: .default, handler: {
@@ -92,69 +83,43 @@ class EventInfoViewController: UIViewController {
             }))
             self.present(addEventPopup, animated: true, completion: nil)
         }
-        
-        /*
-        let addEventPopup = UIAlertController(title: "Checked In", message: "You are now checked in to the event!", preferredStyle: .alert)
-        //let defaultAction = UIAlertAction(title: "Close", style: .default, handler: nil)
-        addEventPopup.addAction(UIAlertAction(title: "OK", style: .default, handler: {
-            action in
-            //present view controller, not dismissed, but reloaded from prototype
-            self.dismiss(animated: true, completion: nil)
-        }
-            )
-        )
-        present(addEventPopup, animated: true, completion: nil)
-        //self.dismiss(animated: true, completion: nil)
-        */
     }
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //self.event_social_info = event_social_info.child("event_social_info")
-        
         eventDescription.isEditable = false
-        
         self.title = titleEvent
-        
         ref = FIRDatabase.database().reference()
-        //eventRef = FIRDatabase.database().reference().child("events")
         eventInfoRef = FIRDatabase.database().reference().child("event_social_info")
-        
         eventTitle?.text = titleEvent
-        eventSubtitle?.text = subtitleEvent
         
-        //eventDescription.text = descriptionEvent
+        let subtitleArr = subtitleEvent?.components(separatedBy: ", ")
+        let venue    = subtitleArr?[0]
+        //let start = subtitleArr?[1]
+        eventSubtitle?.text = venue
+        //print(start)
         
-        print(endDateStr)
         let dateFormatter = DateFormatter()
-        let endDateString: String = endDateStr!
-        print(endDateString)
+        dateFormatter.locale = NSLocale.current
+        dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
         let formatter: DateFormatter = DateFormatter()
-        formatter.dateFormat = "E hh:mm a"
-        let newEndDate = dateFormatter.date(from: endDateString)
-        //let endDate = formatter.date(from: endDateString)
-        print(newEndDate)
-        //startDate.text = String(describing: endDate)
-        
-        //startDate.isHidden = true
+        formatter.dateFormat = "E, MMM d, h:mm a"
+        let newStartDate = dateFormatter.date(from: startDateStr)
+        let newEndDate = dateFormatter.date(from: endDateStr)
+        let newStart = formatter.string(from: newStartDate!)
+        let newEnd = formatter.string(from: newEndDate!)
+        self.startDate.text = newStart
+        self.endDate.text = newEnd
         
         displayEventInfo()
         
-        let imageUrl: URL = NSURL(string: imageEventUrl!) as! URL
-        
+        let imageUrl: URL = NSURL(string: imageEventUrl!)! as URL
         let data = try? Data(contentsOf: imageUrl)
-        
         let profileImage : UIImage = UIImage(data: data!)!
-        
         eventProfileImage.image = profileImage
-        
         eventProfileImage.layer.cornerRadius = eventProfileImage.frame.size.width / 2
         eventProfileImage.layer.cornerRadius = eventProfileImage.frame.size.height / 2
         eventProfileImage.clipsToBounds = true
-        
-        // Do any additional setup after loading the view.
     }
     
     func displayEventInfo(){
