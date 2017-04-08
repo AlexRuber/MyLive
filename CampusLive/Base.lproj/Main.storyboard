@@ -46,7 +46,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="OrgUnfilled"/>
                                 <state key="selected" image="OrgFilled"/>
-                                <state key="highlighted" image="F41A1E4F-F835-468D-91F9-6747FE7878AC"/>
+                                <state key="highlighted" image="F16AF0D6-9B64-4D58-974F-A6F9E4B5DC17"/>
                                 <connections>
                                     <action selector="isVerifiedClicked:" destination="HeC-Kp-YOV" eventType="touchUpInside" id="Olw-jQ-8sP"/>
                                 </connections>
@@ -603,7 +603,7 @@
         <image name="BrandonProfilePic" width="337" height="324"/>
         <image name="CheckInButton" width="676" height="164"/>
         <image name="Destination" width="200" height="200"/>
-        <image name="F41A1E4F-F835-468D-91F9-6747FE7878AC" width="557" height="557">
+        <image name="F16AF0D6-9B64-4D58-974F-A6F9E4B5DC17" width="557" height="557">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
