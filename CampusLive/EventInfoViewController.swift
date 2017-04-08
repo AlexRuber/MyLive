@@ -70,6 +70,8 @@ class EventInfoViewController: UIViewController {
         
         //goingbutton.setTitle("Checked In", for: UIControlState.disabled)
         
+        MeasurementHelper.checkInEvent();
+        
         self.uid = FIRAuth.auth()?.currentUser?.uid
         
         let posts: [String : AnyObject] = [eventId!: true as AnyObject]

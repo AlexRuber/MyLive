@@ -37,6 +37,8 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBAction func logoutBtnPressed(_ sender: Any) {
    //MARK: Actions
         
+        MeasurementHelper.sendLogoutEvent()
+        
         //signs the user out of firebase app
         try! FIRAuth.auth()!.signOut()
         

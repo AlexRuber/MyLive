@@ -26,7 +26,27 @@ class MeasurementHelper: NSObject {
         FIRAnalytics.logEvent(withName: "logout", parameters: nil)
     }
     
-    static func sendMessageEvent() {
-        FIRAnalytics.logEvent(withName: "message", parameters: nil)
+    static func checkInEvent(){
+        FIRAnalytics.logEvent(withName: "event_checkins", parameters: nil)
+    }
+    
+    static func liveAnnotationClickEvent(){
+        FIRAnalytics.logEvent(withName: "live_annotation_clicks", parameters: nil)
+    }
+    
+    static func trendingSegmentEvent(){
+        FIRAnalytics.logEvent(withName: "trending_segment", parameters: nil)
+    }
+    
+    static func liveSegmentEvent(){
+        FIRAnalytics.logEvent(withName: "live_segment", parameters: nil)
+    }
+    
+    static func settingsClickEvent(){
+        FIRAnalytics.logEvent(withName: "setting_clicks", parameters: nil)
+    }
+    
+    static func infoEventAnnotationEvent(){
+        FIRAnalytics.logEvent(withName: "info_event_annotation_clicks", parameters: nil)
     }
 }
