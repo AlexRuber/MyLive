@@ -13,7 +13,7 @@ import FBSDKShareKit
 import SVProgressHUD
 
 
-class SignInViewController: UIViewController, UITextFieldDelegate {
+class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
 
     var homeViewController: UIViewController!
     var viewController: UIViewController!
@@ -27,6 +27,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     
 
     @IBOutlet weak var logoImage: UIImageView!
+    @IBOutlet weak var featureScrollView: UIScrollView!
+    @IBOutlet weak var featurePageControl: UIPageControl!
     //@IBOutlet weak var usernameField: UITextField!
     //@IBOutlet weak var passwordField: UITextField!
     //@IBOutlet weak var loginInButton: UIButton!
@@ -36,8 +38,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var customFBButton: UIButton!
     //@IBOutlet weak var activityInd: UIActivityIndicatorView!
     
-
-    
+    var featureImagesArray = [UIImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,18 +110,55 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         return (true)
         
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if (FBSDKAccessToken.current() != nil && FIRAuth.auth()?.currentUser != nil)
+        {
+            //performSegue(withIdentifier:"SignInToFP", sender: self)
+            showEmailAddress()
+        }
+        
+        var contentWidth: CGFloat = 0.0
+        
+        featureImagesArray = [#imageLiteral(resourceName: "InstaLink"), #imageLiteral(resourceName: "SnapLink"), #imageLiteral(resourceName: "Pin"), #imageLiteral(resourceName: "dollarSign")]
+        featureScrollView.isPagingEnabled = true
+        
+        featureScrollView.showsHorizontalScrollIndicator = false
+        
+        loadFeatures()
+        
+        featureScrollView.delegate = self
+    }
+    
+    func loadFeatures() {
+        
+        var scrollWidth = featureScrollView.frame.size.width
+        var index = 0
+        for feature in featureImagesArray {
+            
+            let featureImageView = UIImageView(image: feature)
+            featureImageView.contentMode = .scaleAspectFit
+            featureScrollView.addSubview(featureImageView)
+            
+            print("ScrollView Origin X: \(featureScrollView.frame.origin.x)")
+            print("ScrollView Widths: \(featureScrollView.frame.size.width * CGFloat(index))")
+            featureImageView.frame = CGRect(x: (featureScrollView.frame.origin.x - 67) + (featureScrollView.frame.size.width * CGFloat(index)), y: featureScrollView.frame.origin.y - 141, width: scrollWidth, height: featureScrollView.frame.size.height)
+            print("Image View frame: \(featureImageView.frame.origin.x)")
+            print("Image View frame: \(featureImageView.frame.origin.y)")
+            
+            index = index + 1
+        }
+        
+        featureScrollView.contentSize = CGSize(width: featureScrollView.frame.origin.x + scrollWidth * CGFloat(featureImagesArray.count), height: 241)
+        
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let page = scrollView.contentOffset.x / scrollView.frame.size.width
+        featurePageControl.currentPage = Int(page)
+    }
   
     //Check access token for already logged facebook
-
-    override func viewDidAppear(_ animated: Bool) {
-        if(FBSDKAccessToken.current() != nil && FIRAuth.auth()?.currentUser != nil){
-            //user is sign in
-            //Put here something what you want to do if user is sign in
-            print("user is already signed in")
-            //performSegue(withIdentifier: "SignInToFP", sender: nil)
-        }
-}
- 
     
     func presentHomeViewController(){
         self.present(homeViewController, animated: true, completion: nil)

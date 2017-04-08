@@ -13,7 +13,7 @@ import FirebaseStorage
 import FirebaseDatabase
 import FBSDKLoginKit
 
-class MyProfileViewController: UIViewController {
+class MyProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var profileName: UILabel!
@@ -21,7 +21,12 @@ class MyProfileViewController: UIViewController {
 
     @IBOutlet weak var campusSegment: UISegmentedControl!
     
+    @IBOutlet weak var checkInsTableView: UITableView!
 
+    var user_checkins = FIRDatabase.database().reference().child("user_checkins")
+    let uid = FIRAuth.auth()?.currentUser?.uid
+    
+    var checkInsArray = [String]()
     
     //var showCampus: Bool?
     
@@ -77,7 +82,21 @@ class MyProfileViewController: UIViewController {
         } else {
             print("User not Signed In.")
         }
+        checkInsTableView.delegate = self
+        checkInsTableView.dataSource = self
         
+        self.user_checkins.observe(.value, with: {(snap) in
+            if let userDict = snap.value as? [String: AnyObject] {
+                
+                for each in userDict as [String: AnyObject] {
+                    if each.key == self.uid {
+                        print("Each Key(userID): \(each.key)")
+                        print("Each value(eventID): \(each.value)")
+                        //self.checkInsArray.append(each.value as! String)
+                    }
+                }
+            }
+        })
     }
     
     func addCampusToSegment(){
@@ -111,8 +130,22 @@ class MyProfileViewController: UIViewController {
 
     }
     
- 
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return checkInsArray.count
+    }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CheckInTableViewCell
+        
+        cell.eventTitleLabel.text = "Hello"
+        cell.eventDateLabel.text = "Come over"
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
     
         //AppState.sharedInstance.dafaultCampus = userDict?[campusSegment.titleForSegment(at: campusSegment.selectedSegmentIndex)!] as! String
          //print(AppState.sharedInstance.dafaultCampus)

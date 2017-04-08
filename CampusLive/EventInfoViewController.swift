@@ -67,6 +67,31 @@ class EventInfoViewController: UIViewController {
     
  
     @IBAction func checkInBtnTapped(_ sender: Any) {
+        
+        //goingbutton.setTitle("Checked In", for: UIControlState.disabled)
+        
+        self.uid = FIRAuth.auth()?.currentUser?.uid
+        
+        let posts: [String : AnyObject] = [eventId!: true as AnyObject]
+        userRef = userRef.child("user_checkins").child(uid)
+        userRef.updateChildValues(posts)
+        //userRef.setValue(posts)
+        
+        ref = ref.child("event_users").child(eventId!)
+        let post1: [String : AnyObject] = [uid: true as AnyObject]
+        ref.updateChildValues(post1)
+        //ref.setValue(post1)
+        
+        let addEventPopup = UIAlertController(title: "Checked In", message: "You are now checked in to the event!", preferredStyle: .alert)
+        DispatchQueue.main.async {
+            addEventPopup.addAction(UIAlertAction(title: "OK", style: .default, handler: {
+                action in
+                self.dismiss(animated: true, completion: nil)
+            }))
+            self.present(addEventPopup, animated: true, completion: nil)
+        }
+        
+        /*
         let addEventPopup = UIAlertController(title: "Checked In", message: "You are now checked in to the event!", preferredStyle: .alert)
         //let defaultAction = UIAlertAction(title: "Close", style: .default, handler: nil)
         addEventPopup.addAction(UIAlertAction(title: "OK", style: .default, handler: {
@@ -78,7 +103,7 @@ class EventInfoViewController: UIViewController {
         )
         present(addEventPopup, animated: true, completion: nil)
         //self.dismiss(animated: true, completion: nil)
-        
+        */
     }
     
 
@@ -158,26 +183,7 @@ class EventInfoViewController: UIViewController {
     
     @IBAction func onEventCheckedIn(_ sender: Any) {
         
-        goingbutton.setTitle("Checked In", for: UIControlState.disabled)
         
-        self.uid = FIRAuth.auth()?.currentUser?.uid
-        
-        let posts: [String : AnyObject] = [eventId!: true as AnyObject]
-        userRef = userRef.child("user_checkins").child(uid)
-        userRef.setValue(posts)
-        
-        ref = ref.child("event_users").child(eventId!)
-        let post1: [String : AnyObject] = [uid: true as AnyObject]
-        ref.setValue(post1)
-        
-        let addEventPopup = UIAlertController(title: "Done", message: "You have checked-in for the event.", preferredStyle: .alert)
-        DispatchQueue.main.async {
-            addEventPopup.addAction(UIAlertAction(title: "OK", style: .default, handler: {
-                action in
-                self.dismiss(animated: true, completion: nil)
-            }))
-            self.present(addEventPopup, animated: true, completion: nil)
-        }
     }
     
 }

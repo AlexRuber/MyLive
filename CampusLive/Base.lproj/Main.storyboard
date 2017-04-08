@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WSx-hg-qa9">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WSx-hg-qa9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -57,7 +57,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="OrgUnfilled"/>
                                         <state key="selected" image="OrgFilled"/>
-                                        <state key="highlighted" image="A8DEA1FD-C74A-4CBD-9C94-7E2D23F8045E"/>
+                                        <state key="highlighted" image="button:6Lo-8P-0qz:image"/>
                                         <connections>
                                             <action selector="isVerifiedClicked:" destination="HeC-Kp-YOV" eventType="touchUpInside" id="Olw-jQ-8sP"/>
                                         </connections>
@@ -229,10 +229,6 @@
                                 <rect key="frame" x="47" y="535" width="280" height="58"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Rounded Rectangle 3" translatesAutoresizingMaskIntoConstraints="NO" id="evs-M9-5u3">
-                                <rect key="frame" x="67" y="213" width="240" height="240"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="By signing in you agree to our Terms and Conditions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Im-Oe-v3M">
                                 <rect key="frame" x="81" y="626" width="213" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -254,12 +250,24 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5ux-RF-0AR">
+                                <rect key="frame" x="67" y="141" width="240" height="241"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </scrollView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="NF3-5f-5KP">
+                                <rect key="frame" x="139" y="412" width="96" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="pageIndicatorTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="currentPageIndicatorTintColor" red="0.16862745100000001" green="0.18039215689999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
                         <outlet property="customFBButton" destination="3U8-14-arI" id="u2Z-6u-zvr"/>
+                        <outlet property="featurePageControl" destination="NF3-5f-5KP" id="9SB-M8-DIR"/>
+                        <outlet property="featureScrollView" destination="5ux-RF-0AR" id="qev-LU-zRC"/>
                         <segue destination="HeC-Kp-YOV" kind="show" identifier="SignInToFP" id="Jw6-FQ-Kg9"/>
                     </connections>
                 </viewController>
@@ -363,77 +371,52 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rRx-vD-nvl">
-                                <rect key="frame" x="8" y="372" width="359" height="30"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0DH-fc-pXY">
+                                <rect key="frame" x="0.0" y="370" width="375" height="297"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Fq-dE-Uz3">
-                                <rect key="frame" x="8" y="410" width="359" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ryC-sR-NrL">
-                                <rect key="frame" x="8" y="486" width="359" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Uh-OW-3lQ">
-                                <rect key="frame" x="8" y="448" width="359" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dqb-jP-zH5">
-                                <rect key="frame" x="8" y="524" width="359" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qIe-hR-t8B">
-                                <rect key="frame" x="8" y="562" width="359" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Info Button" translatesAutoresizingMaskIntoConstraints="NO" id="yQ2-FL-NHU">
-                                <rect key="frame" x="344" y="380" width="15" height="15"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Info Button" translatesAutoresizingMaskIntoConstraints="NO" id="QoV-Gw-eDv">
-                                <rect key="frame" x="344" y="456" width="15" height="15"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Info Button" translatesAutoresizingMaskIntoConstraints="NO" id="yCT-a4-0p8">
-                                <rect key="frame" x="344" y="418" width="15" height="15"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Info Button" translatesAutoresizingMaskIntoConstraints="NO" id="lLg-nZ-fyz">
-                                <rect key="frame" x="344" y="494" width="15" height="15"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Info Button" translatesAutoresizingMaskIntoConstraints="NO" id="PWT-HF-aSg">
-                                <rect key="frame" x="344" y="532" width="15" height="15"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Info Button" translatesAutoresizingMaskIntoConstraints="NO" id="DMH-Vc-SLH">
-                                <rect key="frame" x="344" y="570" width="15" height="15"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="ViT-bB-rnA" customClass="CheckInTableViewCell" customModule="CampusLive" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ViT-bB-rnA" id="48O-bO-wYs">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Today" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qqX-lZ-lWd">
+                                                    <rect key="frame" x="8" y="23" width="247" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="info" translatesAutoresizingMaskIntoConstraints="NO" id="U2I-s6-TJM">
+                                                    <rect key="frame" x="316" y="0.0" width="39" height="36"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Party" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e4a-7p-3YQ">
+                                                    <rect key="frame" x="8" y="0.0" width="247" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="eventDateLabel" destination="qqX-lZ-lWd" id="Du4-lL-Xl7"/>
+                                            <outlet property="eventTitleLabel" destination="e4a-7p-3YQ" id="aBe-VE-FAi"/>
+                                            <outlet property="infoImageView" destination="U2I-s6-TJM" id="FOG-kS-RLw"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="campusSegment" destination="UqM-Pb-UxN" id="kZq-ln-fOw"/>
+                        <outlet property="checkInsTableView" destination="0DH-fc-pXY" id="0EU-PS-wWJ"/>
                         <outlet property="profileImage" destination="qCi-XR-LVQ" id="vYN-Ml-Isd"/>
                         <outlet property="profileName" destination="cQo-Ab-2Iy" id="NsK-ID-xxI"/>
                     </connections>
@@ -605,7 +588,25 @@
         </scene>
     </scenes>
     <resources>
-        <image name="A8DEA1FD-C74A-4CBD-9C94-7E2D23F8045E" width="557" height="557">
+        <image name="BrandonProfilePic" width="337" height="324"/>
+        <image name="CheckInButton" width="676" height="164"/>
+        <image name="Destination" width="200" height="200"/>
+        <image name="FBLink" width="200" height="200"/>
+        <image name="InstaLink" width="200" height="200"/>
+        <image name="Layer 1 copy" width="100" height="96"/>
+        <image name="Logout Rounded Down_50px_2" width="34" height="34"/>
+        <image name="NavButtonFilled" width="581" height="581"/>
+        <image name="NavigationButton" width="262" height="262"/>
+        <image name="OrgFilled" width="401" height="333"/>
+        <image name="OrgUnfilled" width="33" height="32"/>
+        <image name="Post" width="424" height="100"/>
+        <image name="Rounded Rectangle 1-2" width="620" height="282"/>
+        <image name="Settings Filled" width="548" height="548"/>
+        <image name="Settings Unfilled" width="34" height="34"/>
+        <image name="TrendingFilled" width="20" height="20"/>
+        <image name="UCSDTritons copy" width="89" height="101"/>
+        <image name="back" width="13" height="22"/>
+        <image name="button:6Lo-8P-0qz:image" width="557" height="557">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -21343,26 +21344,7 @@ ABL58gAS+f8AEvoEABL6BgAS+ggAEvoNABL6FQAS+hgAEvodABL6JQAS+igAEvo6ABL6PQAS+kIAAAAA
 AAAEAQAAAAAAAABBAAAAAAAAAAAAAAAAABL6RA
 </mutableData>
         </image>
-        <image name="BrandonProfilePic" width="337" height="324"/>
-        <image name="CheckInButton" width="676" height="164"/>
-        <image name="Destination" width="200" height="200"/>
-        <image name="FBLink" width="200" height="200"/>
-        <image name="Info Button" width="25" height="29"/>
-        <image name="InstaLink" width="200" height="200"/>
-        <image name="Layer 1 copy" width="100" height="96"/>
-        <image name="Logout Rounded Down_50px_2" width="34" height="34"/>
-        <image name="NavButtonFilled" width="581" height="581"/>
-        <image name="NavigationButton" width="262" height="262"/>
-        <image name="OrgFilled" width="401" height="333"/>
-        <image name="OrgUnfilled" width="33" height="32"/>
-        <image name="Post" width="424" height="100"/>
-        <image name="Rounded Rectangle 1-2" width="620" height="282"/>
-        <image name="Rounded Rectangle 3" width="519" height="481"/>
-        <image name="Settings Filled" width="548" height="548"/>
-        <image name="Settings Unfilled" width="34" height="34"/>
-        <image name="TrendingFilled" width="20" height="20"/>
-        <image name="UCSDTritons copy" width="89" height="101"/>
-        <image name="back" width="13" height="22"/>
+        <image name="info" width="20" height="23"/>
         <image name="san-diego-state-aztecs" width="118" height="81"/>
     </resources>
 </document>
