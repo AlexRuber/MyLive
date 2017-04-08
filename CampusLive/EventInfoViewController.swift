@@ -142,8 +142,6 @@ class EventInfoViewController: UIViewController {
         eventProfileImage.layer.cornerRadius = eventProfileImage.frame.size.height / 2
         eventProfileImage.clipsToBounds = true
         
-        
-        
         // Do any additional setup after loading the view.
     }
     

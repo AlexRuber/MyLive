@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WSx-hg-qa9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WSx-hg-qa9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -390,10 +390,6 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="info" translatesAutoresizingMaskIntoConstraints="NO" id="U2I-s6-TJM">
-                                                    <rect key="frame" x="316" y="0.0" width="39" height="36"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Party" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e4a-7p-3YQ">
                                                     <rect key="frame" x="8" y="0.0" width="247" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -401,12 +397,19 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xXm-fY-RNd">
+                                                    <rect key="frame" x="331" y="8" width="29" height="28"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Button" image="info"/>
+                                                    <connections>
+                                                        <segue destination="2dk-cX-uy2" kind="show" identifier="detailSegue" id="dXb-Fs-PBd"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="eventDateLabel" destination="qqX-lZ-lWd" id="Du4-lL-Xl7"/>
                                             <outlet property="eventTitleLabel" destination="e4a-7p-3YQ" id="aBe-VE-FAi"/>
-                                            <outlet property="infoImageView" destination="U2I-s6-TJM" id="FOG-kS-RLw"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -21347,4 +21350,7 @@ AAAEAQAAAAAAAABBAAAAAAAAAAAAAAAAABL6RA
         <image name="info" width="20" height="23"/>
         <image name="san-diego-state-aztecs" width="118" height="81"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="dXb-Fs-PBd"/>
+    </inferredMetricsTieBreakers>
 </document>

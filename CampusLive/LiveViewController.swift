@@ -130,7 +130,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         self.uid = FIRAuth.auth()?.currentUser?.uid
         
         displayLiveEvents()
-        displayTrendingEvents()
+        //displayTrendingEvents()
         
     }
     
