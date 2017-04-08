@@ -18,8 +18,10 @@ class MyProfileViewController: UIViewController {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var profileName: UILabel!
     //@IBOutlet weak var campusSegment: UISegmentedControl!
-   
+
     @IBOutlet weak var campusSegment: UISegmentedControl!
+    
+
     
     //var showCampus: Bool?
     
@@ -43,8 +45,9 @@ class MyProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         print("Profile View Controller Loaded.")
+        
+        campusSegment.layer.isHidden = true
         
         //Making Profile Image a Circle
         self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2

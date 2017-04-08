@@ -65,14 +65,10 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     var eventRef: FIRDatabaseReference!
     
     @IBAction func refreshLocationButton(_ sender: Any) {
-        locationManager.requestLocation()
         let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-        mapView.showsUserLocation = true
-        mapView.setUserTrackingMode(.follow, animated: true)
         self.mapView.setRegion(region, animated: true)
-        mapView!.setRegion(region, animated: true)
-        mapView!.setCenter(mapView!.userLocation.coordinate, animated: true)
+        self.mapView.showsUserLocation = true
         print("Did tap user location")
         
     }
@@ -81,11 +77,16 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     
     //Hides pins after posting event
     override func viewDidAppear(_ animated: Bool) {
-        
+        self.mapView.showsUserLocation = true
+
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.mapView.showsUserLocation = true
+        
+        orgSegment.tintColor = UIColor.white
         
         print(AppState.sharedInstance.dafaultCampus)
         print(AppState.sharedInstance.defaultLatitude)
@@ -103,6 +104,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         //eventDescriptive.isHidden = true
         //eventPin.isHidden = true
         
+        
         let span = MKCoordinateSpanMake(0.018, 0.018)
         let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: AppState.sharedInstance.defaultLatitude as! CLLocationDegrees, longitude: AppState.sharedInstance.defaultLongitude as! CLLocationDegrees), span: span)
         mapView.setRegion(region, animated: true)
@@ -117,7 +119,6 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
 
         self.locationManager.delegate = self
         self.locationManager.startUpdatingLocation()
-        self.mapView.showsUserLocation = true
         self.mapView.delegate = self
         self.locationManager.delegate = self
     
@@ -301,6 +302,9 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     
     func displayTrendingEvents() {
         
+        self.mapView.showsUserLocation = true
+
+        
         let allAnnotations = self.mapView.annotations
         
         for annotation in allAnnotations {
@@ -365,14 +369,17 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         switch orgSegment.selectedSegmentIndex {
         case 0:
             if(isVerifiedFlag){
-                displayTrendingEvents()
-                
+               
+                self.mapView.showsUserLocation = true
+
             }else{
+                
+                self.mapView.showsUserLocation = true
+
                 //displayLiveEvents()
             }
         case 1:
             if(isVerifiedFlag){
-                
                 displayTrendingEvents()
                 
                 //displayOrgTrendingEvents()
@@ -399,7 +406,6 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
             //Zoom out to all of San Diego
             isVerifiedFlag = false
             verifiedButton.setImage(UIImage(named: "OrgUnfilled"), for: UIControlState.normal)
-            
             let SDspan = MKCoordinateSpanMake(0.269, 0.269)
             let SDregion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 32.793181, longitude: -117.164898), span: SDspan)
             mapView.setRegion(SDregion, animated: true)
@@ -438,12 +444,10 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     
     //this method is called by the framework on locationManager.requestLocation();
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location = locations.last
-        _ = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
-        self.mapView.centerCoordinate = (location?.coordinate)!
-        let reg = MKCoordinateRegionMakeWithDistance((location?.coordinate)!, 1500, 1500)
-        self.mapView.setRegion(reg, animated: true)
-        self.locationManager.stopUpdatingLocation()
+        self.location = locations.last! as CLLocation
+        self.mapView.showsUserLocation = true
+
+
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -499,7 +503,8 @@ extension LiveViewController: MKMapViewDelegate{
                 view = dequeuedView
             } else {
                 view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                
+                view.image = UIImage(named: "bgpin")
+
                 print("eventID: \(annotation.eventID)")
                 let imageUrl: URL = NSURL(string: annotation.imageUrl) as! URL
                 var data = try? Data(contentsOf: imageUrl)
@@ -551,9 +556,9 @@ extension LiveViewController: MKMapViewDelegate{
                     //eventUserImage.layer.borderColor = otherEvents.cgColor
                 }
                 
-                let f = CGRect(x: 1, y: 1, width: 40, height: 40) // CGRect(2,2,46,43)
+                let f = CGRect(x: 1, y: 1, width: 35, height: 35) // CGRect(2,2,46,43)
                 eventUserImage.frame = f
-                eventUserImage.layer.cornerRadius = 22.0
+                eventUserImage.layer.cornerRadius = 18.0
                 eventUserImage.layer.masksToBounds = true
                 
                 view.addSubview(eventUserImage)
@@ -597,7 +602,6 @@ extension LiveViewController: MKMapViewDelegate{
                     */
                 }
                 
-                view.image = UIImage(named: "whiteCircularPin")
                 /*
                 users.observe(.value, with: {(snap) in
                     if let userDict = snap.value as? [String: AnyObject] {
