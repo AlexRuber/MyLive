@@ -78,6 +78,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     //Hides pins after posting event
     override func viewDidAppear(_ animated: Bool) {
         self.mapView.showsUserLocation = true
+        UIApplication.shared.statusBarStyle = .lightContent
 
     }
     
@@ -486,7 +487,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
 extension LiveViewController: MKMapViewDelegate{
     
     func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
-        
+        SVProgressHUD.dismiss()
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -692,7 +693,7 @@ extension LiveViewController: MKMapViewDelegate{
     
     func mapViewWillStartLoadingMap(_ mapView: MKMapView) {
        //SVProgressHUD.show(withStatus: "Loading Map :)")
-       // SVProgressHUD.show()
+        SVProgressHUD.show()
         
     }
     

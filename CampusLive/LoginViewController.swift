@@ -42,7 +42,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
                     
-        
+        UIApplication.shared.statusBarStyle = .default
+
         users = FIRDatabase.database().reference().child("users")
         
         //Activity Spinner Hidden to Begin
