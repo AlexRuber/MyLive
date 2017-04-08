@@ -78,7 +78,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     //Hides pins after posting event
     override func viewDidAppear(_ animated: Bool) {
         self.mapView.showsUserLocation = true
-
+        UIApplication.shared.statusBarStyle = .lightContent
     }
     
     override func viewDidLoad() {
@@ -324,7 +324,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         let currentDateTimeInterval = currentDate.timeIntervalSince1970
         let dayFromNow = currentDateTimeInterval + 86400.0
         
-        691200
+        //691200
         let formatter: DateFormatter = DateFormatter()
         formatter.dateFormat = "E hh:mm a"
         
@@ -498,7 +498,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
 extension LiveViewController: MKMapViewDelegate{
     
     func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
-        
+        SVProgressHUD.dismiss()
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -527,7 +527,7 @@ extension LiveViewController: MKMapViewDelegate{
                 
                 let eventUserImage : UIImageView = UIImageView(image: profileImage)
                 
-                eventUserImage.layer.borderWidth = 1
+                eventUserImage.layer.borderWidth = 1.5
                 //eventUserImage.layer.borderColor = otherEvents.cgColor
                 
                 // creating colors
@@ -568,9 +568,9 @@ extension LiveViewController: MKMapViewDelegate{
                     //eventUserImage.layer.borderColor = otherEvents.cgColor
                 }
                 
-                let f = CGRect(x: 1, y: 1, width: 35, height: 35) // CGRect(2,2,46,43)
+                let f = CGRect(x: 1, y: 1, width: 30, height: 30) // CGRect(2,2,46,43)
                 eventUserImage.frame = f
-                eventUserImage.layer.cornerRadius = 18.0
+                eventUserImage.layer.cornerRadius = 15.0
                 eventUserImage.layer.masksToBounds = true
                 
                 view.addSubview(eventUserImage)
@@ -723,7 +723,7 @@ extension LiveViewController: MKMapViewDelegate{
     
     func mapViewWillStartLoadingMap(_ mapView: MKMapView) {
        //SVProgressHUD.show(withStatus: "Loading Map :)")
-       // SVProgressHUD.show()
+       SVProgressHUD.show()
         
     }
     
