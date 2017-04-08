@@ -39,7 +39,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
     //@IBOutlet weak var activityInd: UIActivityIndicatorView!
     
     var featureImagesArray = [UIImage]()
-    var titleArray = ["See what's happening around you ...", "Keep up to date with your college campus...", "Discover San Diego"]
+    var titleArray = ["Keep up to date with your college campus...", "Discover San Diego"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -127,6 +127,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
         featureScrollView.showsHorizontalScrollIndicator = false
         
         loadFeatures()
+        titleLabel.text = titleArray[0]
         
         featureScrollView.delegate = self
     }
@@ -135,8 +136,9 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
         
         var scrollWidth = featureScrollView.frame.size.width
         var index = 0
+        titleLabel.text = titleArray[0]
         for feature in featureImagesArray {
-            
+        
             let featureImageView = UIImageView(image: feature)
             featureImageView.contentMode = .scaleAspectFit
             featureScrollView.addSubview(featureImageView)
@@ -157,7 +159,13 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let page = scrollView.contentOffset.x / scrollView.frame.size.width
         featurePageControl.currentPage = Int(page)
-        
+        if(featurePageControl.currentPage == 0){
+            titleLabel.text = titleArray[0]
+        }else if(featurePageControl.currentPage == 1){
+            titleLabel.text = titleArray[1]
+        }else{
+            titleLabel.text = ""
+        }
     }
   
     //Check access token for already logged facebook
