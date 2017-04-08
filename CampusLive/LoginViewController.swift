@@ -14,6 +14,7 @@ import SVProgressHUD
 
 class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
 
+    @IBOutlet weak var titleLabel: UILabel!
     var homeViewController: UIViewController!
     var viewController: UIViewController!
     //var signupViewController: UIViewController!
@@ -38,6 +39,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
     //@IBOutlet weak var activityInd: UIActivityIndicatorView!
     
     var featureImagesArray = [UIImage]()
+    var titleArray = ["See what's happening around you ...", "Keep up to date with your college campus...", "Discover San Diego"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,7 +121,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
         
         var contentWidth: CGFloat = 0.0
         
-        featureImagesArray = [#imageLiteral(resourceName: "page1"), #imageLiteral(resourceName: "page2"), #imageLiteral(resourceName: "page3")]
+        featureImagesArray = [#imageLiteral(resourceName: "page1"), #imageLiteral(resourceName: "page3"), #imageLiteral(resourceName: "page2")]
         featureScrollView.isPagingEnabled = true
         
         featureScrollView.showsHorizontalScrollIndicator = false
