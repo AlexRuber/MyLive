@@ -126,8 +126,18 @@ class EventInfoViewController: UIViewController {
         eventSubtitle?.text = subtitleEvent
         
         //eventDescription.text = descriptionEvent
-        //print(endDateStr)
-        startDate.text = endDateStr
+        
+        print(endDateStr)
+        let dateFormatter = DateFormatter()
+        let endDateString: String = endDateStr!
+        print(endDateString)
+        let formatter: DateFormatter = DateFormatter()
+        formatter.dateFormat = "E hh:mm a"
+        let newEndDate = dateFormatter.date(from: endDateString)
+        //let endDate = formatter.date(from: endDateString)
+        print(newEndDate)
+        //startDate.text = String(describing: endDate)
+        
         //startDate.isHidden = true
         
         displayEventInfo()
