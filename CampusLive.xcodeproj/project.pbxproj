@@ -1,0 +1,450 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		610E355F1E4E7A560041F418 /* ObjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610E355E1E4E7A560041F418 /* ObjectView.swift */; };
+		610E35611E4EB9520041F418 /* AddEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610E35601E4EB9520041F418 /* AddEventViewController.swift */; };
+		616BAA041E402A1F008BF838 /* MeasurementHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616BAA011E402A1F008BF838 /* MeasurementHelper.swift */; };
+		616BAA051E402A1F008BF838 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616BAA021E402A1F008BF838 /* AppState.swift */; };
+		616BAA061E402A1F008BF838 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 616BAA031E402A1F008BF838 /* Constants.swift */; };
+		616BAA081E407B5E008BF838 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 616BAA071E407B5E008BF838 /* GoogleService-Info.plist */; };
+		61EE5E4E1E367E5400D0A7E5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EE5E4D1E367E5400D0A7E5 /* LoginViewController.swift */; };
+		61EE5E521E367EBB00D0A7E5 /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EE5E511E367EBB00D0A7E5 /* LiveViewController.swift */; };
+		61EE5E561E367F1200D0A7E5 /* FeaturedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EE5E551E367F1200D0A7E5 /* FeaturedViewController.swift */; };
+		61EE5E5A1E367F4900D0A7E5 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EE5E591E367F4900D0A7E5 /* MyProfileViewController.swift */; };
+		983CE0661E3478CC0098D03B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983CE0651E3478CC0098D03B /* AppDelegate.swift */; };
+		983CE06B1E3478CC0098D03B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 983CE0691E3478CC0098D03B /* Main.storyboard */; };
+		983CE06D1E3478CC0098D03B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 983CE06C1E3478CC0098D03B /* Assets.xcassets */; };
+		983CE0701E3478CC0098D03B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 983CE06E1E3478CC0098D03B /* LaunchScreen.storyboard */; };
+		98934AFA1E6A84D5009D8720 /* EventInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98934AF91E6A84D5009D8720 /* EventInfoViewController.swift */; };
+		989B04151E98A33700F241BD /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989B04141E98A33700F241BD /* HeaderView.swift */; };
+		E3F806F61A6E2BD5A752F002 /* Pods_CampusLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9072ACA91EB44818AC9E4446 /* Pods_CampusLive.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1BEB0BE0D549D64BB2443FD3 /* Pods-CampusLive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampusLive.release.xcconfig"; path = "Pods/Target Support Files/Pods-CampusLive/Pods-CampusLive.release.xcconfig"; sourceTree = "<group>"; };
+		610E355E1E4E7A560041F418 /* ObjectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectView.swift; sourceTree = "<group>"; };
+		610E35601E4EB9520041F418 /* AddEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEventViewController.swift; sourceTree = "<group>"; };
+		616BAA011E402A1F008BF838 /* MeasurementHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementHelper.swift; sourceTree = "<group>"; };
+		616BAA021E402A1F008BF838 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		616BAA031E402A1F008BF838 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		616BAA071E407B5E008BF838 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		61EE5E4D1E367E5400D0A7E5 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		61EE5E511E367EBB00D0A7E5 /* LiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
+		61EE5E551E367F1200D0A7E5 /* FeaturedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedViewController.swift; sourceTree = "<group>"; };
+		61EE5E591E367F4900D0A7E5 /* MyProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
+		9072ACA91EB44818AC9E4446 /* Pods_CampusLive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CampusLive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		982452661E6E35870022D63C /* CampusLive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CampusLive.entitlements; sourceTree = "<group>"; };
+		983CE0621E3478CC0098D03B /* CampusLive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampusLive.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		983CE0651E3478CC0098D03B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		983CE06A1E3478CC0098D03B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		983CE06C1E3478CC0098D03B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		983CE06F1E3478CC0098D03B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		983CE0711E3478CC0098D03B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		98934AF91E6A84D5009D8720 /* EventInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInfoViewController.swift; sourceTree = "<group>"; };
+		989B04141E98A33700F241BD /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		B51F3F03A5B13767F8E57889 /* Pods-CampusLive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CampusLive.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CampusLive/Pods-CampusLive.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		983CE05F1E3478CC0098D03B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E3F806F61A6E2BD5A752F002 /* Pods_CampusLive.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5DD3E946B5A7DB3BDE918FED /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B51F3F03A5B13767F8E57889 /* Pods-CampusLive.debug.xcconfig */,
+				1BEB0BE0D549D64BB2443FD3 /* Pods-CampusLive.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		5E3484DA3D4363DAB0487D48 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9072ACA91EB44818AC9E4446 /* Pods_CampusLive.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		983CE0591E3478CC0098D03B = {
+			isa = PBXGroup;
+			children = (
+				983CE0641E3478CC0098D03B /* CampusLive */,
+				983CE0631E3478CC0098D03B /* Products */,
+				5DD3E946B5A7DB3BDE918FED /* Pods */,
+				5E3484DA3D4363DAB0487D48 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		983CE0631E3478CC0098D03B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				983CE0621E3478CC0098D03B /* CampusLive.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		983CE0641E3478CC0098D03B /* CampusLive */ = {
+			isa = PBXGroup;
+			children = (
+				982452661E6E35870022D63C /* CampusLive.entitlements */,
+				983CE0651E3478CC0098D03B /* AppDelegate.swift */,
+				61EE5E511E367EBB00D0A7E5 /* LiveViewController.swift */,
+				61EE5E4D1E367E5400D0A7E5 /* LoginViewController.swift */,
+				616BAA011E402A1F008BF838 /* MeasurementHelper.swift */,
+				616BAA021E402A1F008BF838 /* AppState.swift */,
+				616BAA031E402A1F008BF838 /* Constants.swift */,
+				610E355E1E4E7A560041F418 /* ObjectView.swift */,
+				61EE5E551E367F1200D0A7E5 /* FeaturedViewController.swift */,
+				610E35601E4EB9520041F418 /* AddEventViewController.swift */,
+				61EE5E591E367F4900D0A7E5 /* MyProfileViewController.swift */,
+				989B04141E98A33700F241BD /* HeaderView.swift */,
+				98934AF91E6A84D5009D8720 /* EventInfoViewController.swift */,
+				983CE0691E3478CC0098D03B /* Main.storyboard */,
+				983CE06C1E3478CC0098D03B /* Assets.xcassets */,
+				983CE06E1E3478CC0098D03B /* LaunchScreen.storyboard */,
+				616BAA071E407B5E008BF838 /* GoogleService-Info.plist */,
+				983CE0711E3478CC0098D03B /* Info.plist */,
+			);
+			path = CampusLive;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		983CE0611E3478CC0098D03B /* CampusLive */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 983CE0741E3478CC0098D03B /* Build configuration list for PBXNativeTarget "CampusLive" */;
+			buildPhases = (
+				300C4AD01D61397B591ACAB0 /* [CP] Check Pods Manifest.lock */,
+				983CE05E1E3478CC0098D03B /* Sources */,
+				983CE05F1E3478CC0098D03B /* Frameworks */,
+				983CE0601E3478CC0098D03B /* Resources */,
+				A78A70104A17EBBB2C077478 /* [CP] Embed Pods Frameworks */,
+				1AC0046AEED65E44B1CFF5F4 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CampusLive;
+			productName = CampusLive;
+			productReference = 983CE0621E3478CC0098D03B /* CampusLive.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		983CE05A1E3478CC0098D03B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0800;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Mihai Ruber";
+				TargetAttributes = {
+					983CE0611E3478CC0098D03B = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = DSX523G48J;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 0;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 983CE05D1E3478CC0098D03B /* Build configuration list for PBXProject "CampusLive" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 983CE0591E3478CC0098D03B;
+			productRefGroup = 983CE0631E3478CC0098D03B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				983CE0611E3478CC0098D03B /* CampusLive */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		983CE0601E3478CC0098D03B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				983CE0701E3478CC0098D03B /* LaunchScreen.storyboard in Resources */,
+				616BAA081E407B5E008BF838 /* GoogleService-Info.plist in Resources */,
+				983CE06D1E3478CC0098D03B /* Assets.xcassets in Resources */,
+				983CE06B1E3478CC0098D03B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1AC0046AEED65E44B1CFF5F4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CampusLive/Pods-CampusLive-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		300C4AD01D61397B591ACAB0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A78A70104A17EBBB2C077478 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CampusLive/Pods-CampusLive-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		983CE05E1E3478CC0098D03B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				616BAA041E402A1F008BF838 /* MeasurementHelper.swift in Sources */,
+				610E35611E4EB9520041F418 /* AddEventViewController.swift in Sources */,
+				983CE0661E3478CC0098D03B /* AppDelegate.swift in Sources */,
+				616BAA051E402A1F008BF838 /* AppState.swift in Sources */,
+				61EE5E5A1E367F4900D0A7E5 /* MyProfileViewController.swift in Sources */,
+				610E355F1E4E7A560041F418 /* ObjectView.swift in Sources */,
+				616BAA061E402A1F008BF838 /* Constants.swift in Sources */,
+				989B04151E98A33700F241BD /* HeaderView.swift in Sources */,
+				61EE5E521E367EBB00D0A7E5 /* LiveViewController.swift in Sources */,
+				98934AFA1E6A84D5009D8720 /* EventInfoViewController.swift in Sources */,
+				61EE5E4E1E367E5400D0A7E5 /* LoginViewController.swift in Sources */,
+				61EE5E561E367F1200D0A7E5 /* FeaturedViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		983CE0691E3478CC0098D03B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				983CE06A1E3478CC0098D03B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		983CE06E1E3478CC0098D03B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				983CE06F1E3478CC0098D03B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		983CE0721E3478CC0098D03B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: raghavnyati90@gmail.com (PHLTDDYBQ9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		983CE0731E3478CC0098D03B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: raghavnyati90@gmail.com (PHLTDDYBQ9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		983CE0751E3478CC0098D03B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B51F3F03A5B13767F8E57889 /* Pods-CampusLive.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = DSX523G48J;
+				INFOPLIST_FILE = CampusLive/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.firstversion.campuslive;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		983CE0761E3478CC0098D03B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1BEB0BE0D549D64BB2443FD3 /* Pods-CampusLive.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = DSX523G48J;
+				INFOPLIST_FILE = CampusLive/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.firstversion.campuslive;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		983CE05D1E3478CC0098D03B /* Build configuration list for PBXProject "CampusLive" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				983CE0721E3478CC0098D03B /* Debug */,
+				983CE0731E3478CC0098D03B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		983CE0741E3478CC0098D03B /* Build configuration list for PBXNativeTarget "CampusLive" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				983CE0751E3478CC0098D03B /* Debug */,
+				983CE0761E3478CC0098D03B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 983CE05A1E3478CC0098D03B /* Project object */;
+}
