@@ -120,7 +120,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
         
         var contentWidth: CGFloat = 0.0
         
-        featureImagesArray = [#imageLiteral(resourceName: "InstaLink"), #imageLiteral(resourceName: "SnapLink"), #imageLiteral(resourceName: "Pin"), #imageLiteral(resourceName: "dollarSign")]
+        featureImagesArray = [#imageLiteral(resourceName: "page1"), #imageLiteral(resourceName: "page2"), #imageLiteral(resourceName: "page3")]
         featureScrollView.isPagingEnabled = true
         
         featureScrollView.showsHorizontalScrollIndicator = false
