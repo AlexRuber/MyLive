@@ -515,7 +515,7 @@ extension LiveViewController: MKMapViewDelegate{
                 
                 let eventUserImage : UIImageView = UIImageView(image: profileImage)
                 
-                eventUserImage.layer.borderWidth = 1
+                eventUserImage.layer.borderWidth = 1.5
                 //eventUserImage.layer.borderColor = otherEvents.cgColor
                 
                 // creating colors
@@ -556,9 +556,9 @@ extension LiveViewController: MKMapViewDelegate{
                     //eventUserImage.layer.borderColor = otherEvents.cgColor
                 }
                 
-                let f = CGRect(x: 1, y: 1, width: 35, height: 35) // CGRect(2,2,46,43)
+                let f = CGRect(x: 1, y: 1, width: 30, height: 30) // CGRect(2,2,46,43)
                 eventUserImage.frame = f
-                eventUserImage.layer.cornerRadius = 18.0
+                eventUserImage.layer.cornerRadius = 15.0
                 eventUserImage.layer.masksToBounds = true
                 
                 view.addSubview(eventUserImage)
