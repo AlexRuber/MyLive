@@ -78,7 +78,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     //Hides pins after posting event
     override func viewDidAppear(_ animated: Bool) {
         self.mapView.showsUserLocation = true
-
+        UIApplication.shared.statusBarStyle = .lightContent
     }
     
     override func viewDidLoad() {
@@ -148,6 +148,9 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     
     
     func displayLiveEvents() {
+        
+        MeasurementHelper.liveAnnotationClickEvent()
+        
         let allAnnotations = self.mapView.annotations
         
         for annotation in allAnnotations {
@@ -302,6 +305,8 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     
     func displayTrendingEvents() {
         
+        MeasurementHelper.trendingSegmentEvent()
+        
         self.mapView.showsUserLocation = true
 
         
@@ -319,6 +324,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         let currentDateTimeInterval = currentDate.timeIntervalSince1970
         let dayFromNow = currentDateTimeInterval + 86400.0
         
+        //691200
         let formatter: DateFormatter = DateFormatter()
         formatter.dateFormat = "E hh:mm a"
         
@@ -336,23 +342,28 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
                     let dateAsString = startDateSubstring
                     let newDate = dateFormatter.date(from: dateAsString)
                     let startDateTimeInterval = newDate?.timeIntervalSince1970
+                    //let endDateFormat = dateFormatter.date(from: endDateSubstring)
+                    //let endDateTimeInterval = endDateFormat?.timeIntervalSince1970
+                    let trendingEventEndDate = currentDateTimeInterval + 691200
                     
-                    if (Double(startDateTimeInterval!) > dayFromNow) {
-                        let stringDate: String! = formatter.string(from: newDate!)
-                        let autoID = each.key
-                        let name = each.value["title"] as! String
-                        let venue = each.value["venue"] as! String
-                        let subtitle = "\(venue)" + ", " + "\(stringDate!)"
-                        let latitude = each.value["latitude"] as! NSNumber
-                        let longitude = each.value["longitude"] as! NSNumber
-                        
-                        let imageUrl = each.value["image"] as! String
-                        let type = each.value["type"] as! String
-                        let colorType = each.value["colorType"] as! String
-                        
-                        let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: subtitle, imageUrl: imageUrl, eventId: autoID, endDate: endDateSubstring, startDate: startDateSubstring, type: type, colorType: colorType)
-                        
-                        self.mapView.addAnnotation(clAnnotation)
+                    if(Double(trendingEventEndDate) > Double(startDateTimeInterval!)){
+                        if (Double(startDateTimeInterval!) > dayFromNow) {
+                            let stringDate: String! = formatter.string(from: newDate!)
+                            let autoID = each.key
+                            let name = each.value["title"] as! String
+                            let venue = each.value["venue"] as! String
+                            let subtitle = "\(venue)" + ", " + "\(stringDate!)"
+                            let latitude = each.value["latitude"] as! NSNumber
+                            let longitude = each.value["longitude"] as! NSNumber
+                            
+                            let imageUrl = each.value["image"] as! String
+                            let type = each.value["type"] as! String
+                            let colorType = each.value["colorType"] as! String
+                            
+                            let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: subtitle, imageUrl: imageUrl, eventId: autoID, endDate: endDateSubstring, startDate: startDateSubstring, type: type, colorType: colorType)
+                            
+                            self.mapView.addAnnotation(clAnnotation)
+                        }
                     }
                 }
             }
@@ -369,14 +380,14 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         switch orgSegment.selectedSegmentIndex {
         case 0:
             if(isVerifiedFlag){
-               
+                displayLiveEvents()
                 self.mapView.showsUserLocation = true
 
             }else{
                 
                 self.mapView.showsUserLocation = true
 
-                //displayLiveEvents()
+                displayLiveEvents()
             }
         case 1:
             if(isVerifiedFlag){
@@ -384,7 +395,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
                 
                 //displayOrgTrendingEvents()
             }else{
-                //displayTrendingEvents()
+                displayTrendingEvents()
             }
         default:
             break
@@ -414,6 +425,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     }
     
     func infoButtonTapped() {
+        MeasurementHelper.infoEventAnnotationEvent()
         performSegue(withIdentifier: "detailEventVC", sender: self)
     }
     /*
@@ -486,7 +498,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
 extension LiveViewController: MKMapViewDelegate{
     
     func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
-        
+        SVProgressHUD.dismiss()
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -515,7 +527,7 @@ extension LiveViewController: MKMapViewDelegate{
                 
                 let eventUserImage : UIImageView = UIImageView(image: profileImage)
                 
-                eventUserImage.layer.borderWidth = 1
+                eventUserImage.layer.borderWidth = 1.5
                 //eventUserImage.layer.borderColor = otherEvents.cgColor
                 
                 // creating colors
@@ -556,9 +568,9 @@ extension LiveViewController: MKMapViewDelegate{
                     //eventUserImage.layer.borderColor = otherEvents.cgColor
                 }
                 
-                let f = CGRect(x: 1, y: 1, width: 35, height: 35) // CGRect(2,2,46,43)
+                let f = CGRect(x: 1, y: 1, width: 30, height: 30) // CGRect(2,2,46,43)
                 eventUserImage.frame = f
-                eventUserImage.layer.cornerRadius = 18.0
+                eventUserImage.layer.cornerRadius = 15.0
                 eventUserImage.layer.masksToBounds = true
                 
                 view.addSubview(eventUserImage)
@@ -566,7 +578,7 @@ extension LiveViewController: MKMapViewDelegate{
                 let dateFormatter = DateFormatter()
                 dateFormatter.locale = NSLocale.current
                 
-                let dateAsString = annotation.endDate
+                let dateAsString = annotation.startDate
                 dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
                 let newDate = dateFormatter.date(from: dateAsString!)
                 
@@ -581,10 +593,27 @@ extension LiveViewController: MKMapViewDelegate{
                 formatter.dateFormat = "E HH:mm"
                 //let stringDate: String = formatter.string(from: newDate!)
                 
+                let endDateString = annotation.endDate
+                let endDateTime = dateFormatter.date(from: endDateString!)
+                let endDateInt = endDateTime?.timeIntervalSince1970
+                
                 if (integerDate! < timeInterval) {
+                    if(timeInterval < endDateInt!){
+                        eventUserImage.layer.borderColor = live_events.cgColor
+                        let btn2 = UIButton()
+                        btn2.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+                        btn2.setImage(UIImage(named: "live"), for: UIControlState())
+                        view.rightCalloutAccessoryView = btn2
+                    }else{
+                        let btn2 = UIButton()
+                        btn2.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+                        btn2.setImage(UIImage(named: "info"), for: UIControlState())
+                        view.rightCalloutAccessoryView = btn2
+                    }
                     /*
                     if(AppState.sharedInstance.userPostCount! > 1){
-                        AppState.sharedInstance.userPostCount = AppState.sharedInstance.userPostCount! - 1
+                        AppState.sharedI
+                     nstance.userPostCount = AppState.sharedInstance.userPostCount! - 1
                         self.users.child(self.uid!).updateChildValues(["postCount" : AppState.sharedInstance.userPostCount as Any])
                     }
                     */
@@ -600,6 +629,13 @@ extension LiveViewController: MKMapViewDelegate{
                         }
                     }
                     */
+                }
+                else{
+                    
+                    let btn2 = UIButton()
+                    btn2.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+                    btn2.setImage(UIImage(named: "info"), for: UIControlState())
+                    view.rightCalloutAccessoryView = btn2
                 }
                 
                 /*
@@ -629,11 +665,6 @@ extension LiveViewController: MKMapViewDelegate{
                 view.leftCalloutAccessoryView?.layer.cornerRadius = (view.leftCalloutAccessoryView?.frame.width)!/2
                 view.leftCalloutAccessoryView?.clipsToBounds = true
                 
-                
-                let btn2 = UIButton()
-                btn2.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-                btn2.setImage(UIImage(named: "info"), for: UIControlState())
-                view.rightCalloutAccessoryView = btn2
                 // btn2.addTarget(self, action: "infoButtonTapped", for: .touchUpInside)
                 
             }
@@ -692,7 +723,7 @@ extension LiveViewController: MKMapViewDelegate{
     
     func mapViewWillStartLoadingMap(_ mapView: MKMapView) {
        //SVProgressHUD.show(withStatus: "Loading Map :)")
-       // SVProgressHUD.show()
+       SVProgressHUD.show()
         
     }
     

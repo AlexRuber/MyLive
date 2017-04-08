@@ -289,7 +289,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
     func selectCampus(){
         campusRef = FIRDatabase.database().reference().child("campuses").child("san_diego")
         
-        let passwordPrompt = UIAlertController(title: "Campus", message: "Select your Campus:", preferredStyle: UIAlertControllerStyle.alert)
+        //let passwordPrompt = UIAlertController(title: "Campus", message: "Select your Campus:", preferredStyle: UIAlertControllerStyle.alert)
         
         campusRef.observe(.value
             , with: {(snap) in
@@ -299,7 +299,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
                 
                 for each in userDict as [String: AnyObject] {
                     
-                    passwordPrompt.addAction(UIAlertAction(title: each.key, style: UIAlertActionStyle.default, handler: { (action) -> Void in
+                    //passwordPrompt.addAction(UIAlertAction(title: each.key, style: UIAlertActionStyle.default, handler: { (action) -> Void in
                         AppState.sharedInstance.dafaultCampus = each.key
                         AppState.sharedInstance.defaultLatitude = each.value["latitude"] as? NSNumber
                         AppState.sharedInstance.defaultLongitude = each.value["longitude"] as? NSNumber
@@ -308,7 +308,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
                         self.performSegue(withIdentifier: Constants.Segues.SignInToFp, sender: nil)
                         
                         //self.dismiss(animated: true, completion: nil)
-                    }))
+                   // }))
                     
                 }
             }
@@ -316,7 +316,9 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
             print(error.localizedDescription)
         }
         //DispatchQueue.main.async {
-        present(passwordPrompt, animated: true, completion: nil)
+        
+        //present(passwordPrompt, animated: true, completion: nil)
+        
         //self.dismiss(animated: true, completion: nil)
     }
     
