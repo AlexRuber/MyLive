@@ -185,7 +185,7 @@
 				TargetAttributes = {
 					983CE0611E3478CC0098D03B = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = DSX523G48J;
+						DevelopmentTeam = EJD57Q9L26;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -422,7 +422,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = DSX523G48J;
+				DEVELOPMENT_TEAM = EJD57Q9L26;
 				INFOPLIST_FILE = CampusLive/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -440,7 +440,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = DSX523G48J;
+				DEVELOPMENT_TEAM = EJD57Q9L26;
 				INFOPLIST_FILE = CampusLive/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
