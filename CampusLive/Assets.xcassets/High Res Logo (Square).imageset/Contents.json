@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Campus Button (filled).png",
+      "filename" : "High Res Logo (Square).png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Campus Button (filled)-1.png",
+      "filename" : "High Res Logo (Square)-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Campus Button (filled)-2.png",
+      "filename" : "High Res Logo (Square)-2.png",
       "scale" : "3x"
     }
   ],

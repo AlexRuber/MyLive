@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Campus Button (filled).png",
+      "filename" : "Log-In (User Blank).jpg",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Campus Button (filled)-1.png",
+      "filename" : "Log-In (User Blank)-1.jpg",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Campus Button (filled)-2.png",
+      "filename" : "Log-In (User Blank)-2.jpg",
       "scale" : "3x"
     }
   ],

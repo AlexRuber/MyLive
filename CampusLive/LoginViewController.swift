@@ -39,7 +39,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
     //@IBOutlet weak var activityInd: UIActivityIndicatorView!
     
     var featureImagesArray = [UIImage]()
-    var titleArray = ["Keep up to date with your college campus...", "Discover San Diego"]
+    var titleArray = ["See whats happening around you...", "Discover San Diego", "Wow bro"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +57,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
         //Custom FB Button Settings
         let customFBImage = UIImage(named: "facebook-login-blue")
         customFBButton.setImage(customFBImage, for: .normal)
-        customFBButton.frame = CGRect(x: 62, y: 540, width: 250, height: 45)
+        customFBButton.frame = CGRect(x: 32, y: 340
+            , width: 300, height: 532)
         customFBButton.addTarget(self, action: #selector(handleCustomFBLogin), for: .touchUpInside)
         
         //segmentView.selectedSegmentIndex = 0
