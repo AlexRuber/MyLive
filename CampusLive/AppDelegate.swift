@@ -30,7 +30,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         
         UIApplication.shared.statusBarStyle = .lightContent
 
-        
+        let navBgImage: UIImage = UIImage(named: "Active Tab")!
+
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        UINavigationBar.appearance().tintColor = UIColor.white
+        UINavigationBar.appearance().setBackgroundImage(navBgImage, for: .default)
+        UINavigationBar.appearance().titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Avenir", size: 18)!, NSForegroundColorAttributeName: UIColor.white]
+        UINavigationBar.appearance().frame = CGRect(x: 0, y: 0, width: 150, height: 70.0)
+       
         return true
     }
     

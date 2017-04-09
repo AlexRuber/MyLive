@@ -52,7 +52,6 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     
     @IBOutlet weak var verifiedButton: UIButton!
     
-    @IBOutlet weak var refreshLocaiton: UIButton!
     @IBOutlet weak var eventDescriptive: UIButton!
     @IBOutlet weak var orgSegment: UISegmentedControl!
     @IBOutlet weak var showAllSwitch: UISwitch!
@@ -65,76 +64,146 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     var eventRef: FIRDatabaseReference!
     
     @IBAction func refreshLocationButton(_ sender: Any) {
+        locationManager.requestLocation()
         let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        mapView.showsUserLocation = true
+        mapView.setUserTrackingMode(.follow, animated: true)
         self.mapView.setRegion(region, animated: true)
-        self.mapView.showsUserLocation = true
+        mapView!.setRegion(region, animated: true)
+        mapView!.setCenter(mapView!.userLocation.coordinate, animated: true)
         print("Did tap user location")
+    }
+    
+ 
+    //this method is called by the framework on locationManager.requestLocation();
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        self.location = locations.last! as CLLocation
+        
+        
+        let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
+        
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1))
+        self.mapView.setRegion(region, animated: true)
+        self.locationManager.stopUpdatingLocation()
         
     }
- 
-  
     
     //Hides pins after posting event
     override func viewDidAppear(_ animated: Bool) {
         self.mapView.showsUserLocation = true
-        UIApplication.shared.statusBarStyle = .lightContent
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        
+        
+        super.viewDidLoad()
+        
+        
         
         self.mapView.showsUserLocation = true
         
+        
+        
         orgSegment.tintColor = UIColor.white
         
+        
+        
         //print(AppState.sharedInstance.dafaultCampus)
+        
         //print(AppState.sharedInstance.defaultLatitude)
+        
         //print(AppState.sharedInstance.defaultLongitude)
         
+        
+        
         //Settings for the loading spinner
+        
         let foregroundColor = UIColor(red: 27/255, green: 150/255, blue: 254/255, alpha: 1)
+        
         let backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+        
         SVProgressHUD.show()
+        
         SVProgressHUD.setForegroundColor(foregroundColor)
+        
         SVProgressHUD.setBackgroundColor(backgroundColor)
+        
         //Minus Button is hidden to start
+        
         //subtractEventButton.isHidden = true
         
+        
+        
         //eventDescriptive.isHidden = true
+        
         //eventPin.isHidden = true
         
         
+        
+        
+        
         let span = MKCoordinateSpanMake(0.018, 0.018)
+        
         let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: AppState.sharedInstance.defaultLatitude as! CLLocationDegrees, longitude: AppState.sharedInstance.defaultLongitude as! CLLocationDegrees), span: span)
+        
         mapView.setRegion(region, animated: true)
+        
+        
         
         isAuthorizedtoGetUserLocation()
         
+        
+        
         if CLLocationManager.locationServicesEnabled(){
+            
             self.locationManager.delegate = self
+            
             self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            
             locationManager.requestLocation()
+            
         }
-
+        
+        
+        
         self.locationManager.delegate = self
+        
         self.locationManager.startUpdatingLocation()
+        
         self.mapView.delegate = self
+        
         self.locationManager.delegate = self
-    
+        
+        
+        
         //self.eventBusRef = eventBusRef.child("business_events")
+        
         //self.eventOrgRef = eventOrgRef.child("org_events")
         
+        
+        
         eventRef = FIRDatabase.database().reference().child("events")
+        
         self.uid = FIRAuth.auth()?.currentUser?.uid
         
+        
+        
         isVerifiedFlag = true
+        
         verifiedButton.setImage(UIImage(named: "OrgFilled"), for: UIControlState.normal)
         
+        
+        
         displayLiveEvents()
+        
         //displayTrendingEvents()
         
     }
+    
+    
     
     //if we have no permission to access user location, then ask user for permission.
     func isAuthorizedtoGetUserLocation() {
@@ -456,13 +525,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         }
     }
     
-    //this method is called by the framework on locationManager.requestLocation();
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.location = locations.last! as CLLocation
-        self.mapView.showsUserLocation = true
-
-
-    }
+ 
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Errors: " + error.localizedDescription)
@@ -608,7 +671,7 @@ extension LiveViewController: MKMapViewDelegate{
                         view.rightCalloutAccessoryView = btn2
                     }else{
                         let btn2 = UIButton()
-                        btn2.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+                        btn2.frame = CGRect(x: 0, y: 0, width: 18, height: 20)
                         btn2.setImage(UIImage(named: "Info Button-1"), for: UIControlState())
                         view.rightCalloutAccessoryView = btn2
                     }
