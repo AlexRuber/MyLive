@@ -43,7 +43,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                    
+        
+        UIApplication.shared.statusBarStyle = .default
         
         users = FIRDatabase.database().reference().child("users")
         
@@ -57,7 +58,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
         //Custom FB Button Settings
         let customFBImage = UIImage(named: "facebook-login-blue")
         customFBButton.setImage(customFBImage, for: .normal)
-        customFBButton.frame = CGRect(x: 32, y: 340
+        customFBButton.frame = CGRect(x: 32, y: 320
             , width: 300, height: 532)
         customFBButton.addTarget(self, action: #selector(handleCustomFBLogin), for: .touchUpInside)
         
@@ -122,7 +123,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
         
         var contentWidth: CGFloat = 0.0
         
-        featureImagesArray = [#imageLiteral(resourceName: "pic1"), #imageLiteral(resourceName: "pic2"), #imageLiteral(resourceName: "pic3")]
+        featureImagesArray = [#imageLiteral(resourceName: "Log In 1"), #imageLiteral(resourceName: "Log In 2"), #imageLiteral(resourceName: "Log In 3")]
         featureScrollView.isPagingEnabled = true
         
         featureScrollView.showsHorizontalScrollIndicator = false

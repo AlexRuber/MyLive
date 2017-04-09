@@ -60,6 +60,8 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UIApplication.shared.statusBarStyle = .lightContent
+
         user_checkins = user_checkins.child("user_checkins").child(self.uid!)
         print("Profile View Controller Loaded.")
         
