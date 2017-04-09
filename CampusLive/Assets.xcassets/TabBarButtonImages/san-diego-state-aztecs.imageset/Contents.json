@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "san-diego-state-aztecs.png",
+      "filename" : "sandiegostateaztecs.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "san-diego-state-aztecs-1.png",
+      "filename" : "sandiegostateaztecs-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "san-diego-state-aztecs-2.png",
+      "filename" : "sandiegostateaztecs-2.png",
       "scale" : "3x"
     }
   ],

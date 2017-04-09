@@ -603,13 +603,13 @@ extension LiveViewController: MKMapViewDelegate{
                     if(timeInterval < endDateInt!){
                         eventUserImage.layer.borderColor = live_events.cgColor
                         let btn2 = UIButton()
-                        btn2.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+                        btn2.frame = CGRect(x: 0, y: 0, width: 38, height: 20)
                         btn2.setImage(UIImage(named: "live"), for: UIControlState())
                         view.rightCalloutAccessoryView = btn2
                     }else{
                         let btn2 = UIButton()
                         btn2.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-                        btn2.setImage(UIImage(named: "info"), for: UIControlState())
+                        btn2.setImage(UIImage(named: "Info Button-1"), for: UIControlState())
                         view.rightCalloutAccessoryView = btn2
                     }
                     /*
