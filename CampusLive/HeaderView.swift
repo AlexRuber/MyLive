@@ -1,14 +1,14 @@
 //
-//  HeaderView.swift
+//  headerView.swift
 //  CampusLive
 //
-//  Created by Mihai Ruber on 4/3/17.
+//  Created by Mihai Ruber on 4/8/17.
 //  Copyright © 2017 Mihai Ruber. All rights reserved.
 //
 
 import UIKit
 
-class HeaderView: UIView {
+class headerView: UIImageView {
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,5 +20,4 @@ class HeaderView: UIView {
         layer.cornerRadius = 3.0
         
     }
-
 }
