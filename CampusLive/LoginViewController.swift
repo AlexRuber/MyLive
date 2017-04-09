@@ -39,7 +39,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
     //@IBOutlet weak var activityInd: UIActivityIndicatorView!
     
     var featureImagesArray = [UIImage]()
-    var titleArray = ["See whats happening around you...", "Discover San Diego", "Wow bro"]
+    var titleArray = ["See what's happening around you...", "Keep up to date with your college campus...", "Discover San Diego"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,7 +122,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
         
         var contentWidth: CGFloat = 0.0
         
-        featureImagesArray = [#imageLiteral(resourceName: "page1"), #imageLiteral(resourceName: "page3"), #imageLiteral(resourceName: "page2")]
+        featureImagesArray = [#imageLiteral(resourceName: "pic1"), #imageLiteral(resourceName: "pic2"), #imageLiteral(resourceName: "pic3")]
         featureScrollView.isPagingEnabled = true
         
         featureScrollView.showsHorizontalScrollIndicator = false
@@ -165,7 +165,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
         }else if(featurePageControl.currentPage == 1){
             titleLabel.text = titleArray[1]
         }else{
-            titleLabel.text = ""
+            titleLabel.text = titleArray[2]
         }
     }
   

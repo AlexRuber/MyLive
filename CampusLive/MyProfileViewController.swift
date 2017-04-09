@@ -65,9 +65,7 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
         
         //campusSegment.layer.isHidden = true
         
-        checkInsTableView.delegate = self
-        checkInsTableView.dataSource = self
-        
+    
         //Making Profile Image a Circle
         self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2
         self.profileImage.clipsToBounds = true
@@ -104,6 +102,9 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
                 }
             }
         })
+        
+        checkInsTableView.delegate = self
+        checkInsTableView.dataSource = self
         
     }
     
@@ -190,9 +191,10 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CheckInTableViewCell
         
-        cell.eventTitleLabel.text = eventsArray[indexPath.row].title
-        cell.eventDateLabel.text = eventsArray[indexPath.row].startDate
-        
+        //print(indexPath.row)
+            //cell.eventTitleLabel.text = eventsArray[indexPath.row].title
+            //cell.eventDateLabel.text = eventsArray[indexPath.row].startDate
+
         return cell
     }
     

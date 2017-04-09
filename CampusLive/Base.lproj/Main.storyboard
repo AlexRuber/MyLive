@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WSx-hg-qa9">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WSx-hg-qa9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -57,7 +57,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="OrgUnfilled"/>
                                 <state key="selected" image="OrgFilled"/>
-                                <state key="highlighted" image="46096A5E-FF18-48EF-B67E-FE4531AE8A4F"/>
+                                <state key="highlighted" image="button:6Lo-8P-0qz:image"/>
                                 <connections>
                                     <action selector="isVerifiedClicked:" destination="HeC-Kp-YOV" eventType="touchUpInside" id="Olw-jQ-8sP"/>
                                 </connections>
@@ -237,23 +237,23 @@
                                 <color key="textColor" red="0.82440625000000001" green="0.82440625000000001" blue="0.82440625000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5ux-RF-0AR">
+                                <rect key="frame" x="42" y="143" width="292" height="291"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </scrollView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="NF3-5f-5KP">
+                                <rect key="frame" x="139" y="460" width="96" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="pageIndicatorTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="currentPageIndicatorTintColor" red="0.16862745100000001" green="0.18039215689999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </pageControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="See what's happening around you..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Qs-sD-gUo">
-                                <rect key="frame" x="69" y="57" width="238" height="58"/>
+                                <rect key="frame" x="69" y="58" width="238" height="58"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.87" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5ux-RF-0AR">
-                                <rect key="frame" x="67" y="123" width="240" height="393"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </scrollView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="NF3-5f-5KP">
-                                <rect key="frame" x="139" y="524" width="96" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="pageIndicatorTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="currentPageIndicatorTintColor" red="0.16862745100000001" green="0.18039215689999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -586,7 +586,30 @@
         </scene>
     </scenes>
     <resources>
-        <image name="46096A5E-FF18-48EF-B67E-FE4531AE8A4F" width="557" height="557">
+        <image name="Active Tab" width="667" height="135"/>
+        <image name="BrandonProfilePic" width="337" height="324"/>
+        <image name="Calendar_48px_3" width="21" height="22"/>
+        <image name="CheckInButton" width="676" height="164"/>
+        <image name="Destination" width="200" height="200"/>
+        <image name="FBLink" width="200" height="200"/>
+        <image name="Info Button" width="25" height="29"/>
+        <image name="InstaLink" width="200" height="200"/>
+        <image name="Layer 1 copy" width="100" height="96"/>
+        <image name="Log-In Background" width="667" height="1183"/>
+        <image name="Logout Rounded Down_50px_2" width="34" height="34"/>
+        <image name="NavButtonFilled" width="581" height="581"/>
+        <image name="NavigationButton" width="262" height="262"/>
+        <image name="OrgFilled" width="33" height="32"/>
+        <image name="OrgUnfilled" width="33" height="32"/>
+        <image name="Post" width="424" height="100"/>
+        <image name="Rounded Rectangle 1-1" width="620" height="64"/>
+        <image name="Rounded Rectangle 1-2" width="620" height="282"/>
+        <image name="Settings Filled" width="548" height="548"/>
+        <image name="Settings Unfilled" width="34" height="34"/>
+        <image name="TrendingFilled" width="20" height="20"/>
+        <image name="UCSDTritons copy" width="150" height="169"/>
+        <image name="back" width="13" height="22"/>
+        <image name="button:6Lo-8P-0qz:image" width="557" height="557">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -21324,29 +21347,6 @@ ABL58gAS+f8AEvoEABL6BgAS+ggAEvoNABL6FQAS+hgAEvodABL6JQAS+igAEvo6ABL6PQAS+kIAAAAA
 AAAEAQAAAAAAAABBAAAAAAAAAAAAAAAAABL6RA
 </mutableData>
         </image>
-        <image name="Active Tab" width="667" height="135"/>
-        <image name="BrandonProfilePic" width="337" height="324"/>
-        <image name="Calendar_48px_3" width="21" height="22"/>
-        <image name="CheckInButton" width="676" height="164"/>
-        <image name="Destination" width="200" height="200"/>
-        <image name="FBLink" width="200" height="200"/>
-        <image name="Info Button" width="25" height="29"/>
-        <image name="InstaLink" width="200" height="200"/>
-        <image name="Layer 1 copy" width="100" height="96"/>
-        <image name="Log-In Background" width="667" height="1183"/>
-        <image name="Logout Rounded Down_50px_2" width="34" height="34"/>
-        <image name="NavButtonFilled" width="581" height="581"/>
-        <image name="NavigationButton" width="262" height="262"/>
-        <image name="OrgFilled" width="33" height="32"/>
-        <image name="OrgUnfilled" width="33" height="32"/>
-        <image name="Post" width="424" height="100"/>
-        <image name="Rounded Rectangle 1-1" width="620" height="64"/>
-        <image name="Rounded Rectangle 1-2" width="620" height="282"/>
-        <image name="Settings Filled" width="548" height="548"/>
-        <image name="Settings Unfilled" width="34" height="34"/>
-        <image name="TrendingFilled" width="20" height="20"/>
-        <image name="UCSDTritons copy" width="150" height="169"/>
-        <image name="back" width="13" height="22"/>
         <image name="san-diego-state-aztecs" width="118" height="81"/>
     </resources>
     <inferredMetricsTieBreakers>

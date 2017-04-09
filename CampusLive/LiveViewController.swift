@@ -346,7 +346,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     func displayTrendingEvents() {
         
         MeasurementHelper.liveAnnotationClickEvent()
-        
+
         let allAnnotations = self.mapView.annotations
         
         for annotation in allAnnotations {
@@ -645,21 +645,22 @@ extension LiveViewController: MKMapViewDelegate{
                 if (integerDate! < timeInterval) {
                     if(timeInterval < endDateInt!){
                         eventUserImage.layer.borderColor = live_events.cgColor
+                        //eventUserImage.layer.borderColor = trending.cgColor
+                        print("live")
                         let btn2 = UIButton()
                         btn2.frame = CGRect(x: 0, y: 0, width: 38, height: 20)
                         btn2.setImage(UIImage(named: "live"), for: UIControlState())
                         view.rightCalloutAccessoryView = btn2
                     }else{
                         let btn2 = UIButton()
-                        
                         switch annotation.colorType! {
-                        case "trending":
+                        case "Trending":
                             eventUserImage.layer.borderColor = trending.cgColor
                             break
-                        case "event":
+                        case "Event":
                             eventUserImage.layer.borderColor = events.cgColor
                             break
-                        case "experience":
+                        case "Experiences":
                             eventUserImage.layer.borderColor = experiences.cgColor
                             break
                         case "21+":
@@ -668,12 +669,12 @@ extension LiveViewController: MKMapViewDelegate{
                         case "check_ins":
                             eventUserImage.layer.borderColor = check_ins.cgColor
                             break
-                        case "other":
+                            //case "other":
+                            //  eventUserImage.layer.borderColor = otherEvents.cgColor
+                        // break
+                        default:
                             eventUserImage.layer.borderColor = otherEvents.cgColor
                             break
-                        default:
-                            break
-                            //eventUserImage.layer.borderColor = otherEvents.cgColor
                         }
                         
                         btn2.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
@@ -701,14 +702,15 @@ extension LiveViewController: MKMapViewDelegate{
                     */
                 }
                 else{
-                    switch annotation.colorType! {
-                    case "trending":
+                    print("Trending")
+                  switch annotation.colorType! {
+                    case "Trending":
                         eventUserImage.layer.borderColor = trending.cgColor
                         break
-                    case "event":
+                    case "Event":
                         eventUserImage.layer.borderColor = events.cgColor
                         break
-                    case "experience":
+                    case "Experiences":
                         eventUserImage.layer.borderColor = experiences.cgColor
                         break
                     case "21+":
@@ -717,12 +719,12 @@ extension LiveViewController: MKMapViewDelegate{
                     case "check_ins":
                         eventUserImage.layer.borderColor = check_ins.cgColor
                         break
-                    case "other":
+                    //case "other":
+                      //  eventUserImage.layer.borderColor = otherEvents.cgColor
+                       // break
+                    default:
                         eventUserImage.layer.borderColor = otherEvents.cgColor
                         break
-                    default:
-                        break
-                        //eventUserImage.layer.borderColor = otherEvents.cgColor
                     }
                     let btn2 = UIButton()
                     btn2.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
@@ -758,7 +760,6 @@ extension LiveViewController: MKMapViewDelegate{
                 view.leftCalloutAccessoryView?.clipsToBounds = true
                 
                 // btn2.addTarget(self, action: "infoButtonTapped", for: .touchUpInside)
-                
             }
             return view
         }
