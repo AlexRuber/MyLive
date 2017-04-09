@@ -37,5 +37,4 @@ struct Constants {
     static let imageURL = "imageURL"
   }
     
-  
 }

@@ -103,7 +103,7 @@ class EventInfoViewController: UIViewController {
         dateFormatter.locale = NSLocale.current
         dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
         let formatter: DateFormatter = DateFormatter()
-        formatter.dateFormat = "E, MMM d, h:mm a"
+        formatter.dateFormat = "E MMM d, h:mm a"
         let newStartDate = dateFormatter.date(from: startDateStr)
         let newEndDate = dateFormatter.date(from: endDateStr)
         let newStart = formatter.string(from: newStartDate!)

@@ -29,6 +29,9 @@ class AppState: NSObject {
     var showCampus: Bool?
     var defaultLatitude: NSNumber?
     var defaultLongitude: NSNumber?
-    var campusDict: [String:AnyObject]?
+    
+    var campusDict: [String: AnyObject]?
+    var liveEventDict: [String:AnyObject]?
+    var trendingEventDict: [String:AnyObject]?
     
 }

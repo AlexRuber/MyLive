@@ -5,11 +5,11 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
-  - FBSDKCoreKit (4.20.2):
+  - FBSDKCoreKit (4.21.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.20.2):
+  - FBSDKLoginKit (4.21.0):
     - FBSDKCoreKit
-  - FBSDKShareKit (4.20.2):
+  - FBSDKShareKit (4.21.0):
     - FBSDKCoreKit
   - Firebase/Auth (3.15.0):
     - Firebase/Core
@@ -49,6 +49,7 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.1)
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
+  - GRDB.swift (0.105.0)
   - GTMSessionFetcher/Core (1.1.9)
   - SVProgressHUD (2.1.2)
 
@@ -60,13 +61,14 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
+  - GRDB.swift
   - SVProgressHUD
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
-  FBSDKCoreKit: 82eac696eb6157da5f4266c3a241f00e9bd72471
-  FBSDKLoginKit: 2211bede07c83391349eacc1fd86cf6d9289ce38
-  FBSDKShareKit: ca9b22264ea49a896dafb2467c1a4f72aa41996f
+  FBSDKCoreKit: 8a372ab194b5c7c26355c1920ef52dbeb44bc222
+  FBSDKLoginKit: a1a5f4b4ac445823a020fbeeaf5f03714a67ff9c
+  FBSDKShareKit: 649a7acfd01a3e056a33994c1bfbb997814cc8a2
   Firebase: 2b1cdfba1cda8589f32904a697cc753322bff9d8
   FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
   FirebaseAuth: cc8a1824170adbd351edb7f994490a3fb5c18be6
@@ -75,9 +77,10 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
   FirebaseStorage: a5c55b23741a49a72af8f30f95b3bb5ddbeda12d
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
+  GRDB.swift: a21d29acf4b3bde1aaabcaf76dc0a4b64cc96a12
   GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
 
-PODFILE CHECKSUM: 776463053d7e9208db99ba0dc9e95e50e5251c61
+PODFILE CHECKSUM: 86259604123eafb86a481c1d4a3f50bd234cc637
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.1.1
