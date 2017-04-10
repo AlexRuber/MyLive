@@ -69,6 +69,8 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
         
         print("Profile View Controller Loaded.")
         
+        UIApplication.shared.statusBarStyle = .lightContent
+        
         //campusSegment.layer.isHidden = true
         
         checkInsTableView.delegate = self

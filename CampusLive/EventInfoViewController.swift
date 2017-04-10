@@ -93,6 +93,8 @@ class EventInfoViewController: UIViewController {
         eventInfoRef = FIRDatabase.database().reference().child("event_social_info")
         eventTitle?.text = titleEvent
         
+        UIApplication.shared.statusBarStyle = .lightContent
+        
         let subtitleArr = subtitleEvent?.components(separatedBy: ", ")
         let venue    = subtitleArr?[0]
         //let start = subtitleArr?[1]
