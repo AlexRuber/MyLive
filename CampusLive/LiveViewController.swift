@@ -70,7 +70,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         mapView.showsUserLocation = true
         mapView.setUserTrackingMode(.follow, animated: true)
         self.mapView.setRegion(region, animated: true)
-        mapView!.setRegion(region, animated: true)
+        //mapView!.setRegion(region, animated: true)
         mapView!.setCenter(mapView!.userLocation.coordinate, animated: true)
         print("Did tap user location")
     }
@@ -79,12 +79,11 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     //this method is called by the framework on locationManager.requestLocation();
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.location = locations.last! as CLLocation
-        
-        
-        let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
-        
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1))
-        self.mapView.setRegion(region, animated: true)
+
+        //let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
+        self.mapView.showsUserLocation = true
+        //let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1))
+        //self.mapView.setRegion(region, animated: true)
         self.locationManager.stopUpdatingLocation()
         
     }
@@ -97,29 +96,9 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
-        
-        super.viewDidLoad()
-        
-        
-        
         self.mapView.showsUserLocation = true
         
-        
-        
         orgSegment.tintColor = UIColor.white
-        
-        
-        
-        //print(AppState.sharedInstance.dafaultCampus)
-        
-        //print(AppState.sharedInstance.defaultLatitude)
-        
-        //print(AppState.sharedInstance.defaultLongitude)
-        
-        
-        
-        //Settings for the loading spinner
         
         let foregroundColor = UIColor(red: 27/255, green: 150/255, blue: 254/255, alpha: 1)
         
@@ -153,15 +132,16 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         }
         
     
-        self.locationManager.delegate = self
-        self.locationManager.startUpdatingLocation()
+       // self.locationManager.delegate = self
+        //self.locationManager.startUpdatingLocation()
         self.mapView.delegate = self
-        self.locationManager.delegate = self
+        //self.locationManager.delegate = self
         
         //self.eventBusRef = eventBusRef.child("business_events")
         
         //self.eventOrgRef = eventOrgRef.child("org_events")
         
+        //mapView.showsUserLocation = true
         
         let span = MKCoordinateSpanMake(0.018, 0.018)
         
@@ -198,7 +178,10 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     }
     
     @IBAction func indexChanged(_ sender: Any) {
+        SVProgressHUD.show()
         displayRelevantEvents()
+        self.mapView.showsUserLocation = true
+        //SVProgressHUD.dismiss()
     }
     
     
@@ -753,7 +736,7 @@ extension LiveViewController: MKMapViewDelegate{
                     }
                     let btn2 = UIButton()
                     btn2.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-                    btn2.setImage(UIImage(named: "info"), for: UIControlState())
+                    btn2.setImage(UIImage(named: "Info Button-1"), for: UIControlState())
                     view.rightCalloutAccessoryView = btn2
                 }
                 
@@ -788,6 +771,8 @@ extension LiveViewController: MKMapViewDelegate{
             }
             return view
         }
+        
+        //SVProgressHUD.dismiss()
         return nil
     }
     
@@ -838,10 +823,14 @@ extension LiveViewController: MKMapViewDelegate{
         }
     }
    
+    func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
+        SVProgressHUD.dismiss()
+    }
     
     func mapViewWillStartLoadingMap(_ mapView: MKMapView) {
        //SVProgressHUD.show(withStatus: "Loading Map :)")
-       SVProgressHUD.show()
+       
+        //SVProgressHUD.show()
         
     }
     

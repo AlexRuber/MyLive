@@ -224,6 +224,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
             self.signedIn(user, userID: (user?.uid)!, userData: userData as! Dictionary<String, String>)
         })
         
+        /*
         FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email"]).start{
             (connection, result, err) in
             if(err != nil){
@@ -232,6 +233,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
             }
             print(result ?? "")
         }
+        */
     }
     
     /*

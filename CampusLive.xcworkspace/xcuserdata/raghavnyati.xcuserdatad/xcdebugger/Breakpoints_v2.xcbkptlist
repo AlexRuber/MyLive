@@ -106,12 +106,12 @@
                   moduleName = "CampusLive"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/raghavnyati/Desktop/New%20MyLiveBackup/CampusLive/MyProfileViewController.swift"
-                  timestampString = "513405307.874377"
+                  timestampString = "513494071.912777"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "98"
-                  endingLineNumber = "98"
-                  offsetFromSymbolStart = "4369">
+                  startingLineNumber = "100"
+                  endingLineNumber = "100"
+                  offsetFromSymbolStart = "3764">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -121,12 +121,12 @@
                   moduleName = "CampusLive"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/raghavnyati/Desktop/New%20MyLiveBackup/CampusLive/MyProfileViewController.swift"
-                  timestampString = "513405307.879596"
+                  timestampString = "513494071.916098"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "99"
-                  endingLineNumber = "99"
-                  offsetFromSymbolStart = "19">
+                  startingLineNumber = "101"
+                  endingLineNumber = "101"
+                  offsetFromSymbolStart = "32">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -144,22 +144,6 @@
             startingLineNumber = "107"
             endingLineNumber = "107"
             landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CampusLive/LiveViewController.swift"
-            timestampString = "513412044.24659"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "226"
-            endingLineNumber = "226"
-            landmarkName = "displayLiveEvents()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
