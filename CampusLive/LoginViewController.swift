@@ -39,11 +39,12 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
     //@IBOutlet weak var activityInd: UIActivityIndicatorView!
     
     var featureImagesArray = [UIImage]()
-    var titleArray = ["Keep up to date with your college campus...", "Discover San Diego"]
+    var titleArray = ["See what's happening around you...", "Keep up to date with your college campus...", "Discover San Diego"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                    
+        
+        UIApplication.shared.statusBarStyle = .default
         
         users = FIRDatabase.database().reference().child("users")
         
@@ -57,7 +58,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
         //Custom FB Button Settings
         let customFBImage = UIImage(named: "facebook-login-blue")
         customFBButton.setImage(customFBImage, for: .normal)
-        customFBButton.frame = CGRect(x: 62, y: 540, width: 250, height: 45)
+        customFBButton.frame = CGRect(x: 32, y: 320
+            , width: 300, height: 532)
         customFBButton.addTarget(self, action: #selector(handleCustomFBLogin), for: .touchUpInside)
         
         //segmentView.selectedSegmentIndex = 0
@@ -121,7 +123,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
         
         var contentWidth: CGFloat = 0.0
         
-        featureImagesArray = [#imageLiteral(resourceName: "page1"), #imageLiteral(resourceName: "page3"), #imageLiteral(resourceName: "page2")]
+        featureImagesArray = [#imageLiteral(resourceName: "Log In 1"), #imageLiteral(resourceName: "Log In 2"), #imageLiteral(resourceName: "Log In 3")]
         featureScrollView.isPagingEnabled = true
         
         featureScrollView.showsHorizontalScrollIndicator = false
@@ -160,7 +162,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
         }else if(featurePageControl.currentPage == 1){
             titleLabel.text = titleArray[1]
         }else{
-            titleLabel.text = ""
+            titleLabel.text = titleArray[2]
         }
     }
   

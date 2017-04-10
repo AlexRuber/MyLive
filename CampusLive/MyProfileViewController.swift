@@ -20,7 +20,7 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var profileName: UILabel!
     //@IBOutlet weak var campusSegment: UISegmentedControl!
 
-    @IBOutlet weak var campusSegment: UISegmentedControl!
+    //@IBOutlet weak var campusSegment: UISegmentedControl!
     
     @IBOutlet weak var checkInsTableView: UITableView!
 
@@ -76,6 +76,7 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
         //self.checkInsTableView.reloadData()
         
         
+    
         //Making Profile Image a Circle
         self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2
         self.profileImage.clipsToBounds = true
@@ -94,12 +95,12 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
                 let data = NSData(contentsOf: photo)
                 self.profileImage.image = UIImage(data: data! as Data)
             }
-            campusSegment.isHidden = true
+            //campusSegment.isHidden = true
             
             
             if(AppState.sharedInstance.showCampus)!{
-                campusSegment.isHidden = false
-                addCampusToSegment()
+                //campusSegment.isHidden = false
+                //addCampusToSegment()
             }
         } else {
             print("User not Signed In.")
@@ -109,6 +110,9 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
         self.checkInsArray.removeAll()
         
         loadFirebaseData()
+        
+        checkInsTableView.delegate = self
+        checkInsTableView.dataSource = self
         
     }
     
@@ -179,6 +183,7 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
             i += 1
         }
     }
+ 
     
     @IBAction func segmentValueChanged(_ sender: Any) {
  
@@ -198,7 +203,7 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
         }
 
     }
-    
+     */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return checkInsArray.count
     }
