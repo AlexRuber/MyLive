@@ -366,11 +366,11 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xXm-fY-RNd">
-                                                    <rect key="frame" x="339" y="28" width="18" height="20"/>
+                                                    <rect key="frame" x="337" y="8" width="21" height="28"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" image="Info Button"/>
                                                     <connections>
-                                                        <segue destination="2dk-cX-uy2" kind="show" identifier="detailSegue" id="dXb-Fs-PBd"/>
+                                                        <action selector="infoButtonPressed:" destination="L0E-g9-m5t" eventType="touchUpInside" id="X75-X1-HCY"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -378,9 +378,14 @@
                                         <connections>
                                             <outlet property="eventDateLabel" destination="qqX-lZ-lWd" id="Du4-lL-Xl7"/>
                                             <outlet property="eventTitleLabel" destination="e4a-7p-3YQ" id="aBe-VE-FAi"/>
+                                            <outlet property="infoButton" destination="xXm-fY-RNd" id="rrR-0M-zau"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="L0E-g9-m5t" id="PQw-fk-x7m"/>
+                                    <outlet property="delegate" destination="L0E-g9-m5t" id="cri-ek-FRc"/>
+                                </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xy8-m4-a7R">
                                 <rect key="frame" x="120" y="28" width="132" height="28"/>
@@ -412,6 +417,7 @@
                         <outlet property="checkInsTableView" destination="0DH-fc-pXY" id="0EU-PS-wWJ"/>
                         <outlet property="profileImage" destination="qCi-XR-LVQ" id="vYN-Ml-Isd"/>
                         <outlet property="profileName" destination="cQo-Ab-2Iy" id="NsK-ID-xxI"/>
+                        <segue destination="Yb5-6D-gIK" kind="show" identifier="detailSegue" id="Pd8-Xe-KAn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yKl-lw-sjc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -24295,6 +24301,6 @@ Gsw
         <image name="san-diego-state-aztecs" width="118" height="81"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dXb-Fs-PBd"/>
+        <segue reference="Pd8-Xe-KAn"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -12,7 +12,8 @@ class CheckInTableViewCell: UITableViewCell {
 
     @IBOutlet weak var eventTitleLabel: UILabel!
     @IBOutlet weak var eventDateLabel: UILabel!
-    @IBOutlet weak var infoImageView: UIImageView!
+    
+    @IBOutlet weak var infoButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
