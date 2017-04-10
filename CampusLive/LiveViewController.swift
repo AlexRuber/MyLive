@@ -142,7 +142,25 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         //eventPin.isHidden = true
         
         
+    
+        isAuthorizedtoGetUserLocation()
         
+        if CLLocationManager.locationServicesEnabled(){
+            
+            self.locationManager.delegate = self
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestLocation()
+        }
+        
+    
+        self.locationManager.delegate = self
+        self.locationManager.startUpdatingLocation()
+        self.mapView.delegate = self
+        self.locationManager.delegate = self
+        
+        //self.eventBusRef = eventBusRef.child("business_events")
+        
+        //self.eventOrgRef = eventOrgRef.child("org_events")
         
         
         let span = MKCoordinateSpanMake(0.018, 0.018)
@@ -150,40 +168,6 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: AppState.sharedInstance.defaultLatitude as! CLLocationDegrees, longitude: AppState.sharedInstance.defaultLongitude as! CLLocationDegrees), span: span)
         
         mapView.setRegion(region, animated: true)
-        
-        
-        
-        isAuthorizedtoGetUserLocation()
-        
-        
-        
-        if CLLocationManager.locationServicesEnabled(){
-            
-            self.locationManager.delegate = self
-            
-            self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            
-            locationManager.requestLocation()
-            
-        }
-        
-        
-        
-        self.locationManager.delegate = self
-        
-        self.locationManager.startUpdatingLocation()
-        
-        self.mapView.delegate = self
-        
-        self.locationManager.delegate = self
-        
-        
-        
-        //self.eventBusRef = eventBusRef.child("business_events")
-        
-        //self.eventOrgRef = eventOrgRef.child("org_events")
-        
-        
         
         eventRef = FIRDatabase.database().reference().child("events")
         
