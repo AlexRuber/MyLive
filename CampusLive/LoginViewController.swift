@@ -41,6 +41,11 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
     var featureImagesArray = [UIImage]()
     var titleArray = ["See what's happening around you...", "Keep up to date with your college campus...", "Discover San Diego"]
     
+    @IBAction func didTapTerms(_ sender: Any) {
+        UIApplication.shared.openURL(NSURL(string: "http://www.myliveinc.com")! as URL)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
