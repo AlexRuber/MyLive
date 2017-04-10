@@ -110,6 +110,9 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         
         SVProgressHUD.setBackgroundColor(backgroundColor)
         
+        UIApplication.shared.statusBarStyle = .lightContent
+
+        
         //Minus Button is hidden to start
         
         //subtractEventButton.isHidden = true

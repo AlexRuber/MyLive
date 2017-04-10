@@ -55,9 +55,9 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j0R-2a-DDO">
                                 <rect key="frame" x="310" y="18" width="65" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" image="Settings Unfilled"/>
-                                <state key="selected" image="Settings Filled"/>
-                                <state key="highlighted" image="Settings Filled"/>
+                                <state key="selected" image="Settings Unfilled" backgroundImage="Settings Filled"/>
                                 <connections>
                                     <action selector="settingsClicked:" destination="HeC-Kp-YOV" eventType="touchUpInside" id="FRZ-W0-fNT"/>
                                     <segue destination="L0E-g9-m5t" kind="show" identifier="toProfileSegue" id="yGP-IK-zj8"/>
@@ -123,10 +123,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.87" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5ux-RF-0AR">
-                                <rect key="frame" x="68" y="136" width="240" height="395"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </scrollView>
                             <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="NF3-5f-5KP">
                                 <rect key="frame" x="140" y="461" width="96" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -145,6 +141,10 @@
                                     <action selector="didTapTerms:" destination="WSx-hg-qa9" eventType="touchUpInside" id="sJt-eN-3Fq"/>
                                 </connections>
                             </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5ux-RF-0AR">
+                                <rect key="frame" x="67" y="136" width="241" height="395"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -224,7 +224,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="77"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="8DCFE947-D80D-47E2-9394-2DDC600177DE" translatesAutoresizingMaskIntoConstraints="NO" id="uyo-eX-bU2">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="C40E1FAD-6A6D-4CFE-8E91-5AF88FAE0AAB" translatesAutoresizingMaskIntoConstraints="NO" id="uyo-eX-bU2">
                                                     <rect key="frame" x="0.0" y="-9" width="375" height="86"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -247,7 +247,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xXm-fY-RNd">
-                                                    <rect key="frame" x="319" y="8" width="48" height="55"/>
+                                                    <rect key="frame" x="337" y="19" width="30" height="38"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <rect key="contentStretch" x="0.0" y="0.20000000000000001" width="1" height="1"/>
                                                     <state key="normal" image="Info Button"/>
@@ -461,7 +461,8 @@
     <resources>
         <image name="6666DA49-01DA-42E0-BEBC-F64CDD8D4F25" width="16" height="16"/>
         <image name="72372BB6-0E36-4E77-AC58-93B912E22088" width="16" height="16"/>
-        <image name="8DCFE947-D80D-47E2-9394-2DDC600177DE" width="620" height="64">
+        <image name="Active Tab" width="667" height="135"/>
+        <image name="C40E1FAD-6A6D-4CFE-8E91-5AF88FAE0AAB" width="620" height="64">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -3160,7 +3161,6 @@ AnYNAAJ2GgACdh8AAnYhAAJ2IwACdigAAnYwAAJ2MwACdjgAAnZAAAJ2QwACdlUAAnZYAAJ2XQAAAAAA
 AAQBAAAAAAAAAEEAAAAAAAAAAAAAAAAAAnZfA
 </mutableData>
         </image>
-        <image name="Active Tab" width="667" height="135"/>
         <image name="Calendar_48px_3" width="21" height="22"/>
         <image name="CheckInButton" width="676" height="164"/>
         <image name="Destination" width="200" height="200"/>
@@ -3183,6 +3183,6 @@ AAQBAAAAAAAAAEEAAAAAAAAAAAAAAAAAAnZfA
         <image name="san-diego-state-aztecs" width="118" height="81"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="B7M-3u-HxH"/>
+        <segue reference="Pd8-Xe-KAn"/>
     </inferredMetricsTieBreakers>
 </document>
