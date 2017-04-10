@@ -69,12 +69,10 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
         
         print("Profile View Controller Loaded.")
         
-        campusSegment.layer.isHidden = true
+        //campusSegment.layer.isHidden = true
         
         checkInsTableView.delegate = self
         checkInsTableView.dataSource = self
-        //self.checkInsTableView.reloadData()
-        
         
     
         //Making Profile Image a Circle
@@ -172,7 +170,7 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
        
     }
     
-    func addCampusToSegment(){
+    /*func addCampusToSegment(){
         
         campusSegment.removeAllSegments()
         let userDict = AppState.sharedInstance.campusDict
@@ -202,8 +200,8 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
             }
         }
 
-    }
-     */
+    }*/
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return checkInsArray.count
     }
