@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WSx-hg-qa9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WSx-hg-qa9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -399,11 +399,11 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xXm-fY-RNd">
-                                                    <rect key="frame" x="331" y="8" width="29" height="28"/>
+                                                    <rect key="frame" x="337" y="8" width="21" height="28"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Button" image="info"/>
                                                     <connections>
-                                                        <segue destination="2dk-cX-uy2" kind="show" identifier="detailSegue" id="dXb-Fs-PBd"/>
+                                                        <action selector="infoButtonPressed:" destination="L0E-g9-m5t" eventType="touchUpInside" id="X75-X1-HCY"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -411,9 +411,14 @@
                                         <connections>
                                             <outlet property="eventDateLabel" destination="qqX-lZ-lWd" id="Du4-lL-Xl7"/>
                                             <outlet property="eventTitleLabel" destination="e4a-7p-3YQ" id="aBe-VE-FAi"/>
+                                            <outlet property="infoButton" destination="xXm-fY-RNd" id="rrR-0M-zau"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="L0E-g9-m5t" id="PQw-fk-x7m"/>
+                                    <outlet property="delegate" destination="L0E-g9-m5t" id="cri-ek-FRc"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -423,6 +428,7 @@
                         <outlet property="checkInsTableView" destination="0DH-fc-pXY" id="0EU-PS-wWJ"/>
                         <outlet property="profileImage" destination="qCi-XR-LVQ" id="vYN-Ml-Isd"/>
                         <outlet property="profileName" destination="cQo-Ab-2Iy" id="NsK-ID-xxI"/>
+                        <segue destination="Yb5-6D-gIK" kind="show" identifier="detailSegue" id="Pd8-Xe-KAn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yKl-lw-sjc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -21360,6 +21366,6 @@ AAAEAQAAAAAAAABBAAAAAAAAAAAAAAAAABL6RA
         <image name="san-diego-state-aztecs" width="118" height="81"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dXb-Fs-PBd"/>
+        <segue reference="Pd8-Xe-KAn"/>
     </inferredMetricsTieBreakers>
 </document>

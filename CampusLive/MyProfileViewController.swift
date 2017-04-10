@@ -12,6 +12,7 @@ import Foundation
 import FirebaseStorage
 import FirebaseDatabase
 import FBSDKLoginKit
+import CoreLocation
 
 class MyProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -36,6 +37,8 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
     var startDate: String!
     
     //var showCampus: Bool?
+    var indexPath: Int?
+    
     
     //Back Button
     @IBAction func backBtnPressed(_ sender: Any) {
@@ -60,13 +63,18 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //self.checkInsTableView.register(CheckInTableViewCell.self, forCellReuseIdentifier: "cell")
         user_checkins = user_checkins.child("user_checkins").child(self.uid!)
+        events = events.child("events")
+        
         print("Profile View Controller Loaded.")
         
         campusSegment.layer.isHidden = true
         
         checkInsTableView.delegate = self
         checkInsTableView.dataSource = self
+        //self.checkInsTableView.reloadData()
+        
         
         //Making Profile Image a Circle
         self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width/2
@@ -97,58 +105,68 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
             print("User not Signed In.")
         }
         
-        self.user_checkins.observe(.value, with: {(snap) in
-            if let userDict = snap.value as? [String: AnyObject] {
-                for each in userDict as [String: AnyObject] {
-                    self.checkInsArray.append(each.key)
-                }
-            }
-        })
+        self.eventsArray.removeAll()
+        self.checkInsArray.removeAll()
+        
+        loadFirebaseData()
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        
-        self.eventTitle = ""
-        self.startDate = ""
-        events = events.child("events")
-        
-        self.events.observe(.value, with: {(snap) in
-            if let userDict = snap.value as? [String: AnyObject] {
-                //print("userDict: \(userDict)")
-                
-                for each in userDict as [String: AnyObject] {
-                    
-                    for i in 0..<self.checkInsArray.count {
-                        if (each.key == self.checkInsArray[i]) {
-                            let title = each.value["title"] as! String
-                            let startDate = each.value["startDate"] as! String
-                            
-                            print("title: \(title)")
-                            
-                            
-                            self.eventsArray.append(Event(title: title, startDate: startDate))
-                            
-                            print("array title: \(self.eventsArray[0].title)")
-                            
-                            self.eventTitle = ""
-                            self.startDate = ""
-                        }
+    func loadFirebaseData() {
+        DispatchQueue.main.async {
+            self.user_checkins.observe(.value, with: {(snap) in
+                if let userDict = snap.value as? [String: AnyObject] {
+                    for each in userDict as [String: AnyObject] {
+                        self.checkInsArray.append(each.key)
                     }
+                    DispatchQueue.main.async {
+                        self.events.observe(.value, with: {(snap) in
+                            if let userDict = snap.value as? [String: AnyObject] {
+                                
+                                for each in userDict as [String: AnyObject] {
+                                    
+                                    for i in 0..<self.checkInsArray.count {
+                                        if (each.key == self.checkInsArray[i]) {
+                                            let autoID = each.key
+                                            let title = each.value["title"] as! String
+                                            let startDate = each.value["startDate"] as! String
+                                            
+                                            let venue = each.value["venue"] as! String
+                                            let endDate = each.value["endDate"] as! String
+                                            let latitude = each.value["latitude"] as! NSNumber
+                                            let longitude = each.value["longitude"] as! NSNumber
+                                            let imageUrl = each.value["image"] as! String
+                                            
+                                            let dateFormatter = DateFormatter()
+                                            dateFormatter.locale = NSLocale.current
+                                            dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
+                                            let formatter: DateFormatter = DateFormatter()
+                                            formatter.dateFormat = "E. MMM d, h:mm a"
+                                            let newStartDate = dateFormatter.date(from: startDate)
+                                            let newEndDate = dateFormatter.date(from: endDate)
+                                            
+                                            let newEnd = formatter.string(from: newEndDate!)
+                                            let newStart = formatter.string(from: newStartDate!)
+                                            
+                                            self.eventsArray.append(Event(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: title, subtitle: venue, imageUrl: imageUrl, eventId: autoID, endDate: newEnd, startDate: newStart, unformattedStartDate: startDate, unformattedEndDate: endDate))
+                                            
+                                            DispatchQueue.main.async() {
+                                                self.checkInsTableView.reloadData()
+                                            }
+                                            
+                                        }
+                                    }
+                                }
+                            }
+                        })
+                    }
+                    
                 }
-            }
-        })
-        
-
-        DispatchQueue.main.async() {
-            self.checkInsTableView.reloadData()
+                
+            })
         }
+       
     }
-    
-    /*func storeEventValues(i: Int) {
-        print("iiiiiiiiii: \(i)")
-        
-    }*/
     
     func addCampusToSegment(){
         
@@ -186,36 +204,44 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CheckInTableViewCell
+        var cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? CheckInTableViewCell
         
-        cell.eventTitleLabel.text = eventsArray[indexPath.row].title
-        cell.eventDateLabel.text = eventsArray[indexPath.row].startDate
+        cell?.eventTitleLabel.text = eventsArray[indexPath.row].title
+        cell?.eventDateLabel.text = eventsArray[indexPath.row].startDate
         
-        return cell
+        cell?.infoButton.tag = indexPath.row
+        cell?.infoButton.addTarget(self, action: #selector(infoButtonPressed), for: .touchUpInside)
+        
+        return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
     
-        //AppState.sharedInstance.dafaultCampus = userDict?[campusSegment.titleForSegment(at: campusSegment.selectedSegmentIndex)!] as! String
-         //print(AppState.sharedInstance.dafaultCampus)
+    @IBAction func infoButtonPressed(_ sender: Any) {
+        self.indexPath = (sender as AnyObject).tag
+        performSegue(withIdentifier: "detailSegue", sender: self)
+    }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detailSegue" {
+            if let indexPath = self.indexPath { //checkInsTableView.indexPathForSelectedRow {
+                let nav = segue.destination as! UINavigationController
+                let destinationViewController = nav.viewControllers[0] as! EventInfoViewController
+                destinationViewController.titleEvent = eventsArray[indexPath].title
+                destinationViewController.subtitleEvent = eventsArray[indexPath].subtitle
+                destinationViewController.imageEventUrl = eventsArray[indexPath].imageUrl
+                destinationViewController.startDateStr = eventsArray[indexPath].unformattedStartDate
+                destinationViewController.endDateStr = eventsArray[indexPath].unformattedEndDate
+                destinationViewController.eventId = eventsArray[indexPath].eventId
+                destinationViewController.coordinate = eventsArray[indexPath].coordinate
+            }
+        }
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
