@@ -7,19 +7,30 @@
 //
 
 import Foundation
+import CoreLocation
 
 class Event {
-    var title = ""
-    var subtitle = ""
-    var startDate = ""
-    var endDate = ""
-    var imageUrl = ""
-    var description = ""
-    var coordinates = ""
+    var title: String?
+    var subtitle: String?
+    var startDate: String?
+    var endDate: String?
+    var imageUrl: String?
+    var eventId: String?
+    var unformattedStartDate: String?
+    var unformattedEndDate: String?
+
+    var coordinate: CLLocationCoordinate2D
     
-    init(title: String, startDate: String)
+    init(lat: CLLocationDegrees, long: CLLocationDegrees, title: String? = nil, subtitle: String? = nil, imageUrl: String!, eventId: String!, endDate: String? = nil, startDate: String? = nil, unformattedStartDate: String? = nil, unformattedEndDate: String? = nil)
     {
+        self.coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
         self.title = title
+        self.subtitle = subtitle
+        self.imageUrl = imageUrl
+        self.eventId = eventId
+        self.endDate = endDate
         self.startDate = startDate
+        self.unformattedEndDate = unformattedEndDate
+        self.unformattedStartDate = unformattedStartDate
     }
 }

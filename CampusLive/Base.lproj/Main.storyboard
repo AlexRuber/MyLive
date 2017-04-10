@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WSx-hg-qa9">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WSx-hg-qa9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -63,7 +63,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j0R-2a-DDO">
-                                <rect key="frame" x="334" y="30" width="25" height="25"/>
+                                <rect key="frame" x="310" y="18" width="65" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Settings Unfilled"/>
                                 <state key="selected" image="Settings Filled"/>
@@ -71,6 +71,16 @@
                                 <connections>
                                     <action selector="settingsClicked:" destination="HeC-Kp-YOV" eventType="touchUpInside" id="FRZ-W0-fNT"/>
                                     <segue destination="L0E-g9-m5t" kind="show" identifier="toProfileSegue" id="yGP-IK-zj8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Lo-8P-0qz">
+                                <rect key="frame" x="0.0" y="17" width="67" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="83D84E7C-035A-4696-89C6-A398EF796950"/>
+                                <state key="selected" image="6666DA49-01DA-42E0-BEBC-F64CDD8D4F25"/>
+                                <state key="highlighted" image="72372BB6-0E36-4E77-AC58-93B912E22088"/>
+                                <connections>
+                                    <action selector="isVerifiedClicked:" destination="HeC-Kp-YOV" eventType="touchUpInside" id="Olw-jQ-8sP"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -229,8 +239,8 @@
                                 <rect key="frame" x="47" y="569" width="280" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="We don't post anything to Facebook. By signing in you agree to our Terms and Conditions" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aWs-gr-bIf">
-                                <rect key="frame" x="84" y="626" width="206" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="We don't post anything to Facebook. By signing in you agree to our" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aWs-gr-bIf">
+                                <rect key="frame" x="113" y="626" width="170" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="7"/>
                                 <color key="textColor" red="0.82440625000000001" green="0.82440625000000001" blue="0.82440625000000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -355,11 +365,11 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xXm-fY-RNd">
-                                                    <rect key="frame" x="339" y="28" width="18" height="20"/>
+                                                    <rect key="frame" x="337" y="8" width="21" height="28"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" image="Info Button"/>
                                                     <connections>
-                                                        <segue destination="2dk-cX-uy2" kind="show" identifier="detailSegue" id="dXb-Fs-PBd"/>
+                                                        <action selector="infoButtonPressed:" destination="L0E-g9-m5t" eventType="touchUpInside" id="X75-X1-HCY"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -367,9 +377,14 @@
                                         <connections>
                                             <outlet property="eventDateLabel" destination="qqX-lZ-lWd" id="Du4-lL-Xl7"/>
                                             <outlet property="eventTitleLabel" destination="e4a-7p-3YQ" id="aBe-VE-FAi"/>
+                                            <outlet property="infoButton" destination="xXm-fY-RNd" id="rrR-0M-zau"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="L0E-g9-m5t" id="PQw-fk-x7m"/>
+                                    <outlet property="delegate" destination="L0E-g9-m5t" id="cri-ek-FRc"/>
+                                </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xy8-m4-a7R">
                                 <rect key="frame" x="120" y="28" width="132" height="28"/>
@@ -387,7 +402,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="27e-CJ-0Gr">
-                                <rect key="frame" x="16" y="34" width="11" height="17"/>
+                                <rect key="frame" x="-10" y="16" width="73" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="back"/>
                                 <connections>
@@ -401,6 +416,7 @@
                         <outlet property="checkInsTableView" destination="0DH-fc-pXY" id="0EU-PS-wWJ"/>
                         <outlet property="profileImage" destination="qCi-XR-LVQ" id="vYN-Ml-Isd"/>
                         <outlet property="profileName" destination="cQo-Ab-2Iy" id="NsK-ID-xxI"/>
+                        <segue destination="Yb5-6D-gIK" kind="show" identifier="detailSegue" id="Pd8-Xe-KAn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yKl-lw-sjc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -24042,6 +24058,6 @@ AAQBAAAAAAAAAEEAAAAAAAAAAAAAAAAAAnZfA
         <image name="san-diego-state-aztecs" width="118" height="81"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dXb-Fs-PBd"/>
+        <segue reference="Pd8-Xe-KAn"/>
     </inferredMetricsTieBreakers>
 </document>

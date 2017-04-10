@@ -41,6 +41,11 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
     var featureImagesArray = [UIImage]()
     var titleArray = ["See what's happening around you...", "Keep up to date with your college campus...", "Discover San Diego"]
     
+    @IBAction func didTapTerms(_ sender: Any) {
+        UIApplication.shared.openURL(NSURL(string: "http://www.myliveinc.com")! as URL)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -145,11 +150,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
             featureImageView.contentMode = .scaleAspectFit
             featureScrollView.addSubview(featureImageView)
             
-            print("ScrollView Origin X: \(featureScrollView.frame.origin.x)")
-            print("ScrollView Widths: \(featureScrollView.frame.size.width * CGFloat(index))")
             featureImageView.frame = CGRect(x: (featureScrollView.frame.origin.x - 67) + (featureScrollView.frame.size.width * CGFloat(index)), y: featureScrollView.frame.origin.y - 141, width: scrollWidth, height: featureScrollView.frame.size.height)
-            print("Image View frame: \(featureImageView.frame.origin.x)")
-            print("Image View frame: \(featureImageView.frame.origin.y)")
             
             index = index + 1
         }
