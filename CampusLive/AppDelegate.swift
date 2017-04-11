@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
 
     var window: UIWindow?
 
-    
+    var storyboard: UIStoryboard?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -28,6 +28,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         let tintColor = UIColor(red: 27/255, green: 150/255, blue: 254/255, alpha: 1.0)
         window!.tintColor = tintColor
         
+       /* let defaults = UserDefaults.standard
+        if defaults.value(forKey: "yourKey") != nil{
+            
+            var vc = UIViewController()
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let value = defaults.value(forKey: "yourKey") as! String!
+            let controller = storyboard.instantiateViewController(withIdentifier: "HomeView") as UIViewController!
+            if value == "loggedin"{
+                vc = storyboard.instantiateViewController(withIdentifier: "HomeView") as UIViewController!
+            }
+            else if value == "loggedOut"{
+                vc = storyboard.instantiateViewController(withIdentifier: "LoginView") as UIViewController!
+            }
+            self.window?.rootViewController = controller
+        }*/
+        
         UIApplication.shared.statusBarStyle = .lightContent
 
         let navBgImage: UIImage = UIImage(named: "Active Tab")!
@@ -37,6 +53,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         UINavigationBar.appearance().setBackgroundImage(navBgImage, for: .default)
         UINavigationBar.appearance().titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Avenir", size: 18)!, NSForegroundColorAttributeName: UIColor.white]
         UINavigationBar.appearance().frame = CGRect(x: 0, y: 0, width: 150, height: 70.0)
+        
+        
        
         return true
     }

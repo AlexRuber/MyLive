@@ -77,7 +77,7 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
                     } else {
                         print("Max: Succesfully stored images in Firebase storage")
                         downloadURL = (metadata?.downloadURL()!.absoluteString)!
-                        self.post(imageUrl: downloadURL!)
+                        self.post(downloadURL!)
                         
                         //print("MAXMAXMAXMAXMAX: \(downloadURL!)")
                         //self.postToFirebase(downloadURL!)
@@ -129,11 +129,11 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func setUserPostCount(count: Int) {
+    func setUserPostCount(_ count: Int) {
         AppState.sharedInstance.userPostCount = count
     }
     
-    func post(imageUrl: String) {
+    func post(_ imageUrl: String) {
         let name = nameTextField.text
         let venue = venueTextField.text
         let description = descriptionTextView.text
@@ -211,8 +211,8 @@ class AddEventViewController: UIViewController, UITextFieldDelegate {
             
             //self.uiEmailLabelView.text = email
             if let photo = photoURL {
-                let data = NSData(contentsOf: photo)
-                self.profileImage.image = UIImage(data: data! as Data)
+                let data = try? Data(contentsOf: photo)
+                self.profileImage.image = UIImage(data: data as! Data)
             }
             
         } else {

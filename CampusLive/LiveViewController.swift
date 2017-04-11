@@ -157,12 +157,9 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         self.uid = FIRAuth.auth()?.currentUser?.uid
         
         
-        
         isVerifiedFlag = true
         
         verifiedButton.setImage(UIImage(named: "OrgFilled"), for: UIControlState.normal)
-        
-        
         
         displayLiveEvents()
         
@@ -201,7 +198,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
                     if let userDict = snap.value as? [String:AnyObject] {
                         if(AppState.sharedInstance.liveEventDict?.count != userDict.count){
                             AppState.sharedInstance.liveEventDict = userDict
-                            self.showEvents(userDict: AppState.sharedInstance.liveEventDict!, str: "live")
+                            self.showEvents(AppState.sharedInstance.liveEventDict!, str: "live")
                         }
                     }
                 })
@@ -209,15 +206,15 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         }else{
             print("records from global variable fetched")
             DispatchQueue.main.async {
-                self.showEvents(userDict: AppState.sharedInstance.liveEventDict!, str: "live")
+                self.showEvents(AppState.sharedInstance.liveEventDict!, str: "live")
             }
         }
     }
     
-    func showEvents(userDict: [String: AnyObject], str: String){
+    func showEvents(_ userDict: [String: AnyObject], str: String){
         let currentDate = Date()
         let dateFormatter = DateFormatter()
-        dateFormatter.locale = NSLocale.current
+        dateFormatter.locale = Locale.current
         dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
         let formatter: DateFormatter = DateFormatter()
         formatter.dateFormat = "E hh:mm a"
@@ -402,7 +399,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
                         
                         if(AppState.sharedInstance.trendingEventDict?.count != userDict.count){
                             AppState.sharedInstance.trendingEventDict = userDict
-                            self.showEvents(userDict: AppState.sharedInstance.trendingEventDict!, str: "trend")
+                            self.showEvents(AppState.sharedInstance.trendingEventDict!, str: "trend")
                         }
                     }
                 })
@@ -410,7 +407,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         }else{
             print("records from global variable fetched")
             DispatchQueue.main.async {
-                self.showEvents(userDict: AppState.sharedInstance.trendingEventDict!, str: "trend")
+                self.showEvents(AppState.sharedInstance.trendingEventDict!, str: "trend")
             }
         }
         
@@ -620,7 +617,14 @@ extension LiveViewController: MKMapViewDelegate{
                 view = dequeuedView
             } else {
                 view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                view.image = UIImage(named: "bgpin")
+                
+                var pinImage : UIImage = UIImage(named: "bgpin")!
+                var dataPin: Data?
+                
+                dataPin = UIImageJPEGRepresentation(pinImage, 1.0)
+                //pinImage = UIImage(data: dataPin!)!
+                
+                view.image = pinImage
 
                // print("eventID: \(annotation.eventID)")
                 let imageUrl: URL = NSURL(string: annotation.imageUrl) as! URL
@@ -644,9 +648,7 @@ extension LiveViewController: MKMapViewDelegate{
                 let twentyOnePlus = UIColor(red: 0.0, green: 51/255.0, blue: 102/255.0, alpha: 1.0)
                 let check_ins = UIColor(red: 67/255.0, green: 199/255.0, blue: 61/255.0, alpha: 1.0)
                 
-                print("colorType: \(annotation.colorType)")
                 //eventUserImage.layer.borderColor = otherEvents.cgColor
-                
                 
                 let f = CGRect(x: 1, y: 1, width: 30, height: 30) // CGRect(2,2,46,43)
                 eventUserImage.frame = f
@@ -656,7 +658,7 @@ extension LiveViewController: MKMapViewDelegate{
                 view.addSubview(eventUserImage)
                 
                 let dateFormatter = DateFormatter()
-                dateFormatter.locale = NSLocale.current
+                dateFormatter.locale = Locale.current
                 
                 let dateAsString = annotation.startDate
                 dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"

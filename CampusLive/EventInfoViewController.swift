@@ -102,7 +102,7 @@ class EventInfoViewController: UIViewController {
         //print(start)
         
         let dateFormatter = DateFormatter()
-        dateFormatter.locale = NSLocale.current
+        dateFormatter.locale = Locale.current
         dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
         let formatter: DateFormatter = DateFormatter()
         formatter.dateFormat = "E MMM d, h:mm a"

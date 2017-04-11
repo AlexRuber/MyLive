@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WSx-hg-qa9">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WSx-hg-qa9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -153,7 +153,10 @@
                         <outlet property="customFBButton" destination="3U8-14-arI" id="u2Z-6u-zvr"/>
                         <outlet property="featurePageControl" destination="NF3-5f-5KP" id="9SB-M8-DIR"/>
                         <outlet property="featureScrollView" destination="5ux-RF-0AR" id="qev-LU-zRC"/>
-                        <outlet property="titleLabel" destination="6Qs-sD-gUo" id="oGL-Yu-rkX"/>
+                        <outlet property="loginBackgroundImage" destination="kAC-xE-QYM" id="MyH-9O-Ma8"/>
+                        <outlet property="policyButton" destination="sMg-m9-trW" id="hKh-cG-luD"/>
+                        <outlet property="policyLabel" destination="aWs-gr-bIf" id="IIC-9V-C0O"/>
+                        <outlet property="titleLabel" destination="6Qs-sD-gUo" id="obB-qI-Srq"/>
                         <segue destination="HeC-Kp-YOV" kind="show" identifier="SignInToFP" id="Jw6-FQ-Kg9"/>
                     </connections>
                 </viewController>
@@ -224,7 +227,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="77"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="C40E1FAD-6A6D-4CFE-8E91-5AF88FAE0AAB" translatesAutoresizingMaskIntoConstraints="NO" id="uyo-eX-bU2">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="imageView:uyo-eX-bU2:image" translatesAutoresizingMaskIntoConstraints="NO" id="uyo-eX-bU2">
                                                     <rect key="frame" x="0.0" y="-9" width="375" height="86"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -462,7 +465,26 @@
         <image name="6666DA49-01DA-42E0-BEBC-F64CDD8D4F25" width="16" height="16"/>
         <image name="72372BB6-0E36-4E77-AC58-93B912E22088" width="16" height="16"/>
         <image name="Active Tab" width="667" height="135"/>
-        <image name="C40E1FAD-6A6D-4CFE-8E91-5AF88FAE0AAB" width="620" height="64">
+        <image name="Calendar_48px_3" width="21" height="22"/>
+        <image name="CheckInButton" width="676" height="164"/>
+        <image name="Destination" width="200" height="200"/>
+        <image name="Info Button" width="25" height="29"/>
+        <image name="InstaLink" width="200" height="200"/>
+        <image name="Layer 1 copy" width="100" height="96"/>
+        <image name="Log-In Background" width="667" height="1183"/>
+        <image name="Logout Rounded Down_50px_2" width="34" height="34"/>
+        <image name="My Check-Ins (Box)" width="664" height="52"/>
+        <image name="NavButtonFilled" width="581" height="581"/>
+        <image name="NavigationButton" width="262" height="262"/>
+        <image name="OrgFilled" width="33" height="32"/>
+        <image name="Rounded Rectangle 1-1" width="620" height="64"/>
+        <image name="Rounded Rectangle 1-2" width="620" height="282"/>
+        <image name="Settings Filled" width="548" height="548"/>
+        <image name="Settings Unfilled" width="34" height="34"/>
+        <image name="TrendingFilled" width="12" height="12"/>
+        <image name="UCSDTritons copy" width="150" height="169"/>
+        <image name="back" width="13" height="22"/>
+        <image name="imageView:uyo-eX-bU2:image" width="620" height="64">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -3161,25 +3183,6 @@ AnYNAAJ2GgACdh8AAnYhAAJ2IwACdigAAnYwAAJ2MwACdjgAAnZAAAJ2QwACdlUAAnZYAAJ2XQAAAAAA
 AAQBAAAAAAAAAEEAAAAAAAAAAAAAAAAAAnZfA
 </mutableData>
         </image>
-        <image name="Calendar_48px_3" width="21" height="22"/>
-        <image name="CheckInButton" width="676" height="164"/>
-        <image name="Destination" width="200" height="200"/>
-        <image name="Info Button" width="25" height="29"/>
-        <image name="InstaLink" width="200" height="200"/>
-        <image name="Layer 1 copy" width="100" height="96"/>
-        <image name="Log-In Background" width="667" height="1183"/>
-        <image name="Logout Rounded Down_50px_2" width="34" height="34"/>
-        <image name="My Check-Ins (Box)" width="664" height="52"/>
-        <image name="NavButtonFilled" width="581" height="581"/>
-        <image name="NavigationButton" width="262" height="262"/>
-        <image name="OrgFilled" width="33" height="32"/>
-        <image name="Rounded Rectangle 1-1" width="620" height="64"/>
-        <image name="Rounded Rectangle 1-2" width="620" height="282"/>
-        <image name="Settings Filled" width="548" height="548"/>
-        <image name="Settings Unfilled" width="34" height="34"/>
-        <image name="TrendingFilled" width="12" height="12"/>
-        <image name="UCSDTritons copy" width="150" height="169"/>
-        <image name="back" width="13" height="22"/>
         <image name="san-diego-state-aztecs" width="118" height="81"/>
     </resources>
     <inferredMetricsTieBreakers>

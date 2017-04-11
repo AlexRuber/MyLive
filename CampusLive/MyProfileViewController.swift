@@ -55,6 +55,10 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
         //sign the user out of facebook app
         FBSDKAccessToken.setCurrent(nil)
         
+        //let defaults = UserDefaults.standard
+        //defaults.setValue("loggedOut", forKey: "yourKey")
+
+        
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController: UIViewController = mainStoryboard.instantiateViewController(withIdentifier: "LoginView")
         self.present(viewController, animated: true, completion: nil)
@@ -92,8 +96,8 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
             self.profileName.text = name
             //self.uiEmailLabelView.text = email
             if let photo = photoURL {
-                let data = NSData(contentsOf: photo)
-                self.profileImage.image = UIImage(data: data! as Data)
+                let data = try? Data(contentsOf: photo) //throws // try Data(contentsOf: photo)
+                self.profileImage.image = UIImage(data: data as! Data)
             }
             //campusSegment.isHidden = true
             
