@@ -18,17 +18,10 @@ class ObjectView: UIImageView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func touchesMoved(_ touches: Set<UITouch>!, with event: UIEvent!) {
-        var touch = touches.first
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent!) {
+        let touch = touches.first
         self.center = (touch?.location(in: self.superview))!
         //CGPoint
     }
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
+    
 }

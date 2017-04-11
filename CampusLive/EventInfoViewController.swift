@@ -16,7 +16,6 @@ class EventInfoViewController: UIViewController {
     
     var userRef = FIRDatabase.database().reference()
     var ref: FIRDatabaseReference!
-    //var eventRef: FIRDatabaseReference!
     var eventInfoRef: FIRDatabaseReference!
     
     var uid: String!
@@ -25,12 +24,6 @@ class EventInfoViewController: UIViewController {
     @IBOutlet weak var eventSubtitle: UILabel!
     @IBOutlet weak var eventDescription: UITextView!
     @IBOutlet weak var eventProfileImage: UIImageView!
-    
-    @IBOutlet weak var goingbutton: UIButton!
-    
-    
-    //@IBOutlet weak var startDate: UILabel!
-    //@IBOutlet weak var startDate: UILabel!
     @IBOutlet weak var startDate: UILabel!
     @IBOutlet weak var endDate: UILabel!
     @IBOutlet weak var checkInBtn: UIButton!
@@ -100,15 +93,12 @@ class EventInfoViewController: UIViewController {
         
         UIApplication.shared.statusBarStyle = .lightContent
         
-        //Nav bar code
         let navBgImage: UIImage = UIImage(named: "Active Tab")!
         UINavigationBar.appearance().setBackgroundImage(navBgImage, for: .default)
         
         let subtitleArr = subtitleEvent?.components(separatedBy: ", ")
         let venue    = subtitleArr?[0]
-        //let start = subtitleArr?[1]
         eventSubtitle?.text = venue
-        //print(start)
         
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale.current
@@ -138,7 +128,6 @@ class EventInfoViewController: UIViewController {
             // Get user value
             let value = snapshot.value as? NSDictionary
             let description = value?["description"] as? String ?? ""
-            //let user = User.init(username: username)
             self.website = value?["website"] as? String ?? ""
             self.eventDescription.text = description
         }) { (error) in
@@ -149,28 +138,6 @@ class EventInfoViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    /*
-    @IBAction func reportEventClicked(_ sender: Any) {
-        self.uid = FIRAuth.auth()?.currentUser?.uid
-        let posts: [String : AnyObject] = ["reported By": uid as AnyObject]
-        userRef = userRef.child("malicious_events").child(eventId!)
-        userRef.setValue(posts)
-        
-        let addEventPopup = UIAlertController(title: "Appreciate it!", message: "Thank you for reporting. Our team will shortly look into it.", preferredStyle: .alert)
-        addEventPopup.addAction(UIAlertAction(title: "OK", style: .default, handler: {
-            action in
-            self.dismiss(animated: true, completion: nil)
-        }))
-        present(addEventPopup, animated: true, completion: nil)
-        
-    }
-    */
-    
-    @IBAction func onEventCheckedIn(_ sender: Any) {
-        
-        
     }
     
 }

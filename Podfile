@@ -15,6 +15,5 @@ target 'CampusLive' do
   pod ‘Firebase/Storage’
   pod ‘Firebase/Database’
   pod ’SVProgressHUD’
-  pod 'GRDB.swift'
   
 end

@@ -52,14 +52,7 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     
     @IBOutlet weak var verifiedButton: UIButton!
     
-    @IBOutlet weak var eventDescriptive: UIButton!
     @IBOutlet weak var orgSegment: UISegmentedControl!
-    @IBOutlet weak var showAllSwitch: UISwitch!
-    @IBOutlet weak var eventPin: UIImageView!
-    @IBOutlet weak var schoolButton: UIButton!
-    
-    //var eventOrgRef = FIRDatabase.database().reference()
-    //var eventBusRef = FIRDatabase.database().reference()
     
     var eventRef: FIRDatabaseReference!
     
@@ -70,7 +63,6 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         mapView.showsUserLocation = true
         mapView.setUserTrackingMode(.follow, animated: true)
         self.mapView.setRegion(region, animated: true)
-        //mapView!.setRegion(region, animated: true)
         mapView!.setCenter(mapView!.userLocation.coordinate, animated: true)
         print("Did tap user location")
     }
@@ -79,13 +71,8 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
     //this method is called by the framework on locationManager.requestLocation();
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.location = locations.last! as CLLocation
-
-        //let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
         self.mapView.showsUserLocation = true
-        //let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1))
-        //self.mapView.setRegion(region, animated: true)
         self.locationManager.stopUpdatingLocation()
-        
     }
     
     //Hides pins after posting event
@@ -97,81 +84,42 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         super.viewDidLoad()
 
         self.mapView.showsUserLocation = true
-        
         orgSegment.tintColor = UIColor.white
         
         let foregroundColor = UIColor(red: 27/255, green: 150/255, blue: 254/255, alpha: 1)
-        
         let backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
         
         SVProgressHUD.show()
-        
         SVProgressHUD.setForegroundColor(foregroundColor)
-        
         SVProgressHUD.setBackgroundColor(backgroundColor)
-        
         UIApplication.shared.statusBarStyle = .lightContent
 
-        
-        //Minus Button is hidden to start
-        
-        //subtractEventButton.isHidden = true
-        
-        
-        
-        //eventDescriptive.isHidden = true
-        
-        //eventPin.isHidden = true
-        
-        
-    
         isAuthorizedtoGetUserLocation()
         
         if CLLocationManager.locationServicesEnabled(){
-            
             self.locationManager.delegate = self
             self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.requestLocation()
         }
         
-    
-       // self.locationManager.delegate = self
-        //self.locationManager.startUpdatingLocation()
         self.mapView.delegate = self
-        //self.locationManager.delegate = self
-        
-        //self.eventBusRef = eventBusRef.child("business_events")
-        
-        //self.eventOrgRef = eventOrgRef.child("org_events")
-        
-        //mapView.showsUserLocation = true
         
         let span = MKCoordinateSpanMake(0.018, 0.018)
-        
         let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: AppState.sharedInstance.defaultLatitude as! CLLocationDegrees, longitude: AppState.sharedInstance.defaultLongitude as! CLLocationDegrees), span: span)
         
         mapView.setRegion(region, animated: true)
-        
         eventRef = FIRDatabase.database().reference().child("events")
-        
         self.uid = FIRAuth.auth()?.currentUser?.uid
         
-        
         isVerifiedFlag = true
-        
         verifiedButton.setImage(UIImage(named: "OrgFilled"), for: UIControlState.normal)
         
         displayLiveEvents()
         
-        //displayTrendingEvents()
-        
     }
-    
-    
     
     //if we have no permission to access user location, then ask user for permission.
     func isAuthorizedtoGetUserLocation() {
-        
         if CLLocationManager.authorizationStatus() != .authorizedWhenInUse     {
             locationManager.requestWhenInUseAuthorization()
         }
@@ -181,12 +129,9 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         SVProgressHUD.show()
         displayRelevantEvents()
         self.mapView.showsUserLocation = true
-        //SVProgressHUD.dismiss()
     }
     
-    
     func displayLiveEvents() {
-
         MeasurementHelper.liveAnnotationClickEvent()
         let allAnnotations = self.mapView.annotations
         for annotation in allAnnotations {
@@ -223,7 +168,6 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
             if(str == "live"){
                 
                 let autoID = each.key
-                //let type = each.value["type"] as! String
                 let name = each.value["title"] as! String
                 let endDateSubstring = each.value["endDate"] as! String
                 let startDateSubstring = each.value["startDate"] as! String
@@ -239,16 +183,13 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
                     let subtitle = "\(venue)" + ", " + "\(stringDate!)"
                     let latitude = each.value["latitude"] as! NSNumber
                     let longitude = each.value["longitude"] as! NSNumber
-                    //let description = each.value["description"] as! String
                     let imageUrl = each.value["image"] as! String
                     
                     let type = each.value["type"] as! String
                     let colorType = each.value["colorType"] as! String
-                    
                     let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: subtitle, imageUrl: imageUrl, eventId: autoID, endDate: endDateSubstring, startDate: startDateSubstring, type: type, colorType: colorType)
                     
                     self.mapView.addAnnotation(clAnnotation)
-                    //self.mapView.addAnnotation(clAnnotation)
                 }
             }else{
                 let endDateSubstring = each.value["endDate"] as! String
@@ -258,8 +199,6 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
                 let startDateTimeInterval = newDate?.timeIntervalSince1970
                 let currentDateTimeInterval = currentDate.timeIntervalSince1970
                 let dayFromNow = currentDateTimeInterval + 86400.0
-                //let endDateFormat = dateFormatter.date(from: endDateSubstring)
-                //let endDateTimeInterval = endDateFormat?.timeIntervalSince1970
                 let trendingEventEndDate = currentDateTimeInterval + 691200
                 if(Double(trendingEventEndDate) > Double(startDateTimeInterval!)){
                     if (Double(startDateTimeInterval!) > dayFromNow) {
@@ -284,119 +223,19 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
             
         }
     }
-    /*
-    func displayLiveOrgEvents(){
-     
-        let currentDate = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = NSLocale.current
-        dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
-        let formatter: DateFormatter = DateFormatter()
-        formatter.dateFormat = "E hh:mm a"
-     
-        let allAnnotations = self.mapView.annotations
-        
-        for annotation in allAnnotations {
-            mapView.view(for: annotation)?.isHidden = true
-        }
-        
-        eventRefOrg.observe(.value, with: {(snap) in
-            if let userDict = snap.value as? [String:AnyObject] {
-                for each in userDict as [String: AnyObject] {
-                    let autoID = each.key
-                    let name = each.value["name"] as! String
-                    let endDateSubstring = each.value["endDate"] as! String
-                    let startDateSubstring = each.value["startDate"] as! String
-                    let dateAsString = startDateSubstring
-                    let newDate = dateFormatter.date(from: dateAsString)
-                    let stringDate: String! = formatter.string(from: newDate!)
-                    let startDateTimeInterval = newDate?.timeIntervalSince1970
-                    let currentDateTimeInterval = currentDate.timeIntervalSince1970
-                    let dayFromNow = currentDateTimeInterval + 86400.0
-                    
-                    if (Double(startDateTimeInterval!) < dayFromNow) {
-                        
-                        let venue = each.value["venue"] as! String
-                        let subtitle = "\(venue)" + ", " + "\(stringDate!)"
-                        let latitude = each.value["latitude"] as! NSNumber
-                        let longitude = each.value["longitude"] as! NSNumber
-                        let description = each.value["description"] as! String
-                        let imageUrl = each.value["profileImage"] as! String
-                        let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: subtitle, imageUrl: imageUrl, eventDescription: description, eventID: autoID, endDate: endDateSubstring, startDate: startDateSubstring)
-                        
-                        self.mapView.addAnnotation(clAnnotation)
-                    }
-                }
-            }
-        })
-    }
-    
-    func displayOrgTrendingEvents(){
-        
-        let allAnnotations = self.mapView.annotations
-        
-        let currentDate = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = NSLocale.current
-        dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
-        
-        let currentDateTimeInterval = currentDate.timeIntervalSince1970
-        let dayFromNow = currentDateTimeInterval + 86400.0
-        
-        let formatter: DateFormatter = DateFormatter()
-        formatter.dateFormat = "E hh:mm a"
-        
-        for annotation in allAnnotations {
-            mapView.view(for: annotation)?.isHidden = true
-        }
-        
-        eventRefOrg.observe(.value, with: {(snap) in
-            if let userDict = snap.value as? [String:AnyObject] {
-                
-                // print(userDict)
-                for each in userDict as [String: AnyObject] {
-                    
-                    let endDateSubstring = each.value["endDate"] as! String
-                    let startDateSubstring = each.value["startDate"] as! String
-                    let dateAsString = startDateSubstring
-                    let newDate = dateFormatter.date(from: dateAsString)
-                    let startDateTimeInterval = newDate?.timeIntervalSince1970
-                    
-                    if (Double(startDateTimeInterval!) > dayFromNow) {
-                        let stringDate: String! = formatter.string(from: newDate!)
-                        let autoID = each.key
-                        let name = each.value["name"] as! String
-                        let venue = each.value["venue"] as! String
-                        let subtitle = "\(venue)" + ", " + "\(stringDate!)"
-                        let latitude = each.value["latitude"] as! NSNumber
-                        let longitude = each.value["longitude"] as! NSNumber
-                        let description = each.value["description"] as! String
-                        let imageUrl = each.value["profileImage"] as! String
-                        let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: subtitle, imageUrl: imageUrl, eventDescription: description, eventID: autoID, endDate: endDateSubstring, startDate: startDateSubstring)
-                        
-                        self.mapView.addAnnotation(clAnnotation)
-                    }
-                }
-            }
-        })
-    }*/
     
     func displayTrendingEvents() {
         
         MeasurementHelper.liveAnnotationClickEvent()
-
         let allAnnotations = self.mapView.annotations
-        
         for annotation in allAnnotations {
             mapView.view(for: annotation)?.isHidden = true
         }
         
         if (AppState.sharedInstance.trendingEventDict == nil){
-            
             DispatchQueue.main.async {
                 self.eventRef.observe(.value, with: {(snap) in
                     if let userDict = snap.value as? [String:AnyObject] {
-                        
                         if(AppState.sharedInstance.trendingEventDict?.count != userDict.count){
                             AppState.sharedInstance.trendingEventDict = userDict
                             self.showEvents(AppState.sharedInstance.trendingEventDict!, str: "trend")
@@ -411,75 +250,9 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
             }
         }
         
-        /*
-        MeasurementHelper.trendingSegmentEvent()
-        
-        self.mapView.showsUserLocation = true
-
-        
-        let allAnnotations = self.mapView.annotations
-        
-        for annotation in allAnnotations {
-            mapView.view(for: annotation)?.isHidden = true
-        }
-        
-        let currentDate = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = NSLocale.current
-        dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
-        
-        let currentDateTimeInterval = currentDate.timeIntervalSince1970
-        let dayFromNow = currentDateTimeInterval + 86400.0
-        
-        //691200
-        let formatter: DateFormatter = DateFormatter()
-        formatter.dateFormat = "E hh:mm a"
-        
-        //displaying ORG events
-        //displayOrgTrendingEvents()
-        
-        //displaying Student events
-        eventRef.observe(.value, with: {(snap) in
-            if let userDict = snap.value as? [String:AnyObject] {
-                
-                for each in userDict as [String: AnyObject] {
-                    
-                    let endDateSubstring = each.value["endDate"] as! String
-                    let startDateSubstring = each.value["startDate"] as! String
-                    let dateAsString = startDateSubstring
-                    let newDate = dateFormatter.date(from: dateAsString)
-                    let startDateTimeInterval = newDate?.timeIntervalSince1970
-                    //let endDateFormat = dateFormatter.date(from: endDateSubstring)
-                    //let endDateTimeInterval = endDateFormat?.timeIntervalSince1970
-                    let trendingEventEndDate = currentDateTimeInterval + 691200
-                    
-                    if(Double(trendingEventEndDate) > Double(startDateTimeInterval!)){
-                        if (Double(startDateTimeInterval!) > dayFromNow) {
-                            let stringDate: String! = formatter.string(from: newDate!)
-                            let autoID = each.key
-                            let name = each.value["title"] as! String
-                            let venue = each.value["venue"] as! String
-                            let subtitle = "\(venue)" + ", " + "\(stringDate!)"
-                            let latitude = each.value["latitude"] as! NSNumber
-                            let longitude = each.value["longitude"] as! NSNumber
-                            
-                            let imageUrl = each.value["image"] as! String
-                            let type = each.value["type"] as! String
-                            let colorType = each.value["colorType"] as! String
-                            
-                            let clAnnotation = CampusLiveAnnotation(lat: CLLocationDegrees(latitude), long: CLLocationDegrees(longitude), title: name, subtitle: subtitle, imageUrl: imageUrl, eventId: autoID, endDate: endDateSubstring, startDate: startDateSubstring, type: type, colorType: colorType)
-                            
-                            self.mapView.addAnnotation(clAnnotation)
-                        }
-                    }
-                }
-            }
-        })
-        */
     }
     
     @IBAction func settingsClicked(_ sender: Any) {
-        
     }
     
     var isVerifiedFlag = true
@@ -490,18 +263,13 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
             if(isVerifiedFlag){
                 displayLiveEvents()
                 self.mapView.showsUserLocation = true
-
             }else{
-                
                 self.mapView.showsUserLocation = true
-
                 displayLiveEvents()
             }
         case 1:
             if(isVerifiedFlag){
                 displayTrendingEvents()
-                
-                //displayOrgTrendingEvents()
             }else{
                 displayTrendingEvents()
             }
@@ -515,7 +283,6 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
             isVerifiedFlag = true
             verifiedButton.setImage(UIImage(named: "OrgFilled"), for: UIControlState.normal)
             
-            //Zoom in to UCSD School
             let schoolSpan = MKCoordinateSpan(latitudeDelta: 0.025, longitudeDelta: 0.025)
             let schoolCoordinate = CLLocationCoordinate2DMake(32.88077651406362, -117.2365665435791)
             let schoolRegion = MKCoordinateRegionMake(schoolCoordinate, schoolSpan)
@@ -529,30 +296,12 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
             let SDregion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 32.793181, longitude: -117.164898), span: SDspan)
             mapView.setRegion(SDregion, animated: true)
         }
-       // displayRelevantEvents()
     }
     
     func infoButtonTapped() {
         MeasurementHelper.infoEventAnnotationEvent()
         performSegue(withIdentifier: "detailEventVC", sender: self)
     }
-    /*
-    //Event Button Click Variations
-    @IBAction func addEventButtonClicked(_ sender: Any) {
-        print("add event button clicked.")
-        //eventDescriptive.isHidden = false
-        //eventPin.isHidden = false
-        //addEventButton.isHidden = true
-        //subtractEventButton.isHidden = false
-    }
-    
-    @IBAction func subtractEventButtonClicked(_ sender: Any) {
-        eventPin.isHidden = true
-        eventDescriptive.isHidden = true
-        addEventButton.isHidden = false
-        subtractEventButton.isHidden = true
-    }
-    */
     
     //this method will be called each time when a user change his location access preference.
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -562,29 +311,17 @@ class LiveViewController: UIViewController, CLLocationManagerDelegate{
         }
     }
     
- 
-    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Errors: " + error.localizedDescription)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        /*
-        if(segue.identifier == "AddEventDescription") {
-            let nav = segue.destination as! UINavigationController
-            let destinationViewController = nav.viewControllers[0] as! AddEventViewController
-            destinationViewController.location = addEventLocation
-        }
-        */
+    
         if (segue.identifier == "EventInfo") {
             let nav = segue.destination as! UINavigationController
             let destinationViewController = nav.viewControllers[0] as! EventInfoViewController
             let annotation: CampusLiveAnnotation = sender as! CampusLiveAnnotation
             
-            
-            //print("eventID: \(annotation.eventID)")
-            //print("Title: \(annotation.title)")
-
             destinationViewController.titleEvent = annotation.title
             destinationViewController.subtitleEvent = annotation.subtitle
             destinationViewController.imageEventUrl = annotation.imageUrl
@@ -618,16 +355,14 @@ extension LiveViewController: MKMapViewDelegate{
             } else {
                 view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 
-                var pinImage : UIImage = UIImage(named: "bgpin")!
-                var dataPin: Data?
+                let pinImage : UIImage = UIImage(named: "bgpin")!
                 
+                var dataPin: Data?
                 dataPin = UIImageJPEGRepresentation(pinImage, 1.0)
-                //pinImage = UIImage(data: dataPin!)!
                 
                 view.image = pinImage
-
-               // print("eventID: \(annotation.eventID)")
-                let imageUrl: URL = NSURL(string: annotation.imageUrl) as! URL
+                
+                let imageUrl: URL = NSURL(string: annotation.imageUrl)! as URL
                 var data = try? Data(contentsOf: imageUrl)
                 var profileImage : UIImage = UIImage(data: data!)!
                 
@@ -635,9 +370,7 @@ extension LiveViewController: MKMapViewDelegate{
                 profileImage = UIImage(data: data!)!
                 
                 let eventUserImage : UIImageView = UIImageView(image: profileImage)
-                
                 eventUserImage.layer.borderWidth = 1.5
-                //eventUserImage.layer.borderColor = otherEvents.cgColor
                 
                 // creating colors
                 let otherEvents = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha:1.0)
@@ -647,8 +380,6 @@ extension LiveViewController: MKMapViewDelegate{
                 let experiences = UIColor(red: 164/255.0, green: 50/255.0, blue: 1.0, alpha: 1.0)
                 let twentyOnePlus = UIColor(red: 0.0, green: 51/255.0, blue: 102/255.0, alpha: 1.0)
                 let check_ins = UIColor(red: 67/255.0, green: 199/255.0, blue: 61/255.0, alpha: 1.0)
-                
-                //eventUserImage.layer.borderColor = otherEvents.cgColor
                 
                 let f = CGRect(x: 1, y: 1, width: 30, height: 30) // CGRect(2,2,46,43)
                 eventUserImage.frame = f
@@ -682,8 +413,6 @@ extension LiveViewController: MKMapViewDelegate{
                 if (integerDate! < timeInterval) {
                     if(timeInterval < endDateInt!){
                         eventUserImage.layer.borderColor = live_events.cgColor
-                        //eventUserImage.layer.borderColor = trending.cgColor
-                        print("live")
                         let btn2 = UIButton()
                         btn2.frame = CGRect(x: 0, y: 0, width: 38, height: 18)
                         btn2.setImage(UIImage(named: "live"), for: UIControlState())
@@ -694,25 +423,7 @@ extension LiveViewController: MKMapViewDelegate{
                         btn2.setImage(UIImage(named: "Info Button-1"), for: UIControlState())
                         view.rightCalloutAccessoryView = btn2
                     }
-                    /*
-                    if(AppState.sharedInstance.userPostCount! > 1){
-                        AppState.sharedI
-                     nstance.userPostCount = AppState.sharedInstance.userPostCount! - 1
-                        self.users.child(self.uid!).updateChildValues(["postCount" : AppState.sharedInstance.userPostCount as Any])
-                    }
-                    */
                     
-                    //Don't want an event deletion to be initiated from client side. 
-                    /*
-                    eventRef.child(annotation.eventID!).removeValue { (error, ref) in
-                        print("DELETEEEEEEEEEE")
-                        //AppState.sharedInstance.userPostCount = AppState.sharedInstance.userPostCount! - 1
-                        //self.users.child(self.uid!).updateChildValues(["postCount" : AppState.sharedInstance.userPostCount])
-                        if error != nil {
-                            print("error \(error)")
-                        }
-                    }
-                    */
                 }
                 else{
                     print("Trending")
@@ -732,9 +443,6 @@ extension LiveViewController: MKMapViewDelegate{
                     case "check_ins":
                         eventUserImage.layer.borderColor = check_ins.cgColor
                         break
-                    //case "other":
-                      //  eventUserImage.layer.borderColor = otherEvents.cgColor
-                       // break
                     default:
                         eventUserImage.layer.borderColor = otherEvents.cgColor
                         break
@@ -745,56 +453,27 @@ extension LiveViewController: MKMapViewDelegate{
                     view.rightCalloutAccessoryView = btn2
                 }
                 
-                /*
-                users.observe(.value, with: {(snap) in
-                    if let userDict = snap.value as? [String: AnyObject] {
-                        
-                        for each in userDict as [String: AnyObject] {
-                            if each.key == annotation.eventID {
-                                view.image = UIImage(named: "purpleCircularPin")
-                                break
-                            }
-                        }
-                    }
-                })
-                */
-                
                 view.isEnabled = true
                 view.canShowCallout = true
-                //view.leftCalloutAccessoryView = UIImageView(image: pikeImage)
                 view.leftCalloutAccessoryView = UIImageView(image: eventUserImage.image)
                 
                 //Custom Left Callout Image Settings
                 view.leftCalloutAccessoryView?.contentMode = .scaleAspectFit
                 view.leftCalloutAccessoryView?.frame = CGRect(x: CGFloat(5), y: CGFloat(5), width: CGFloat(40), height: CGFloat(40))
                     
-                    //CGFloat(eventPin.frame.size.height - 15), height: eventPin.frame.size.height - 15)
                 view.leftCalloutAccessoryView?.layer.cornerRadius = (view.leftCalloutAccessoryView?.frame.width)!/2
                 view.leftCalloutAccessoryView?.clipsToBounds = true
-                
-                // btn2.addTarget(self, action: "infoButtonTapped", for: .touchUpInside)
             }
             return view
         }
         
-        //SVProgressHUD.dismiss()
         return nil
     }
     
-    
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         self.location = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
-        // geoCode(location)
-        
-        /**
-        let span = MKCoordinateSpanMake(0.269, 0.269)
-        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 32.793181, longitude: -117.164898), span: span)
-        mapView.setRegion(region, animated: true)
-        */
         
         UIView.animate(withDuration: 0.4, animations: {
-            //self.eventDescriptive.layer.opacity = 1
-            
             self.addEventLocation = self.location.coordinate
         })
     }
@@ -818,13 +497,7 @@ extension LiveViewController: MKMapViewDelegate{
             if let annotation = view.annotation as? CampusLiveAnnotation {
                 performSegue(withIdentifier: "EventInfo", sender: annotation)
             }
-            /*
-            eventPin.isHidden = true
-            subtractEventButton.isHidden = true
-            addEventButton.isHidden = false
-            eventDescriptive.isHidden = true
-            print("Right callout Accessory  View Called")
-            */
+            
         }
     }
    
@@ -833,15 +506,11 @@ extension LiveViewController: MKMapViewDelegate{
     }
     
     func mapViewWillStartLoadingMap(_ mapView: MKMapView) {
-       //SVProgressHUD.show(withStatus: "Loading Map :)")
-       
-        //SVProgressHUD.show()
         
     }
     
     func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
         SVProgressHUD.dismiss(withDelay: 0.5)
-        
     }
     
 }

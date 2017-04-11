@@ -49,7 +49,6 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.1)
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
-  - GRDB.swift (0.105.0)
   - GTMSessionFetcher/Core (1.1.9)
   - SVProgressHUD (2.1.2)
 
@@ -61,7 +60,6 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
-  - GRDB.swift
   - SVProgressHUD
 
 SPEC CHECKSUMS:
@@ -77,10 +75,9 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
   FirebaseStorage: a5c55b23741a49a72af8f30f95b3bb5ddbeda12d
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
-  GRDB.swift: a21d29acf4b3bde1aaabcaf76dc0a4b64cc96a12
   GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
 
-PODFILE CHECKSUM: 86259604123eafb86a481c1d4a3f50bd234cc637
+PODFILE CHECKSUM: 4cb8b87e487748890729569c1c6c24ab402e24de
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.1

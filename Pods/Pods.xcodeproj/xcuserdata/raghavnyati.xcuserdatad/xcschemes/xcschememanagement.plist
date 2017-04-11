@@ -24,11 +24,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>GRDB.swift.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>GTMSessionFetcher.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,72 +47,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>046058E68C810F2E9FFC7EF429FCE5B8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>049819BA70C23C00D5B2DA2BF349AB43</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>107A9565F9DF88517DFD3E28C05B2B96</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>23BA9083ED0D2392A167A8AFA04427FA</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>30D7FCF8072F5D59AE1C98D94F9A6EC9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3E9AF4F93A3C267ACABF1DB0FB7BB733</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>44CAD6CE523055ED339E87154473A254</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>61AF977C23DFB1506EEC7FDC5AACAB7E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6EDC37F3FA92533C6AC3562458AA91F1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7D04535608058A2FABC0D16935868FB9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8E82AB21E575FFCD5CBD6A80C2A18C43</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>97C4E246388741A9C9C3535BC62D3913</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9D0F2E5EA1B46A5D72FFD42B0B39DBBC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>AE1DF1F93CA4DE7285BEF78916FED2C1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -133,6 +68,16 @@
 			<true/>
 		</dict>
 		<key>C052BEBFBD0AB5218CC64BA3450F6547</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C053D0583CA1D54C73AFB54D7A41D2DC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D62561EFF5E320D9286E0D3709EE908B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

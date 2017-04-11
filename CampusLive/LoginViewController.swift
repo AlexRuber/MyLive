@@ -32,14 +32,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
     @IBOutlet weak var logoImage: UIImageView!
     @IBOutlet weak var featureScrollView: UIScrollView!
     @IBOutlet weak var featurePageControl: UIPageControl!
-    //@IBOutlet weak var usernameField: UITextField!
-    //@IBOutlet weak var passwordField: UITextField!
-    //@IBOutlet weak var loginInButton: UIButton!
-    //@IBOutlet weak var forgetPasswordButton: UIButton!
-    //@IBOutlet weak var signupButton: UIButton!
-    //@IBOutlet weak var segmentView: UISegmentedControl!
     @IBOutlet weak var customFBButton: UIButton!
-    //@IBOutlet weak var activityInd: UIActivityIndicatorView!
     
     var featureImagesArray = [UIImage]()
     var titleArray = ["See what's happening around you...", "Keep up to date with your college campus...", "Discover San Diego"]
@@ -54,8 +47,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
         
         if (FBSDKAccessToken.current() != nil && FIRAuth.auth()?.currentUser != nil)
         {
-            //performSegue(withIdentifier:"SignInToFP", sender: self)
-            
             showEmailAddress()
             
             let blueColor = UIColor(red: 31.0/255.0, green: 150.0/255.0, blue: 254.0/255.0, alpha: 1.0)
@@ -71,12 +62,10 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
             let imageView = UIImageView(image: image!)
             
             imageView.frame = CGRect(x: 110, y: 109, width: 154, height: 154)
-            //imageView.tintColor = blueColor
-            //imageView.backgroundColor = blueColor
             imageView.isOpaque = true
             view.addSubview(imageView)
 
-            let blueColorView = UIColor(red: 26/255.0, green: 127/255.0, blue: 254/255.0, alpha: 1.0)
+            _ = UIColor(red: 26/255.0, green: 127/255.0, blue: 254/255.0, alpha: 1.0)
             self.view.backgroundColor = blueColor
             self.view.tintColor = blueColor
             
@@ -86,54 +75,14 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
         
         users = FIRDatabase.database().reference().child("users")
         
-        //Activity Spinner Hidden to Begin
-        //activityInd.isHidden = true
-        
-        //Creating Delegates for Hiding Keyboard
-        //self.usernameField.delegate = self
-        //self.passwordField.delegate = self
-        
         //Custom FB Button Settings
         let customFBImage = UIImage(named: "facebook-login-blue")
         customFBButton.setImage(customFBImage, for: .normal)
         customFBButton.frame = CGRect(x: 32, y: 320
             , width: 300, height: 532)
         customFBButton.addTarget(self, action: #selector(handleCustomFBLogin), for: .touchUpInside)
-        
-        //segmentView.selectedSegmentIndex = 0
-        //usernameField.isHidden = true
-        //asswordField.isHidden = true
-        //loginInButton.isHidden = true
-        //forgetPasswordButton.isHidden = true
-        //signupButton.isHidden = true
-        //customFBButton.isHidden = false
-        
   
     }
-
-    /*
-    @IBAction func segmentStateChanged(_ sender: Any) {
-        switch segmentView.selectedSegmentIndex{
-        case 0:
-            usernameField.isHidden = true
-            passwordField.isHidden = true
-            loginInButton.isHidden = true
-            forgetPasswordButton.isHidden = true
-            signupButton.isHidden = true
-            customFBButton.isHidden = false
-        case 1:
-            usernameField.isHidden = false
-            passwordField.isHidden = false
-            loginInButton.isHidden = false
-            forgetPasswordButton.isHidden = false
-            signupButton.isHidden = false
-            customFBButton.isHidden = true
-        default:
-            break;
-        }
-    }
-    */
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -156,7 +105,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
     }
     override func viewDidAppear(_ animated: Bool) {
         
-        var contentWidth: CGFloat = 0.0
+        var _: CGFloat = 0.0
         
         featureImagesArray = [#imageLiteral(resourceName: "Log In 1"), #imageLiteral(resourceName: "Log In 2"), #imageLiteral(resourceName: "Log In 3")]
         featureScrollView.isPagingEnabled = true
@@ -171,7 +120,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
     
     func loadFeatures() {
         
-        var scrollWidth = featureScrollView.frame.size.width
+        let scrollWidth = featureScrollView.frame.size.width
         var index = 0
         titleLabel.text = titleArray[0]
         for feature in featureImagesArray {
@@ -212,10 +161,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
     }
     
     func handleCustomFBLogin(){
-        //print(1234)
-        
-        //isOrgLogin = false
-        
         self.customFBButton.isHidden = false
         
         FBSDKLoginManager().logIn(withReadPermissions: ["email", "public_profile", "user_friends"], from: self){ (result, err) in
@@ -223,11 +168,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
                 print("Fb Login Failed", err ?? "")
                 self.dismiss(animated: true, completion: nil)
             }
-            //print(result?.token.tokenString ?? "")
             self.showEmailAddress()
-         
-            //self.dismiss(animated: true, completion: nil)
-
         }
     }
     
@@ -254,38 +195,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
             self.signedIn(user, userID: (user?.uid)!, userData: userData as! Dictionary<String, String>)
         })
         
-        /*
-        FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email"]).start{
-            (connection, result, err) in
-            if(err != nil){
-                print("Failed to start graph request.")
-                return
-            }
-            print(result ?? "")
-        }
-        */
     }
-    
-    /*
-    @IBAction func didRequestPasswordReset(_ sender: Any) {
-        let prompt = UIAlertController.init(title: nil, message: "Email:", preferredStyle: .alert)
-        let okAction = UIAlertAction.init(title: "OK", style: .default) { (action) in
-            let userInput = prompt.textFields![0].text
-            if (userInput!.isEmpty) {
-                return
-            }
-            FIRAuth.auth()?.sendPasswordReset(withEmail: userInput!) { (error) in
-                if let error = error {
-                    print(error.localizedDescription)
-                    return
-                }
-            }
-        }
-        prompt.addTextField(configurationHandler: nil)
-        prompt.addAction(okAction)
-        present(prompt, animated: true, completion: nil);
-    }
-    */
     
     func signedIn(_ user: FIRUser?, userID: String, userData: Dictionary<String, String>) {
         
@@ -305,67 +215,29 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
             self.checkCampus()
             self.selectCampus()
         }
-        //let defaults = UserDefaults.standard
-        //defaults.setValue("loggedin", forKey: "yourKey")
-        
-        //let notificationName = Notification.Name(rawValue: Constants.NotificationKeys.SignedIn)
-        //NotificationCenter.default.post(name: notificationName, object: nil, userInfo: nil)
-        //performSegue(withIdentifier: Constants.Segues.SignInToFp, sender: nil)
-    
     }
-    
-    /*
-    func doNothing(){
-        var inputTextField: UITextField?
-        let passwordPrompt = UIAlertController(title: "Campus", message: "Select your Campus.", preferredStyle: UIAlertControllerStyle.alert)
-        passwordPrompt.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
-        passwordPrompt.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (action) -> Void in
-            // Now do whatever you want with inputTextField (remember to unwrap the optional)
-        }))
-        passwordPrompt.addTextField(configurationHandler: {(textField: UITextField!) in
-            textField.placeholder = "Password"
-            textField.isSecureTextEntry = true
-            inputTextField = textField
-        })
-        
-        present(passwordPrompt, animated: true, completion: nil)
-    }
-    */
     
     func selectCampus(){
         campusRef = FIRDatabase.database().reference().child("campuses").child("san_diego")
-        
-        //let passwordPrompt = UIAlertController(title: "Campus", message: "Select your Campus:", preferredStyle: UIAlertControllerStyle.alert)
-        
         campusRef.observe(.value
             , with: {(snap) in
             if let userDict = snap.value as? [String:AnyObject] {
                 
                 AppState.sharedInstance.campusDict = userDict
-                
                 for each in userDict as [String: AnyObject] {
                     
-                    //passwordPrompt.addAction(UIAlertAction(title: each.key, style: UIAlertActionStyle.default, handler: { (action) -> Void in
                         AppState.sharedInstance.dafaultCampus = each.key
                         AppState.sharedInstance.defaultLatitude = each.value["latitude"] as? NSNumber
                         AppState.sharedInstance.defaultLongitude = each.value["longitude"] as? NSNumber
                         let notificationName = Notification.Name(rawValue: Constants.NotificationKeys.SignedIn)
                         NotificationCenter.default.post(name: notificationName, object: nil, userInfo: nil)
                         self.performSegue(withIdentifier: Constants.Segues.SignInToFp, sender: nil)
-                        
-                        //self.dismiss(animated: true, completion: nil)
-                   // }))
                     
                 }
             }
         }){ (error) in
             print(error.localizedDescription)
         }
-        //DispatchQueue.main.async {
-        
-        //present(passwordPrompt, animated: true, completion: nil)
-        
-        //self.dismiss(animated: true, completion: nil)
     }
     
     func checkCampus(){
@@ -384,74 +256,10 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
         //selectCampus()
     }
 
-    /*
-    @IBAction func signupButtonClicked(_ sender: Any) {
-        performSegue(withIdentifier: "SignUpIdentifier", sender: nil)
-    }
-    
-    
-    @IBAction func loginButtonClicked(_ sender: Any) {
-     
-        // Sign In with credentials.
-        isOrgLogin = true
-        
-        
-        if ((usernameField.text?.isEmpty)! || (passwordField.text?.isEmpty)!){
-            let alert = UIAlertController(title: "Invalid Fields", message: "Enter all details", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
-            
-            
-            self.present(alert, animated: true, completion: nil)
-        }
-        else{
-
-            if let email = usernameField.text, let password = passwordField.text {
-            FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
-                if error == nil {
-                    self.logIn(user)
-                }else{
-                    print(error?.localizedDescription ?? "Something went wrong.")
-                    let alert = UIAlertController(title: "Invalid User", message: "User does not exist.", preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
-                    
-                    
-                    return
-                    }
-                }
-            }
-        }
-        
-        
-    }
-    
-    func logIn(_ user: FIRUser?) {
-        if(FIRAuth.auth()?.currentUser != nil){
-            
-            MeasurementHelper.sendLoginEvent()
-            AppState.sharedInstance.displayName = user?.displayName ?? user?.email
-            AppState.sharedInstance.photoURL = user?.photoURL
-            AppState.sharedInstance.signedIn = true
-            let notificationName = Notification.Name(rawValue: Constants.NotificationKeys.SignedIn)
-            NotificationCenter.default.post(name: notificationName, object: nil, userInfo: nil)
-            performSegue(withIdentifier: Constants.Segues.SignUpToFp, sender: nil)
-        }
-    }
-    */
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        //let viewController = segue.destination as!
-        //viewController.isOrgLogin = true
         if(FIRAuth.auth()?.currentUser != nil){
             if(segue.identifier == "SignUpToFP"){
-            //let barViewControllers = segue.destination as! UITabBarController
-            //let nav = barViewControllers.viewControllers![0] as! UINavigationController
-            
-            //let destinationViewController = nav.viewControllers[0]
-                let destinationViewController = segue.destination as! LiveViewController
-                //destinationViewController.isOrgLogin = true
+                _ = segue.destination as! LiveViewController
             }
         }
     }
