@@ -123,6 +123,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
         if (FBSDKAccessToken.current() != nil && FIRAuth.auth()?.currentUser != nil)
         {
             //performSegue(withIdentifier:"SignInToFP", sender: self)
+            SVProgressHUD.show()
             showEmailAddress()
         }
         
