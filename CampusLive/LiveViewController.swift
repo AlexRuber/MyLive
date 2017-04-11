@@ -683,12 +683,12 @@ extension LiveViewController: MKMapViewDelegate{
                         //eventUserImage.layer.borderColor = trending.cgColor
                         print("live")
                         let btn2 = UIButton()
-                        btn2.frame = CGRect(x: 0, y: 0, width: 38, height: 20)
+                        btn2.frame = CGRect(x: 0, y: 0, width: 38, height: 18)
                         btn2.setImage(UIImage(named: "live"), for: UIControlState())
                         view.rightCalloutAccessoryView = btn2
                     }else{
                         let btn2 = UIButton()
-                        btn2.frame = CGRect(x: 0, y: 0, width: 18, height: 20)
+                        btn2.frame = CGRect(x: 0, y: 0, width: 20, height: 22)
                         btn2.setImage(UIImage(named: "Info Button-1"), for: UIControlState())
                         view.rightCalloutAccessoryView = btn2
                     }

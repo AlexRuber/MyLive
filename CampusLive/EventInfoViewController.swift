@@ -95,6 +95,10 @@ class EventInfoViewController: UIViewController {
         
         UIApplication.shared.statusBarStyle = .lightContent
         
+        //Nav bar code
+        let navBgImage: UIImage = UIImage(named: "Active Tab")!
+        UINavigationBar.appearance().setBackgroundImage(navBgImage, for: .default)
+        
         let subtitleArr = subtitleEvent?.components(separatedBy: ", ")
         let venue    = subtitleArr?[0]
         //let start = subtitleArr?[1]
