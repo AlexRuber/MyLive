@@ -42,7 +42,12 @@ class EventInfoViewController: UIViewController {
     var endDateStr: String!
     var eventId: String?
     var coordinate: CLLocationCoordinate2D?
+    var website:String!
    
+    @IBAction func websiteClicked(_ sender: Any) {
+        UIApplication.shared.openURL(URL(string: "http://"+website)! as URL)
+    }
+    
     @IBAction func getDirections(_ sender: Any) {
         //Defining destination
         let latitude: CLLocationDegrees = (coordinate?.latitude)!
@@ -134,6 +139,7 @@ class EventInfoViewController: UIViewController {
             let value = snapshot.value as? NSDictionary
             let description = value?["description"] as? String ?? ""
             //let user = User.init(username: username)
+            self.website = value?["website"] as? String ?? ""
             self.eventDescription.text = description
         }) { (error) in
             print(error.localizedDescription)

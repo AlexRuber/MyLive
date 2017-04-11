@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WSx-hg-qa9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WSx-hg-qa9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -227,7 +227,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="D68F18AF-7361-40B6-9C3F-9393C8352C45" translatesAutoresizingMaskIntoConstraints="NO" id="uyo-eX-bU2">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="imageView:uyo-eX-bU2:image" translatesAutoresizingMaskIntoConstraints="NO" id="uyo-eX-bU2">
                                                     <rect key="frame" x="0.0" y="-9" width="375" height="73"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -275,6 +275,7 @@
                                             <outlet property="eventDateLabel" destination="qqX-lZ-lWd" id="Du4-lL-Xl7"/>
                                             <outlet property="eventTitleLabel" destination="e4a-7p-3YQ" id="aBe-VE-FAi"/>
                                             <outlet property="infoButton" destination="xXm-fY-RNd" id="rrR-0M-zau"/>
+                                            <outlet property="venueLabel" destination="twU-9q-ZgF" id="Crt-kW-8IS"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -418,7 +419,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="InstaLink"/>
                                 <connections>
-                                    <action selector="didTapWebsite:" destination="2dk-cX-uy2" eventType="touchUpInside" id="xDh-qV-wks"/>
+                                    <action selector="websiteClicked:" destination="2dk-cX-uy2" eventType="touchUpInside" id="z8P-wF-fm5"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PbB-pP-6Dw">
@@ -478,7 +479,25 @@
         <image name="Active Tab" width="667" height="135"/>
         <image name="Calendar_48px_3" width="21" height="22"/>
         <image name="CheckInButton" width="676" height="164"/>
-        <image name="D68F18AF-7361-40B6-9C3F-9393C8352C45" width="620" height="64">
+        <image name="Destination" width="200" height="200"/>
+        <image name="Info Button" width="25" height="29"/>
+        <image name="InstaLink" width="200" height="200"/>
+        <image name="Layer 1 copy" width="100" height="96"/>
+        <image name="Log-In Background" width="667" height="1183"/>
+        <image name="Logout Rounded Down_50px_2" width="34" height="34"/>
+        <image name="Marker_48px_4" width="17" height="24"/>
+        <image name="My Check-Ins (Box)" width="664" height="52"/>
+        <image name="NavButtonFilled" width="581" height="581"/>
+        <image name="NavigationButton" width="262" height="262"/>
+        <image name="OrgFilled" width="23" height="22"/>
+        <image name="Rounded Rectangle 1-1" width="620" height="64"/>
+        <image name="Rounded Rectangle 1-2" width="620" height="282"/>
+        <image name="Settings Filled" width="548" height="548"/>
+        <image name="Settings Unfilled" width="23" height="23"/>
+        <image name="TrendingFilled" width="12" height="12"/>
+        <image name="UCSDTritons copy" width="150" height="169"/>
+        <image name="back" width="13" height="22"/>
+        <image name="imageView:uyo-eX-bU2:image" width="620" height="64">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -3177,24 +3196,6 @@ AnYNAAJ2GgACdh8AAnYhAAJ2IwACdigAAnYwAAJ2MwACdjgAAnZAAAJ2QwACdlUAAnZYAAJ2XQAAAAAA
 AAQBAAAAAAAAAEEAAAAAAAAAAAAAAAAAAnZfA
 </mutableData>
         </image>
-        <image name="Destination" width="200" height="200"/>
-        <image name="Info Button" width="25" height="29"/>
-        <image name="InstaLink" width="200" height="200"/>
-        <image name="Layer 1 copy" width="100" height="96"/>
-        <image name="Log-In Background" width="667" height="1183"/>
-        <image name="Logout Rounded Down_50px_2" width="34" height="34"/>
-        <image name="Marker_48px_4" width="17" height="24"/>
-        <image name="My Check-Ins (Box)" width="664" height="52"/>
-        <image name="NavButtonFilled" width="581" height="581"/>
-        <image name="NavigationButton" width="262" height="262"/>
-        <image name="OrgFilled" width="23" height="22"/>
-        <image name="Rounded Rectangle 1-1" width="620" height="64"/>
-        <image name="Rounded Rectangle 1-2" width="620" height="282"/>
-        <image name="Settings Filled" width="548" height="548"/>
-        <image name="Settings Unfilled" width="23" height="23"/>
-        <image name="TrendingFilled" width="12" height="12"/>
-        <image name="UCSDTritons copy" width="150" height="169"/>
-        <image name="back" width="13" height="22"/>
         <image name="san-diego-state-aztecs" width="118" height="81"/>
     </resources>
     <inferredMetricsTieBreakers>

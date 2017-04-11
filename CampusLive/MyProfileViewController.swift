@@ -213,12 +213,12 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? CheckInTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? CheckInTableViewCell
         
         
         cell?.eventTitleLabel.text = eventsArray[indexPath.row].title
         cell?.eventDateLabel.text = eventsArray[indexPath.row].startDate
-        
+        cell?.venueLabel.text = eventsArray[indexPath.row].subtitle
         cell?.infoButton.tag = indexPath.row
         cell?.infoButton.addTarget(self, action: #selector(infoButtonPressed), for: .touchUpInside)
         
