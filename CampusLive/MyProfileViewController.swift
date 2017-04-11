@@ -145,7 +145,7 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
                                             dateFormatter.locale = NSLocale.current
                                             dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
                                             let formatter: DateFormatter = DateFormatter()
-                                            formatter.dateFormat = "E. MMM d, h:mm a"
+                                            formatter.dateFormat = "E hh:mm a"
                                             let newStartDate = dateFormatter.date(from: startDate)
                                             let newEndDate = dateFormatter.date(from: endDate)
                                             
@@ -210,6 +210,7 @@ class MyProfileViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? CheckInTableViewCell
+        
         
         cell?.eventTitleLabel.text = eventsArray[indexPath.row].title
         cell?.eventDateLabel.text = eventsArray[indexPath.row].startDate
