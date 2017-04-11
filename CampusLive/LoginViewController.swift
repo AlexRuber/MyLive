@@ -14,7 +14,6 @@ import SVProgressHUD
 
 class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
 
-    @IBOutlet weak var titleLabel: UILabel!
     var homeViewController: UIViewController!
     var viewController: UIViewController!
     //var signupViewController: UIViewController!
@@ -25,7 +24,11 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
     
     //var isOrgLogin: Bool = false
     
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var policyLabel: UILabel!
+    @IBOutlet weak var policyButton: UIButton!
 
+    @IBOutlet weak var loginBackgroundImage: UIImageView!
     @IBOutlet weak var logoImage: UIImageView!
     @IBOutlet weak var featureScrollView: UIScrollView!
     @IBOutlet weak var featurePageControl: UIPageControl!
@@ -42,12 +45,42 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
     var titleArray = ["See what's happening around you...", "Keep up to date with your college campus...", "Discover San Diego"]
     
     @IBAction func didTapTerms(_ sender: Any) {
-        UIApplication.shared.openURL(NSURL(string: "http://www.myliveinc.com/terms")! as URL)
+        UIApplication.shared.openURL(URL(string: "http://www.myliveinc.com")! as URL)
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if (FBSDKAccessToken.current() != nil && FIRAuth.auth()?.currentUser != nil)
+        {
+            //performSegue(withIdentifier:"SignInToFP", sender: self)
+            
+            showEmailAddress()
+            
+            let blueColor = UIColor(red: 31.0/255.0, green: 150.0/255.0, blue: 254.0/255.0, alpha: 1.0)
+            loginBackgroundImage.isHidden = true
+            featureScrollView.isHidden = true
+            customFBButton.isHidden = true
+            featurePageControl.isHidden = true
+            titleLabel.isHidden = true
+            policyButton.isHidden = true
+            policyLabel.isHidden = true
+            
+            let image = UIImage(named: "High Res Logo (Square)")
+            let imageView = UIImageView(image: image!)
+            
+            imageView.frame = CGRect(x: 110, y: 109, width: 154, height: 154)
+            //imageView.tintColor = blueColor
+            //imageView.backgroundColor = blueColor
+            imageView.isOpaque = true
+            view.addSubview(imageView)
+
+            let blueColorView = UIColor(red: 26/255.0, green: 127/255.0, blue: 254/255.0, alpha: 1.0)
+            self.view.backgroundColor = blueColor
+            self.view.tintColor = blueColor
+            
+        }
         
         UIApplication.shared.statusBarStyle = .default
         
@@ -119,13 +152,9 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+    }
     override func viewDidAppear(_ animated: Bool) {
-        if (FBSDKAccessToken.current() != nil && FIRAuth.auth()?.currentUser != nil)
-        {
-            //performSegue(withIdentifier:"SignInToFP", sender: self)
-            SVProgressHUD.show()
-            showEmailAddress()
-        }
         
         var contentWidth: CGFloat = 0.0
         
@@ -202,7 +231,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
         }
     }
     
-    
     func showEmailAddress(){
         let accessToken = FBSDKAccessToken.current()
         guard let accessTokenString = accessToken?.tokenString else {
@@ -277,6 +305,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate, UIScrollViewD
             self.checkCampus()
             self.selectCampus()
         }
+        //let defaults = UserDefaults.standard
+        //defaults.setValue("loggedin", forKey: "yourKey")
         
         //let notificationName = Notification.Name(rawValue: Constants.NotificationKeys.SignedIn)
         //NotificationCenter.default.post(name: notificationName, object: nil, userInfo: nil)

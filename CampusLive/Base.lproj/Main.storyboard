@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WSx-hg-qa9">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="WSx-hg-qa9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -153,7 +153,10 @@
                         <outlet property="customFBButton" destination="3U8-14-arI" id="u2Z-6u-zvr"/>
                         <outlet property="featurePageControl" destination="NF3-5f-5KP" id="9SB-M8-DIR"/>
                         <outlet property="featureScrollView" destination="5ux-RF-0AR" id="qev-LU-zRC"/>
-                        <outlet property="titleLabel" destination="6Qs-sD-gUo" id="oGL-Yu-rkX"/>
+                        <outlet property="loginBackgroundImage" destination="kAC-xE-QYM" id="MyH-9O-Ma8"/>
+                        <outlet property="policyButton" destination="sMg-m9-trW" id="hKh-cG-luD"/>
+                        <outlet property="policyLabel" destination="aWs-gr-bIf" id="IIC-9V-C0O"/>
+                        <outlet property="titleLabel" destination="6Qs-sD-gUo" id="obB-qI-Srq"/>
                         <segue destination="HeC-Kp-YOV" kind="show" identifier="SignInToFP" id="Jw6-FQ-Kg9"/>
                     </connections>
                 </viewController>
