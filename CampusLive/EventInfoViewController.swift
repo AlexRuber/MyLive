@@ -1,0 +1,176 @@
+//
+//  EventInfoViewController.swift
+//  CampusLive
+//
+//  Created by Mihai Ruber on 3/3/17.
+//  Copyright © 2017 Mihai Ruber. All rights reserved.
+//
+
+import UIKit
+import FirebaseDatabase
+import FirebaseAuth
+import SVProgressHUD
+import MapKit
+
+class EventInfoViewController: UIViewController {
+    
+    var userRef = FIRDatabase.database().reference()
+    var ref: FIRDatabaseReference!
+    //var eventRef: FIRDatabaseReference!
+    var eventInfoRef: FIRDatabaseReference!
+    
+    var uid: String!
+    
+    @IBOutlet weak var eventTitle: UILabel!
+    @IBOutlet weak var eventSubtitle: UILabel!
+    @IBOutlet weak var eventDescription: UITextView!
+    @IBOutlet weak var eventProfileImage: UIImageView!
+    
+    @IBOutlet weak var goingbutton: UIButton!
+    
+    
+    //@IBOutlet weak var startDate: UILabel!
+    //@IBOutlet weak var startDate: UILabel!
+    @IBOutlet weak var startDate: UILabel!
+    @IBOutlet weak var endDate: UILabel!
+    @IBOutlet weak var checkInBtn: UIButton!
+    
+    var titleEvent: String?
+    var subtitleEvent: String?
+    var imageEventUrl: String?
+    var startDateStr: String!
+    var endDateStr: String!
+    var eventId: String?
+    var coordinate: CLLocationCoordinate2D?
+    var website:String!
+   
+    @IBAction func websiteClicked(_ sender: Any) {
+        UIApplication.shared.openURL(URL(string: "http://"+website)! as URL)
+    }
+    
+    @IBAction func getDirections(_ sender: Any) {
+        //Defining destination
+        let latitude: CLLocationDegrees = (coordinate?.latitude)!
+        let longitude: CLLocationDegrees = (coordinate?.longitude)!
+        
+        let regionDistance:CLLocationDistance = 1000;
+        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+        let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center), MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)]
+        
+        let placemark = MKPlacemark(coordinate: coordinates)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = "Event Location"
+        mapItem.openInMaps(launchOptions: options)
+    
+    }
+    
+    
+    
+    @IBAction func backBtnTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func checkInBtnTapped(_ sender: Any) {
+        MeasurementHelper.checkInEvent();
+        self.uid = FIRAuth.auth()?.currentUser?.uid
+        let posts: [String : AnyObject] = [eventId!: true as AnyObject]
+        userRef = userRef.child("user_checkins").child(uid)
+        userRef.updateChildValues(posts)
+        ref = ref.child("event_users").child(eventId!)
+        let post1: [String : AnyObject] = [uid: true as AnyObject]
+        ref.updateChildValues(post1)
+        let addEventPopup = UIAlertController(title: "Checked In", message: "You are now checked in to the event!", preferredStyle: .alert)
+        DispatchQueue.main.async {
+            addEventPopup.addAction(UIAlertAction(title: "OK", style: .default, handler: {
+                action in
+                self.dismiss(animated: true, completion: nil)
+            }))
+            self.present(addEventPopup, animated: true, completion: nil)
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        eventDescription.isEditable = false
+        self.title = titleEvent
+        ref = FIRDatabase.database().reference()
+        eventInfoRef = FIRDatabase.database().reference().child("event_social_info")
+        eventTitle?.text = titleEvent
+        
+        UIApplication.shared.statusBarStyle = .lightContent
+        
+        //Nav bar code
+        let navBgImage: UIImage = UIImage(named: "Active Tab")!
+        UINavigationBar.appearance().setBackgroundImage(navBgImage, for: .default)
+        
+        let subtitleArr = subtitleEvent?.components(separatedBy: ", ")
+        let venue    = subtitleArr?[0]
+        //let start = subtitleArr?[1]
+        eventSubtitle?.text = venue
+        //print(start)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale.current
+        dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
+        let formatter: DateFormatter = DateFormatter()
+        formatter.dateFormat = "E MMM d, h:mm a"
+        let newStartDate = dateFormatter.date(from: startDateStr)
+        let newEndDate = dateFormatter.date(from: endDateStr)
+        let newStart = formatter.string(from: newStartDate!)
+        let newEnd = formatter.string(from: newEndDate!)
+        self.startDate.text = newStart
+        self.endDate.text = newEnd
+        
+        displayEventInfo()
+        
+        let imageUrl: URL = NSURL(string: imageEventUrl!)! as URL
+        let data = try? Data(contentsOf: imageUrl)
+        let profileImage : UIImage = UIImage(data: data!)!
+        eventProfileImage.image = profileImage
+        eventProfileImage.layer.cornerRadius = eventProfileImage.frame.size.width / 2
+        eventProfileImage.layer.cornerRadius = eventProfileImage.frame.size.height / 2
+        eventProfileImage.clipsToBounds = true
+    }
+    
+    func displayEventInfo(){
+        eventInfoRef.child(eventId!).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            let description = value?["description"] as? String ?? ""
+            //let user = User.init(username: username)
+            self.website = value?["website"] as? String ?? ""
+            self.eventDescription.text = description
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    /*
+    @IBAction func reportEventClicked(_ sender: Any) {
+        self.uid = FIRAuth.auth()?.currentUser?.uid
+        let posts: [String : AnyObject] = ["reported By": uid as AnyObject]
+        userRef = userRef.child("malicious_events").child(eventId!)
+        userRef.setValue(posts)
+        
+        let addEventPopup = UIAlertController(title: "Appreciate it!", message: "Thank you for reporting. Our team will shortly look into it.", preferredStyle: .alert)
+        addEventPopup.addAction(UIAlertAction(title: "OK", style: .default, handler: {
+            action in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        present(addEventPopup, animated: true, completion: nil)
+        
+    }
+    */
+    
+    @IBAction func onEventCheckedIn(_ sender: Any) {
+        
+        
+    }
+    
+}
